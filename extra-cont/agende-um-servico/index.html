@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Agende um Serviço - WeCare Auto</title>
+
+<!--[CSS PADRAO]-->
+<link href="css/reset.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/formulario.css" rel="stylesheet" type="text/css" media="screen">
+
+</head>
+
+<body>
+
+<script>
+	function valida_campos(){
+	
+	if(document.getElementById("nome").value == ''){
+		alert("Campo ( NOME ) é obrigatório!!");
+		document.getElementById("nome").focus();
+		return false;
+	}
+	
+	if(document.getElementById("email").value == ''){
+		alert("Campo ( E-MAIL ) é obrigatório!!");
+		document.getElementById("email").focus();			
+		return false;
+	}else{
+	
+		if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("email").value))){ 
+			alert("Favor informar um E-MAIL válido.");
+			document.getElementById("email").focus();
+			var erro = "sim";				
+			return false;
+		} 	
+	}
+	
+	if(document.getElementById("ddd").value == ''){
+		alert("Campo ( DDD ) é obrigatório!!");
+		document.getElementById("ddd").focus();			
+		return false;
+	}
+	
+	if(document.getElementById("tel").value == ''){
+		alert("Campo ( TELEFONE ) é obrigatório!!");
+		document.getElementById("tel").focus();			
+		return false;
+	}
+
+	if(document.getElementById("placa").value == ''){
+		alert("Campo ( PLACA ) é obrigatório!!");
+		document.getElementById("placa").focus();			
+		return false;
+	}
+
+	if(document.getElementById("servicos").value == ''){
+		alert("Campo ( SERVIÇOS ) é obrigatório!!");
+		document.getElementById("servicos").focus();			
+		return false;
+	}
+
+	if(document.getElementById("Observacoes").value == ''){
+		alert("Campo ( Comentários ) é obrigatório!!");
+		document.getElementById("Observacoes").focus();			
+		return false;
+	}
+	}
+</script>
+
+
+
+<div class="pg_contato"> 
+	<p>Todos os campos são de preenchimento obrigatório.</p>
+    <br />      	
+    <form name="cadastro" id="exA" method="post" action="http://www.wecareauto.com.br/extra-cont/enviar.php">
+         <input type="hidden" name="recipient" value="agendeumservico@wecareauto.com.br">
+         <input type="hidden" name="redirect" value="http://www.wecareauto.com.br/extra-cont/agende-um-servico/grato.html">
+         <input type="hidden" name="subject" value="Agende um serviço">
+                
+         <label class="gridFull" for="nome">Nome: <input id="nome" name="nome" type="text" class="campo" /> </label>
+         <label class="gridFull" for="email">E-mail: <input id="email" name="email" type="text" class="campo" /> </label>
+         <label class="gridDdd" for="ddd">DDD: <input id="ddd" name="ddd" type="text" class="campo" maxlength="2" /> </label>
+         <label class="gridTel" for="tel">Telefone: <input id="tel" name="tel" type="text" class="campo" size="9" /> </label>
+         <label class="gridFull" for="placa">Placa do veículo: <input id="placa" name="placa" type="text" class="campo" /> </label>
+         <label class="gridFullAll"  for="servicos">Serviços: <textarea name="servicos" cols="" rows="" class="campo" id="servicos" style="height:50px;" ></textarea></label>
+         <label class="gridFullAll"  for="Observacoes">Observações: <textarea name="Observacoes" cols="" rows="" class="campo" id="Observacoes" style="height:100px;" ></textarea></label> 
+         
+         <br clear="all" /> 
+         <input type="submit" name="acao" class="botao_form" value="Agendar" onclick="return valida_campos();" />        
+    </form>   
+</div>
+
+
+
+</body>
+</html>

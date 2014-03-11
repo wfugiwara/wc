@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modification>
+        <id>Simple Product Views Counter</id>
+        <version>0.1</version>
+        <vqmver>2.2.1</vqmver>
+        <author>Ivan Panchev</author>
+	<file name="admin/model/catalog/product.php">
+                <operation error="skip">
+                    <search position="replace">
+                         <![CDATA[
+				  	class ModelCatalogProduct extends Model {
+                         ]]>
+                    </search>
+                    <add>
+                          <![CDATA[
+                    class ModelCatalogProduct extends Model {
+                    public function getViewsProducts()
+                    {
+                        $result = $this->db->query("SELECT product_id, viewed FROM " . DB_PREFIX . "product");
+                        $return = array();
+                        foreach($result->rows as $product)
+                        {
+                            $return[$product['product_id']] = $product['viewed'];
+                        }
+                        return $return;
+                    }
+
+                          ]]>
+                    </add>
+                </operation>
+        </file>
+	<file name="admin/controller/catalog/product.php">
+                <operation error="skip">
+                    <search position="replace">
+                         <![CDATA[
+				  	public function index() {	
+                         ]]>
+                    </search>
+                    <add>
+                          <![CDATA[
+				  	public function index() {
+                        $this->load->model('catalog/product');
+                        $this->data['arrProductsViews'] = $this->model_catalog_product->getViewsProducts();
+                          ]]>
+                    </add>
+                </operation>
+        </file>
+	
+	
+	<file name="admin/view/template/catalog/product_list.tpl">
+                <operation error="skip">
+                    <search position="replace">
+                         <![CDATA[
+				<span style="color: #008000;"><?php echo $product['quantity']; ?></span>
+                         ]]>
+                    </search>
+                    <add>
+                          <![CDATA[
+				<span style="color: #008000;"><?php echo $product['quantity']; ?>&nbsp/&nbspVistos:<?php echo isset($arrProductsViews[$product['product_id']]) ? $arrProductsViews[$product['product_id']] : 0 ;?></span>
+                          ]]>
+                    </add>
+                </operation>
+    </file>
+
+	<file name="admin/view/template/catalog/product_list.tpl">
+                <operation error="skip">
+                    <search position="replace">
+                         <![CDATA[
+				<span style="color: #FFA500;"><?php echo $product['quantity']; ?></span>
+                         ]]>
+                    </search>
+                    <add>
+                          <![CDATA[
+				<span style="color: #FFA500;"><?php echo $product['quantity']; ?>&nbsp/&nbspViews:<?php echo isset($arrProductsViews[$product['product_id']]) ? $arrProductsViews[$product['product_id']] : 0 ;?></span>
+                          ]]>
+                    </add>
+                </operation>
+    </file>
+</modification>
+
+

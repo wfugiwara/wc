@@ -1,0 +1,316 @@
+<modification>
+	<id>Categories to Information Pages</id>
+	<version>2.3</version>
+	<vqmver>2.1.7</vqmver>
+	<author>dbassa - danbasper@gmail.com</author>
+	
+	<!--admin-->
+	
+	<file name="admin/language/portuguese-br/catalog/category.php" error="skip">
+		<operation error="skip">
+		    <search position="after"><![CDATA[
+		    	$_['entry_description']
+		    ]]></search>
+		    <add><![CDATA[
+			$_['entry_linkto'] = 'Link para a página:<br /><span class="help">Colocar URL de destino começando com http://. Por exemplo: para vincular o google faça um link como http://www.google.com</span>';
+		    ]]></add>
+		</operation>		
+	</file>	
+
+	<file name="admin/language/english/catalog/category.php">
+		<operation>
+		    <search position="after"><![CDATA[
+		    	$_['entry_description']
+		    ]]></search>
+		    <add><![CDATA[
+			$_['entry_linkto'] = 'Link to the page:<br /><span class="help">Set destination URL starting with http://. For example: to link to google make the link like http://www.google.com</span>';
+		    ]]></add>
+		</operation>		
+	</file>
+
+	<file name="admin/model/catalog/category.php">
+		<operation>
+		    <search position="replace"><![CDATA[
+		    	status = '" . (int)$data['status'] . "',
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			status = '" . (int)$data['status'] . "', linkto = '" . $this->db->escape($data['linkto']) . "',
+		    ]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/catalog/category.php">
+		<operation>
+		    <search position="after"><![CDATA[
+		    	public function index() {
+		    ]]></search>
+		    <add><![CDATA[
+			//Q: Insert DB columns
+			$query = $this->db->query("DESC ".DB_PREFIX."category linkto");
+			if (!$query->num_rows) {
+			$this->db->query("ALTER TABLE `" . DB_PREFIX . "category` ADD `linkto` varchar(255) NOT NULL COMMENT '' COLLATE utf8_bin AFTER top;");
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="after"><![CDATA[
+		    	$this->data['entry_description']
+		    ]]></search>
+		    <add><![CDATA[
+			$this->data['entry_linkto'] = $this->language->get('entry_linkto');
+		    ]]></add>
+		</operation>
+
+		<operation>
+		    <search position="before"><![CDATA[
+		    	if (isset($this->request->post['keyword'])) {
+		    ]]></search>
+		    <add><![CDATA[
+			if (isset($this->request->post['linkto'])) {
+				$this->data['linkto'] = $this->request->post['linkto'];
+			} elseif (!empty($category_info)) {
+				$this->data['linkto'] = $category_info['linkto'];
+			} else {
+				$this->data['linkto'] = '';
+			}
+		    ]]></add>
+		</operation>		
+	</file>
+
+	<file name="admin/view/template/catalog/category_form.tpl">
+		<operation>
+		    <search position="after" offset="2"><![CDATA[
+		   	<td><?php echo $entry_keyword; ?></td>
+		    ]]></search>
+		    <add><![CDATA[
+			<tr>
+			<td><?php echo $entry_linkto; ?></td>
+			<td><input type="text" name="linkto" value="<?php echo $linkto; ?>" size="100" /></td>
+			</tr>
+		    ]]></add>
+		</operation>
+	</file>
+
+	<!--catalog-->
+
+	<file name="catalog/controller/common/header.php">
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$children_data[]
+		    ]]></search>
+		    <add><![CDATA[
+			if ($child['linkto']) {
+				$link = $child['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']);
+			}
+		    ]]></add>
+		</operation>
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>
+		<!--
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			'name'  => $child['name'] . ($child['linkto'] ?  '' : ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : '')),
+		    ]]></add>
+		</operation>
+		-->
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$this->data['categories'][]
+		    ]]></search>
+		    <add><![CDATA[
+			if ($category['linkto']) {
+				$link = $category['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $category['category_id']);
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $category['category_id'])
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>		
+	</file>
+
+	<file name="catalog/controller/module/category.php">
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$children_data[]
+		    ]]></search>
+		    <add><![CDATA[
+			if ($child['linkto']) {
+				$link = $child['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']);
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>		
+
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$this->data['categories'][]
+		    ]]></search>
+		    <add><![CDATA[
+			if ($category['linkto']) {
+				$link = $category['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $category['category_id']);
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $category['category_id'])
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="after"><![CDATA[
+			foreach ($categories as $category) {
+		    ]]></search>
+		    <add><![CDATA[
+			if (($category['sort_order'] < 0) || ($category['sort_order'] >= 1000)) { continue; }
+		    ]]></add>
+		</operation>			
+	</file>
+
+	<file name="catalog/controller/module/split_category.php" error="skip"><!--idem above-->
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$children_data[]
+		    ]]></search>
+		    <add><![CDATA[
+			if ($child['linkto']) {
+				$link = $child['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id']);
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $category['category_id'] . '_' . $child['category_id'])
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>		
+
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$this->data['categories'][]
+		    ]]></search>
+		    <add><![CDATA[
+			if ($category['linkto']) {
+				$link = $category['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $category['category_id']);
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $category['category_id'])
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="after"><![CDATA[
+			foreach ($categories as $category) {
+		    ]]></search>
+		    <add><![CDATA[
+			if (($category['sort_order'] < 0) || ($category['sort_order'] >= 1000)) { continue; }
+		    ]]></add>
+		</operation>		
+	</file>
+
+	<file name="catalog/controller/product/category.php">
+		<operation>
+		    <search position="before" offset="2"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $path . $url),
+		    ]]></search>
+		    <add><![CDATA[
+			if ($category_info['linkto']) {
+				$link = $category_info['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $path);
+			}
+		    ]]></add>
+		</operation>
+
+		<operation>
+		    <search position="replace"><![CDATA[$link = $this->url->link('product/category', 'path=' . $path);
+			}]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>
+
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$this->data['categories'][]		
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			if ($result['linkto']) {
+				$link = $result['linkto'];
+			} else {
+				$link = $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url);
+			}
+		    ]]></add>
+		</operation>
+		
+		<operation>
+		    <search position="replace"><![CDATA[
+		   	=> $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
+		    ]]></search>
+		    <add trim="true"><![CDATA[
+			=> $link
+		    ]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/common/footer.php">
+		<operation>
+		    <search position="before"><![CDATA[
+		   	$this->data['informations'][]
+		    ]]></search>
+		    <add><![CDATA[
+			if (($result['sort_order'] < 0) || ($result['sort_order'] >= 1000)) { continue; }
+		    ]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,52 @@
+<modification>
+	<id><![CDATA[Powered by Removal]]></id>
+	<version><![CDATA[2.5]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[blackaqua - http://blackaqua.com - ocsupport@blackaqua.com]]></author>
+	<file name="catalog/language/*/common/footer.php">
+		<operation error="skip">
+			<search regex="true" position="replace"><![CDATA[/(\$_\['text_powered'\].+;)/i]]></search>
+			<add><![CDATA[$_['text_powered']      = '%s &copy; %s';]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/mail/order.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$text_powered]]></search>
+			<add><![CDATA['']]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme_mobile/opmex/template/mail/order.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$text_powered]]></search>
+			<add><![CDATA['']]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme_mobile/omtex-mobile/template/mail/order.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$text_powered]]></search>
+			<add><![CDATA['']]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme_tablet/omtex-tablet/template/mail/order.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[$text_powered]]></search>
+			<add><![CDATA['']]></add>
+		</operation>
+	</file>	
+	<file name="admin/language/*/common/footer.php">
+		<operation error="skip">
+			<search regex="true" position="replace"><![CDATA[/(\$_\['text_footer'\].+;)/i]]></search>
+			<add><![CDATA[$_['text_footer'] = '';]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/footer.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.]]></search>
+			<add><![CDATA[<?php echo $powered; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[Please donate via PayPal to donate@opencart.com]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+	</file>
+</modification>

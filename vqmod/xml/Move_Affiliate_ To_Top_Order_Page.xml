@@ -1,0 +1,63 @@
+
+<modification>
+  <id>Move Affiliate to Top of Orders Page</id> 
+  <version>1.0</version> 
+  <vqmver>2.1.6</vqmver> 
+  <author>Gerrad Duniam - http://opencart-extensions.com</author> 
+  <file name="admin/view/template/sale/order_info.tpl">
+   <operation>
+    <search position="after" index="1">
+     <![CDATA[ 			<table class="form">
+			
+              ]]> 
+    </search>
+    <add>
+    <![CDATA[ 	
+				<?php if ($affiliate) { ?>
+          <tr>
+            <td><?php echo $text_affiliate; ?></td>
+            <td><a href="<?php echo $affiliate; ?>"><?php echo $affiliate_firstname; ?> <?php echo $affiliate_lastname; ?></a></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_commission; ?></td>
+            <td><?php echo $commission; ?>
+              <?php if (!$commission_total) { ?>
+              <span id="commission"><b>[</b> <a id="commission-add"><?php echo $text_commission_add; ?></a> <b>]</b></span>
+              <?php } else { ?>
+              <span id="commission"><b>[</b> <a id="commission-remove"><?php echo $text_commission_remove; ?></a> <b>]</b></span>
+              <?php } ?></td>
+          </tr>
+          <?php } ?>
+			
+              ]]> 
+    </add>
+   </operation>
+   <operation>
+    <search position="replace" index="2" offset="14">
+     <![CDATA[ 			<?php if ($affiliate) { ?>
+			
+              ]]> 
+    </search>
+    <add>
+    <![CDATA[ 	
+				<!--<?php if ($affiliate) { ?>
+          <tr>
+            <td><?php echo $text_affiliate; ?></td>
+            <td><a href="<?php echo $affiliate; ?>"><?php echo $affiliate_firstname; ?> <?php echo $affiliate_lastname; ?></a></td>
+          </tr>
+          <tr>
+            <td><?php echo $text_commission; ?></td>
+            <td><?php echo $commission; ?>
+              <?php if (!$commission_total) { ?>
+              <span id="commission"><b>[</b> <a id="commission-add"><?php echo $text_commission_add; ?></a> <b>]</b></span>
+              <?php } else { ?>
+              <span id="commission"><b>[</b> <a id="commission-remove"><?php echo $text_commission_remove; ?></a> <b>]</b></span>
+              <?php } ?></td>
+          </tr>
+          <?php } ?> -->
+			
+              ]]> 
+    </add>
+   </operation>
+  </file>
+</modification>

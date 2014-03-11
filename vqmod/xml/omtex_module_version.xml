@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Omtex - Version Control 1551</id>
+	<version>1.2</version>
+	<vqmver>2.0</vqmver>
+	<author>Opcrat</author>
+	<file name="admin/view/template/module/category.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+		<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/featured.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[
+		 <?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="6"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="8"></td>
+				<?php }else{ ?>
+				<td colspan="10"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/filter.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+		 <?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>	

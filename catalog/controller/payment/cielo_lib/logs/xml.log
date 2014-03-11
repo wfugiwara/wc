@@ -1,0 +1,4349 @@
+***********************************************
+2012-10-10 14:20:54:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="74f8304d190666ccb4ed969b0eb96b14" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>77</numero>
+      <valor>201240</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:20:54</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:20:55:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>010</codigo><mensagem>O envio do cartão é obrigatório.</mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:22:26:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="0c484fc0aaccc563e376b7cb39e93fea" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>78</numero>
+      <valor>400900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:22:26</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:22:27:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>010</codigo><mensagem>O envio do cartão é obrigatório.</mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:23:49:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="99fe5b3876b4ff2c75cffb958ab99466" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>79</numero>
+      <valor>400900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:23:49</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:23:50:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>002</codigo><mensagem>Credenciais inválidas.</mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:31:59:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="80d4e8941b3d61a0ac3ab6d609139be5" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>80</numero>
+      <valor>400900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:31:59</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:32:01:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="80d4e8941b3d61a0ac3ab6d609139be5" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA692006</tid>
+  <dados-pedido>
+    <numero>80</numero>
+    <valor>400900</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:31:44.553-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>6</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=06307d55eec0757f02d72bfd142390cc</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:33:03:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="6d2fe16b83b6f854045fd3c447983827" versao="1.1.1">
+   <tid>100173489808BA692006</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:33:05:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="6d2fe16b83b6f854045fd3c447983827" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA692006</tid>
+  <pan>IqVz7P9zaIgTYdU41HaW/OB/d7Idwttqwb2vaTt8MT0=</pan>
+  <dados-pedido>
+    <numero>80</numero>
+    <valor>400900</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:31:44.553-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>6</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Autenticada com sucesso</mensagem>
+    <data-hora>2012-10-10T11:32:45.877-03:00</data-hora>
+    <valor>400900</valor>
+    <eci>5</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2012-10-10T11:32:45.890-03:00</data-hora>
+    <valor>400900</valor>
+    <lr>00</lr>
+    <arp>123456</arp>
+    <nsu>572009</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2012-10-10T11:32:45.903-03:00</data-hora>
+    <valor>400900</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:35:07:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="c3958756043efe0500fd13510219e8ea" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>81</numero>
+      <valor>11620</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:35:07</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>10</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:35:08:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="c3958756043efe0500fd13510219e8ea" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA6A2010</tid>
+  <dados-pedido>
+    <numero>81</numero>
+    <valor>11620</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:34:51.136-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>10</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=92db8e7111888bcf901d8bcd27436c29</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:36:15:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="5db83a08b666332914614f0d4a4c9920" versao="1.1.1">
+   <tid>100173489808BA6A2010</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:36:16:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="5db83a08b666332914614f0d4a4c9920" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA6A2010</tid>
+  <pan>b1SQ6jpKCDt3n9C0dgD/ZkPQ1Bh+7aJESqr/CwP64P0=</pan>
+  <dados-pedido>
+    <numero>81</numero>
+    <valor>11620</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:34:51.136-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>10</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Nao autenticada</mensagem>
+    <data-hora>2012-10-10T11:35:57.396-03:00</data-hora>
+    <valor>11620</valor>
+    <eci>1</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-10-10T11:35:57.401-03:00</data-hora>
+    <valor>11620</valor>
+    <lr>20</lr>
+    <nsu>572010</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:37:24:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="bcaa4ae72c014e39b6379d35c6d42af4" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>82</numero>
+      <valor>11040</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:37:24</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>diners</bandeira>
+      <produto>2</produto>
+      <parcelas>10</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:37:25:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="bcaa4ae72c014e39b6379d35c6d42af4" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA6B2010</tid>
+  <dados-pedido>
+    <numero>82</numero>
+    <valor>11040</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:37:08.520-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>diners</bandeira>
+    <produto>2</produto>
+    <parcelas>10</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=65801e55b499a4b2c5b0f8386e1e0e6a</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:37:57:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="918667c1b33b67caca0201b251a87ea9" versao="1.1.1">
+   <tid>100173489808BA6B2010</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:37:58:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="918667c1b33b67caca0201b251a87ea9" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA6B2010</tid>
+  <pan>pK2dAM/G6e92PorjglyWwO0RXqPIKoiS1+j0nkKVjBw=</pan>
+  <dados-pedido>
+    <numero>82</numero>
+    <valor>11040</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:37:08.520-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>diners</bandeira>
+    <produto>2</produto>
+    <parcelas>10</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2012-10-10T11:37:40.221-03:00</data-hora>
+    <valor>11040</valor>
+    <eci>7</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-10-10T11:37:40.225-03:00</data-hora>
+    <valor>11040</valor>
+    <lr>40</lr>
+    <nsu>572011</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:39:03:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="52075300514dcfaef1959629ac41a339" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>83</numero>
+      <valor>201240</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:39:03</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>elo</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:39:03:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="52075300514dcfaef1959629ac41a339" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA6C2006</tid>
+  <dados-pedido>
+    <numero>83</numero>
+    <valor>201240</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:38:46.802-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>elo</bandeira>
+    <produto>2</produto>
+    <parcelas>6</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=0b764c8d3dfd4f91005ab6134ce6e8ef</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:39:33:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="b9fbd153c42547ffb2b7f35354bcbd7d" versao="1.1.1">
+   <tid>100173489808BA6C2006</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:39:34:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="b9fbd153c42547ffb2b7f35354bcbd7d" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA6C2006</tid>
+  <pan>r6qvdWW+ZmrNmFdXB8jaV0fNrnhIl6LiJOL9lnuypdA=</pan>
+  <dados-pedido>
+    <numero>83</numero>
+    <valor>201240</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:38:46.802-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>elo</bandeira>
+    <produto>2</produto>
+    <parcelas>6</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2012-10-10T11:39:14.945-03:00</data-hora>
+    <valor>201240</valor>
+    <eci>7</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-10-10T11:39:14.947-03:00</data-hora>
+    <valor>201240</valor>
+    <lr>40</lr>
+    <nsu>572012</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:41:02:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="0236823f678c0e9713f641413ead6610" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>84</numero>
+      <valor>10900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:41:02</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>discover</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:41:02:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="0236823f678c0e9713f641413ead6610" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA711001</tid>
+  <dados-pedido>
+    <numero>84</numero>
+    <valor>10900</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:40:45.860-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>discover</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=b80ec52752015ae316ba173224cc0784</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:41:30:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="1099b4cd3698ef3a7660e8315b746242" versao="1.1.1">
+   <tid>100173489808BA711001</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:41:31:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="1099b4cd3698ef3a7660e8315b746242" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA711001</tid>
+  <pan>ozJIeUvkYR6lMcI03uV5yp9QVFeuBB4Z7pTjajiGXsc=</pan>
+  <dados-pedido>
+    <numero>84</numero>
+    <valor>10900</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:40:45.860-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>discover</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2012-10-10T11:41:12.922-03:00</data-hora>
+    <valor>10900</valor>
+    <eci>7</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2012-10-10T11:41:12.925-03:00</data-hora>
+    <valor>10900</valor>
+    <lr>00</lr>
+    <arp>123456</arp>
+    <nsu>572017</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2012-10-10T11:41:12.939-03:00</data-hora>
+    <valor>10900</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:42:36:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="42da651a3338026b60866250f7e9f0cb" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>85</numero>
+      <valor>21490</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:42:36</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:42:36:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:43:31:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="09f07c555dc817b78ed2108bd2003f90" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>86</numero>
+      <valor>21490</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:43:31</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:43:32:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:44:05:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="918f274cec8aadbb083630d50430a324" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>87</numero>
+      <valor>21490</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:44:05</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:44:05:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="918f274cec8aadbb083630d50430a324" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA742006</tid>
+  <dados-pedido>
+    <numero>87</numero>
+    <valor>21490</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:43:48.738-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>6</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=2850d938201ebffaf72cef0bebd04306</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:44:34:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="1598f3aba2a275c473aa2c342167d328" versao="1.1.1">
+   <tid>100173489808BA742006</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:44:35:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="1598f3aba2a275c473aa2c342167d328" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA742006</tid>
+  <pan>5UeSVNFr1L76SHYZclDdTlr3Ax2Z84mstUQoXbV9AE0=</pan>
+  <dados-pedido>
+    <numero>87</numero>
+    <valor>21490</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:43:48.738-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>6</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2012-10-10T11:44:16.830-03:00</data-hora>
+    <valor>21490</valor>
+    <eci>6</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-10-10T11:44:16.835-03:00</data-hora>
+    <valor>21490</valor>
+    <lr>90</lr>
+    <nsu>572020</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:46:08:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="9b6a9ebf291eb76c122ccd5b83ef5d50" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>88</numero>
+      <valor>12500</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:46:08</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>3</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:46:09:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="9b6a9ebf291eb76c122ccd5b83ef5d50" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA762003</tid>
+  <dados-pedido>
+    <numero>88</numero>
+    <valor>12500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:45:52.529-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=ba9b7a5d817675fd0b4648a648c0c1dd</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:46:40:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="dd901c04cd8a64cdd42dcde795b5e935" versao="1.1.1">
+   <tid>100173489808BA762003</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:46:41:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="dd901c04cd8a64cdd42dcde795b5e935" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA762003</tid>
+  <pan>b1SQ6jpKCDt3n9C0dgD/ZkPQ1Bh+7aJESqr/CwP64P0=</pan>
+  <dados-pedido>
+    <numero>88</numero>
+    <valor>12500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:45:52.529-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Nao autenticada</mensagem>
+    <data-hora>2012-10-10T11:46:22.533-03:00</data-hora>
+    <valor>12500</valor>
+    <eci>1</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2012-10-10T11:46:22.536-03:00</data-hora>
+    <valor>12500</valor>
+    <lr>00</lr>
+    <arp>123456</arp>
+    <nsu>572022</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2012-10-10T11:46:22.553-03:00</data-hora>
+    <valor>12500</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:47:55:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="7d225f71f099a500979600491e491b72" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>89</numero>
+      <valor>30499</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:47:55</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:47:56:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:49:02:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="fdc619c49ebe497eeb394017e1b3ba52" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>90</numero>
+      <valor>30499</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:49:02</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:49:03:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-10 14:49:59:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="c8d8d4453ee94c18936247c30a5bfb8d" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>91</numero>
+      <valor>30499</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:49:59</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>diners</bandeira>
+      <produto>2</produto>
+      <parcelas>4</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 14:50:00:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="c8d8d4453ee94c18936247c30a5bfb8d" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA782004</tid>
+  <dados-pedido>
+    <numero>91</numero>
+    <valor>30499</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:49:43.667-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>diners</bandeira>
+    <produto>2</produto>
+    <parcelas>4</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=f5d8fe8006d304ba2cf7c171e423cf95</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 14:50:28:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="0795e200700238d298df072feea71d01" versao="1.1.1">
+   <tid>100173489808BA782004</tid>
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-10 14:50:28:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="0795e200700238d298df072feea71d01" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808BA782004</tid>
+  <pan>pK2dAM/G6e92PorjglyWwO0RXqPIKoiS1+j0nkKVjBw=</pan>
+  <dados-pedido>
+    <numero>91</numero>
+    <valor>30499</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-10T11:49:43.667-03:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>diners</bandeira>
+    <produto>2</produto>
+    <parcelas>4</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2012-10-10T11:50:10.441-03:00</data-hora>
+    <valor>30499</valor>
+    <eci>7</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-10-10T11:50:10.444-03:00</data-hora>
+    <valor>30499</valor>
+    <lr>99</lr>
+    <nsu>572024</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-10-10 15:17:23:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d46688e5501b8e330666ef3182c63d41" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>93</numero>
+      <valor>100900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T15:17:23</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 15:17:24:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-10 15:19:53:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="ae3e2fda61efc19d28b8cc34d4cc4713" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>94</numero>
+      <valor>100900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T15:19:53</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 15:19:54:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-10 15:20:40:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="4cb94b627af30b1d3443837aef7aab70" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>95</numero>
+      <valor>100900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T15:20:40</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>4</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-10 15:20:41:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>010</codigo><mensagem>O envio do cartão é obrigatório.</mensagem></erro>
+
+
+***********************************************
+2012-10-22 13:11:32:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d44bca5b792ca70dd3ddbde00d61db39" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>107</numero>
+      <valor>100899</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-22T13:11:32</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-22 13:11:33:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="d44bca5b792ca70dd3ddbde00d61db39" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>100173489808C6DB2002</tid>
+  <dados-pedido>
+    <numero>107</numero>
+    <valor>100899</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-22T11:08:20.667-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://qasecommerce.cielo.com.br/web/index.cbmp?id=21fc644d879f2493ea5627aebc63f95e</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-26 18:54:11:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d3bde4bfccf705069a53f88ab4288c8f" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>109</numero>
+      <valor>1340</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T18:54:11</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 18:54:12:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 18:56:06:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="b96bb376f9e05376fd6e96ae705d6158" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>110</numero>
+      <valor>1340</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T18:56:06</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 18:56:07:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="b96bb376f9e05376fd6e96ae705d6158" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000012002</tid>
+  <dados-pedido>
+    <numero>110</numero>
+    <valor>1340</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-26T16:56:07.590-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=c50bd24b4c6247e41a5c5c9b19fa453c</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-26 18:56:29:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="55fdeaf79abacc72423aaf7a7f88e0cf" versao="1.1.1">
+   <tid>10398975060000012002</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-26 18:56:29:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="55fdeaf79abacc72423aaf7a7f88e0cf" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000012002</tid>
+  <dados-pedido>
+    <numero>110</numero>
+    <valor>1340</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-26T16:56:07.590-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2012-10-26T16:56:28.446-02:00</data-hora>
+    <valor>1340</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2012-10-26 18:59:15:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="6eea1cb5ab63e1e5d1b1662ef58b3bb6" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>112</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T18:59:15</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 18:59:16:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 19:12:18:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="5d8efb2e6c466b904dfda06ed1a1276b" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>113</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:12:18</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 19:12:19:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 19:14:18:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="f88955e8a968bc433d4e08ebfadd6b12" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>114</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:14:18</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 19:14:20:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 19:24:50:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="5b78d415ee17f53ed8fea0114273cd04" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>115</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:24:50</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 19:24:54:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 19:26:24:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="743cac8ac9e6d64e3168b192162adc4e" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>116</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:26:24</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 19:26:29:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 19:43:11:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="f16855c51c6a06f2fe5f880d3f07a5a9" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>117</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:43:11</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 19:43:14:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 19:53:31:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="4db0526fe1c7215fadf18a349be88772" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>118</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:53:31</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 19:53:33:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 20:01:44:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="70b8e06bca7f75f179fc5f7d70d4eaa0" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>119</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:01:44</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 20:01:45:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 20:12:34:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="c0c544a14374b7c44f81b66960a4d9e9" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>120</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:12:34</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 20:12:35:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 20:14:52:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="5ecf2d5f88a66982dc460ee5796850d7" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>121</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:14:52</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 20:14:53:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-26 20:32:47:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="8fd76f277585617e0eb139bf1f04fcb4" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>122</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:32:47</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>discover</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 20:32:48:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="8fd76f277585617e0eb139bf1f04fcb4" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000021001</tid>
+  <dados-pedido>
+    <numero>122</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-26T18:32:48.009-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>discover</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=285f93cca2d1307c3f0a20125cf5a3dd</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-26 20:48:19:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="b3e381ecf384da96311e078dbbea7277" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>123</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:48:19</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-26 20:48:20:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-27 10:27:28:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d2c248dcab171b9b02603e97e5687159" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>125</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T10:27:27</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-27 10:27:29:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-27 12:15:49:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="bb9d910ae49d62a2d869e340035a5140" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>127</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T12:15:49</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-27 12:15:51:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<erro xmlns="http://ecommerce.cbmp.com.br"><codigo>001</codigo><mensagem><![CDATA[
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+]]></mensagem></erro>
+
+
+***********************************************
+2012-10-27 12:17:01:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="f8e0d2eda3a8545bede37d3b772d325a" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>128</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T12:17:01</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-27 12:17:02:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="f8e0d2eda3a8545bede37d3b772d325a" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000032002</tid>
+  <dados-pedido>
+    <numero>128</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-27T10:17:02.631-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=eb166b355d12f3b4a31e6ed4e0e444fb</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-27 12:18:29:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="04cf5006cbb838f07db86e6ab437af65" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>129</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T12:18:29</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-27 12:18:30:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="04cf5006cbb838f07db86e6ab437af65" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000042002</tid>
+  <dados-pedido>
+    <numero>129</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-27T10:18:29.884-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=725c8fca8d5f9cda9891a6054e933bb7</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-27 12:19:32:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="1a7b0c15a78a8079f2b929321a01b869" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>130</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T12:19:32</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>elo</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-27 12:19:33:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="1a7b0c15a78a8079f2b929321a01b869" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000052002</tid>
+  <dados-pedido>
+    <numero>130</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-27T10:19:32.794-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>elo</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=9e3c0be76d5df7ff63cf625bc800d9a8</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-27 12:20:16:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="537b4ee46bcc184878759fcb2261f327" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>131</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T12:20:16</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>diners</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-27 12:20:17:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="537b4ee46bcc184878759fcb2261f327" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000062002</tid>
+  <dados-pedido>
+    <numero>131</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-27T10:20:17.682-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>diners</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=3beac14339c1b6b262a1a0e957ee6522</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 02:02:58:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/debug
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="3f7c4a3bd756a519809578ae57e75cf6" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>140</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T02:02:58</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 02:02:59:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/debug
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="3f7c4a3bd756a519809578ae57e75cf6" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000007A001</tid>
+  <dados-pedido>
+    <numero>140</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T00:02:59.839-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=c78a7afc5c5b7f040362b702e2ccd593</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 02:05:07:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="c47c13e7cdfe5dec1453b8b45d16b1a4" versao="1.1.1">
+   <tid>1039897506000007A001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-29 02:05:08:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="c47c13e7cdfe5dec1453b8b45d16b1a4" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000007A001</tid>
+  <pan>IqVz7P9zaIgTYdU41HaW/OB/d7Idwttqwb2vaTt8MT0=</pan>
+  <dados-pedido>
+    <numero>140</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T00:02:59.839-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2012-10-29T00:05:07.001-02:00</data-hora>
+    <valor>1400</valor>
+    <eci>6</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-10-29T00:05:07.055-02:00</data-hora>
+    <valor>1400</valor>
+    <lr>57</lr>
+    <nsu>000007</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 05:21:32:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/debug
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="4e8a91afc5394e44f6c473acbfd9fb78" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>140</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T05:21:32</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 05:21:33:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/debug
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="4e8a91afc5394e44f6c473acbfd9fb78" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000008A001</tid>
+  <dados-pedido>
+    <numero>140</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T03:21:33.019-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=30e94f5d1031b887f466e078a030be09</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 06:16:53:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/debug
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="82a1bfd5754bd91c52e3da5ec87294d8" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>140</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T06:16:53</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 06:16:54:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/debug
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="82a1bfd5754bd91c52e3da5ec87294d8" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000009A001</tid>
+  <dados-pedido>
+    <numero>140</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T04:16:54.086-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=ec4e577ea302614404502df4ea8a386c</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 14:36:59:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="740a36ab6ac18302f598f84734707381" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>161</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T14:36:59</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 14:37:00:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="740a36ab6ac18302f598f84734707381" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000AA001</tid>
+  <dados-pedido>
+    <numero>161</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T12:37:00.596-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=52a23e178e543a6095b24fac634903e4</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 14:46:07:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="ab885ac29f421b2ba886715828f9aba8" versao="1.1.1">
+   <tid>103989750600000AA001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-10-29 14:46:08:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="ab885ac29f421b2ba886715828f9aba8" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000AA001</tid>
+  <dados-pedido>
+    <numero>161</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T12:37:00.596-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento por timeout do usuario</mensagem>
+    <data-hora>2012-10-29T12:42:14.045-02:00</data-hora>
+    <valor>1400</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2012-10-29 17:42:19:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="363ae68cfecd338e2911832c25780717" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>162</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T17:42:19</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 17:42:20:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="363ae68cfecd338e2911832c25780717" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000BA001</tid>
+  <dados-pedido>
+    <numero>162</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T15:42:20.738-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=8668828d845ce97ed8953430b06f083b</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 17:43:48:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="ee9c6fc936ef61eac7bbaff98232b5a0" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>164</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T17:43:48</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 17:43:49:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="ee9c6fc936ef61eac7bbaff98232b5a0" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000C2002</tid>
+  <dados-pedido>
+    <numero>164</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T15:43:49.194-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=f049d8191887e1f3bd9427ba91e8c710</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 17:44:21:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="3be7d42b40901f99bbc6e417cf7abba1" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>165</numero>
+      <valor>1400</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T17:44:21</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 17:44:22:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="3be7d42b40901f99bbc6e417cf7abba1" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000D2002</tid>
+  <dados-pedido>
+    <numero>165</numero>
+    <valor>1400</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T15:44:21.823-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=1d18a3587f60580baf7e79099ed6e0ab</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 18:49:41:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="9176061a32e819234d57f4b377981350" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>166</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T18:49:41</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 18:49:42:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="9176061a32e819234d57f4b377981350" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000EA001</tid>
+  <dados-pedido>
+    <numero>166</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T16:49:42.552-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=b02d324578a2041f5e034d7608e5fc92</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 18:50:52:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="1b1bed458ad4a08f7ea61be31218a488" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>167</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T18:50:52</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 18:50:54:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="1b1bed458ad4a08f7ea61be31218a488" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600000F2002</tid>
+  <dados-pedido>
+    <numero>167</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T16:50:54.500-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=bc2beb37846912b6420c6d82fc58b5dc</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-10-29 18:51:40:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="f7f012f606345e78f1c31d4f1b49cc6b" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>168</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-29T18:51:40</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-10-29 18:51:42:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="f7f012f606345e78f1c31d4f1b49cc6b" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000010A001</tid>
+  <dados-pedido>
+    <numero>168</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-10-29T16:51:42.030-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=0ed6b1d5423032ab725d923f5cbda9ae</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-11-26 12:23:19:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="cc7f6434d7248c6e791680a627f75348" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>171</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-11-26T12:23:19</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-11-26 12:23:23:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="cc7f6434d7248c6e791680a627f75348" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000012A001</tid>
+  <dados-pedido>
+    <numero>171</numero>
+    <valor>100</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-11-26T10:23:23.603-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=46f638ed58643735edb5d433dd064204</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-11-26 12:27:18:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="d45dbaa391dd84afe849efef2828a3ee" versao="1.1.1">
+   <tid>1039897506000012A001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-11-26 12:27:19:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="d45dbaa391dd84afe849efef2828a3ee" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000012A001</tid>
+  <pan>AgAv2yp3tfqK1wj/hX8+gWs1T+pIVPRqWkPqHV4j7DU=</pan>
+  <dados-pedido>
+    <numero>171</numero>
+    <valor>100</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-11-26T10:23:23.603-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>5</status>
+  <autenticacao>
+    <codigo>5</codigo>
+    <mensagem>Autenticada com sucesso</mensagem>
+    <data-hora>2012-11-26T10:27:17.880-02:00</data-hora>
+    <valor>100</valor>
+    <eci>5</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>5</codigo>
+    <mensagem>Autorização negada</mensagem>
+    <data-hora>2012-11-26T10:27:17.896-02:00</data-hora>
+    <valor>100</valor>
+    <lr>01</lr>
+    <nsu>000018</nsu>
+  </autorizacao>
+</transacao>
+
+
+***********************************************
+2012-11-27 14:09:32:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="e8da3281a36bc7f1566efacc025daf48" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>175</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-11-27T14:09:32</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-11-27 14:09:34:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="e8da3281a36bc7f1566efacc025daf48" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000131001</tid>
+  <dados-pedido>
+    <numero>175</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-11-27T12:09:34.035-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=9ec31c1a84e57a89334b5abbbadf17c1</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-11-27 14:11:31:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="30c75fec5508994cb1ba194e2abf691c" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>176</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-11-27T14:11:31</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-11-27 14:11:32:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="30c75fec5508994cb1ba194e2abf691c" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>1039897506000014A001</tid>
+  <dados-pedido>
+    <numero>176</numero>
+    <valor>1000</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-11-27T12:11:32.310-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>A</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=23ce3ab576e31c1fef3f2be53b0cadc0</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-11-27 14:14:03:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="00d912243f4fb8e13cf66150cdb197fa" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>177</numero>
+      <valor>100</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-11-27T14:14:03</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-11-27 14:14:04:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="00d912243f4fb8e13cf66150cdb197fa" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000151001</tid>
+  <dados-pedido>
+    <numero>177</numero>
+    <valor>100</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-11-27T12:14:03.931-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=16482ba7b80e460e7417d2c45f4c9868</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-11-27 14:15:53:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="7c8a2cd3566d8a9660909c498d39eee8" versao="1.1.1">
+   <tid>10398975060000151001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-11-27 14:15:54:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="7c8a2cd3566d8a9660909c498d39eee8" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000151001</tid>
+  <dados-pedido>
+    <numero>177</numero>
+    <valor>100</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-11-27T12:14:03.931-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2012-11-27T12:15:53.178-02:00</data-hora>
+    <valor>100</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2012-12-05 22:06:12:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="835b19f87c48fb0a5ff17e44f922f332" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>214</numero>
+      <valor>17500</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-12-05T22:06:12</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>4</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-12-05 22:06:13:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="835b19f87c48fb0a5ff17e44f922f332" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000222004</tid>
+  <dados-pedido>
+    <numero>214</numero>
+    <valor>17500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-05T20:06:13.159-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>4</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=c221da53767c706bbe54a850651154a6</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-12-06 15:50:38:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="e567ad51258a835e5119b0a813f2a917" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>217</numero>
+      <valor>17500</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-12-06T15:50:38</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>3</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-12-06 15:50:40:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="e567ad51258a835e5119b0a813f2a917" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000232003</tid>
+  <dados-pedido>
+    <numero>217</numero>
+    <valor>17500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-06T13:50:39.825-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=aaae596d46578fbbe55c3344558da71c</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-12-06 15:50:45:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="6298b6e98317c4630792fe43581b701b" versao="1.1.1">
+   <tid>10398975060000232003</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-12-06 15:50:46:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="6298b6e98317c4630792fe43581b701b" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000232003</tid>
+  <dados-pedido>
+    <numero>217</numero>
+    <valor>17500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-06T13:50:39.825-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2012-12-06T13:50:45.421-02:00</data-hora>
+    <valor>17500</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2012-12-07 12:22:50:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="e5766dfd15830ea9303dab59b28a7b03" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>221</numero>
+      <valor>70900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-12-07T12:22:50</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-12-07 12:22:51:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="e5766dfd15830ea9303dab59b28a7b03" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000242002</tid>
+  <dados-pedido>
+    <numero>221</numero>
+    <valor>70900</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-07T10:22:51.543-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=ee2927ef259a99afae8183e78f9e26e9</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-12-15 10:11:36:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="991e001d225f3dad9a868cd78fce7a21" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>241</numero>
+      <valor>20500</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-12-15T10:11:36</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>3</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-12-15 10:11:37:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="991e001d225f3dad9a868cd78fce7a21" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000252003</tid>
+  <dados-pedido>
+    <numero>241</numero>
+    <valor>20500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-15T08:11:37.483-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=ee15fb98b2a7fba13718f3edfbe43ec5</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-12-15 10:12:22:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="fec02c8fc74db7497aca2cdc5b48d6a2" versao="1.1.1">
+   <tid>10398975060000252003</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-12-15 10:12:23:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="fec02c8fc74db7497aca2cdc5b48d6a2" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000252003</tid>
+  <dados-pedido>
+    <numero>241</numero>
+    <valor>20500</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-15T08:11:37.483-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2012-12-15T08:12:22.009-02:00</data-hora>
+    <valor>20500</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2012-12-26 00:28:21:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="7ce5fe2b813e37afed2d394411092967" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>245</numero>
+      <valor>7490</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-12-26T00:28:21</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>3</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2012-12-26 00:28:23:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="7ce5fe2b813e37afed2d394411092967" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000262003</tid>
+  <dados-pedido>
+    <numero>245</numero>
+    <valor>7490</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-25T22:28:22.912-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=dbe18f6d8e2f9fd4cf80f7ddbc66c332</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2012-12-26 00:28:29:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="515d5eac3e4ffd4361c80c673eff935d" versao="1.1.1">
+   <tid>10398975060000262003</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2012-12-26 00:28:30:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="515d5eac3e4ffd4361c80c673eff935d" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000262003</tid>
+  <dados-pedido>
+    <numero>245</numero>
+    <valor>7490</valor>
+    <moeda>986</moeda>
+    <data-hora>2012-12-25T22:28:22.912-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2012-12-25T22:28:29.027-02:00</data-hora>
+    <valor>7490</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2013-01-05 11:24:12:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="26cd44be3687e5572db20a035416b265" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>253</numero>
+      <valor>18490</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-01-05T11:24:12</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-01-05 11:24:13:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="26cd44be3687e5572db20a035416b265" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000272002</tid>
+  <dados-pedido>
+    <numero>253</numero>
+    <valor>18490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-05T09:24:13.214-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=2e9baaf7f24e48f46addf3ea5019bd4d</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-01-05 11:24:30:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="022732e83044c47e0cc0fad7e1c9a9a0" versao="1.1.1">
+   <tid>10398975060000272002</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-01-05 11:24:30:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="022732e83044c47e0cc0fad7e1c9a9a0" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000272002</tid>
+  <dados-pedido>
+    <numero>253</numero>
+    <valor>18490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-05T09:24:13.214-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2013-01-05T09:24:29.457-02:00</data-hora>
+    <valor>18490</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2013-01-07 19:00:47:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="dc3cc0f8bd4f19b80894a644a0d32203" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>256</numero>
+      <valor>18490</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-01-07T19:00:47</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-01-07 19:00:48:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="dc3cc0f8bd4f19b80894a644a0d32203" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000281001</tid>
+  <dados-pedido>
+    <numero>256</numero>
+    <valor>18490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-07T17:00:47.993-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=f15869737a5fe90becf23a01de4e137f</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-01-07 19:01:09:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="7c0f78e4c7032b38ac6b21f537bbfb28" versao="1.1.1">
+   <tid>10398975060000281001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-01-07 19:01:10:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="7c0f78e4c7032b38ac6b21f537bbfb28" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000281001</tid>
+  <dados-pedido>
+    <numero>256</numero>
+    <valor>18490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-07T17:00:47.993-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2013-01-07T17:01:09.213-02:00</data-hora>
+    <valor>18490</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2013-01-10 00:51:50:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d30c0f7bd5990f11915c1ea886627da0" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>274</numero>
+      <valor>7490</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-01-10T00:51:50</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-01-10 00:51:51:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="d30c0f7bd5990f11915c1ea886627da0" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002A1001</tid>
+  <dados-pedido>
+    <numero>274</numero>
+    <valor>7490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-09T22:51:51.069-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=c5ea1515c6eab77c6695205c6ce3e401</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-01-10 00:51:57:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="aa564008afd73194daf05e97cc0d0e07" versao="1.1.1">
+   <tid>103989750600002A1001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-01-10 00:51:57:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="aa564008afd73194daf05e97cc0d0e07" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002A1001</tid>
+  <dados-pedido>
+    <numero>274</numero>
+    <valor>7490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-09T22:51:51.069-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2013-01-09T22:51:56.640-02:00</data-hora>
+    <valor>7490</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2013-01-10 10:05:24:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="bf5e47dc0c7c47231ab30ca12702dbd3" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>275</numero>
+      <valor>18490</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-01-10T10:05:24</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-01-10 10:05:25:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="bf5e47dc0c7c47231ab30ca12702dbd3" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002B1001</tid>
+  <dados-pedido>
+    <numero>275</numero>
+    <valor>18490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-10T08:05:25.597-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=12b03a9ba8d82f1d43005137e6479e03</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-01-10 10:06:05:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="738962e9fcb8850b2b85c20feed81f9c" versao="1.1.1">
+   <tid>103989750600002B1001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-01-10 10:06:06:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="738962e9fcb8850b2b85c20feed81f9c" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002B1001</tid>
+  <dados-pedido>
+    <numero>275</numero>
+    <valor>18490</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-10T08:05:25.597-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>9</status>
+  <cancelamento>
+    <codigo>9</codigo>
+    <mensagem>Cancelamento solicitado pelo usuario</mensagem>
+    <data-hora>2013-01-10T08:06:05.165-02:00</data-hora>
+    <valor>18490</valor>
+  </cancelamento>
+</transacao>
+
+
+***********************************************
+2013-01-29 11:52:06:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="a8626b072747d5181bfb59105c24cc35" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>280</numero>
+      <valor>39082</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-01-29T11:52:06</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-01-29 11:52:07:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="a8626b072747d5181bfb59105c24cc35" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002C2002</tid>
+  <dados-pedido>
+    <numero>280</numero>
+    <valor>39082</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-29T09:52:07.239-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=7182a647a5e618d7f6aa899c705dab62</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-01-29 11:52:42:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="79a0922eceb6cc5bb369a79db7c3d1f5" versao="1.1.1">
+   <tid>103989750600002C2002</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-01-29 11:52:43:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="79a0922eceb6cc5bb369a79db7c3d1f5" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002C2002</tid>
+  <pan>pOma+6jIFiHyQDzqeYmiL3yhU1F3wnYMi5CtKFk9RXQ=</pan>
+  <dados-pedido>
+    <numero>280</numero>
+    <valor>39082</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-29T09:52:07.239-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>mastercard</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Nao autenticada</mensagem>
+    <data-hora>2013-01-29T09:52:40.853-02:00</data-hora>
+    <valor>39082</valor>
+    <eci>1</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2013-01-29T09:52:40.915-02:00</data-hora>
+    <valor>39082</valor>
+    <lr>00</lr>
+    <arp>037921</arp>
+    <nsu>000044</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2013-01-29T09:52:41.459-02:00</data-hora>
+    <valor>39082</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2013-01-30 14:56:24:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="ea992fea88804f7fe35c5a05013bba02" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>282</numero>
+      <valor>16950</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-01-30T14:56:24</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>2</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-01-30 14:56:25:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="ea992fea88804f7fe35c5a05013bba02" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002D2002</tid>
+  <dados-pedido>
+    <numero>282</numero>
+    <valor>16950</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-30T12:56:25.113-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=29bea348ca9f34e04df6866c95c7beb8</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-01-30 15:00:18:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="415a9f0e1adc8374e8d2df7eb0d52de1" versao="1.1.1">
+   <tid>103989750600002D2002</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-01-30 15:00:19:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="415a9f0e1adc8374e8d2df7eb0d52de1" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002D2002</tid>
+  <pan>+PHYwDJP3WuKh5/onmKYemE/8l2AbIGdPPd4oHUxK2M=</pan>
+  <dados-pedido>
+    <numero>282</numero>
+    <valor>16950</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-01-30T12:56:25.113-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>2</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Autenticada com sucesso</mensagem>
+    <data-hora>2013-01-30T13:00:16.806-02:00</data-hora>
+    <valor>16950</valor>
+    <eci>5</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2013-01-30T13:00:16.940-02:00</data-hora>
+    <valor>16950</valor>
+    <lr>00</lr>
+    <arp>029358</arp>
+    <nsu>000045</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2013-01-30T13:00:17.834-02:00</data-hora>
+    <valor>16950</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2013-02-07 18:59:02:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="8b4c2050fe5c89e90260de1965756df6" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>295</numero>
+      <valor>33050</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-02-07T18:59:02</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>1</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-02-07 18:59:03:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="8b4c2050fe5c89e90260de1965756df6" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002E1001</tid>
+  <dados-pedido>
+    <numero>295</numero>
+    <valor>33050</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-02-07T16:59:03.056-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=d1ad13a3cd15743d7b5fe7486313520d</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-02-07 18:59:59:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="23eb5b18caca5e5b85c41d74646a7ddf" versao="1.1.1">
+   <tid>103989750600002E1001</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-02-07 19:00:00:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="23eb5b18caca5e5b85c41d74646a7ddf" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002E1001</tid>
+  <pan>lNRSKhG47iPQNx46y6hTxXzZ+UN/iYekJwZBK1i2ZJg=</pan>
+  <dados-pedido>
+    <numero>295</numero>
+    <valor>33050</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-02-07T16:59:03.056-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>1</produto>
+    <parcelas>1</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2013-02-07T16:59:57.556-02:00</data-hora>
+    <valor>33050</valor>
+    <eci>6</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2013-02-07T16:59:57.577-02:00</data-hora>
+    <valor>33050</valor>
+    <lr>00</lr>
+    <arp>037208</arp>
+    <nsu>000046</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2013-02-07T16:59:58.870-02:00</data-hora>
+    <valor>33050</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2013-02-11 14:23:09:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="9a7bf76991e98f03fd037985ed980d1d" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>302</numero>
+      <valor>40520</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-02-11T14:23:09</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>3</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-02-11 14:23:11:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="9a7bf76991e98f03fd037985ed980d1d" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002F2003</tid>
+  <dados-pedido>
+    <numero>302</numero>
+    <valor>40520</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-02-11T12:23:10.945-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=098027320b0122f55e365a13e0671afb</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-02-11 14:24:11:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="7af83a8e27feb0c283ef5a31d85fbf41" versao="1.1.1">
+   <tid>103989750600002F2003</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-02-11 14:24:12:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="7af83a8e27feb0c283ef5a31d85fbf41" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>103989750600002F2003</tid>
+  <pan>rHzONyWZXQ2Lxw7wLJ0FYTzfzqk1fUOfFJ82Ey7P4Kg=</pan>
+  <dados-pedido>
+    <numero>302</numero>
+    <valor>40520</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-02-11T12:23:10.945-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2013-02-11T12:24:09.693-02:00</data-hora>
+    <valor>40520</valor>
+    <eci>6</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2013-02-11T12:24:09.816-02:00</data-hora>
+    <valor>40520</valor>
+    <lr>00</lr>
+    <arp>045241</arp>
+    <nsu>000047</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2013-02-11T12:24:10.478-02:00</data-hora>
+    <valor>40520</valor>
+  </captura>
+</transacao>
+
+
+***********************************************
+2013-02-14 22:14:40:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="b33fd2bd7caad6f79e5dcaf6313ac771" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>304</numero>
+      <valor>26560</valor>
+      <moeda>986</moeda>
+      <data-hora>2013-02-14T22:14:40</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>3</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+***********************************************
+2013-02-14 22:14:41:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/processar
+OPERAÇÃO: Transacao
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="b33fd2bd7caad6f79e5dcaf6313ac771" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000302003</tid>
+  <dados-pedido>
+    <numero>304</numero>
+    <valor>26560</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-02-14T20:14:41.580-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>0</status>
+  <url-autenticacao>https://ecommerce.cielo.com.br/web/index.cbmp?id=2488ed2d95cdfa7b1abe15efb38ac08a</url-autenticacao>
+</transacao>
+
+
+***********************************************
+2013-02-14 22:15:22:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+ENVIO: <?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-consulta id="ef2707e636bc47637f5f210ef361f95f" versao="1.1.1">
+   <tid>10398975060000302003</tid>
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+</requisicao-consulta>
+
+***********************************************
+2013-02-14 22:15:23:000000 (UTC)
+DO ARQUIVO: /loja/index.php?route=payment/cielo/retorno
+OPERAÇÃO: Consulta
+RESPOSTA: <?xml version="1.0" encoding="ISO-8859-1"?>
+<transacao versao="1.1.1" id="ef2707e636bc47637f5f210ef361f95f" xmlns="http://ecommerce.cbmp.com.br">
+  <tid>10398975060000302003</tid>
+  <pan>yj19WtrgwprNp2D6MnceTV3Wz0bsDfZU2nuWgIoudZI=</pan>
+  <dados-pedido>
+    <numero>304</numero>
+    <valor>26560</valor>
+    <moeda>986</moeda>
+    <data-hora>2013-02-14T20:14:41.580-02:00</data-hora>
+    <idioma>PT</idioma>
+  </dados-pedido>
+  <forma-pagamento>
+    <bandeira>visa</bandeira>
+    <produto>2</produto>
+    <parcelas>3</parcelas>
+  </forma-pagamento>
+  <status>6</status>
+  <autenticacao>
+    <codigo>6</codigo>
+    <mensagem>Transacao sem autenticacao</mensagem>
+    <data-hora>2013-02-14T20:15:19.331-02:00</data-hora>
+    <valor>26560</valor>
+    <eci>6</eci>
+  </autenticacao>
+  <autorizacao>
+    <codigo>6</codigo>
+    <mensagem>Transação autorizada</mensagem>
+    <data-hora>2013-02-14T20:15:19.433-02:00</data-hora>
+    <valor>26560</valor>
+    <lr>00</lr>
+    <arp>041568</arp>
+    <nsu>000048</nsu>
+  </autorizacao>
+  <captura>
+    <codigo>6</codigo>
+    <mensagem>Transacao capturada com sucesso</mensagem>
+    <data-hora>2013-02-14T20:15:20.314-02:00</data-hora>
+    <valor>26560</valor>
+  </captura>
+</transacao>
+
+

@@ -1,0 +1,382 @@
+<modification>
+
+	<id>Admin replace text (action) by buttons</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.2</vqmver>
+	<author>LeorLindel</author>
+
+	<file name="admin/view/template/catalog/category_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/catalog/download_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/catalog/information_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/catalog/manufacturer_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/catalog/product_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/catalog/review_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/common/home.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/extension/feed.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/extension/module.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/extension/payment.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/extension/shipping.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/extension/total.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/country_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/currency_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/geo_zone_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/language_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/length_class_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/measurement_class_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/order_status_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/stock_status_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/tax_class_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/weight_class_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/localisation/zone_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/sale/coupon_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/sale/customer_group_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/sale/customer_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/sale/order_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/user/user_group_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/user/user_list.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+[ <a href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]
+			]]></search>
+            <add><![CDATA[
+<a href="<?php echo $action['href']; ?>" class="button"><span><?php echo $action['text']; ?></span></a>
+			]]></add>
+        </operation>
+	</file>
+
+	<!--<file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+                <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+			]]></search>
+            <add><![CDATA[
+                <br /><a onclick="$(this).parent().find(':checkbox').attr('checked', true);" class="button"><span><?php echo $text_select_all; ?></span></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);" class="button"><span><?php echo $text_unselect_all; ?></span></a></td>
+			]]></add>
+        </operation>
+	</file>-->
+
+	<file name="admin/view/template/shipping/ups.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+			]]></search>
+            <add><![CDATA[
+              <br /><a onclick="$(this).parent().find(':checkbox').attr('checked', true);" class="button"><span><?php echo $text_select_all; ?></span></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);" class="button"><span><?php echo $text_unselect_all; ?></span></a></td>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/shipping/usps.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+			]]></search>
+            <add><![CDATA[
+              <br /><a onclick="$(this).parent().find(':checkbox').attr('checked', true);" class="button"><span><?php echo $text_select_all; ?></span></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);" class="button"><span><?php echo $text_unselect_all; ?></span></a></td>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/tool/backup.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+			]]></search>
+            <add><![CDATA[
+              <br /><a onclick="$(this).parent().find(':checkbox').attr('checked', true);" class="button"><span><?php echo $text_select_all; ?></span></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);" class="button"><span><?php echo $text_unselect_all; ?></span></a></td>
+			]]></add>
+        </operation>
+	</file>
+
+	<file name="admin/view/template/user/user_group_form.tpl">
+        <operation>
+            <search position="replace"><![CDATA[
+              <a onclick="$(this).parent().find(':checkbox').attr('checked', true);"><?php echo $text_select_all; ?></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);"><?php echo $text_unselect_all; ?></a></td>
+			]]></search>
+            <add><![CDATA[
+              <br /><a onclick="$(this).parent().find(':checkbox').attr('checked', true);" class="button"><span><?php echo $text_select_all; ?></span></a> / <a onclick="$(this).parent().find(':checkbox').attr('checked', false);" class="button"><span><?php echo $text_unselect_all; ?></span></a></td>
+			]]></add>
+        </operation>
+	</file>
+
+</modification>

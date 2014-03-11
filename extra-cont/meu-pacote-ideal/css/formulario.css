@@ -1,0 +1,144 @@
+/***************************************************************/
+/*/////////////////////////////////////////////////////////////*/
+/***************[CONFIGURAÇÕES GERAIS]*************/
+*{padding:0; margin:0; list-style:none; font-family:Verdana, Geneva, sans-serif;}
+body{font-family:Verdana, Geneva, sans-serif; font-size:13px; color:#686868;}
+a{outline:none; text-decoration:none;}
+.block{display:block;}
+.none{display:none;}
+.left{float:left;}
+.right{float:right;}
+.indent{text-indent:-999999px; overflow:hidden;}
+.italico{font-style:italic;}
+.opacity{opacity:0.70; -moz-opacity: 0.70; filter: alpha(opacity=70);}
+.borda_arredondada{-moz-border-radius:10px;}
+.relative{ position:relative; }
+.absolute{ position: absolute; }
+.bold{font-weight:bold;}
+img{border:0px;}
+.clear{clear:both;}
+.txtCenter{text-align:center;}
+strong{font-weight:bold;}
+
+
+/***************************************************************/
+/*/////////////////////////////////////////////////////////////*/
+/***************[FORMULARIO]*************/
+
+.usual {
+  color:#686868;
+  width:950px;
+  background:#EFECC6;
+  padding:15px;
+  
+  /*margin:8px auto;*/
+}
+.usual li { list-style:none; float:left; }
+.usual ul a {
+  display:block;
+  padding:6px 18px;
+  text-decoration:none!important;
+  margin:1px;
+  margin-left:0;
+  font:bold 20px Verdana, Geneva, sans-serif;
+  color:#FFF;
+  background:#273E6E;
+}
+.usual ul a:hover {
+  color:#FFF;
+  background:#4970BE;
+  }
+.usual ul a.selected {
+  margin-bottom:0;
+  color:#273E6E;
+  background:#FFF;
+  border-bottom:1px solid #FFF;
+  cursor:default;
+  }
+.usual div {
+  padding:20px;
+  *padding-top:3px;
+  *margin-top:-15px;
+  clear:left;
+  background:#FFF;
+  font:13px Verdana, Geneva, sans-serif;
+  color:#686868;
+}
+
+hr{border:1px solid #D2CD97; margin:20px 0;}
+
+.nPerg{background:#EFECC6; color:#273E6E!important; padding:3px; color:#FFF; font-weight:bold;}
+
+.verResultado{
+	background:url(../btn-ver-resultado.png) 0 0 no-repeat;
+	display:block;
+	width:219px;
+	height:51px;
+	text-indent:-9999999px;	
+}
+.verResultado:hover{background-position:bottom;}
+
+.pg_contato{width:520px;}
+.pg_contato strong{font-weight:bold;}
+
+label {
+	display: block;
+	line-height: 18px;
+	margin-bottom: 10px;
+}
+
+.gridFull 		{width:225px; float:left; margin-right:25px;}
+.gridFullAll 	{width:475px; clear:both;}
+.gridDdd 		{width:50px; float:left; margin-right:25px;}
+.gridTel 		{width:150px; float:left; margin-right:25px;}
+
+
+.campo {
+	padding:3px;
+	display: block;
+	width: 100%;
+	height:18px;
+	overflow:auto;
+	border:1px solid #CCC;
+	background:#F8F8F8;
+}
+
+.campo:hover  {
+	border: 1px solid #666;
+	
+}
+
+.botao_form {
+	cursor: pointer;
+	color: #FFFFFF;
+	line-height: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	background: url('http://www.wecareauto.com.br/catalog/view/theme/default/image/button.png') repeat-x;
+
+	-webkit-border-radius: 7px 7px 7px 7px;
+	-moz-border-radius: 7px 7px 7px 7px;
+	-khtml-border-radius: 7px 7px 7px 7px;
+	border-radius: 7px 7px 7px 7px;
+
+	-webkit-box-shadow: 0px 2px 2px #DDDDDD;
+	-moz-box-shadow: 0px 2px 2px #DDDDDD;
+	box-shadow: 0px 2px 2px #DDDDDD;
+	
+	display: inline-block;
+	text-decoration: none;
+	padding: 6px 12px 6px 12px;
+
+	margin: 0;
+	border: 0;
+	height: 24px;
+	padding: 0px 12px 0px 12px;
+
+}
+
+.botao_form:hover {
+	background-position: 0px -24px;
+}
+
+.alinhaBotao{padding-top:6px!important; height:18px!important;}

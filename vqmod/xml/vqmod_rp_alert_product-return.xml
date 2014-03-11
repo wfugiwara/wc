@@ -1,0 +1,35 @@
+<modification>
+	<id>Alert - Product Return Request</id>
+	<version>1.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Raj Padhi - WiseMusings.com</author>
+	<file name="catalog/controller/account/return.php">
+		<operation>
+		
+			<search position="after"><![CDATA[
+			$this->model_account_return->addReturn($this->request->post);
+			]]></search>
+			
+			<add><![CDATA[
+			$message ="<strong>".$this->customer->getFirstName()." ".$this->customer->getLastName()." Chegou um pedido de devolução de produto.</strong><br><br>"
+               .'<a href="http://'.$_SERVER["SERVER_NAME"].'/admin">Clique aqui para ver</a>';
+         
+               $mail = new Mail();
+               $mail->protocol = $this->config->get('config_mail_protocol');
+               $mail->parameter = $this->config->get('config_mail_parameter');
+               $mail->hostname = $this->config->get('config_smtp_host');
+               $mail->username = $this->config->get('config_smtp_username');
+               $mail->password = $this->config->get('config_smtp_password');
+               $mail->port = $this->config->get('config_smtp_port');
+               $mail->timeout = $this->config->get('config_smtp_timeout');                                                  
+               $mail->setTo($this->config->get('config_email')); /* OR setTo("MYEMAIL@MYDOMAIN.COM"); */
+               $mail->setFrom($this->config->get('config_email')); /* OR setFrom("MYEMAIL@MYDOMAIN.COM"); */
+               $mail->setSender($this->config->get('config_name'));
+               $mail->setSubject(($this->config->get('config_name')) . " - Product Return Request");
+               $mail->setHtml($message);
+               $mail->send();
+			]]></add>
+			
+		</operation>
+	</file>
+</modification>

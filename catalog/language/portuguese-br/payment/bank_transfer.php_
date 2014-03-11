@@ -1,0 +1,7 @@
+<?php
+// Text
+$_['text_title']       = '<img src="http://www.wecareauto.com.br/image/pagamento/transferenciabancaria.jpg" alt="Transferência Bancária" title="Transferência Bancária" style="border 1px solid #EEEEEE;" /></a>';
+$_['text_instruction'] = 'Instruções para Transferência Bancária';
+$_['text_description'] = 'Por favor, transfira o valor total para a seguinte conta bancária:';
+$_['text_payment']     = 'Seu pedido será enviado assim que confirmarmos o pagamento.';
+?>

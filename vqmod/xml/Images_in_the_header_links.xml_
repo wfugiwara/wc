@@ -1,0 +1,36 @@
+<modification>
+
+	<id>Images in the header links</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Fabrikator</author>
+	
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+	    <operation error="skip"><search position="replace"><![CDATA[<div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist_total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $cart; ?>"><?php echo $text_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>]]></search>
+		<add><![CDATA[<div class="links">
+		<style type="text/css">
+		#header .links img {margin:-10px 5px -10px 0}
+		</style>
+		   <a href="<?php echo $home; ?>"><img src="catalog/view/theme/default/image/links/home.png" alt="<?php echo $text_home; ?>" /><?php echo $text_home; ?></a>
+		   <a href="<?php echo $wishlist; ?>" id="wishlist-total"><img src="catalog/view/theme/default/image/links/wishlist.png" alt="<?php echo $text_wishlist; ?>" /><?php echo $text_wishlist; ?></a>
+		   <a href="<?php echo $account; ?>"><img src="catalog/view/theme/default/image/links/account.png" alt="<?php echo $text_account; ?>" /><?php echo $text_account; ?></a>
+		   <a href="<?php echo $cart; ?>"><img src="catalog/view/theme/default/image/links/cart.png" alt="<?php echo $text_cart; ?>" /><?php echo $text_cart; ?></a>
+		   <a href="<?php echo $checkout; ?>"><img src="catalog/view/theme/default/image/links/checkout.png" alt="<?php echo $text_checkout; ?>" /><?php echo $text_checkout; ?></a>
+		</div>]]></add></operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+	    <operation error="skip"><search position="replace"><![CDATA[<div class="links"><a href="<?php echo $home; ?>"><?php echo $text_home; ?></a><a href="<?php echo $wishlist; ?>" id="wishlist-total"><?php echo $text_wishlist; ?></a><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a><a href="<?php echo $shopping_cart; ?>"><?php echo $text_shopping_cart; ?></a><a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>]]></search>
+		<add><![CDATA[<div class="links">
+		<style type="text/css">
+		#header .links img {margin:-10px 5px -10px 0}
+		</style>
+		   <a href="<?php echo $home; ?>"><img src="catalog/view/theme/default/image/links/home.png" alt="<?php echo $text_home; ?>" /><?php echo $text_home; ?></a>
+		   <a href="<?php echo $wishlist; ?>" id="wishlist-total"><img src="catalog/view/theme/default/image/links/wishlist.png" alt="<?php echo $text_wishlist; ?>" /><?php echo $text_wishlist; ?></a>
+		   <a href="<?php echo $account; ?>"><img src="catalog/view/theme/default/image/links/account.png" alt="<?php echo $text_account; ?>" /><?php echo $text_account; ?></a>
+		   <a href="<?php echo $shopping_cart; ?>"><img src="catalog/view/theme/default/image/links/cart.png" alt="<?php echo $text_shopping_cart; ?>" /><?php echo $text_shopping_cart; ?></a>
+		   <a href="<?php echo $checkout; ?>"><img src="catalog/view/theme/default/image/links/checkout.png" alt="<?php echo $text_checkout; ?>" /><?php echo $text_checkout; ?></a>
+		</div>]]></add></operation>
+	</file>
+	
+</modification>

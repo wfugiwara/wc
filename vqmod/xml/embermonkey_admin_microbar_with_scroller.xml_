@@ -1,0 +1,121 @@
+<modification>
+	<id>Admin Micro Bar</id>
+	<version><![CDATA[1]]></version>
+	<vqmver><![CDATA[2]]></vqmver>
+	<author>Peter Stuart - embermonkey</author>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<div id="header">]]></search>
+			<add><![CDATA[<?php if(!$logged){ ?>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<div id="header">]]></search>
+			<add><![CDATA[<style>
+#content { padding-top:50px; }
+</style>]]></add>
+		</operation>
+		<operation>
+			<search position="replace" index="2" offset="1"><![CDATA[<?php if ($logged) { ?>]]></search>
+			<add><![CDATA[
+  <?php } ?>
+  <?php if ($logged) { ?>
+  <div id="menu" style="position:fixed; left:0; right:0; -webkit-box-shadow: 0 0 10px 0 black;-moz-box-shadow: 0 0 10px 0 black; box-shadow: 0 0 10px 0 black;">
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[</head>]]></search>
+			<add><![CDATA[
+<script type="text/javascript">
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 0) {
+        $("#scrollTop").fadeIn();
+    } else {
+        $("#scrollTop").fadeOut();
+    }
+    if ($(this).scrollTop() > 85) {
+        $(".fixedButtons").fadeIn();
+    } else {
+        $(".fixedButtons").fadeOut();
+    }
+});
+$(document).ready(function(){
+	$("#scrollTop").click(function(){
+		$('html, body').animate({ scrollTop: 0 }, 'slow');
+		$("#scrollTop").fadeOut();
+	});
+});
+</script>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<script type="text/javascript">]]></search>
+			<add><![CDATA[
+    <style>
+		.fixedButtons {
+			position:absolute;
+			top:34px;
+			right:45px;
+			padding:6px 10px;
+			background:url("view/image/box.png") repeat-x scroll 0 0 transparent;
+			border-radius: 0 0 5px 5px;
+			border:1px solid #DBDBDB;
+			display:none;
+		}
+		
+		.fixedButtons a {
+			margin:0 5px;
+		}
+		
+		.fixedButtons .buttons {
+			float:right;
+		}
+		.fixedButtons h1 {
+			color: #003A88;
+			float: left;
+			font-size: 16px;
+			margin: 0 10px 0 0;
+			padding: 0;
+		}
+		.fixedButtons h1 img {
+			float: left;
+			margin-left: 3px;
+			margin-right: 8px;
+			margin-top: -1px;
+		}
+	</style>
+    <div class="fixedButtons"></div>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/common/footer.tpl">
+		<operation>
+			<search position="after"><![CDATA[<div id="footer"><?php echo $text_footer; ?></div>]]></search>
+			<add><![CDATA[
+<style>
+	#scrollTop {
+		opacity:0.7;
+		background:#aaa;
+		border-radius:5px;
+		cursor:pointer;
+		padding:5px 8px;	
+		font-weight:bold;
+		font-size:16px;
+		color:#fff;
+		display:none;
+	}
+	
+	#scrollTop:hover {
+		opacity:0.9;
+	}
+</style>
+<div id="scrollTop" style="position:fixed; right:10px; bottom:10px;">Rolar Para Cima</div>
+
+    <script type="text/javascript">
+	$(".heading h1").clone().appendTo(".fixedButtons");
+	$(".buttons").clone().appendTo(".fixedButtons");
+    </script>
+			]]></add>
+		</operation>
+	</file>
+</modification>

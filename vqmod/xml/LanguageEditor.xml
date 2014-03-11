@@ -1,0 +1,26 @@
+<modification>
+    <id><![CDATA[Language Editor]]></id>
+    <version>1.0</version>
+    <vqmver>2.3.0</vqmver>
+    <author>Na'ven Goodkarma</author>
+    <file name="admin/controller/common/header.php">
+        <operation>
+            <search position="after"><![CDATA[$this->data['direction'] = $this->language->get('direction');]]></search>
+            <add><![CDATA[
+            if(isset($this->session->data['token'])){
+                $this->load->language('LanguageEditor/LanguageEditor');
+                $this->data['menu_language'] = $this->language->get('menu_language');
+                $this->data['link_language'] = $this->url->link('LanguageEditor/LanguageEditor', 'token=' . $this->session->data['token']);
+            }
+            ]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/common/header.tpl">
+        <operation>
+            <search position="after"><![CDATA[<li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>]]></search>
+            <add><![CDATA[
+            <li><a href="<?php echo $link_language; ?>"><?php echo $menu_language; ?></a></li>
+            ]]></add>
+        </operation>
+    </file>
+</modification>

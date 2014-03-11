@@ -1,0 +1,45 @@
+<modification>
+	<id><![CDATA[@tik Savings Note]]></id>
+	<version><![CDATA[1.1]]></version>
+	<vqmver><![CDATA[2.1.7]]></vqmver>
+	<author><![CDATA[OC2PS]]></author>
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+		<operation>
+			<search position="before" offset="2" error="log"><![CDATA[<?php if ($tax) { ?>]]></search>
+			<add><![CDATA[<br /><span class="you-save"><?php echo $text_yousave; ?> <?php echo $yousave . ' (' . $yousavepercent . '%)'; ?></span>]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/english/product/product.php">
+		<operation>
+			<search position="replace" error="log"><![CDATA[// Entry]]></search>
+			<add><![CDATA[$_['text_yousave']        = 'You save:';
+// Entry]]></add>
+		</operation>
+	</file>
+	<file name="catalog/language/portuguese-br/product/product.php">
+		<operation>
+			<search position="replace" error="skip"><![CDATA[// Entry]]></search>
+			<add><![CDATA[$_['text_yousave']        = 'Você Econimiza:';
+// Entry]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="replace" error="log"><![CDATA[$this->data['text_tax'] = $this->language->get('text_tax');]]></search>
+			<add><![CDATA[$this->data['text_tax'] = $this->language->get('text_tax');
+$this->data['text_yousave'] = $this->language->get('text_yousave');]]></add>
+		</operation>
+		<operation>
+			<search position="replace" error="log"><![CDATA[$this->data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));]]></search>
+			<add><![CDATA[$this->data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+$this->data['yousave'] = $this->currency->format($this->tax->calculate($product_info['price']-$product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')));
+$this->data['yousavepercent'] = round(($product_info['price']-$product_info['special'])*100/$product_info['price'],0);]]></add>
+		</operation>
+		<operation>
+			<search position="replace" error="log"><![CDATA[$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));]]></search>
+			<add><![CDATA[$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+$yousave = $this->currency->format($this->tax->calculate($result['price']-$result['special'], $result['tax_class_id'], $this->config->get('config_tax')));
+$yousavepercent = round(($result['price']-$result['special'])*100/$result['price'],0);]]></add>
+		</operation>		
+	</file>
+</modification>

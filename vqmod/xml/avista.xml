@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Desconto à Vista</id>
+	<version>0.7</version>
+	<vqmver>2.1.6</vqmver>
+	<author>Danilo Fahl - danfahl@gmail.com</author>
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="replace" index="2"><![CDATA[$text .= $total['title'] . ': ' . html_entity_decode($total['text'], ENT_NOQUOTES, 'UTF-8') . "\n";]]></search>
+			<add><![CDATA[$text .= $total['title'] . ': ' . strip_tags(html_entity_decode($total['text'], ENT_NOQUOTES, 'UTF-8')) . "\n"; //avista]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>Hide Cart Button</id>
+        <version>1.0</version>
+        <vqmver>1.0.8</vqmver>
+        <author>Ariel Orozco</author>
+        <!--<file name="catalog/view/theme/*/template/product/product.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart">]]></search>
+                        <add><![CDATA[<div class="cart" style="display: none">]]></add>
+                </operation>
+        </file>-->
+        <file name="catalog/view/theme/*/template/product/category.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart">]]></search>
+                        <add><![CDATA[<div class="cart" style="display: none">]]></add>
+                </operation>
+                <operation>
+                        <search position="replace"><![CDATA[<div class="wishlist">]]></search>
+                        <add><![CDATA[<div class="wishlist" style="display: none">]]></add>
+                </operation>
+                <operation>
+                        <search position="replace"><![CDATA[<div class="compare">]]></search>
+                        <add><![CDATA[<div class="compare" style="display: none">]]></add>
+                </operation>
+             
+        </file>        
+        <file name="catalog/view/theme/*/template/product/search.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart">]]></search>
+                        <add><![CDATA[<div class="cart" style="display: none">]]></add>
+                </operation>
+                <operation>
+                        <search position="replace"><![CDATA[<div class="wishlist">]]></search>
+                        <add><![CDATA[<div class="wishlist" style="display: none">]]></add>
+                </operation>
+                <operation>
+                        <search position="replace"><![CDATA[<div class="compare">]]></search>
+                        <add><![CDATA[<div class="compare" style="display: none">]]></add>
+                </operation>             
+        </file>
+        <file name="catalog/view/theme/*/template/module/featured.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></search>
+                        <add><![CDATA[<div style="display: none" class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></add>
+                </operation>
+        </file>
+        <file name="catalog/view/theme/*/template/module/latest.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></search>
+                        <add><![CDATA[<div style="display: none" class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></add>
+                </operation>
+        </file>
+        <file name="catalog/view/theme/*/template/module/special.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></search>
+                        <add><![CDATA[<div style="display: none" class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></add>
+                </operation>
+        </file>
+        <file name="catalog/view/theme/*/template/module/bestseller.tpl">
+                <operation>
+                        <search position="replace"><![CDATA[<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></search>
+                        <add><![CDATA[<div style="display: none" class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>]]></add>
+                </operation>
+        </file>
+</modification>

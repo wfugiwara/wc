@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>Confirm Email Registration/Checkout</id>
+        <version>1.0.7</version>
+        <vqmver>2.2.1</vqmver>
+        <author>KollanH - KollanH@gmail.com</author>
+		<!-- ++ Checkout ++ -->
+		<!-- Add to template -->
+		<!-- Guest -->
+		<file name="catalog/view/theme/*/template/checkout/guest.tpl">
+		<operation error="log">
+			<search position="before">
+				<![CDATA[<span class="required">*</span> <?php echo $entry_telephone; ?><br />]]>
+			</search>
+			
+			<add>
+				<![CDATA[<span class="required">*</span> <?php echo $entry_email_confirm; ?><br />
+  <input type="text" name="email_confirm" value="" class="large-field" />
+  <br />
+  <br />]]>
+			</add>	
+		</operation>
+        </file>
+		<!-- Register -->
+		<file name="catalog/view/theme/*/template/checkout/register.tpl">
+		<operation error="log">
+			<search position="before">
+				<![CDATA[<span class="required">*</span> <?php echo $entry_telephone; ?><br />]]>
+			</search>
+			
+			<add>
+				<![CDATA[<span class="required">*</span> <?php echo $entry_email_confirm; ?><br />
+  <input type="text" name="email_confirm" value="" class="large-field" />
+  <br />
+  <br />]]>
+			</add>	
+		</operation>
+        </file>
+		<!-- Checkout -->
+		<file name="catalog/view/theme/*/template/checkout/checkout.tpl">
+		<operation error="log">
+			<search position="before">
+				<![CDATA[if (json['error']['confirm']) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if (json['error']['email_confirm']) {
+					$('#payment-address input[name=\'email_confirm\'] + br').after('<span class="error">' + json['error']['email_confirm'] + '</span>');
+				}]]>
+			</add>	
+		</operation>
+		<operation error="log">
+			<search position="before" index="4">
+				<![CDATA[if (json['error']['zone']) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if (json['error']['email_confirm']) {
+					$('#payment-address input[name=\'email_confirm\'] + br').after('<span class="error">' + json['error']['email_confirm'] + '</span>');
+				}]]>
+			</add>	
+		</operation>
+        </file>
+		<!-- Add to language -->
+		<file name="catalog/language/*/checkout/checkout.php">
+		<operation error="log">
+			<search position="before">
+				<![CDATA[$_['entry_email']]]>
+			</search>
+			
+			<add>
+				<![CDATA[$_['entry_email_confirm']                    = 'Confirme o E-mail:';
+				]]>
+			</add>
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[$_['error_confirm']]]>
+			</search>
+			
+			<add>
+				<![CDATA[$_['error_email_confirm']                  = 'E-mails não combinam!';]]>
+			</add>	
+		</operation>
+        </file>
+		<!-- Add to controller -->
+		<!-- Guest -->
+		<file name="catalog/controller/checkout/guest.php">
+		<operation error="log">
+			<search position="after">
+				<![CDATA[$this->data['entry_email'] = $this->language->get('entry_email');]]>
+			</search>
+			
+			<add>
+				<![CDATA[$this->data['entry_email_confirm'] = $this->language->get('entry_email_confirm');]]>
+			</add>	
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if ($this->request->post['email_confirm'] != $this->request->post['email']) {
+
+				$json['error']['email_confirm'] = $this->language->get('error_email_confirm');
+
+			}]]>
+			</add>
+		</operation>
+        </file>
+		<!-- Register -->
+		<file name="catalog/controller/checkout/register.php">
+		<operation error="log">
+			<search position="after">
+				<![CDATA[$this->data['entry_email'] = $this->language->get('entry_email');]]>
+			</search>
+			
+			<add>
+				<![CDATA[$this->data['entry_email_confirm'] = $this->language->get('entry_email_confirm');]]>
+			</add>	
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[if ($this->request->post['confirm'] != $this->request->post['password']) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if ($this->request->post['email_confirm'] != $this->request->post['email']) {
+
+				$json['error']['email_confirm'] = $this->language->get('error_email_confirm');
+
+			}]]>
+			</add>
+		</operation>
+        </file>
+		<!-- ++ Account ++ -->
+		<!-- Add to template -->
+		
+      
+		<!-- ++ Affiliate ++ -->
+		<!-- Add to template -->
+		<!-- Register -->
+		<file name="catalog/view/theme/*/template/affiliate/register.tpl">
+		<operation error="log">
+			<search position="before" index="4">
+				<![CDATA[<tr>]]>
+			</search>
+			
+			<add>
+				<![CDATA[<tr>
+          <td><span class="required">*</span> <?php echo $entry_email_confirm; ?></td>
+          <td><input type="text" name="email_confirm" value="<?php echo $email_confirm; ?>" />
+            <?php if ($error_email_confirm) { ?>
+            <span class="error"><?php echo $error_email_confirm; ?></span>
+            <?php } ?></td>
+        </tr>]]>
+			</add>	
+		</operation>
+        </file>
+		<!-- Add to the controller -->
+		<file name="catalog/controller/affiliate/register.php">
+		<operation error="log">
+			<search position="before">
+				<![CDATA[if (isset($this->error['telephone'])) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if (isset($this->error['email_confirm'])) {
+
+			$this->data['error_email_confirm'] = $this->error['email_confirm'];
+
+		} else {
+
+			$this->data['error_email_confirm'] = '';
+
+		}]]>
+			</add>	
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[if ($this->model_affiliate_affiliate->getTotalAffiliatesByEmail($this->request->post['email'])) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if ($this->request->post['email'] !== $this->request->post['email_confirm']) {
+
+      		$this->error['email_confirm'] = $this->language->get('error_email_confirm');
+
+    	}]]>
+			</add>	
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[$this->data['entry_email'] = $this->language->get('entry_email');]]>
+			</search>
+			
+			<add>
+				<![CDATA[$this->data['entry_email_confirm'] = $this->language->get('entry_email_confirm');]]>
+			</add>	
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[if (isset($this->request->post['confirm'])) {]]>
+			</search>
+			
+			<add>
+				<![CDATA[if (isset($this->request->post['email_confirm'])) {
+
+    		$this->data['email_confirm'] = $this->request->post['email_confirm'];
+
+		} else {
+
+			$this->data['email_confirm'] = '';
+
+		}]]>
+			</add>	
+		</operation>
+        </file>
+		<!-- Add to language -->
+		<file name="catalog/language/*/affiliate/register.php">
+		<operation error="log">
+			<search position="before">
+				<![CDATA[$_['entry_email']]]>
+			</search>
+			
+			<add>
+				<![CDATA[$_['entry_email_confirm']                    = 'Confirme o E-mail:';
+				]]>
+			</add>
+		</operation>
+		<operation error="log">
+			<search position="before">
+				<![CDATA[$_['error_confirm']]]>
+			</search>
+			
+			<add>
+				<![CDATA[$_['error_email_confirm']                  = 'E-mails não combinam!';]]>
+			</add>	
+		</operation>
+        </file>
+		
+</modification>

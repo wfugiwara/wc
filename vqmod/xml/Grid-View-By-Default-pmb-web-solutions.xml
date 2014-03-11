@@ -1,0 +1,23 @@
+<modification>
+
+         <name>grid default by PMBwebsolutions.com</name>
+
+	<version>1.0.0</version>
+	<author>PMB Web Solutions</author>
+
+	<file name="catalog/view/theme/default/template/product/category.tpl">
+        <operation>
+            <search position="replace">
+            	<![CDATA[<?php echo $footer; ?>]]>
+            </search>
+            <add>
+            	<![CDATA[<script type="text/javascript">$(document).ready(function() { if(typeof display == 'function') { display('grid'); } });</script><?php echo $footer; ?>]]>
+            </add>
+        </operation>       
+	</file>
+	
+
+</modification>
+
+
+

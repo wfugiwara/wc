@@ -1,0 +1,41 @@
+<modification>
+	<id>Powered Plus</id>
+	<version>1.0.0</version>
+	<vqmver>1.0.0</vqmver>
+	<author>Fabius - http://opencartit.altervista.org</author>
+	<file name="catalog/language/portuguese-br/common/footer.php">
+		<operation error="log">
+			<search position="bottom" offset="1"><![CDATA[]]></search>
+			<add><![CDATA[
+			$_['text_pp_copyright'] = '&copy; %s all rights reserved';
+			$_['text_pp_phone'] = 'Phone: ';
+			$_['text_pp_fax'] = 'Fax: ';
+			$_['text_pp_mail'] = 'E-mail: ';
+			$_['text_pp_id'] = 'Company ID: ';
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/controller/common/footer.php">
+		<operation error="log">
+			<search position="replace"><![CDATA[
+			$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+			]]></search>
+			<add><![CDATA[
+			$pps = explode(",", $this->config->get('pplus_setting'));
+			foreach($pps as $val) {	$end[] = $val == 'y' ? " - " : ($val == 'Y' ? "<br />" : ""); }
+			$address = $pps[2] == 'Y' ? nl2br($this->config->get('config_address')) : $this->config->get('config_address');
+			
+			if(strtolower($pps[0]) == 'y') $pps[0] = sprintf($this->language->get('text_pp_copyright'), date('Y', time())).$end[0]; else unset($pps[0]);
+			if(strtolower($pps[1]) == 'y') $pps[1] = $this->config->get('config_name').$end[1]; else unset($pps[1]);
+			if(strtolower($pps[2]) == 'y') $pps[2] = $address.$end[2]; else unset($pps[2]);
+			if(strtolower($pps[3]) == 'y') $pps[3] = $this->language->get('text_pp_phone').$this->config->get('config_telephone').$end[3]; else unset($pps[3]);
+			if(strtolower($pps[4]) == 'y') $pps[4] = $this->language->get('text_pp_fax').$this->config->get('config_fax').$end[4]; else unset($pps[4]);
+			if(strtolower($pps[5]) == 'y') $pps[5] = $this->language->get('text_pp_mail').$this->config->get('config_email').$end[5]; else unset($pps[5]);
+			if(strtolower($pps[6]) == 'y') $pps[6] = $this->language->get('text_pp_id').$this->config->get('config_vat_number').$end[6]; else unset($pps[6]);
+			
+			$this->data['powered'] = '<div style="text-align:'.$this->config->get('pplus_align').';">'.implode($pps).nl2br($this->config->get('pplus_message')).'</div>';
+		    ]]></add>
+		</operation>
+	</file>
+</modification>

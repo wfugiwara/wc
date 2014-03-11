@@ -1,0 +1,26 @@
+<modification>
+
+	<id>Number limit of products</id>
+	<version>1.0.0</version>
+	<vqmver>1.0.8</vqmver>
+	<author>Martijn - Wappdesign - http://www.wappdesign.nl</author>
+
+	<file name="admin/view/template/catalog/product_list.tpl">
+        <operation>
+			<search position="replace">
+            <![CDATA[<a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button"><?php echo $button_copy; ?></a>]]>
+            </search>
+			<add>
+            <![CDATA[
+	<?php $this->load->model('catalog/product'); ?>
+	<?php if ($this->model_catalog_product->getTotalProducts() <= 115) { ?>
+		<a onclick="location = '<?php echo $insert; ?>'" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button"><?php echo $button_copy; ?></a>
+    <?php } else { ?> 
+        <font color="red">O número máximo de 80 produtos foi alcançado</font>
+    <?php } ?>
+            ]]></add>
+		</operation>
+        
+	</file>
+
+</modification>

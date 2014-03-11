@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+
+	<id>Admin Product On-Of</id>
+	<version>1.1.1</version>
+	<vqmver>1.0</vqmver>
+	<author>Geno Kozniuk</author>
+	
+	<file name="admin/controller/catalog/product.php"  error="log">
+		<operation>
+			<search position="before" ><![CDATA[
+			protected function validateCopy() {
+			]]></search>
+			<add><![CDATA[
+			protected function option() {
+				$output = ''; 
+		
+				$this->load->model('catalog/option');
+		
+				$results = $this->model_catalog_option->getOptionValues($this->request->get['option_id']);
+		
+				foreach ($results as $result) {
+					$output .= '<option value="' . $result['option_value_id'] . '"';
+
+					if (isset($this->request->get['option_value_id']) && ($this->request->get['option_value_id'] == $result['option_value_id'])) {
+						$output .= ' selected="selected"';
+					}
+
+					$output .= '>' . $result['name'] . '</option>';
+				}
+
+				$this->response->setOutput($output);
+			}
+	
+			public function ajaxupdate() {
+				$json = array();
+		
+				if (isset($this->request->get['status'])) {
+					$this->load->model('catalog/product');
+			
+					//$this->request->get['availability_update']
+					$product_id = $this->request->get['product_id'];
+					$status = $this->request->get['status'];
+			
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET status = '" . (int)$status . "' WHERE product_id = '" . (int)$product_id . "'");
+			
+				
+						$json[] = array(
+							'ok' => 1,
+						);	
+			
+				}
+		
+		
+				$this->load->library('json');
+
+				$this->response->setOutput(Json::encode($json));
+			}
+
+			]]></add>
+		</operation>
+	</file>
+		
+	<file name="admin/view/template/catalog/product_list.tpl" error="log">
+		<operation>
+			<search position="replace"><![CDATA[
+			<td class="left"><?php echo $product['status']; ?></td>
+			]]></search>
+			
+			<add><![CDATA[
+				<td class="left"><p class="field switch">
+				<label class="cb-enable<?php if ($product['status'] == 'Habilitado'){echo ' selected';} ?>" id="on<?php echo $product['product_id']; ?>" OnClick="turnon('<?php echo $product['product_id']; ?>');"><span>On</span></label>
+				<label class="cb-disable<?php if ($product['status'] == 'Desabilitado'){echo ' selected';} ?>" id="off<?php echo $product['product_id']; ?>" OnClick="turnoff('<?php echo $product['product_id']; ?>');"><span>Off</span></label>
+				</p></td>
+				<style>
+					.cb-enable, .cb-disable, .cb-enable span, .cb-disable span { background: url('../admin/view/image/switch.gif') repeat-x; display: block; float: left; }
+					.cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
+					.cb-enable span { background-position: left -90px; padding: 0 10px; }
+					.cb-disable span { background-position: right -180px;padding: 0 10px; }
+					.cb-disable.selected { background-position: 0 -30px; }
+					.cb-disable.selected span { background-position: right -210px; color: #fff; }
+					.cb-enable.selected { background-position: 0 -60px; }
+					.cb-enable.selected span { background-position: left -150px; color: #fff; }
+					.switch label { cursor: pointer;}
+				</style>
+			]]></add>
+		</operation>
+		
+		<operation>
+			<search position="before"><![CDATA[
+				$('#form input').keydown(function(e) {
+			]]></search>
+			
+			<add><![CDATA[
+			function turnon(product_id){
+			//	alert(product_id);
+				$('#off'+product_id).removeClass('selected');
+				$('#on'+product_id).addClass('selected');
+				
+				$.ajax({
+					url: 'index.php?route=catalog/product/ajaxupdate&token=<?php echo $token; ?>&product_id='+product_id+'&status=1',
+					type: 'get',
+					dataType: 'json',
+					});
+
+			}
+
+			function turnoff(product_id){
+				$('#on'+product_id).removeClass('selected');
+				$('#off'+product_id).addClass('selected');
+				
+				$.ajax({
+					url: 'index.php?route=catalog/product/ajaxupdate&token=<?php echo $token; ?>&product_id='+product_id+'&status=0',
+					type: 'get',
+					dataType: 'json',
+					});
+
+			}
+			]]></add>
+		</operation>
+	</file>
+</modification>

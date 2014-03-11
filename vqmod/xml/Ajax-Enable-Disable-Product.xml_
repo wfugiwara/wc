@@ -1,0 +1,84 @@
+﻿<modification>
+	<id>Ajax Enable Disable Product</id>
+	<version>1.0</version>
+	<vqmver>2.0</vqmver>
+	<author>www.backonoc.com</author>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[
+				public function insert()
+			]]></search>
+			<add><![CDATA[
+				public function setatten() {
+		$this->load->language('catalog/product');
+		$this->load->model('catalog/product');
+		$output='';
+		if(isset($this->request->get['object_id'])){
+			$requestpart = explode('-',$this->request->get['object_id']);
+			if(count($requestpart)==2){
+				$column_name = $requestpart[0];
+				$product_id = $requestpart[1];				
+				$result = $this->model_catalog_product->getProduct($product_id);
+				if($result[$column_name]){
+					$this->model_catalog_product->setAttributeen($product_id, $column_name, 0);
+				} else {
+					$this->model_catalog_product->setAttributeen($product_id, $column_name, 1);
+				}				
+				$result = $this->model_catalog_product->getProduct($product_id);
+				$output = $result[$column_name] ? $this->language->get('text_enabled') : $this->language->get('text_disabled');
+			}
+		}
+		$this->response->setOutput($output);
+	}
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[
+				public function getProduct($product_id)
+			]]></search>
+			<add><![CDATA[
+				public function setAttributeen($product_id, $column_name, $value){
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET " . $column_name . " = '" . (int)$value . "' WHERE product_id = '" . (int)$product_id . "'");
+	}
+			]]></add>
+		</operation>
+	</file>	
+
+	<file name="admin/view/template/catalog/product_list.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+				<?php echo $product['status']; ?>
+			]]></search>
+			<add><![CDATA[
+				<a class="ajaxcolumnen" id="status-<?php echo $product['product_id']; ?>"><?php echo $product['status']; ?></a>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[
+				<?php echo $footer; ?>
+			]]></search>
+			<add><![CDATA[
+				<script type="text/javascript"><!--
+$('.ajaxcolumnen').click(function() {
+	var object_id=$(this).attr('id');
+	$.ajax({
+		url: 'index.php?route=catalog/product/setatten&token=<?php echo $token; ?>',
+		type: 'get',
+		data: {object_id:object_id},
+		dataType: 'html',
+		success: function(html) {
+			if(html!=''){				
+				$('#'+object_id).html(html);
+			}
+		}
+	});
+});
+//--></script> 
+			]]></add>
+		</operation>
+	</file>
+
+</modification>

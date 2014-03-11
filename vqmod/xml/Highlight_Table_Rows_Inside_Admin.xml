@@ -1,0 +1,28 @@
+<modification>
+	<id>Highlight Table Rows Inside Admin</id>
+	<version>1.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Codegirl Studio - Copyright (c) 2012 KatGirl/Codegirl Studio (support@codegirlstudio.com). All Rights Reserved. No part of this document may be reproduced, copied, sold, or given away without written consent from the author.</author>
+
+  
+  
+<file name="admin/view/template/common/header.tpl">
+	<operation>
+	<search position="after"><![CDATA[<script type="text/javascript" src="view/javascript/jquery/superfish/js/superfish.js"></script>]]></search>
+	<add><![CDATA[
+	<script type="text/javascript" src="view/javascript/jquery/table-highlighting.js"></script>
+	]]></add>
+	</operation>
+
+	<operation>
+	<search position="before"><![CDATA[
+	<script type="text/javascript" src="view/javascript/jquery/jquery-1.7.1.min.js"></script>
+	]]></search>
+	<add><![CDATA[
+	<link rel="stylesheet" type="text/css" href="view/stylesheet/highlight-css.css" />
+	]]></add>
+	</operation>
+</file>
+</modification>
+
+

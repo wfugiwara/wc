@@ -1,0 +1,267 @@
+﻿<!--
+  Copyright (C) 2012 Tri Le <trile7 at gmail dot com>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>
+-->
+<modification>
+  <id>SOLD OUT for out of stock product</id>
+  <version>0.3.4</version>
+  <vqmver>2.1.7</vqmver>
+  <author>Tri Le trile7 at gmail dot com</author>
+  <file name="catalog/controller/module/bestseller.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/module/bestseller.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<span style='color:red; font-weight:bold;'>$product[stock]</span><a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/module/featured.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $product_info['quantity'], 'stock' => $product_info['stock_status'], 'model' => $product_info['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/module/featured.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<span style='color:red; font-weight:bold;'>$product[stock]</span><a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/module/latest.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/module/latest.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<span style='color:red; font-weight:bold;'>$product[stock]</span><a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/module/special.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/module/special.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<span style='color:red; font-weight:bold;'>$product[stock]</span><a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/category.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/category.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/product.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+    <operation>
+      <search position="before"><![CDATA[$product_info['quantity'] <= 0]]></search>
+      <add><![CDATA[
+        $this->data['prod_quant'] = $product_info['quantity'];
+        $this->data['prod_name'] = $product_info['name'];
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/product.tpl">
+    <operation>
+      <search position="replace" offset="3"><![CDATA[<div><?php echo $text_qty; ?>]]></search>
+      <add><![CDATA[
+      <?php
+      if ($prod_quant>0) echo "<div>$text_qty<input type='text' name='quantity' size='2' value='$minimum' /><input type='hidden' name='product_id' size='2' value='$product_id' />&nbsp;";
+      else echo "<div>";
+      ?>
+      ]]></add>
+    </operation>
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" id="button-cart" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($prod_quant>0) echo "<input type='button' value='$button_cart' id='button-cart' class='button' />";
+        else echo "<a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $prod_name ($model) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+    <operation>
+      <search position="replace"><![CDATA[<a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a>]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<span style='color:red; font-weight:bold;'>$product[stock]</span><a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/special.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/special.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<span style='color:red; font-weight:bold;'>$product[stock]</span><a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/compare.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][$product_id] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $product_info['quantity'],
+        'stock' => $product_info['stock_status'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/compare.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/account/wishlist.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $product_info['quantity'],
+        'stock' => $product_info['stock_status'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/account/wishlist.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<img src="catalog/view/theme/default/image/cart-add.png" alt="<?php echo $button_cart; ?>" title="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/search.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/search.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/manufacturer.php">
+    <operation>
+      <search position="after"><![CDATA[$this->data['products'][] = array(]]></search>
+      <add><![CDATA[
+        'quantity' => $result['quantity'], 'stock' => $result['stock_status'], 'model' => $result['model'],
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/view/theme/*/template/product/manufacturer_info.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />]]></search>
+      <add><![CDATA[
+        <?php
+        if ($product['quantity']>0) echo "<input type='button' value='$button_cart' onclick='addToCart($product[product_id]);' class='button' />";
+        else echo "<a href='index.php?route=information/contact&enquiry=", urlencode("Avise-me quando o produto $product[name] ($product[model]) retornar ao estoque.".PHP_EOL), "' target='_blank' class='button' style='color:yellow;'>Avise-me</a>";
+        ?>
+      ]]></add>
+    </operation>
+  </file>
+  <file name="catalog/controller/information/contact.php">
+    <operation>
+      <search position="after" offset="1"><![CDATA[if (isset($this->request->post['enquiry'])) {]]></search>
+      <add><![CDATA[
+        } elseif (isset($this->request->get['enquiry'])) {
+        $this->data['enquiry'] = $this->request->get['enquiry'];
+      ]]></add>
+    </operation>
+  </file>
+</modification>

@@ -1,0 +1,31 @@
+div.html-pa { margin:0; padding:0; border:0; }
+
+div.html-pa.left { text-align: left; }
+div.html-pa.right { text-align: right; }
+div.html-pa.center { text-align: center; }
+
+div.html-pa p {
+	overflow: hidden;
+	margin:0;
+	padding:1em 0;
+	border-bottom:solid 1px #ccc;
+}
+
+div.html-pa.left p { text-align: left; }
+div.html-pa.right p { text-align: right; }
+div.html-pa.center p { text-align: center; }
+
+div.html-pa.one p { height:1em; }
+div.html-pa.two p { height:2em; }
+div.html-pa.three p { height:3em; }
+div.html-pa.four p { height:4em; }
+div.html-pa.five p { height:5em; }
+div.html-pa.six p { height:6em; }
+div.html-pa.seven p { height:7em; }
+div.html-pa.eight p { height:8em; }
+div.html-pa.nine p { height:9em; }
+div.html-pa.ten p { height:10em; }
+
+div.html-pa p.last{
+	border-bottom:0;
+}

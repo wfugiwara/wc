@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Omtex - Opencart Default Modules Optimization</id>
+	<version>1.2</version>
+	<vqmver>2.0</vqmver>
+	<author>Opcrat</author>
+	<file name="admin/language/*/module/*.php">
+		<operation error="skip">
+		<search position="before"><![CDATA[$_['entry_status']]]></search>
+		<add><![CDATA[
+		$_['entry_position_mobile']      = 'Móvel Posição:';
+		$_['entry_status_mobile']        = 'Móvel Situação:';
+		$_['entry_position_tablet']      = 'Tablet Posição:';
+		$_['entry_status_tablet']        = 'Tablet Situação:';
+		]]></add>
+		</operation>
+	</file>	
+	<file name="admin/controller/module/*.php">
+		<operation error="skip">
+		<search position="before"><![CDATA[$this->data['entry_status'] = $this->language->get('entry_status');]]></search>
+		<add><![CDATA[
+		$this->data['entry_position_mobile'] = $this->language->get('entry_position_mobile');
+		$this->data['entry_status_mobile'] = $this->language->get('entry_status_mobile');
+		$this->data['entry_position_tablet'] = $this->language->get('entry_position_tablet');
+		$this->data['entry_status_tablet'] = $this->language->get('entry_status_tablet');
+		$this->data['template_tablet'] = $this->config->get('config_template_tablet');
+		$this->data['template_mobile'] = $this->config->get('config_template_mobile');
+		]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/*.tpl">
+		<operation  error="skip">
+			<search position="before"><![CDATA[<td class="right"><?php echo $entry_sort_order; ?></td>]]></search>
+			<add><![CDATA[
+			<?php if($template_mobile!=''){ ?>
+			<td class="left"><?php echo $entry_position_mobile; ?></td>
+            <td class="left"><?php echo $entry_status_mobile; ?></td>
+            <?php } ?>
+			<?php if($template_tablet!=''){ ?>
+            <td class="left"><?php echo $entry_position_tablet; ?></td>
+            <td class="left"><?php echo $entry_status_tablet; ?></td>
+			<?php } ?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" offset="1"><![CDATA[<td class="left"><a onclick="$('#module-row<?php echo $module_row; ?>').remove();" class="button">]]></search>
+			<add><![CDATA[
+			<?php 
+			
+			$module_names=explode('/',$this->request->get['route']);
+			
+			$module_name = $module_names[1];
+
+			if($template_mobile!=''){ ?>
+				<td class="left">
+					<select name="<?php echo $module_name;?>_module[<?php echo $module_row; ?>][position_mobile]">
+						<option value="content_top" <?php if(isset($module['position_mobile'])) { if ($module['position_mobile'] == 'content_top') { ?> selected="selected" <?php } } ?> ><?php echo $text_content_top; ?>
+						</option>
+						<option value="content_bottom" <?php if(isset($module['position_mobile'])) { if ($module['position_mobile'] == 'content_bottom') { ?> selected="selected" <?php } } ?>><?php echo $text_content_bottom; ?>
+						</option>  
+					</select>
+				</td>
+				<td class="left">
+					<select name="<?php echo $module_name;?>_module[<?php echo $module_row; ?>][status_mobile]">
+						<option value="1" <?php if(isset($module['status_mobile'])) { if ($module['status_mobile'] == 1) { ?>selected="selected" <?php } } ?>><?php echo $text_enabled; ?>
+						</option>
+						<option value="0" <?php if(isset($module['status_mobile'])) { if ($module['status_mobile'] == 0) { ?>selected="selected" <?php } } ?>><?php echo $text_disabled; ?>
+						</option>
+				    </select>
+				</td>
+			<?php } ?>
+						
+			<?php if($template_tablet!=''){ ?>
+				<td class="left">
+					<select name="<?php echo $module_name;?>_module[<?php echo $module_row; ?>][position_tablet]">
+						<option value="content_top" <?php if(isset($module['position_tablet'])) { if ($module['position_tablet'] == 'content_top') { ?> selected="selected" <?php } } ?>><?php echo $text_content_top; ?>
+						</option>
+						<option value="content_bottom" <?php if(isset($module['position_tablet'])) { if ($module['position_tablet'] == 'content_bottom') { ?> selected="selected" <?php } } ?>><?php echo $text_content_bottom; ?>
+						</option>
+						<option value="column_left" <?php if(isset($module['position_tablet'])) { if ($module['position_tablet'] == 'column_left') { ?> selected="selected" <?php } } ?>><?php echo $text_column_left; ?>
+						</option>  
+					</select>
+				</td>
+				<td class="left">
+					<select name="<?php echo $module_name;?>_module[<?php echo $module_row; ?>][status_tablet]">
+						<option value="1" <?php if(isset($module['status_tablet'])) { if ($module['status_tablet'] == 1) { ?>selected="selected" <?php } } ?>><?php echo $text_enabled; ?>
+						</option>
+						<option value="0" <?php if(isset($module['status_tablet'])) { if ($module['status_tablet'] == 0) { ?>selected="selected" <?php } } ?>><?php echo $text_disabled; ?>
+						</option>
+					</select>
+				</td>
+			<?php } ?>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="before" offset="1"><![CDATA[html += '    <td class="left"><a onclick="$(\'#module-row' + module_row + '\').remove();" class="button">]]></search>
+			<add><![CDATA[
+			
+		<?php if($template_mobile!=''){ ?>
+		html += '    <td class="left"><select name="<?php echo $module_name;?>_module[' + module_row + '][position_mobile]">';
+
+		html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
+		html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
+		html += '    </select></td>';
+		html += '    <td class="left"><select name="<?php echo $module_name;?>_module[' + module_row + '][status_mobile]">';
+		html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
+		html += '      <option value="0"><?php echo $text_disabled; ?></option>';
+		html += '    </select></td>';
+		<?php } ?> 
+		
+		<?php if($template_tablet!=''){ ?>
+		html += '    <td class="left"><select name="<?php echo $module_name;?>_module[' + module_row + '][position_tablet]">';
+		html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
+		html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
+		html += '      <option value="column_left"><?php echo $text_column_left; ?></option>';
+		html += '    </select></td>';
+		html += '    <td class="left"><select name="<?php echo $module_name;?>_module[' + module_row + '][status_tablet]">';
+		html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
+		html += '      <option value="0"><?php echo $text_disabled; ?></option>';
+		html += '    </select></td>';
+		<?php } ?> 
+		
+	]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/*/module/welcome.php">
+		<operation>
+			<search position="before"><![CDATA[$_['entry_status']]]></search>
+			<add><![CDATA[
+		$_['entry_position_mobile']      = 'Móvel Posição:';
+		$_['entry_status_mobile']        = 'Móvel Situação:';
+		$_['entry_position_tablet']      = 'Tablet Posição:';
+		$_['entry_status_tablet']        = 'Tablet Situação:';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/module/welcome.php">
+		<operation>
+			<search position="before"><![CDATA[$this->data['entry_status'] = $this->language->get('entry_status');]]></search>
+			<add><![CDATA[
+		$this->data['entry_position_mobile'] = $this->language->get('entry_position_mobile');
+		$this->data['entry_status_mobile'] = $this->language->get('entry_status_mobile');
+		$this->data['entry_position_tablet'] = $this->language->get('entry_position_tablet');
+		$this->data['entry_status_tablet'] = $this->language->get('entry_status_tablet');
+		$this->data['template_tablet'] = $this->config->get('config_template_tablet');
+		$this->data['template_mobile'] = $this->config->get('config_template_mobile');
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/welcome.tpl">
+		<operation>
+			<search position="replace" index="1"><![CDATA[<td><?php echo $entry_sort_order; ?></td>]]></search>
+			<add><![CDATA[
+			<?php if($template_mobile!=''){ ?>
+			<td><?php echo $entry_position_mobile; ?></td>
+            <td><select name="welcome_module[<?php echo $module_row; ?>][position_mobile]">
+                <?php if ($module['position_mobile'] == 'content_top') { ?>
+                <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
+                <?php } else { ?>
+                <option value="content_top"><?php echo $text_content_top; ?></option>
+                <?php } ?>  
+                <?php if ($module['position_mobile'] == 'content_bottom') { ?>
+                <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
+                <?php } else { ?>
+                <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
+                <?php } ?>    
+             </select></td></tr><tr>
+            <td><?php echo $entry_status_mobile; ?></td>
+			<td><select name="welcome_module[<?php echo $module_row; ?>][status_mobile]">
+                <?php if ($module['status_mobile']) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select></td>
+			</tr><tr>
+			<?php } ?>
+			
+			<?php if($template_tablet!=''){ ?>
+            <td><?php echo $entry_position_tablet; ?></td>
+            <td><select name="welcome_module[<?php echo $module_row; ?>][position_tablet]">
+                <?php if ($module['position_tablet'] == 'content_top') { ?>
+                <option value="content_top" selected="selected"><?php echo $text_content_top; ?></option>
+                <?php } else { ?>
+                <option value="content_top"><?php echo $text_content_top; ?></option>
+                <?php } ?>  
+                <?php if ($module['position_tablet'] == 'content_bottom') { ?>
+                <option value="content_bottom" selected="selected"><?php echo $text_content_bottom; ?></option>
+                <?php } else { ?>
+                <option value="content_bottom"><?php echo $text_content_bottom; ?></option>
+                <?php } ?>    
+                </select></td></tr><tr>
+			<td><?php echo $entry_status_tablet; ?></td>
+			<td><select name="welcome_module[<?php echo $module_row; ?>][status_tablet]">
+                <?php if ($module['status_tablet']) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select></td>  
+			 </tr><tr>
+			<?php } ?>
+		    <td><?php echo $entry_sort_order; ?></td>
+		    ]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[html += '      <td><?php echo $entry_sort_order; ?></td>';]]></search>
+			<add><![CDATA[
+			<?php if($template_mobile!=''){ ?>
+		html += '    <td><?php echo $entry_position_mobile; ?></td>';
+		html += '    <td><select name="welcome_module[<?php echo $module_row; ?>][position_mobile]">';
+		html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
+		html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
+		html += '    </select></td></tr><tr>';
+		html += '    <td><?php echo $entry_status_mobile; ?></td>';
+		html += '    <td><select name="welcome_module[' + module_row + '][status_mobile]">';
+		html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
+		html += '      <option value="0"><?php echo $text_disabled; ?></option>';
+		html += '    </select></td></tr><tr>';
+			<?php } ?>
+			<?php if($template_tablet!=''){ ?>
+		html += '    <td><?php echo $entry_position_tablet; ?></td>';
+		html += '    <td class="left"><select name="welcome_module[' + module_row + '][position_tablet]">';
+		html += '      <option value="content_top"><?php echo $text_content_top; ?></option>';
+		html += '      <option value="content_bottom"><?php echo $text_content_bottom; ?></option>';
+		html += '    </select></td></tr><tr>';
+		html += '    <td><?php echo $entry_status_tablet; ?></td>';
+		html += '    <td class="left"><select name="welcome_module[' + module_row + '][status_tablet]">';
+		html += '      <option value="1" selected="selected"><?php echo $text_enabled; ?></option>';
+		html += '      <option value="0"><?php echo $text_disabled; ?></option>';
+		html += '    </select></td></tr><tr>';
+		<?php } ?>
+		html += '      <td><?php echo $entry_sort_order; ?></td>';
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/account.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+				<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/affiliate.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+		<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/banner.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[
+				<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="6"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="8"></td>
+				<?php }else{ ?>
+				<td colspan="10"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/bestseller.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[
+			 <?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="6"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="8"></td>
+				<?php }else{ ?>
+				<td colspan="10"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/carousel.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="8"></td>]]></search>
+			<add><![CDATA[
+		 <?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="8"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="10"></td>
+				<?php }else{ ?>
+				<td colspan="12"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/google_talk.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+				<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/information.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+		<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/latest.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[
+            <?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="6"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="8"></td>
+				<?php }else{ ?>
+				<td colspan="10"></td>
+				<?php } ?>			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/slideshow.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[
+<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="6"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="8"></td>
+				<?php }else{ ?>
+				<td colspan="10"></td>
+				<?php } ?>			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/special.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="6"></td>]]></search>
+			<add><![CDATA[
+<?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="6"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="8"></td>
+				<?php }else{ ?>
+				<td colspan="10"></td>
+				<?php } ?>			]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/module/store.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td colspan="4"></td>]]></search>
+			<add><![CDATA[
+		 <?php if($template_tablet=='' && $template_mobile=='' ){ ?>
+				<td colspan="4"></td>
+				<?php }elseif($template_tablet=='' || $template_mobile==''){ ?>
+				<td colspan="6"></td>
+				<?php }else{ ?>
+				<td colspan="8"></td>
+				<?php } ?>
+			]]></add>
+		</operation>
+	</file>
+</modification>	

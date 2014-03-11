@@ -1,0 +1,284 @@
+<!-- *********************************************************************************** -->
+<!-- *** Part of OpenShop project: http://OpenShop.org.ua (c) MaxD                   *** -->
+<!-- *********************************************************************************** -->
+<!-- Redistribution in any form without written permission is prohibited.                -->
+
+<modification>
+	<id><![CDATA[Top menu icons for admin]]></id>
+	<version><![CDATA[1.2]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[MaxD http://OpenShop.org.ua]]></author>
+	<file name="admin/view/template/common/header.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_dashboard; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/home.png" style="vertical-align:middle;">]]></add>
+		</operation>
+
+<!-- CSS fix -->
+        <operation error="skip">
+            <search position="before"><![CDATA[$scripts as $script]]></search>
+            <add><![CDATA[<style type="text/css">
+            #menu > ul .top, #menu > ul li li.sfhover {
+                padding: 8px 15px 11px 15px;
+            }
+            #menu > ul ul {
+                margin-left: 8px;
+            }
+            #menu > ul li ul a {
+		width: auto;
+		min-width: 145px;
+	    }
+	    
+            </style>]]></add>
+        </operation>
+
+<!-- Catalog menu-->
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_catalog; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/layout.png" style="vertical-align:middle;"> <b><?php echo $text_catalog; ?></b>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_category; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/category.png" style="vertical-align:middle;"> <?php echo $text_category; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_product; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/stock-status.png" style="vertical-align:middle;"> <?php echo $text_product; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_filter; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/order.png" style="vertical-align:middle;"> <?php echo $text_filter; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace" index="1"><![CDATA[<?php echo $text_attribute; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/measurement.png" style="vertical-align:middle;"> <?php echo $text_attribute; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_option; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/product.png" style="vertical-align:middle;"> <?php echo $text_option; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_manufacturer; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/customer.png" style="vertical-align:middle;"> <?php echo $text_manufacturer; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_download; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/download.png" style="vertical-align:middle;"> <?php echo $text_download; ?>]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[<?php echo $text_review; ?>]]></search>
+			<add><![CDATA[<img width="22" height="22" src="view/image/review.png" style="vertical-align:middle;"> <?php echo $text_review; ?>]]></add>
+		</operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_information; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/information.png" style="vertical-align:middle;"> <?php echo $text_information; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_cachemanager; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/cachemanager.png" style="vertical-align:middle;"> <?php echo $text_cachemanager; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $information_pages; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/information.png" style="vertical-align:middle;"> <?php echo $information_pages; ?>]]></add>
+        </operation>
+
+<!-- Extensions menu-->
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_extension; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/module.png" style="vertical-align:middle;"> <b><?php echo $text_extension; ?></b>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_module; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/module.png" style="vertical-align:middle;"> <?php echo $text_module; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_shipping; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/shipping.png" style="vertical-align:middle;"> <?php echo $text_shipping; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_payment; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/payment.png" style="vertical-align:middle;"> <?php echo $text_payment; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_total; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/total.png" style="vertical-align:middle;"> <?php echo $text_total; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_feed; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/feed.png" style="vertical-align:middle;"> <?php echo $text_feed; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_vqmod_manager; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/vqmod_manager.png" style="vertical-align:middle;"> <?php echo $text_vqmod_manager; ?>]]></add>
+        </operation>		
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $tweaks; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/product.png" style="vertical-align:middle;"> <?php echo $tweaks; ?>]]></add>
+        </operation>
+
+<!-- Sales menu-->
+        <operation error="skip">
+            <search position="replace"><![CDATA[<a class="top"><?php echo $text_sale; ?>]]></search>
+            <add><![CDATA[<a class="top"><img width="22" height="22" src="view/image/tax.png" style="vertical-align:middle;"> <b><?php echo $text_sale; ?></b>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_order; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/order.png" style="vertical-align:middle;"> <?php echo $text_order; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace" index="1"><![CDATA[<?php echo $text_return; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/error.png" style="vertical-align:middle;"> <?php echo $text_return; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace" index="1,3"><![CDATA[<?php echo $text_customer; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/customer.png" style="vertical-align:middle;"> <?php echo $text_customer; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_affiliate; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/user-group.png" style="vertical-align:middle;"> <?php echo $text_affiliate; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_coupon; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/feed.png" style="vertical-align:middle;"> <?php echo $text_coupon; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace" index="1"><![CDATA[<?php echo $text_voucher; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/payment.png" style="vertical-align:middle;"> <?php echo $text_voucher; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_contact; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/mail.png" style="vertical-align:middle;"> <?php echo $text_contact; ?>]]></add>
+        </operation>
+
+<!-- System menu-->
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_system; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/product.png" style="vertical-align:middle;"> <b><?php echo $text_system; ?></b>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_setting; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/setting.png" style="vertical-align:middle;"> <?php echo $text_setting; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_design; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/layout.png" style="vertical-align:middle;"> <?php echo $text_design; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_users; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/user-group.png" style="vertical-align:middle;"> <?php echo $text_users; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_localisation; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/country.png" style="vertical-align:middle;"> <?php echo $text_localisation; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_error_log; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/log.png" style="vertical-align:middle;"> <?php echo $text_error_log; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_backup; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/backup.png" style="vertical-align:middle;"> <?php echo $text_backup; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php if (!isset($file_manager)) $file_manager='File Manager'; echo $file_manager; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/category.png" style="vertical-align:middle;"> <?php if (!isset($file_manager)) $file_manager='File Manager'; echo $file_manager; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php if (!isset($mysql_admin)) $mysql_admin='MySQL Admin'; echo $mysql_admin; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/stock-status.png" style="vertical-align:middle;"> <?php if (!isset($mysql_admin)) $mysql_admin='MySQL Admin'; echo $mysql_admin; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php if (!isset($send_inv)) $send_inv='Send Invitation'; echo $send_inv; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/user.png" style="vertical-align:middle;"> <?php if (!isset($send_inv)) $send_inv='Send Invitation'; echo $send_inv; ?>]]></add>
+        </operation>
+
+        <!-- Reports menu-->
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_reports; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/report.png" style="vertical-align:middle;"> <b><?php echo $text_reports; ?></b>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<a class="parent"><?php echo $text_sale; ?>]]></search>
+            <add><![CDATA[<a class="parent"><img width="22" height="22" src="view/image/tax.png" style="vertical-align:middle;"> <?php echo $text_sale; ?>]]></add>
+        </operation>
+
+<!-- Help menu-->
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_help; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/information.png" style="vertical-align:middle;"> <b><?php echo $text_help; ?></b>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_opencart; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/home.png" style="vertical-align:middle;"> <?php echo $text_opencart; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_documentation; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/review.png" style="vertical-align:middle;"> <?php echo $text_documentation; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_support; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/category.png" style="vertical-align:middle;"> <?php echo $text_support; ?>]]></add>
+        </operation>
+
+
+<!-- CMS menu-->
+        <operation error="skip">
+            <search position="replace"><![CDATA[<a class="top"><?php echo $cms_menu; ?></a>]]></search>
+            <add><![CDATA[<a class="top"><img width="22" height="22" src="view/image/order.png" style="vertical-align:middle;"> <b><?php echo $cms_menu; ?></b></a>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_news; ?>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/review.png" style="vertical-align:middle;"> <?php echo $text_news; ?>]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="replace"><![CDATA[<?php echo $text_modules; ?></a>]]></search>
+            <add><![CDATA[<img width="22" height="22" src="view/image/report.png" style="vertical-align:middle;"> <?php echo $text_modules; ?></a>]]></add>
+        </operation>
+
+	</file>
+
+    <!-- Icons fixes -->
+    <file name="admin/view/template/catalog/product*">
+    <operation error="skip">
+        <search position="replace"><![CDATA[product.png]]></search>
+        <add><![CDATA[stock-status.png]]></add>
+    </operation>
+    </file>
+    <file name="admin/view/template/catalog/attribute*">
+        <operation error="skip">
+            <search position="replace"><![CDATA[order.png]]></search>
+            <add><![CDATA[measurement.png]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/catalog/option*">
+        <operation error="skip">
+            <search position="replace"><![CDATA[order.png]]></search>
+            <add><![CDATA[product.png]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/catalog/manufacturer*">
+        <operation error="skip">
+            <search position="replace"><![CDATA[shipping.png]]></search>
+            <add><![CDATA[customer.png]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/sale/return*">
+        <operation error="skip">
+            <search position="replace"><![CDATA[order.png]]></search>
+            <add><![CDATA[error.png]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/sale/affiliate*">
+        <operation error="skip">
+            <search position="replace"><![CDATA[customer.png]]></search>
+            <add><![CDATA[user-group.png]]></add>
+        </operation>
+    </file>
+    <file name="admin/view/template/sale/coupon*">
+        <operation error="skip">
+            <search position="replace"><![CDATA[customer.png]]></search>
+            <add><![CDATA[feed.png]]></add>
+        </operation>
+    </file>
+
+</modification>

@@ -1,0 +1,984 @@
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:20:55 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 010
+     Mensagem: O envio do cartão é obrigatório.
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="74f8304d190666ccb4ed969b0eb96b14" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>77</numero>
+      <valor>201240</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:20:54</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>mastercard</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:22:27 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 010
+     Mensagem: O envio do cartão é obrigatório.
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="0c484fc0aaccc563e376b7cb39e93fea" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>78</numero>
+      <valor>400900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:22:26</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:23:50 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 002
+     Mensagem: Credenciais inválidas.
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="99fe5b3876b4ff2c75cffb958ab99466" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>79</numero>
+      <valor>400900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:23:49</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>6</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:42:36 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="42da651a3338026b60866250f7e9f0cb" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>85</numero>
+      <valor>21490</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:42:36</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:43:32 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="09f07c555dc817b78ed2108bd2003f90" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>86</numero>
+      <valor>21490</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:43:31</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:47:56 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="7d225f71f099a500979600491e491b72" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>89</numero>
+      <valor>30499</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:47:55</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 14:49:03 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="fdc619c49ebe497eeb394017e1b3ba52" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>90</numero>
+      <valor>30499</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T14:49:02</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 15:17:24 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d46688e5501b8e330666ef3182c63d41" versao="1.1.1">
+   <dados-ec>
+      <numero>1001734898</numero>
+      <chave>e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>93</numero>
+      <valor>100900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T15:17:23</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 15:19:54 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="ae3e2fda61efc19d28b8cc34d4cc4713" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>94</numero>
+      <valor>100900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T15:19:53</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-10 15:20:41 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 010
+     Mensagem: O envio do cartão é obrigatório.
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="4cb94b627af30b1d3443837aef7aab70" versao="1.1.1">
+   <dados-ec>
+      <numero>1006993069</numero>
+      <chave>25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>95</numero>
+      <valor>100900</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-10T15:20:40</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visa</bandeira>
+      <produto>2</produto>
+      <parcelas>4</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 18:54:12 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d3bde4bfccf705069a53f88ab4288c8f" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>109</numero>
+      <valor>1340</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T18:54:11</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 18:59:16 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="6eea1cb5ab63e1e5d1b1662ef58b3bb6" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>112</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T18:59:15</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 19:12:19 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="5d8efb2e6c466b904dfda06ed1a1276b" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>113</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:12:18</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 19:14:20 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="f88955e8a968bc433d4e08ebfadd6b12" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>114</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:14:18</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 19:24:54 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="5b78d415ee17f53ed8fea0114273cd04" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>115</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:24:50</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 19:26:29 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="743cac8ac9e6d64e3168b192162adc4e" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>116</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:26:24</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 19:43:14 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="f16855c51c6a06f2fe5f880d3f07a5a9" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>117</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:43:11</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 19:53:33 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="4db0526fe1c7215fadf18a349be88772" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>118</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T19:53:31</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 20:01:45 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="70b8e06bca7f75f179fc5f7d70d4eaa0" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>119</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:01:44</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 20:12:35 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="c0c544a14374b7c44f81b66960a4d9e9" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>120</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:12:34</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 20:14:53 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="5ecf2d5f88a66982dc460ee5796850d7" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>121</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:14:52</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-26 20:48:20 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="b3e381ecf384da96311e078dbbea7277" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>123</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-26T20:48:19</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-27 10:27:29 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="d2c248dcab171b9b02603e97e5687159" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>125</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T10:27:27</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+256 ERRO NA TRANSACAO - 2012-10-27 12:15:51 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo_lib/includes/errorHandling.php(Linha 63)
+     MENSAGEM: 
+     Código do erro: 001
+     Mensagem: 
+O XML informado não é valido:
+- string value 'visae' is not a valid enumeration value for type of bandeira element in FormaPagamento in namespace http://ecommerce.cbmp.com.br: '<xml-fragment/>'
+
+     XML de envio: 
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<requisicao-transacao id="bb9d910ae49d62a2d869e340035a5140" versao="1.1.1">
+   <dados-ec>
+      <numero>1039897506</numero>
+      <chave>1e6b3c06ce47a482dad8a3c7dffd877dd63ae9304785c5b1602a1ad35d054ec4</chave>
+   </dados-ec>
+   <dados-pedido>
+      <numero>127</numero>
+      <valor>1000</valor>
+      <moeda>986</moeda>
+      <data-hora>2012-10-27T12:15:49</data-hora>
+      <idioma>PT</idioma>
+   </dados-pedido>
+   <forma-pagamento>
+      <bandeira>visae</bandeira>
+      <produto>A</produto>
+      <parcelas>1</parcelas>
+   </forma-pagamento>
+   <url-retorno>http://www.mynd.com.br/loja/index.php?route=payment/cielo/retorno</url-retorno>
+   <autorizar>2</autorizar>
+   <capturar>1</capturar>
+</requisicao-transacao>
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-10-29 01:41:58 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 42)
+     MENSAGEM: 
+Undefined index:  bandeira
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-10-29 01:45:11 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 43)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-10-29 01:46:25 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 43)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-10-29 01:47:03 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 43)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-10-29 01:47:15 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 43)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-10-29 17:43:03 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-12-15 10:12:26 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-12-15 10:12:27 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-12-15 10:12:28 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-12-26 00:20:29 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2012-12-26 00:29:33 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-05 11:18:30 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-05 11:20:00 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-05 13:18:51 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-08 13:37:39 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-08 19:00:11 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-08 20:18:06 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-09 23:09:24 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-28 11:56:25 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:00:56 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:01:05 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:01:19 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:01:28 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:01:36 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:01:56 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:01 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:07 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:08 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:23 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:26 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:30 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:32 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-01-30 15:02:34 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 87)
+     MENSAGEM: 
+Undefined offset:  -1
+
+**********************************************************
+8 RUNTIME NOTICE - 2013-02-14 22:12:35 (UTC)
+     ARQUIVO: /home/mynd12/public_html/loja/catalog/controller/payment/cielo.php(Linha 34)
+     MENSAGEM: 
+Undefined index:  formaPagamento
+

@@ -1,0 +1,338 @@
+<modification>
+	
+	<id>módulo escolha de forma de pagamento</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Jeann </author>
+    
+	<file name="catalog/controller/checkout/checkout.php">	
+		<operation> <!-- linha 3 geral -->
+			<search position="after" ><![CDATA[
+			public function index() {
+			]]></search>
+			<add><![CDATA[
+			/* trecho adicionado pelo mod_forma_pgto.xml */
+			if ($this->cart->getPermPagt()=="1"){
+				$this->redirect($this->url->link('checkout/cart', '', 'SSL'));
+			}
+			]]></add>  
+		</operation>
+	</file>	 
+	
+	<file name="admin/model/catalog/product.php">	
+		<operation><!-- linha 6 geral -->
+			<search position="after" ><![CDATA[
+				$product_id = $this->db->getLastId();
+			]]></search>
+			<add><![CDATA[
+				/* trecho adicionado pelo mod_forma_pgto.xml */
+				if ($this->config->get('status_pagto_prod')){
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET forma_pgto = '" . $this->db->escape($data['forma_pgto']) . "' WHERE product_id = '" . (int)$product_id . "' ");
+				}
+			]]></add>  
+		</operation>
+		
+		<operation><!-- linha 126 geral -->
+			<search position="after" ><![CDATA[
+				public function editProduct($product_id, $data) {
+			]]></search>
+			<add><![CDATA[
+				/* trecho adicionado pelo mod_forma_pgto.xml */
+				if ($this->config->get('status_pagto_prod')){
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET forma_pgto = '" . $this->db->escape($data['forma_pgto']) . "' WHERE product_id = '" . (int)$product_id . "' ");
+				}
+			]]></add>  
+		</operation>
+
+	</file>	  
+	 
+	<file name="admin/controller/catalog/product.php">	
+		<operation><!-- linha 1285 geral -->
+			<search position="before" ><![CDATA[
+			$this->template = 'catalog/product_form.tpl';
+			]]></search>
+			<add><![CDATA[
+				/* trecho adicionado pelo mod_forma_pgto.xml */
+				if ($this->config->get('status_pagto_prod')){
+					if (isset($this->request->post['forma_pgto'])) {
+						$this->data['forma_pgto'] = $this->request->post['forma_pgto'];
+					} else if (!empty($product_info)) {
+						$this->data['forma_pgto'] = $product_info['forma_pgto'];
+					} else {
+						$this->data['forma_pgto'] = '';
+					}
+					
+					$this->load->model('setting/extension');
+				
+					$pagamento = array(); 
+					$results = $this->model_setting_extension->getInstalled('payment');
+				
+					foreach ($results as  $value) {
+							$this->load->language('payment/' . $value);
+							$pagamento[] = array(
+										'name'       =>$this->language->get('heading_title'),
+										'code'       =>$value
+							);
+					}
+
+					$this->data['pgtos'] = $pagamento;
+				}	
+			]]></add>  
+		</operation>
+
+	</file>	  
+	 
+	<file name="admin/view/template/catalog/product_form.tpl">	
+		<operation><!-- linha 94 geral -->
+			<search position="after" offset="1"><![CDATA[
+			<td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+			]]></search>
+			<add><![CDATA[
+			<?php /* trecho adicionado pelo mod_forma_pgto.xml */ ?>
+			<?php if ($this->config->get('status_pagto_prod')){ ?>
+				<tr>
+				  <td>Aceita as seguintes formas de pagamento:</td>
+				  <td>
+				   <select name="forma_pgto">
+					<option value="" selected>Todas as formas de pagamento</option>
+					<?php
+						foreach ($pgtos as $result) {
+							if ($forma_pgto==$result["code"]){
+								echo '<option value="'.$result["code"].'" selected>Apenas: '.$result["name"].'</option>';      
+							}else{
+								echo '<option value="'.$result["code"].'">Apenas: '.$result["name"].'</option>'; 
+							}            
+						}
+					?>
+				  </select>
+				  
+				  </td>
+				</tr>
+			<?php 
+			} 
+			?>	
+			]]></add>  
+		</operation>
+
+	</file>	 
+
+	<file name="system/library/cart.php">	
+		<operation><!-- linha 283 geral -->
+			<search position="after" ><![CDATA[
+				$this->data[$key] = array(
+			]]></search>
+			<add><![CDATA[
+				'forma_pgto'       => ($this->config->get('status_pagto_prod'))? $product_query->row['forma_pgto'] : "",
+			]]></add>  
+		</operation>
+		<operation><!-- linha 463 geral -->
+			<search position="before" ><![CDATA[
+			public function hasDownload() {
+			]]></search>
+			<add><![CDATA[
+			/* trecho adicionado pelo mod_forma_pgto.xml */
+			public function getPermPagt() {
+				$forma_pgto="a";
+				$i = 0;
+				foreach ($this->getProducts() as $product) {
+					if ($forma_pgto<>$product['forma_pgto']){
+						$forma_pgto = $product['forma_pgto'];
+						$i +=  1 ;
+					}	
+				}
+				if ($i > 1){		
+					$retorno = "1";
+				}else{
+					$retorno = $forma_pgto;
+				}
+				return $retorno;
+			}	
+			]]></add>  
+		</operation>
+
+	</file>	 
+	
+	
+
+	<file name="catalog/controller/checkout/cart.php">	
+		<operation><!-- linha 196 geral -->
+			<search position="replace" ><![CDATA[
+			foreach ($products as $product) {
+			]]></search>
+			<add><![CDATA[
+				/* trecho adicionado pelo mod_forma_pgto.xml */
+				if ($this->cart->getPermPagt()=="1"){
+					if ($this->config->get('frase_pagto_prod')<>""){
+						$this->data['mensagem'] = $this->config->get('frase_pagto_prod');
+					}else{
+						$this->data['mensagem'] = "Você tem produtos com opções de pagamento diferentes!";
+					}
+				}else{
+					$this->data['mensagem'] = '';
+				}
+				$this->load->model('setting/extension');
+				$name_forma_pgto = "";
+				$resultsPgto = $this->model_setting_extension->getExtensions('payment');
+				foreach ($products as $product) {
+					foreach ($resultsPgto as  $value) {
+							if ($product['forma_pgto'] == $value["code"]){
+								
+								if ($value["code"] == "bpprod") {
+									$name_forma_pgto = "Pagamento à Vista";
+							 
+									break; 
+								}elseif ($value["code"] == "braspagapi") {
+									$name_forma_pgto = "Assinatura com pagamento mensal";
+									break;
+								}else{
+									$this->load->language('payment/' . $value["code"]);
+									if ($this->language->get('text_title') <> ""){
+										$name_forma_pgto = $this->language->get('text_title');
+										break;
+									}
+								}
+							}else{
+								$name_forma_pgto = "";
+							}
+					}
+			
+			]]></add>  
+		</operation>
+		
+		<operation><!-- linha 271 geral -->
+			<search position="after" ><![CDATA[
+			$this->data['products'][] = array(
+			]]></search>
+			<add><![CDATA[
+			/* trecho adicionado pelo mod_forma_pgto.xml */
+			'forma_pgto'    => $name_forma_pgto,
+			]]></add>  
+		</operation>
+		
+		
+	</file>	
+
+
+	<file name="catalog/view/theme/*/template/checkout/cart.tpl">
+		<operation><!-- linha 37 geral -->
+			<search position="before" ><![CDATA[
+			<?php foreach ($products as $product) { ?>
+			]]></search>
+			<add><![CDATA[
+			<?php /* trecho adicionado pelo mod_forma_pgto.xml */ ?>
+			<?php if ($mensagem<>""){ ?>
+ 			<script>
+			$(function() {
+				$( "#dialog" ).dialog({
+				modal: true,
+				buttons: {
+					Ok: function() {
+						$( this ).dialog( "close" );
+					}
+				}
+				});
+			});
+			</script>
+			<div id="dialog" title="Atenção" style="display:none;">
+				<p><?php echo $mensagem; ?></p>
+			</div>
+			<?php } ?>
+		
+			]]></add>  
+		</operation>
+		<operation><!-- linha 50 geral -->
+			<search position="after" ><![CDATA[
+			<td style="border:none;" class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+			]]></search>
+			<add><![CDATA[
+			<?php /* trecho adicionado pelo mod_forma_pgto.xml */ ?>
+			<?php 
+			if ($this->config->get('frase_pagto_prod2')<>""){
+				$mensagem2 = $this->config->get('frase_pagto_prod2');
+			}else{
+				$mensagem2 = "Atenção: Produto com pagamento apenas por ";
+			}
+			
+			if ($this->config->get('status_pagto_prod')){
+				if ($product['forma_pgto']<>""){echo '<br><span style="color:#FF0000;">'.$mensagem2.' "'.$product['forma_pgto'].'"</span><br>';} 
+			}
+			?>
+			]]></add>  
+		</operation>
+		
+	</file>	
+
+	<file name="catalog/controller/checkout/payment_method.php">	
+		<operation> <!-- linha 14 geral -->
+			<search position="before" ><![CDATA[
+			if (!empty($payment_address)) { 
+			]]></search>
+			<add><![CDATA[
+			/* trecho adicionado pelo mod_forma_pgto.xml */ 
+			if ($this->cart->getPermPagt()=="1"){
+				$json['redirect'] = $this->url->link('checkout/cart', '', 'SSL');
+			}else{
+				$pagto_prod = $this->cart->getPermPagt();
+			}
+			]]></add>  
+		</operation>
+		
+		<operation>
+			<search position="replace" ><![CDATA[
+			$method_data[$result['code']] = $method;
+			]]></search>
+			<add><![CDATA[
+			/* trecho adicionado pelo mod_forma_pgto.xml */ 
+			if ($result['code'] == $pagto_prod){
+				$method_data[$result['code']] = $method;
+			}else if ($pagto_prod==""){
+				$method_data[$result['code']] = $method;
+			}
+			]]></add>  
+		</operation>
+		
+	</file>	
+	
+	<file name="catalog/controller/onecheckout/payment.php">	
+	<operation>
+		<search position="replace" ><![CDATA[
+		$method_data[$result['code']] = $method;
+		]]></search>
+		<add><![CDATA[
+		if ($this->cart->getPermPagt()=="1"){
+			$json['redirect'] = $this->url->link('checkout/cart', '', 'SSL');
+		}else{
+			$pagto_prod = $this->cart->getPermPagt();
+		}	
+		/* trecho adicionado pelo mod_forma_pgto.xml */ 
+		if ($result['code'] == $pagto_prod){
+			$method_data[$result['code']] = $method;
+		}else if ($pagto_prod==""){
+			$method_data[$result['code']] = $method;
+		}
+		]]></add>  
+	</operation>
+	
+</file>	
+		
+	<file name="catalog/controller/onecheckout/checkout.php">	
+		<operation> <!-- linha 14 geral -->
+			<search position="before" ><![CDATA[
+			$products = $this->cart->getProducts();
+			]]></search>
+			<add><![CDATA[
+			/* trecho adicionado pelo mod_forma_pgto.xml */ 
+			if ($this->cart->getPermPagt()=="1"){
+				//$json['redirect'] = $this->url->link('checkout/cart', '', 'SSL');
+				$this->redirect($this->url->link('checkout/cart'));
+			}else{
+				$pagto_prod = $this->cart->getPermPagt();
+			}
+			]]></add>  
+		</operation>
+		
+	</file>	
+
+	
+	 
+</modification>

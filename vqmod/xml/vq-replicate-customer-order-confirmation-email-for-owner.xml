@@ -1,0 +1,17 @@
+<modification>
+	<id><![CDATA[@tik Copy customer order confirmation for owner]]></id>
+	<version><![CDATA[1.1]]></version>
+	<vqmver><![CDATA[2.1.7]]></vqmver>
+	<author><![CDATA[OC2PS]]></author>
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="replace" error="log"><![CDATA[$template->data['ip'] = $order_info['ip']]]></search>
+			<add><![CDATA[$template->data['ip'] = $order_info['ip']."<br/><b>".$language->get('text_new_comment')."</b> ".$order_info['comment']]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="57" error="log"><![CDATA[if ($this->config->get('config_alert_mail')) {]]></search>
+			<add><![CDATA[if ($this->config->get('config_alert_mail')) {
+$mail->setTo($this->config->get('config_email'));]]></add>
+		</operation>
+	</file>
+</modification>

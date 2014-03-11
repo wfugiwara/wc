@@ -1,0 +1,218 @@
+<modification>
+	<version>1.5.x</version>
+	<vqmver>2.1.7</vqmver>
+	<author>giangtm1221@yahoo.com</author>
+    <file name="admin/controller/setting/setting.php">
+		<operation>
+			<search position="before"><![CDATA[
+            $this->data['heading_title'] = $this->language->get('heading_title');
+            ]]></search>
+			<add><![CDATA[
+
+            if (isset($this->request->post['description'])) {
+			$this->data['description'] = $this->request->post['description'];
+		} else {
+			$this->data['description'] = $this->config->get('description');
+		}
+
+
+        $this->data['text_yes'] = $this->language->get('text_yes');
+        $this->data['text_no'] = $this->language->get('text_no');
+        $this->data['text_display'] = $this->language->get('text_display');
+        $this->data['text_displayshort'] = $this->language->get('text_displayshort');
+            ]]></add>
+		</operation>
+	</file>
+    <file name="admin/language/*/setting/setting.php">
+		<operation>
+			<search position="after"><![CDATA[
+            <?php
+            ]]></search>
+			<add><![CDATA[
+            $_['text_display']         = 'Exibir curta descrição produto no módulo de indicados, mais recente, especial, Best-seller?';
+            $_['text_displayshort']         = '(Exibir os primeiro 122 caracteres na descrição do produto)';
+            ]]></add>
+		</operation>
+	</file>
+    <file name="admin/view/template/setting/setting.tpl">
+		<operation>
+			<search position="after"><![CDATA[
+            <div id="tab-option">
+            ]]></search>
+			<add><![CDATA[
+            <table class="form"><tr>
+              <td><?php echo $text_display; ?>
+              <br/>
+              <font size="1" color="#333"><?php echo $text_displayshort; ?></font>
+              </td>
+              <td>
+              <?php if ($description) { ?>
+                <input type="radio" name="description" value="1" checked="checked" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="description" value="0" />
+                <?php echo $text_no; ?>
+                <?php } else { ?>
+                <input type="radio" name="description" value="1" />
+                <?php echo $text_yes; ?>
+                <input type="radio" name="description" value="0" checked="checked" />
+                <?php echo $text_no; ?>
+                <?php } ?>
+              </td>
+            </tr>
+          </table>
+            ]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/module/featured.php">
+		<operation>
+			<search position="before"><![CDATA[
+            $this->data['products'][] = array(
+            ]]></search>
+			<add><![CDATA[
+             if ($this->config->get('description')) {
+					$description = $product_info['description'];
+				} else {
+					$description = false;
+				}
+            ]]></add>
+		</operation>
+        <operation>
+			<search position="after"><![CDATA[
+            'name'    	 => $product_info['name'],
+            ]]></search>
+			<add><![CDATA[
+            'description' => $product_info['description'],
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/view/theme/*/template/module/featured.tpl">
+		<operation>
+			<search position="before"><![CDATA[
+            <?php if ($product['price']) { ?>
+            ]]></search>
+			<add><![CDATA[
+
+            <div class="name"><?php if ($this->config->get('description') && $product['description']) { ?>
+
+	  <?php echo "<p>".mb_substr(strip_tags(html_entity_decode($product['description'])), 0, 122)."...</p>"; ?>
+
+	  <?php } ?> </div>
+
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/controller/module/latest.php">
+		<operation>
+			<search position="before"><![CDATA[
+            $this->data['products'][] = array(
+            ]]></search>
+			<add><![CDATA[
+             if ($this->config->get('description')) {
+					$description = $result['description'];
+				} else {
+					$description = false;
+				}
+            ]]></add>
+		</operation>
+        <operation>
+			<search position="after"><![CDATA[
+            'name'    	 => $result['name'],
+            ]]></search>
+			<add><![CDATA[
+            'description' => $result['description'],
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/view/theme/*/template/module/latest.tpl">
+		<operation>
+			<search position="before"><![CDATA[
+            <?php if ($product['price']) { ?>
+            ]]></search>
+			<add><![CDATA[
+
+            <div class="name"><?php if ($this->config->get('description') && $product['description']) { ?>
+
+	  <?php echo "<p>".mb_substr(strip_tags(html_entity_decode($product['description'])), 0, 122)."...</p>"; ?>
+
+	  <?php } ?> </div>
+
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/controller/module/special.php">
+		<operation>
+			<search position="before"><![CDATA[
+            $this->data['products'][] = array(
+            ]]></search>
+			<add><![CDATA[
+             if ($this->config->get('description')) {
+					$description = $result['description'];
+				} else {
+					$description = false;
+				}
+            ]]></add>
+		</operation>
+        <operation>
+			<search position="after"><![CDATA[
+            'name'    	 => $result['name'],
+            ]]></search>
+			<add><![CDATA[
+            'description' => $result['description'],
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/view/theme/*/template/module/special.tpl">
+		<operation>
+			<search position="before"><![CDATA[
+            <?php if ($product['price']) { ?>
+            ]]></search>
+			<add><![CDATA[
+
+            <div class="name"><?php if ($this->config->get('description') && $product['description']) { ?>
+
+	  <?php echo "<p>".mb_substr(strip_tags(html_entity_decode($product['description'])), 0, 122)."...</p>"; ?>
+
+	  <?php } ?> </div>
+
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/controller/module/bestseller.php">
+		<operation>
+			<search position="before"><![CDATA[
+            $this->data['products'][] = array(
+            ]]></search>
+			<add><![CDATA[
+             if ($this->config->get('description')) {
+					$description = $result['description'];
+				} else {
+					$description = false;
+				}
+            ]]></add>
+		</operation>
+        <operation>
+			<search position="after"><![CDATA[
+            'name'    	 => $result['name'],
+            ]]></search>
+			<add><![CDATA[
+            'description' => $result['description'],
+            ]]></add>
+		</operation>
+	</file>
+    <file name="catalog/view/theme/*/template/module/bestseller.tpl">
+		<operation>
+			<search position="before"><![CDATA[
+            <?php if ($product['price']) { ?>
+            ]]></search>
+			<add><![CDATA[
+
+            <div class="name"><?php if ($this->config->get('description') && $product['description']) { ?>
+
+	  <?php echo "<p>".mb_substr(strip_tags(html_entity_decode($product['description'])), 0, 122)."...</p>"; ?>
+
+	  <?php } ?> </div>
+
+            ]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+    <id>Welcome Email Logo, Customer Name Greeting and Login Information</id>
+      <version>1.0</version>
+		   <vqmver>2.3.2</vqmver>
+       <author>www.best-byte.com</author>
+<file name="catalog/language/portuguese-br/mail/customer.php">
+  <operation error="log">
+		<search position="before"><![CDATA[?>]]></search>
+		<add><![CDATA[
+    $_['text_hello']        = 'Olá';
+    $_['text_login_info']   = 'Você se registrou com os dados:';
+    $_['text_password']     = 'Senha:';
+    ]]></add>
+	</operation> 	
+</file>                          		
+<file name="catalog/model/account/customer.php">
+  <operation>
+		<search position="after"><![CDATA[$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));]]></search>
+		<add><![CDATA[
+    $message = '<p><a href="' . HTTP_SERVER . '" title="' . HTTP_SERVER . '"><img src="http://www.wecareauto.com.br/image/logo-cabecalho.gif" style="border:0;" /></a></p><br>';
+    ]]></add>
+	</operation>
+  <operation>
+		<search position="replace"><![CDATA[$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_hello') . sprintf(' '.$data['firstname'].' '.$data['lastname'].',<br><br> '.$this->language->get('text_welcome'), $this->config->get('config_name')) . "<br><br>";
+    ]]></add>
+	</operation>
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_login') . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_login') . "<br><br>";
+    ]]></add>
+	</operation>
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_approval') . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_approval') . "<br><br>";
+    ]]></add>
+	</operation>  	
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";]]></search>
+		<add><![CDATA[
+    $message .= '<a href="' . $this->url->link('account/login', '', 'SSL') . '">'. $this->url->link('account/login', '', 'SSL') .'</a>' . "<br><br>";
+    $message .= $this->language->get('text_login_info') . "<br><br>";
+    $message .= $this->language->get('text_email') . sprintf(' '.$data['email'].' ') . "<br><br>";
+    $message .= $this->language->get('text_password') . sprintf(' '.$data['password'].' ') . "<br><br>";
+    ]]></add>
+	</operation>
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_services') . "\n\n";]]></search>
+		<add><![CDATA[ 
+    $message .= $this->language->get('text_services') . "<br><br>";
+    ]]></add>
+	</operation>
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_thanks') . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_thanks') . "<br><br>";
+    ]]></add>
+	</operation>    	
+  <operation>
+		<search position="replace"><![CDATA[$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));]]></search>
+		<add><![CDATA[
+    $mail->setHtml($message);
+    ]]></add>
+	</operation>
+  <operation>
+		<search position="replace"><![CDATA[$message  = $this->language->get('text_signup') . "\n\n";]]></search>
+		<add><![CDATA[
+    $message  = $this->language->get('text_signup') . "<br><br>";
+    ]]></add>
+	</operation>  
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_website') . ' ' . $this->config->get('config_name') . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_website') . ' ' . $this->config->get('config_name') . "<br><br>";
+    ]]></add>
+	</operation>  
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_firstname') . ' ' . $data['firstname'] . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_firstname') . ' ' . $data['firstname'] . "<br><br>";
+    ]]></add>
+	</operation> 
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_lastname') . ' ' . $data['lastname'] . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_lastname') . ' ' . $data['lastname'] . "<br><br>";
+    ]]></add>
+	</operation>  
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_customer_group') . ' ' . $customer_group_info['name'] . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_customer_group') . ' ' . $customer_group_info['name'] . "<br><br>";
+    ]]></add>
+	</operation> 
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_company') . ' '  . $data['company'] . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_company') . ' '  . $data['company'] . "<br><br>";
+    ]]></add>
+	</operation>  
+  <operation>
+		<search position="replace"><![CDATA[$message .= $this->language->get('text_email') . ' '  .  $data['email'] . "\n";]]></search>
+		<add><![CDATA[
+    $message .= $this->language->get('text_email') . ' '  .  $data['email'] . "<br><br>";
+    ]]></add>
+	</operation>          	
+</file>	
+</modification>

@@ -1,0 +1,17 @@
+<modification>
+	<id>Cart Module Buttons</id>
+	<version>1.5.1.x_1</version>
+	<vqmver>1.2.5</vqmver>
+	<author>Gigo</author>
+
+	<file name="catalog/view/theme/default/template/module/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+			<a href="<?php echo $cart; ?>"><?php echo $text_cart; ?></a> | <a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a>
+			]]></search>
+			<add trim="true"><![CDATA[
+			<a class="button" href="<?php echo $cart; ?>"><?php echo $text_cart; ?></a> &nbsp; <a class="button" href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a>
+			]]></add>
+		</operation>
+	</file>
+</modification>

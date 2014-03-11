@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>Customer Order Print</id>
+        <version>0.1.0</version>
+        <vqmver>2.2.1</vqmver>
+        <author>KollanH - KollanH@gmail.com</author>
+		
+		<!-- Add to template -->
+		<file name="catalog/view/theme/*/template/account/order_info.tpl">
+		
+		<!-- Add js function -->
+		<operation error="log">
+			<search position="after">
+				<![CDATA[<?php echo $heading_title; ?></h1>]]>
+			</search>
+			
+			<add>
+				<![CDATA[<script type="text/javascript">function printDiv(a){var b=document.getElementById(a).innerHTML,c=document.body.innerHTML;document.body.innerHTML=b,window.print(),document.body.innerHTML=c}</script>]]>
+			</add>
+			
+		</operation>
+		
+		<!-- Add print div -->
+		<operation error="log">
+			<search position="before" index="1">
+				<![CDATA[<h1]]>
+			</search>
+			
+			<add>
+				<![CDATA[<div id="print">]]>
+			</add>
+		</operation>
+		
+		<!-- Add div close -->
+		<operation error="log">
+			<search position="before">
+				<![CDATA[<div class="buttons">]]>
+			</search>
+			
+			<add>
+				<![CDATA[</div>]]>
+			</add>
+			
+		</operation>
+		
+		<!-- Add button for printing -->
+		<operation error="log">
+			<search position="after">
+				<![CDATA[<?php echo $button_continue; ?></a></div>]]>
+			</search>
+			
+			<add>
+				<![CDATA[<div class="right"><a href="javascript:printDiv('print');" class="button" />Imprimir</a></div>]]>
+			</add>
+			
+		</operation>
+		
+		
+        </file>
+		
+		
+</modification>

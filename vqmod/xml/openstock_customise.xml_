@@ -1,0 +1,171 @@
+<modification>
+    <id>Open Stock template customise file</id>
+    <version>148</version>
+    <vqmver>1.0.8</vqmver>
+    <author>James Allsup</author>
+    <file name="catalog/view/theme/*/template/common/header.tpl">
+        <operation>
+            <search position="before"><![CDATA[<?php echo $google_analytics; ?>]]></search>
+            <add><![CDATA[<style>.loading {background: #FFFFFF url('/catalog/view/theme/default/image/loading.gif') 10px center no-repeat;border: 1px solid #B8E2FB;	padding: 10px 10px 10px 33px;margin-bottom: 15px;color: #555555;}</style>]]></add>
+        </operation>
+    </file>
+    <file name="catalog/view/theme/*/template/product/product.tpl">
+        <operation>
+            <search position="replace"><![CDATA[<span><?php echo $text_stock; ?></span> <?php echo $stock; ?>]]></search>
+            <add><![CDATA[<?php if($has_option == 0 && $subtract == 0){echo'<span>'.$text_stock.'</span>'.$stock;}?>]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<select name="option[<?php echo $option['product_option_id']; ?>]">]]></search>
+            <add><![CDATA[<select name="option[<?php echo $option['product_option_id']; ?>]" class="optionChoice">]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" />]]></search>
+            <add><![CDATA[<input type="radio" name="option[<?php echo $option['product_option_id']; ?>]" value="<?php echo $option_value['product_option_value_id']; ?>" id="option-value-<?php echo $option_value['product_option_value_id']; ?>" class="optionChoice" />]]></add>
+        </operation>
+        <operation>
+            <search position="before" offset="2"><![CDATA[<div class="cart">]]></search>
+            <add><![CDATA[<input type="hidden" name="optionNumbers" value="<?php echo $i; ?>" id="optionNumbers" />]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[ <div><?php echo $text_qty; ?>]]></search>
+            <add><![CDATA[<div id="product-cart">]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[<a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a>]]></search>
+            <add><![CDATA[</div>]]></add>
+        </operation>
+        <!-- you can remove the radio button but users dont know if they have selected anything!
+        <operation>
+            <search position="replace"><![CDATA[<td style="width: 1px;">]]></search>
+            <add><![CDATA[<td style="display:none;">]]></add>
+        </operation>
+        -->
+        <!-- FOR TEMPLATE CUSTOMISATION YOU SHOULD NOT NEED TO MODIFY BELOW HERE -->
+        <operation>
+            <search position="replace"><![CDATA[foreach ($options as $option) { ?>]]></search>
+            <add><![CDATA[$i = 0; foreach ($options as $option) { ?>]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<?php if ($option['type'] == 'radio') { ?>]]></search>
+            <add><![CDATA[<?php if ($option['type'] == 'radio') { $i++;?>]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<?php if ($option['type'] == 'select') {]]></search>
+            <add><![CDATA[<?php if ($option['type'] == 'select') { $i++;]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<?php if ($option['type'] == 'image') {]]></search>
+            <add><![CDATA[<?php if ($option['type'] == 'image') { $i++;]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[(<?php echo $option_value['price_prefix']; ?><?php echo $option_value['price']; ?>)]]></search>
+            <add><![CDATA[]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+            <add><![CDATA[<script type="text/javascript"><!--
+$('.optionChoice').change(function(){
+    var optionStr = '';
+    var i = parseInt(0);
+    var optionNumbers = $('#optionNumbers').val();
+    var imgThumbOriginal = '<?php echo $thumb; ?>';
+    var imgPopOriginal = '<?php echo $popup; ?>';
+    var stringPrice = ''; var stringDiscount = '';
+
+    $(".optionChoice option:selected, input:radio[class=optionChoice]:checked").each(function(){
+        if($(this).val() != '')
+        {
+            if(i != 0){optionStr = optionStr +':'+ $(this).val();}else{optionStr = $(this).val();}
+            i++;
+        }
+    });
+
+    if(i == optionNumbers){
+	    $.ajax({
+            type: 'POST',
+            url: 'index.php?route=openstock/openstock/optionStatus',
+            dataType: 'json',
+            data: 'var=' + optionStr + '&product_id=<?php echo $product_id; ?>',
+            beforeSend: function() {
+                $('.success, .warning').remove();
+                $('.options').before('<div class="loading"><?php echo $text_checking_options; ?></div>');
+                $('.product-info .price').html('').hide();
+            },
+            complete: function() {},
+            success: function(data) {
+                setTimeout(function(){
+                    //product price label
+                    stringPrice = '<?php echo $text_price; ?> ';
+
+                    //if the original price is greater then its on special
+                    if(data.data.originaltax != data.data.pricetax){
+                        stringPrice += '<span class="price-old">'+data.data.originaltax+'</span> ';
+                    }
+
+                    //product price and product excluding tax
+                    stringPrice += data.data.pricetax+'<br /><?php if ($tax) { ?><span class="price-tax"><?php echo $text_tax; ?> '+data.data.price+'</span><?php } ?>';
+
+                    //product quantity discounts
+                    stringDiscount = '';
+                    if(data.data.discount){
+                        stringDiscount = '<br /><div class="discount">';
+                        $.each(data.data.discount, function(discountKey, discountAmt) { 
+                            stringDiscount += discountAmt+'<br />';
+                        });
+                        stringDiscount += '</div>';
+                    }
+
+                    //display message if no discounts
+                    if(data.data.nodiscount){
+                        stringDiscount = '<br /><div class="discount">'+data.data.nodiscount+'</div>';
+                    }
+                    
+                    if (data.error) {
+                        $('.loading').removeClass('loading').addClass('warning').empty().text(data.error);
+                        $('#product-cart').hide();
+                    }
+
+                    if (data.success) {
+                        $('.loading').removeClass('loading').addClass('success').empty().text(data.success);
+                        $('.product-info .price').html(stringPrice).append(stringDiscount).show();
+                        $('#product-cart').show();
+                    }
+
+                    if (data.nostock) {
+                        $('.loading').removeClass('loading').addClass('warning').empty().text(data.nostock);
+                        $('.product-info .price').html(stringPrice).append(stringDiscount).show();
+
+                        if(data.nostockcheckout == 1){
+                            $('#product-cart').show();
+                        }else{
+                            $('#product-cart').hide();
+                        }
+                    }
+
+                    if (data.notactive) {
+                        $('.loading').removeClass('loading').addClass('warning').empty().text(data.notactive);
+                        $('.product-info .price').html(stringPrice).append(stringDiscount).show();
+                        $('#product-cart').hide();
+                    }
+                    
+                    /* Image swapping for variant */
+                    if(data.data.image !='')
+                    {
+                        $('#image').attr('src', data.data.thumb);
+                        $('.image a').attr('href', data.data.pop);
+                    }else{
+                        $('#image').attr('src', imgThumbOriginal);
+                        $('.image a').attr('href', imgPopOriginal);
+                    }
+                }, 500);
+            }
+	    });
+    }
+});
+
+<?php if($has_option == 1){ ?> $(function() { $('.product-info .price').html('').hide(); }); <?php } ?>
+
+//--></script>]]></add>
+        </operation>
+    </file>
+</modification>

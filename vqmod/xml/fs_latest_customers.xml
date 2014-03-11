@@ -1,0 +1,74 @@
+<modification>
+	<id>Latest 10 Customers</id>
+	<version>1.2.0</version>
+	<vqmver>2.1.0</vqmver>
+	<author>www.fabiom7.com - fabiome77@hotmail.it</author>
+
+<!-- ADMIN reference 1/1 -->
+<file name="admin/view/template/common/home.tpl">
+  <operation>
+	<search position="after" index="19"><![CDATA[</div>]]></search>
+	<add trim="true"><![CDATA[
+	  <?php 
+		// start setting
+		  $customers_limit = '10';
+		  $text_latest_customers = 'Últimos 10 clientes';
+		  $text_newsletter = 'Newsletter';		
+		// end setting
+		
+		$this->load->language('sale/customer');
+		$this->load->model('sale/customer');
+	    $customers=$this->model_sale_customer->getCustomers(array('sort'=>'c.date_added','order'=>'DESC','start'=>'0','limit'=>$customers_limit));
+	  ?><br /><br />
+      <div style="clear:both;">
+        <div onclick="window.open('http://www.opencart.com/index.php?route=extension/extension&filter_username=fabiom7');" class="dashboard-heading" style="cursor:pointer;" title="Latest Customers v1.2 - powered by fabiom7"><?php echo $text_latest_customers; ?></div>
+        <div class="dashboard-content">
+          <table class="list">
+            <thead>
+              <tr>
+                <td class="left"><?php echo $this->language->get('column_name'); ?></td>
+                <td class="left"><?php echo $this->language->get('column_email'); ?></td>
+                <td class="left"><?php echo $text_newsletter; ?></td>
+			    <td class="left"><?php echo $this->language->get('column_customer_group'); ?></td>
+                <td class="left"><?php echo $this->language->get('column_status'); ?></td>
+                <td class="left"><?php echo $this->language->get('column_approved'); ?></td>
+                <td class="left"><?php echo $this->language->get('column_date_added'); ?></td>
+			    <td class="left"><?php echo $this->language->get('column_action'); ?></td>
+              </tr>
+            </thead>
+			<?php if ($this->user->hasPermission('access', 'sale/customer')) { ?>
+            <tbody>
+              <?php if ($customers) { ?>
+              <?php foreach ($customers as $customer) { ?>
+              <tr>
+                <td class="left"><?php echo $customer['name']; ?></td>
+                <td class="left"><?php echo $customer['email']; ?></td>
+			    <td class="left"><?php echo $customer['newsletter']; ?></td>
+                <td class="left"><?php echo $customer['customer_group']; ?></td>
+                <td class="left"><?php echo $customer['status']; ?></td>
+                <td class="left"><?php echo $customer['approved']; ?></td>
+                <td class="left"><span style="cursor:help;" title="<?php echo date($this->language->get('date_format_long'), strtotime($customer['date_added'])); ?>"><?php echo date($this->language->get('date_format_short'), strtotime($customer['date_added'])); ?></span> <span style="color:#7b7b7b"><?php echo date($this->language->get('time_format'), strtotime($customer['date_added'])); ?></span></td>
+				<?php if ($this->user->hasPermission('modify', 'sale/customer')) { ?>
+				<td class="left">[ <a href="<?php echo $this->url->link('sale/customer/update', 'token=' . $this->session->data['token'] . '&customer_id=' . $customer['customer_id'], 'SSL'); ?>"><?php echo $this->language->get('text_edit'); ?></a> ]</td>
+				<?php } else { ?>
+				<td class="left"><div class="warning" title="<?php echo $this->language->get('error_permission'); ?>" style="margin:0;">[ <?php echo $this->language->get('text_edit'); ?> ]</div></td>
+				<?php } ?>
+              </tr>
+              <?php } ?>
+              <?php } ?>
+            </tbody>
+			<?php } else { ?>
+			<?php $this->load->language('error/permission'); ?>
+			<tbody>
+			  <tr>
+			    <td class="left" colspan="8"><div class="warning"><?php echo $this->language->get('text_permission'); ?></div></td>
+			  </tr>
+			</tbody>
+			<?php } ?>
+          </table>
+        </div>
+      </div>
+	]]></add>
+  </operation>
+</file>
+</modification>

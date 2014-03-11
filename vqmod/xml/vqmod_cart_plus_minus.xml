@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Cart Plus Minus</id>
+	<version>1.0</version>
+	<vqmver>2.1.7</vqmver>
+	<author>Deeman</author>
+    <file name="catalog/controller/module/cart.php">
+		<operation>
+			<search position="before"><![CDATA[
+			if (isset($this->request->get['remove'])) {
+			]]></search>
+			<add><![CDATA[
+			if (!empty($this->request->post['quantity'])) {
+    			foreach ($this->request->post['quantity'] as $key => $value) {
+    				$this->cart->update($key, $value);
+    			}
+    			
+    			unset($this->session->data['shipping_method']);
+    			unset($this->session->data['shipping_methods']);
+    			unset($this->session->data['payment_method']);
+    			unset($this->session->data['payment_methods']); 
+    			unset($this->session->data['reward']);		
+    		}
+			]]></add>
+		</operation>
+    </file>
+	<file name="catalog/view/theme/*/template/module/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+			<td class="quantity">x&nbsp;<?php echo $product['quantity']; ?></td>
+			]]></search>
+			<add><![CDATA[
+			<td class="quantity" style="vertical-align:top;min-width:60px;">
+                <img src='catalog/view/theme/default/image/minus.png' border='0' style='cursor:pointer;display:inline-block;' onclick='pm_update_cart("<?php echo $product['key']; ?>",<?php echo ($product['quantity'] - 1); ?>)'>
+                <span style="vertical-align:top;">x&nbsp;<?php echo $product['quantity']; ?></span>
+                <img src='catalog/view/theme/default/image/plus.png' border='0' style='cursor:pointer;display:inline-block;' onclick='pm_update_cart("<?php echo $product['key']; ?>",<?php echo ($product['quantity'] + 1); ?>)'>
+            </td>
+			]]></add>
+		</operation>
+        <operation>
+			<search position="bottom"><![CDATA[]]></search>
+			<add><![CDATA[
+			<script type='text/javascript'>
+                if (typeof getURLVar != 'function') {
+                    var getURLVar = function(urlVarName) {
+                    	var urlHalves = String(document.location).toLowerCase().split('?');
+                    	var urlVarValue = '';
+                    	
+                    	if (urlHalves[1]) {
+                    		var urlVars = urlHalves[1].split('&');
+                    
+                    		for (var i = 0; i <= (urlVars.length); i++) {
+                    			if (urlVars[i]) {
+                    				var urlVarPair = urlVars[i].split('=');
+                    				
+                    				if (urlVarPair[0] && urlVarPair[0] == urlVarName.toLowerCase()) {
+                    					urlVarValue = urlVarPair[1];
+                    				}
+                    			}
+                    		}
+                    	}
+                    	
+                    	return urlVarValue;
+                    } 
+                }
+
+                function pm_update_cart(key, quantity) {
+                    $.ajax({
+                		url: 'index.php?route=module/cart',
+                		type: 'post',
+                		data: 'quantity[' + key + ']='+quantity,
+                		success: function(data) {
+                            var cart = $(data);
+                            if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {
+                                location.reload();
+                                return;
+                            }
+                			$('#cart').html(cart.html());
+                            	
+                            if ($('#cart-box-list').length) {
+                                var cart_info = $('.mini-cart-info', cart);
+                                if (cart_info.length) {
+                                    $('#cart-box-list').html(cart_info.html());
+                                } else {
+                                    $('#cart-box-list').html($('.content', cart).html());
+                                }
+                            }
+                            if ($('#cart-box-total').length) {
+				                $('#cart-box-total').html($('.mini-cart-total', cart).html());
+                            }
+                            if (typeof load_simplecheckout === 'function') {
+                                load_simplecheckout();
+                            }
+                		}
+                	});
+                }
+            </script>
+			]]></add>
+		</operation>
+	</file>
+    <file name="catalog/view/theme/*/template/checkout/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[
+			<input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
+			]]></search>
+			<add><![CDATA[
+		    <img src='catalog/view/theme/default/image/minus.png' border='0' style='cursor:pointer;display:inline-block;' onclick="$(this).next().val(~~$(this).next().val()-1);$(this).parents('form').submit();">
+            <input style="vertical-align:top;" type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" />
+            <img src='catalog/view/theme/default/image/plus.png' border='0' style='cursor:pointer;display:inline-block;' onclick="$(this).prev().val(~~$(this).prev().val()+1);$(this).parents('form').submit();">
+            ]]></add>
+		</operation>
+	</file>
+</modification>

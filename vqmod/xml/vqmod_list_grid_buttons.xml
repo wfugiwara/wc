@@ -1,0 +1,30 @@
+<modification>
+	<id>List/Grid Buttons</id>
+	<version>0.6</version>
+	<vqmver>2.2.1</vqmver>
+	<author>booger</author>
+		<file name="catalog/view/theme/*/template/common/header.tpl">
+			<operation error="log">
+				<search position="before"><![CDATA[</head>]]></search>
+				<add><![CDATA[<style type="text/css" >
+div.list, div.grid { width: 24px; height: 24px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAABICAYAAACwc3YrAAABJUlEQVR42u2XMQ6CQBBFOYalpRekpgXCGbgHDYUcwNIj2NgQGrrVNdGshjWM2d24y/vJJJOJ+cOPw0vIMoTQm+q6vjRNo3SVZXkO5S+dW6V/mOf5riiKg+6XjGy1ZoHNXzpPN4D5oPf+5POETH/pHEEhKLQFCkV5QggKQSEoBIUQQj9of7wqlxXU37X55xLf/mkFcPnXS/yl868BbL30XZL6S/q0A0R9QlAICkEhKASFoBAUgkJQCAqFDRD9Rz36B1VVpVxWUH89aNvWeYXyfy3ous5ZLQXw5f+2YJ5n9dQ0Tc4D2Pylc2sArb7v1TAMj37JyCbbgjX+0nm6AcwHHcfR6wmZ/tJ5ui8xFIJCUCjyE4JCUAgKQSEotD0KaXn7Xg3kH61ud5TE2yHEUHgAAAAASUVORK5CYII=) no-repeat scroll 0% 0% transparent; cursor: pointer; float: left; margin-right: 5px; }
+div.list { background-position: 0px 0px; }
+div.list:hover { background-position: 0px -24px; }
+div.list:active { background-position: 0px -48px; }
+div.list-active { background-position: 0px -48px; }
+div.grid { background-position: -24px 0px; }
+div.grid:hover { background-position: -24px -24px; }
+div.grid-active { background-position: -24px -48px; }
+div.grid:active { background-position: -24px -48px; }
+</style>]]></add>
+			</operation>
+		</file>
+		<file name="catalog/view/theme/*/template/common/footer.tpl">
+			<operation error="log">
+				<search position="before"><![CDATA[<div id="footer">]]></search>
+				<add><![CDATA[<script type="text/javascript"><!--
+$(function(){$(".display").css("display","none");btnhtml='<div class="list" onclick="display(\'list\');"></div><div class="grid" onclick="display(\'grid\');"></div>';$(".display").replaceWith(btnhtml);$("div .list").bind("click",btndisplay);$("div .grid").bind("click",btndisplay);btndisplay()}); function btndisplay(){"list"==$.totalStorage("display")?($("div .list").addClass("list-active"),$("div .grid").removeClass("grid-active")):($("div .grid").addClass("grid-active"),$("div .list").removeClass("list-active"))};
+//--></script>]]></add>
+			</operation>
+		</file>
+</modification>

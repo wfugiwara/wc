@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Omtex - Opencart Mobile And Tablet Version</id>
+	<version>1.2</version>
+	<vqmver>2.0</vqmver>
+	<author>Opcrat</author>
+	<file name="system/startup.php">
+		<operation>
+			<search position="before"><![CDATA[require_once(DIR_SYSTEM . 'library/cache.php')]]></search>
+			<add><![CDATA[
+require_once(DIR_SYSTEM . 'library/device.php');
+			]]></add>
+		</operation>
+	</file>
+	<file name="system/library/config.php">
+    	<operation>
+			<search position="after"><![CDATA[get($key)]]></search>
+			<add><![CDATA[
+			if($key=='config_template') {
+			$template_tablet = $this->get('config_template_tablet');
+			$template_mobile = $this->get('config_template_mobile');
+			if(isset($_SESSION['device'])) {
+			if($_SESSION['device']=='tablet' && !empty($template_tablet))	{
+				$key = 'config_template_tablet';
+				} 
+			elseif($_SESSION['device']=='mobile' && !empty($template_mobile))	{
+				$key = 'config_template_mobile';
+				}
+			else {
+				$key = 'config_template';
+				}
+			}
+			else {
+				$key = 'config_template';
+				}	
+			}
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/setting/setting.php">
+		<operation>
+			<search position="after"><![CDATA[data['entry_template']]]></search>
+			<add><![CDATA[
+			$this->data['entry_template_mobile'] = $this->language->get('entry_template_mobile');
+			$this->data['entry_template_tablet'] = $this->language->get('entry_template_tablet');
+			$this->data['entry_logo_mobile'] = $this->language->get('entry_logo_mobile');
+			$this->data['entry_logo_tablet'] = $this->language->get('entry_logo_tablet');
+			$this->data['entry_change_device_mode_mobile'] = $this->language->get('entry_change_device_mode_mobile');
+			$this->data['entry_change_device_mode_tablet'] = $this->language->get('entry_change_device_mode_tablet');
+			$this->data['entry_icon_mobile'] = $this->language->get('entry_icon_mobile');
+			$this->data['entry_icon_tablet'] = $this->language->get('entry_icon_tablet');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['tab_image']]]></search>
+			<add><![CDATA[
+			$this->data['tab_mobile'] = $this->language->get('tab_mobile');
+			$this->data['tab_tablet'] = $this->language->get('tab_tablet');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="4" index="1"><![CDATA[$directories]]></search>
+			<add><![CDATA[
+		if (isset($this->request->post['config_template_mobile'])) {
+			$this->data['config_template_mobile'] = $this->request->post['config_template_mobile'];
+		} else {
+			$this->data['config_template_mobile'] = $this->config->get('config_template_mobile');
+		}
+		
+		$this->data['templates_mobile'] = array();
+
+		$directories = glob(DIR_CATALOG . 'view/theme_mobile/*', GLOB_ONLYDIR);
+		
+		foreach ($directories as $directory) {
+			$this->data['templates_mobile'][] = basename($directory);
+		}							
+	
+		if (isset($this->request->post['config_template_tablet'])) {
+			$this->data['config_template_tablet'] = $this->request->post['config_template_tablet'];
+		} else {
+			$this->data['config_template_tablet'] = $this->config->get('config_template_tablet');
+		}
+		
+		$this->data['templates_tablet'] = array();
+
+		$directories = glob(DIR_CATALOG . 'view/theme_tablet/*', GLOB_ONLYDIR);
+		
+		foreach ($directories as $directory) {
+			$this->data['templates_tablet'][] = basename($directory);
+		}
+		
+		if (isset($this->request->post['config_change_device_mode_mobile'])) {
+			$this->data['config_change_device_mode_mobile'] = $this->request->post['config_change_device_mode_mobile'];
+		} else {
+			$this->data['config_change_device_mode_mobile'] = $this->config->get('config_change_device_mode_mobile');
+		}
+		if (isset($this->request->post['config_change_device_mode_tablet'])) {
+			$this->data['config_change_device_mode_tablet'] = $this->request->post['config_change_device_mode_tablet'];
+		} else {
+			$this->data['config_change_device_mode_tablet'] = $this->config->get('config_change_device_mode_tablet');
+		}					
+			]]></add>
+		</operation>
+		<!--<operation>
+			<search position="before"><![CDATA[template()]]></search>
+			<add><![CDATA[
+		public function template_mobile() {
+		$template_mobile = basename($this->request->get['template_mobile']);
+			if (file_exists(DIR_IMAGE . 'templates_mobile/' . $template_mobile . '.png')) {
+				$image = HTTP_CATALOG . 'image/templates_mobile/' . $template_mobile . '.png';
+			} else {
+				$image = HTTP_CATALOG . 'no_image.jpg';
+			}
+			$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
+		}	
+		public function template_tablet() {
+		$template_tablet = basename($this->request->get['template_tablet']);
+			if (file_exists(DIR_IMAGE . 'templates_tablet/' . $template_tablet . '.png')) {
+				$image = HTTP_CATALOG . 'image/templates_tablet/' . $template_tablet . '.png';
+			} else {
+				$image = HTTP_CATALOG . 'no_image.jpg';
+			}
+			$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
+		}		
+			]]></add>
+		</operation>-->
+		<operation>
+			<search position="before"><![CDATA[if (isset($this->request->post['config_icon']))]]></search>
+			<add><![CDATA[
+		if (isset($this->request->post['config_logo_mobile'])) {
+			$this->data['config_logo_mobile'] = $this->request->post['config_logo_mobile'];
+		} else {
+			$this->data['config_logo_mobile'] = $this->config->get('config_logo_mobile');			
+		}
+
+		if ($this->config->get('config_logo_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_logo_mobile')) && is_file(DIR_IMAGE . $this->config->get('config_logo_mobile'))) {
+			$this->data['logo_mobile'] = $this->model_tool_image->resize($this->config->get('config_logo_mobile'), 100, 100);		
+		} else {
+			$this->data['logo_mobile'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		if (isset($this->request->post['config_logo_tablet'])) {
+			$this->data['config_logo_tablet'] = $this->request->post['config_logo_tablet'];
+		} else {
+			$this->data['config_logo_tablet'] = $this->config->get('config_logo_tablet');			
+		}
+
+		if ($this->config->get('config_logo_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_logo_tablet')) && is_file(DIR_IMAGE . $this->config->get('config_logo_tablet'))) {
+			$this->data['logo_tablet'] = $this->model_tool_image->resize($this->config->get('config_logo_tablet'), 100, 100);		
+		} else {
+			$this->data['logo_tablet'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		if (isset($this->request->post['config_icon_mobile'])) {
+			$this->data['config_icon_mobile'] = $this->request->post['config_icon_mobile'];
+		} else {
+			$this->data['config_icon_mobile'] = $this->config->get('config_icon_mobile');			
+		}
+
+		if ($this->config->get('config_icon_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_icon_mobile')) && is_file(DIR_IMAGE . $this->config->get('config_icon_mobile'))) {
+			$this->data['icon_mobile'] = $this->model_tool_image->resize($this->config->get('config_icon_mobile'), 100, 100);		
+		} else {
+			$this->data['icon_mobile'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		if (isset($this->request->post['config_icon_tablet'])) {
+			$this->data['config_icon_tablet'] = $this->request->post['config_icon_tablet'];
+		} else {
+			$this->data['config_icon_tablet'] = $this->config->get('config_icon_tablet');			
+		}
+
+		if ($this->config->get('config_icon_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_icon_tablet')) && is_file(DIR_IMAGE . $this->config->get('config_icon_tablet'))) {
+			$this->data['icon_tablet'] = $this->model_tool_image->resize($this->config->get('config_icon_tablet'), 100, 100);		
+		} else {
+			$this->data['icon_tablet'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/setting/store.php">
+		<operation>
+			<search position="after"><![CDATA[data['entry_template']]]></search>
+			<add><![CDATA[
+			$this->data['entry_template_mobile'] = $this->language->get('entry_template_mobile');
+			$this->data['entry_template_tablet'] = $this->language->get('entry_template_tablet');
+			$this->data['entry_logo_mobile'] = $this->language->get('entry_logo_mobile');
+			$this->data['entry_logo_tablet'] = $this->language->get('entry_logo_tablet');
+			$this->data['entry_change_device_mode_mobile'] = $this->language->get('entry_change_device_mode_mobile');
+			$this->data['entry_change_device_mode_tablet'] = $this->language->get('entry_change_device_mode_tablet');
+			$this->data['entry_icon_mobile'] = $this->language->get('entry_icon_mobile');
+			$this->data['entry_icon_tablet'] = $this->language->get('entry_icon_tablet');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['tab_image']]]></search>
+			<add><![CDATA[
+			$this->data['tab_mobile'] = $this->language->get('tab_mobile');
+			$this->data['tab_tablet'] = $this->language->get('tab_tablet');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after" offset="4" index="1"><![CDATA[$directories]]></search>
+			<add><![CDATA[
+		if (isset($this->request->post['config_template_mobile'])) {
+			$this->data['config_template_mobile'] = $this->request->post['config_template_mobile'];
+		} elseif (isset($store_info['config_template_mobile'])) {
+			$this->data['config_template_mobile'] = $store_info['config_template_mobile'];
+		} else {
+			$this->data['config_template_mobile'] = '';
+		}
+		
+		$this->data['templates_mobile'] = array();
+
+		$directories = glob(DIR_CATALOG . 'view/theme_mobile/*', GLOB_ONLYDIR);
+		
+		foreach ($directories as $directory) {
+			$this->data['templates_mobile'][] = basename($directory);
+		}							
+	
+		if (isset($this->request->post['config_template_tablet'])) {
+			$this->data['config_template_tablet'] = $this->request->post['config_template_tablet'];
+		} elseif (isset($store_info['config_template_tablet'])) {
+			$this->data['config_template_tablet'] = $store_info['config_template_tablet'];
+		} else {
+			$this->data['config_template_tablet'] = '';
+		}
+		
+		$this->data['templates_tablet'] = array();
+
+		$directories = glob(DIR_CATALOG . 'view/theme_tablet/*', GLOB_ONLYDIR);
+		
+		foreach ($directories as $directory) {
+			$this->data['templates_tablet'][] = basename($directory);
+		}
+		
+		if (isset($this->request->post['config_change_device_mode_mobile'])) {
+			$this->data['config_change_device_mode_mobile'] = $this->request->post['config_change_device_mode_mobile'];
+		} elseif (isset($store_info['config_change_device_mode_mobile'])) {
+			$this->data['config_change_device_mode_mobile'] = $store_info['config_change_device_mode_mobile'];
+		} else {
+			$this->data['config_change_device_mode_mobile'] = '';
+		}
+		
+		if (isset($this->request->post['config_change_device_mode_tablet'])) {
+			$this->data['config_change_device_mode_tablet'] = $this->request->post['config_change_device_mode_tablet'];
+		} elseif (isset($store_info['config_change_device_mode_tablet'])) {
+			$this->data['config_change_device_mode_tablet'] = $store_info['config_change_device_mode_tablet'];
+		} else {
+			$this->data['config_change_device_mode_tablet'] = '';
+		}
+					
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[if (isset($this->request->post['config_icon']))]]></search>
+			<add><![CDATA[
+		if (isset($this->request->post['config_logo_mobile'])) {
+			$this->data['config_logo_mobile'] = $this->request->post['config_logo_mobile'];
+		} elseif (isset($store_info['config_logo_mobile'])) {
+			$this->data['config_logo_mobile'] = $store_info['config_logo_mobile'];			
+		} else {
+			$this->data['config_logo_mobile'] = '';
+		}
+
+		if (isset($store_info['config_logo_mobile']) && file_exists(DIR_IMAGE . $store_info['config_logo_mobile']) && is_file(DIR_IMAGE . $store_info['config_logo_mobile'])) {
+			$this->data['logo_mobile'] = $this->model_tool_image->resize($store_info['config_logo_mobile'], 100, 100);		
+		} else {
+			$this->data['logo_mobile'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		if (isset($this->request->post['config_logo_tablet'])) {
+			$this->data['config_logo_tablet'] = $this->request->post['config_logo_tablet'];
+		} elseif (isset($store_info['config_logo_tablet'])) {
+			$this->data['config_logo_tablet'] = $store_info['config_logo_tablet'];			
+		} else {
+			$this->data['config_logo_tablet'] = '';
+		}
+
+		if (isset($store_info['config_logo_tablet']) && file_exists(DIR_IMAGE . $store_info['config_logo_tablet']) && is_file(DIR_IMAGE . $store_info['config_logo_tablet'])) {
+			$this->data['logo_tablet'] = $this->model_tool_image->resize($store_info['config_logo_tablet'], 100, 100);		
+		} else {
+			$this->data['logo_tablet'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		if (isset($this->request->post['config_icon_mobile'])) {
+			$this->data['config_icon_mobile'] = $this->request->post['config_icon_mobile'];
+		} else {
+			$this->data['config_icon_mobile'] = $this->config->get('config_icon_mobile');			
+		}
+
+		if ($this->config->get('config_icon_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_icon_mobile')) && is_file(DIR_IMAGE . $this->config->get('config_icon_mobile'))) {
+			$this->data['icon_mobile'] = $this->model_tool_image->resize($this->config->get('config_icon_mobile'), 114, 114);		
+		} else {
+			$this->data['icon_mobile'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		if (isset($this->request->post['config_icon_tablet'])) {
+			$this->data['config_icon_tablet'] = $this->request->post['config_icon_tablet'];
+		} else {
+			$this->data['config_icon_tablet'] = $this->config->get('config_icon_tablet');			
+		}
+
+		if ($this->config->get('config_icon_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_icon_tablet')) && is_file(DIR_IMAGE . $this->config->get('config_icon_tablet'))) {
+			$this->data['icon_tablet'] = $this->model_tool_image->resize($this->config->get('config_icon_tablet'), 100, 100);		
+		} else {
+			$this->data['icon_tablet'] = $this->model_tool_image->resize('no_image.jpg', 100, 100);
+		}
+		
+		]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[template()]]></search>
+			<add><![CDATA[
+		public function template_mobile() {
+		$template_mobile = basename($this->request->get['template_mobile']);
+			if (file_exists(DIR_IMAGE . 'templates_mobile/' . $template_mobile . '.png')) {
+				$image = HTTPS_IMAGE . 'templates_mobile/' . $template_mobile . '.png';
+			} else {
+				$image = HTTPS_IMAGE . 'no_image.jpg';
+			}
+			$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
+		}	
+		public function template_tablet() {
+		$template_tablet = basename($this->request->get['template_tablet']);
+			if (file_exists(DIR_IMAGE . 'templates_tablet/' . $template_tablet . '.png')) {
+				$image = HTTPS_IMAGE . 'templates_tablet/' . $template_tablet . '.png';
+			} else {
+				$image = HTTPS_IMAGE . 'no_image.jpg';
+			}
+			$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
+		}		
+			]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/english.php">
+    	<operation>
+			<search position="after"><![CDATA[$_['tab_image']]]></search>
+			<add><![CDATA[
+     		$_['tab_mobile']               = 'Mobile';
+			$_['tab_tablet']               = 'Tablet';
+      		]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/setting/setting.php">
+    	<operation>
+			<search position="after"><![CDATA[$_['entry_template']]]></search>
+			<add><![CDATA[
+     		$_['entry_template_mobile'] = 'Mobile Template:<br /><span class="help">Select None for Keeping Same Desktop Version For Mobile Devices.</span>';
+			$_['entry_template_tablet'] = 'Tablet Template:<br /><span class="help">Select None for Keeping Same Desktop Version For Tablet Devices.</span>';
+			$_['entry_logo_mobile']     = 'Mobile Logo:<br /><span class="help">Logo for Mobile theme.</span>';
+			$_['entry_logo_tablet']     = 'Tablet Logo:<br /><span class="help">Logo for Tablet theme.</span>';
+			$_['entry_change_device_mode_mobile'] = 'Device Change Mode<br /><span class="help">Manage Device Mode for Mobile to Desktop.</span>';
+			$_['entry_change_device_mode_tablet'] = 'Device Change Mode<br /><span class="help">Manage Device Mode for Tablet to Desktop</span>';
+			$_['entry_icon_mobile']     = 'Mobile Icon:<br /><span class="help">Icon for smartphone (bookmark on home sceen).</span>';
+			$_['entry_icon_tablet']     = 'Tablet Icon:<br /><span class="help">Icon for tablets (bookmark on home screen).</span>';
+      		]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/setting/store.php">
+    	<operation>
+			<search position="after"><![CDATA[$_['entry_template']]]></search>
+			<add><![CDATA[
+     		$_['entry_template_mobile'] = 'Mobile Template:<br /><span class="help">Select None for Keeping Same Desktop Version For Mobile Devices.</span>';
+			$_['entry_template_tablet'] = 'Tablet Template:<br /><span class="help">Select None for Keeping Same Desktop Version For Tablet Devices.</span>';
+			$_['entry_logo_mobile']     = 'Mobile Logo:<br /><span class="help">Logo for Mobile theme.</span>';
+			$_['entry_logo_tablet']     = 'Tablet Logo:<br /><span class="help">Logo for Tablet theme.</span>';
+			$_['entry_change_device_mode_mobile'] = 'Device Change Mode<br /><span class="help">Manage Device Mode for Mobile to Desktop.</span>';
+			$_['entry_change_device_mode_tablet'] = 'Device Change Mode<br /><span class="help">Manage Device Mode for Tablet to Desktop</span>';
+			$_['entry_icon_mobile']     = 'Mobile Icon:<br /><span class="help">Icon for smartphone (bookmark on home sceen).</span>';
+			$_['entry_icon_tablet']     = 'Tablet Icon:<br /><span class="help">Icon for tablets (bookmark on home screen).</span>';
+      		]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/setting/setting.tpl">
+    	<operation>
+			<search position="replace"><![CDATA[<a href="#tab-image"><?php echo $tab_image; ?></a>]]></search>
+			<add><![CDATA[
+			<a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mobile"><?php echo $tab_mobile; ?></a><a href="#tab-tablet"><?php echo $tab_tablet; ?></a>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<div id="tab-mail">]]></search>
+			<add><![CDATA[
+     	 <div id="tab-mobile">
+          <table class="form">
+			<tr>
+              <td><?php echo $entry_template_mobile; ?></td>
+              <td><select name="config_template_mobile" onchange="$('#template_mobile').load('index.php?route=setting/setting/template_mobile&token=<?php echo $token; ?>&template_mobile=' + encodeURIComponent(this.value)); manage_mobile_options(this.value);">
+                  <option value="" selected="selected">None</option>
+                  <?php foreach ($templates_mobile as $template_mobile) { ?>
+                  <?php if ($template_mobile == $config_template_mobile) { ?>
+                  <option value="<?php echo $template_mobile; ?>" selected="selected"><?php echo $template_mobile; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $template_mobile; ?>"><?php echo $template_mobile; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td id="template_mobile"></td>
+            </tr>
+			
+			<tr>
+				<td colspan="2">
+					<table id="template_mobile_options" <?php if($config_template_mobile==''){ ?> style="display:none" <?php } ?>>
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_logo_mobile; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $logo_mobile; ?>" alt="" id="thumb-logo-mobile" />
+							  <input type="hidden" name="config_logo_mobile" value="<?php echo $config_logo_mobile; ?>" id="logo-mobile" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('logo-mobile', 'thumb-logo-mobile');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-logo-mobile').attr('src', '<?php echo $no_image; ?>'); $('#logo-mobile').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_icon_mobile; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $icon_mobile; ?>" alt="" id="thumb-icon-mobile" />
+							  <input type="hidden" name="config_icon_mobile" value="<?php echo $config_icon_mobile; ?>" id="icon-mobile" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('icon-mobile', 'thumb-icon-mobile');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-icon-mobile').attr('src', '<?php echo $no_image; ?>'); $('#icon-mobile').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td><?php echo $entry_change_device_mode_mobile; ?></td>
+						  <td style="padding:10px;"><?php if ($config_change_device_mode_mobile) { ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="1" checked="checked" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="0" />
+							<?php echo $text_no; ?>
+							<?php } else { ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="1" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="0" checked="checked" />
+							<?php echo $text_no; ?>
+							<?php } ?></td>
+						</tr>
+					
+					</table>
+				</td>
+			</tr>	
+			
+            </table>
+			</div>
+      	<div id="tab-tablet">
+          <table class="form">
+			<tr>
+              <td><?php echo $entry_template_tablet; ?></td>
+              <td><select name="config_template_tablet" onchange="$('#template_tablet').load('index.php?route=setting/setting/template_tablet&token=<?php echo $token; ?>&template_tablet=' + encodeURIComponent(this.value)); manage_tablet_options(this.value);">
+                  <option value="" selected="selected">None</option>
+                  <?php foreach ($templates_tablet as $template_tablet) { ?>
+                  <?php if ($template_tablet == $config_template_tablet) { ?>
+                  <option value="<?php echo $template_tablet; ?>" selected="selected"><?php echo $template_tablet; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $template_tablet; ?>"><?php echo $template_tablet; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td id="template_tablet"></td>
+            </tr>
+
+			<tr>
+				<td colspan="2">
+					<table id="template_tablet_options" <?php if($config_template_tablet==''){ ?> style="display:none" <?php } ?>>
+			
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_logo_tablet; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $logo_tablet; ?>" alt="" id="thumb-logo-tablet" />
+							  <input type="hidden" name="config_logo_tablet" value="<?php echo $config_logo_tablet; ?>" id="logo-tablet" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('logo-tablet', 'thumb-logo-tablet');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-logo-tablet').attr('src', '<?php echo $no_image; ?>'); $('#logo-tablet').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_icon_tablet; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $icon_tablet; ?>" alt="" id="thumb-icon-tablet" />
+							  <input type="hidden" name="config_icon_tablet" value="<?php echo $config_icon_tablet; ?>" id="icon-tablet" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('icon-tablet', 'thumb-icon-tablet');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-icon-tablet').attr('src', '<?php echo $no_image; ?>'); $('#icon-tablet').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td><?php echo $entry_change_device_mode_tablet; ?></td>
+						  <td style="padding:10px;"><?php if ($config_change_device_mode_tablet) { ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="1" checked="checked" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="0" />
+			
+							<?php echo $text_no; ?>
+							<?php } else { ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="1" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="0" checked="checked" />
+							<?php echo $text_no; ?>
+							<?php } ?></td>
+						</tr>
+					
+					</table>
+				</td>
+			</tr>
+						
+			</table>
+			</div>
+      		]]></add>
+		</operation>
+		<operation>
+			<search position="after" index="2"><![CDATA[$('#template')]]></search>
+			<add><![CDATA[
+$('#template_mobile').load('index.php?route=setting/setting/template_mobile&token=<?php echo $token; ?>&template_mobile=' + encodeURIComponent($('select[name=\'config_template_mobile\']').attr('value')));
+
+$('#template_tablet').load('index.php?route=setting/setting/template_tablet&token=<?php echo $token; ?>&template_tablet=' + encodeURIComponent($('select[name=\'config_template_tablet\']').attr('value')));
+      		]]></add>
+		</operation>
+		<operation>
+			<search position="before" index="1"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[
+						<script type="text/javascript">
+						function manage_mobile_options(mobile_template){
+							if(mobile_template==''){
+								//alert('Mobile Template = NONE');
+								document.getElementById('template_mobile_options').style.display="none";
+							}else{
+								document.getElementById('template_mobile_options').style.display="block";
+								//alert('Mobile Template = '+mobile_template);
+							}
+						}
+						function manage_tablet_options(tablet_template){
+							if(tablet_template==''){
+								//alert('Mobile Template = NONE');
+								document.getElementById('template_tablet_options').style.display="none";
+							}else{
+								document.getElementById('template_tablet_options').style.display="block";
+								//alert('Mobile Template = '+mobile_template);
+							}
+						}
+						</script> 
+      		]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/setting/store_form.tpl">
+    	<operation>
+			<search position="replace"><![CDATA[<a href="#tab-image"><?php echo $tab_image; ?></a>]]></search>
+			<add><![CDATA[
+			<a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-mobile"><?php echo $tab_mobile; ?></a><a href="#tab-tablet"><?php echo $tab_tablet; ?></a>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[<div id="tab-server">]]></search>
+			<add><![CDATA[
+     	 <div id="tab-mobile">
+          <table class="form">
+			<tr>
+              <td><?php echo $entry_template_mobile; ?></td>
+              <td><select name="config_template_mobile" onchange="$('#template_mobile').load('index.php?route=setting/setting/template_mobile&token=<?php echo $token; ?>&template_mobile=' + encodeURIComponent(this.value)); manage_mobile_options(this.value);">
+                  <option value="" selected="selected">None</option>
+                  <?php foreach ($templates_mobile as $template_mobile) { ?>
+                  <?php if ($template_mobile == $config_template_mobile) { ?>
+                  <option value="<?php echo $template_mobile; ?>" selected="selected"><?php echo $template_mobile; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $template_mobile; ?>"><?php echo $template_mobile; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td id="template_mobile"></td>
+            </tr>
+			
+			<tr>
+				<td colspan="2">
+					<table id="template_mobile_options" <?php if($config_template_mobile==''){ ?> style="display:none" <?php } ?>>
+			
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_logo_mobile; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $logo_mobile; ?>" alt="" id="thumb-logo-mobile" />
+							  <input type="hidden" name="config_logo_mobile" value="<?php echo $config_logo_mobile; ?>" id="logo-mobile" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('logo-mobile', 'thumb-logo-mobile');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-logo-mobile').attr('src', '<?php echo $no_image; ?>'); $('#logo-mobile').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_icon_mobile; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $icon_mobile; ?>" alt="" id="thumb-icon-mobile" />
+							  <input type="hidden" name="config_icon_mobile" value="<?php echo $config_icon_mobile; ?>" id="icon-mobile" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('icon-mobile', 'thumb-icon-mobile');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-icon-mobile').attr('src', '<?php echo $no_image; ?>'); $('#icon-mobile').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td><?php echo $entry_change_device_mode_mobile; ?></td>
+						  <td style="padding:10px;"><?php if ($config_change_device_mode_mobile) { ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="1" checked="checked" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="0" />
+							<?php echo $text_no; ?>
+							<?php } else { ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="1" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_mobile" value="0" checked="checked" />
+							<?php echo $text_no; ?>
+							<?php } ?></td>
+						</tr>
+            		
+					</table>
+				</td>	
+			</tr>
+			
+			</table>
+			</div>
+      	<div id="tab-tablet">
+          <table class="form">
+			<tr>
+              <td><?php echo $entry_template_tablet; ?></td>
+              <td><select name="config_template_tablet" onchange="$('#template_tablet').load('index.php?route=setting/setting/template_tablet&token=<?php echo $token; ?>&template_tablet=' + encodeURIComponent(this.value)); manage_tablet_options(this.value);">
+                  <option value="" selected="selected">None</option>
+                  <?php foreach ($templates_tablet as $template_tablet) { ?>
+                  <?php if ($template_tablet == $config_template_tablet) { ?>
+                  <option value="<?php echo $template_tablet; ?>" selected="selected"><?php echo $template_tablet; ?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $template_tablet; ?>"><?php echo $template_tablet; ?></option>
+                  <?php } ?>
+                  <?php } ?>
+                </select></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td id="template_tablet"></td>
+            </tr>
+			
+			<tr>
+				<td colspan="2">
+					<table id="template_tablet_options" <?php if($config_template_tablet==''){ ?> style="display:none" <?php } ?>>
+					
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_logo_tablet; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $logo_tablet; ?>" alt="" id="thumb-logo-tablet" />
+							  <input type="hidden" name="config_logo_tablet" value="<?php echo $config_logo_tablet; ?>" id="logo-tablet" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('logo-tablet', 'thumb-logo-tablet');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-logo-tablet').attr('src', '<?php echo $no_image; ?>'); $('#logo-tablet').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td style="width:200px;"><?php echo $entry_icon_tablet; ?></td>
+						  <td style="padding:10px;"><div class="image"><img src="<?php echo $icon_tablet; ?>" alt="" id="thumb-icon-tablet" />
+							  <input type="hidden" name="config_icon_tablet" value="<?php echo $config_icon_tablet; ?>" id="icon-tablet" />
+							  <br />
+							  <?php if(!isset($text_browse)) {
+							   $text_browse = "Browse Files"; }
+							   if(!isset($clear_image)) {
+							   $text_clear = "Clear Image"; }
+							  if(!isset($no_image)) {
+							   $no_image = "No Image"; }
+							  ?>
+							  <a onclick="image_upload('icon-tablet', 'thumb-icon-tablet');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb-icon-tablet').attr('src', '<?php echo $no_image; ?>'); $('#icon-tablet').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+						</tr>
+						
+						<tr>
+						  <td><?php echo $entry_change_device_mode_tablet; ?></td>
+						  <td style="padding:10px;"><?php if ($config_change_device_mode_tablet) { ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="1" checked="checked" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="0" />
+							<?php echo $text_no; ?>
+							<?php } else { ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="1" />
+							<?php echo $text_yes; ?>
+							<input type="radio" name="config_change_device_mode_tablet" value="0" checked="checked" />
+							<?php echo $text_no; ?>
+							<?php } ?></td>
+						</tr>
+						
+					</table>
+				</td>
+			</tr>		
+			
+			</table>
+			</div>
+      		]]></add>
+		</operation>
+		<operation>
+			<search position="after" index="2"><![CDATA[$('#template')]]></search>
+			<add><![CDATA[
+$('#template_mobile').load('index.php?route=setting/setting/template_mobile&token=<?php echo $token; ?>&template_mobile=' + encodeURIComponent($('select[name=\'config_template_mobile\']').attr('value')));
+
+$('#template_tablet').load('index.php?route=setting/setting/template_tablet&token=<?php echo $token; ?>&template_tablet=' + encodeURIComponent($('select[name=\'config_template_tablet\']').attr('value')));
+      		]]></add>
+		</operation>
+		<operation>
+			<search position="before" index="1"><![CDATA[<?php echo $footer; ?>]]></search>
+			<add><![CDATA[
+						<script type="text/javascript">
+						function manage_mobile_options(mobile_template){
+							if(mobile_template==''){
+								//alert('Mobile Template = NONE');
+								document.getElementById('template_mobile_options').style.display="none";
+							}else{
+								document.getElementById('template_mobile_options').style.display="block";
+								//alert('Mobile Template = '+mobile_template);
+							}
+						}
+						function manage_tablet_options(tablet_template){
+							if(tablet_template==''){
+								//alert('Mobile Template = NONE');
+								document.getElementById('template_tablet_options').style.display="none";
+							}else{
+								document.getElementById('template_tablet_options').style.display="block";
+								//alert('Mobile Template = '+mobile_template);
+							}
+						}
+						</script> 
+      		]]></add>
+		</operation>
+	</file>	
+	<file name="catalog/language/english/common/header.php">
+    	<operation>
+			<search position="after"><![CDATA[$_['text_checkout']]]></search>
+			<add><![CDATA[
+     		$_['text_nav_categories'] = 'Categories';
+			$_['text_nav_contact'] = 'Contact';
+			$_['text_nav_info'] = 'Info';
+			$_['text_nav_support'] = 'Support';
+			$_['text_nav_cart'] = 'Cart';
+			$_['text_i_agree'] = 'I agree';			
+			]]></add>
+		</operation>
+	</file>	
+	<file name="catalog/controller/common/header.php">
+    	<operation>
+			<search position="after"><![CDATA[$this->data['text_checkout']]]></search>
+			<add><![CDATA[
+     		$this->data['telephone'] = $this->config->get('config_telephone');
+			$this->data['text_nav_categories'] = $this->language->get('text_nav_categories');
+			$this->data['text_nav_contact'] = $this->language->get('text_nav_contact');
+			$this->data['text_nav_cart'] = $this->language->get('text_nav_cart');
+			$this->data['text_i_agree'] = $this->language->get('text_i_agree');
+			$this->language->load('account/logout');
+			$this->data['text_account'] = $this->language->get('text_account');
+			
+			]]></add>
+		</operation>
+		<!--<operation>
+			<search position="replace" offset="4"><![CDATA[if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {]]></search>
+			<add><![CDATA[
+			    		
+			if($this->session->data['device']=='mobile'){
+				if ($this->config->get('config_logo_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_logo_mobile'))) {
+				$this->data['logo'] = $server . $this->config->get('config_logo_mobile');
+				} elseif($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+					$this->data['logo'] = $server . $this->config->get('config_logo');
+				}
+				
+				if ($this->config->get('config_icon_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_icon_mobile'))) {
+					$this->data['icon_mobile'] = $server . $this->config->get('config_icon_mobile');
+				} else {
+					$this->data['icon_mobile'] = '';
+				}
+				
+			}elseif($this->session->data['device']=='tablet'){
+				if ($this->config->get('config_logo_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_logo_tablet'))) {
+					$this->data['logo'] = $server . $this->config->get('config_logo_tablet');
+				} elseif($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+					$this->data['logo'] = $server . $this->config->get('config_logo');
+				}
+				
+				if ($this->config->get('config_icon_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_icon_tablet'))) {
+					$this->data['icon_tablet'] = $server . $this->config->get('config_icon_tablet');
+				} else {
+					$this->data['icon_tablet'] = '';
+				}
+				
+			}elseif($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))){
+				$this->data['logo'] = $server . $this->config->get('config_logo');
+			}
+			]]></add>
+		</operation>-->
+	</file>	
+	<!--<file name="catalog/language/english/common/footer.php">
+    	<operation>
+			<search position="after"><![CDATA[$_['text_account']]]></search>
+			<add><![CDATA[
+     		$_['device_version_mobile_desktop'] = '<a rel="external" href="index.php?change_device=1&device_name=mobile_desktop">DESKTOP</a>';
+			$_['device_version_mobile']      = '<a rel="external" href="index.php?change_device=1&device_name=mobile">Mobile Version</a>';
+			$_['device_version_tablet_desktop'] = '<a rel="external" href="index.php?change_device=1&device_name=tablet_desktop">DESKTOP</a>';
+			$_['device_version_tablet']      = '<a rel="external" href="index.php?change_device=1&device_name=tablet">Tablet Version</a>';
+			$_['text_omtex_powered']      = '<a title="Opencart Developers" href="http://omtex.opcrat.com/" class="ui-link" rel="external">Omtex</a> Extension & Theme by <a title="Opencart Developers" href="http://opcrat.com" class="ui-link" rel="external">Opcrat</a>';
+			$_['text_mobile'] = 'MOBILE';
+			$_['text_tablet'] = 'TABLET';
+			]]></add>
+		</operation>
+	</file>	
+	<file name="catalog/controller/common/footer.php">
+    	<operation>
+			<search position="replace"><![CDATA[$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));]]></search>
+			<add><![CDATA[
+			$this->data['action'] = $this->url->link('common/home');
+			
+			$this->data['text_mobile'] = $this->language->get('text_mobile');
+			$this->data['text_tablet'] = $this->language->get('text_tablet');
+					
+				if (!isset($this->request->get['route'])) {
+							$this->data['redirect'] = $this->url->link('common/home');
+						} else {
+							$data = $this->request->get;
+							
+							unset($data['_route_']);
+							
+							$route = $data['route'];
+							
+							unset($data['route']);
+							
+							$url = '';
+							
+							if ($data) {
+								$url = '&' . urldecode(http_build_query($data, '', '&'));
+							}			
+							
+							$this->data['redirect'] = $this->url->link($route, $url);
+				}
+		
+				$this->data['language_code'] = $this->session->data['language'];
+				
+				$this->load->model('localisation/language');
+						
+						$this->data['languages'] = array();
+						
+						$results = $this->model_localisation_language->getLanguages();
+						
+						foreach ($results as $result) {
+							if ($result['status']) {
+								$this->data['languages'][] = array(
+									'name'  => $result['name'],
+									'code'  => $result['code'],
+									'image' => $result['image']
+								);	
+							}
+						}
+				
+				if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['currency_code'])) {
+					$this->currency->set($this->request->post['currency_code']);
+					
+					unset($this->session->data['shipping_methods']);
+					unset($this->session->data['shipping_method']);
+						
+					if (isset($this->request->post['redirect'])) {
+						$this->redirect($this->request->post['redirect']);
+					} else {
+						$this->redirect($this->url->link('common/home'));
+					}
+				}
+								
+				$this->data['currency_code'] = $this->currency->getCode(); 
+				
+				$this->load->model('localisation/currency');
+				 
+				 $this->data['currencies'] = array();
+				 
+				$results = $this->model_localisation_currency->getCurrencies();	
+				
+				foreach ($results as $result) {
+					if ($result['status']) {
+						$this->data['currencies'][] = array(
+							'title'        => $result['title'],
+							'code'         => $result['code'],
+							'symbol_left'  => $result['symbol_left'],
+							'symbol_right' => $result['symbol_right']				
+						);
+					}
+				}
+							
+			 $opencart = '<br>'.sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+			 $omtex = '<br>'.sprintf($this->language->get('text_omtex_powered'));
+			 
+							
+			if($this->session->data['device']=='mobile' && $this->data['change_device_mode_mobile']==1){
+				$this->data['powered'] = sprintf($this->language->get('device_version_mobile_desktop')).$opencart.$omtex;
+      		}elseif($this->session->data['device']=='tablet' && $this->data['change_device_mode_tablet']==1){
+				$this->data['powered'] = sprintf($this->language->get('device_version_tablet_desktop')).$opencart.$omtex;
+			}elseif(isset($this->session->data['set_device'])){
+				if($this->session->data['set_device']=='mobile_desktop') {
+					$this->data['powered'] = sprintf($this->language->get('device_version_mobile')).$opencart;
+				} elseif($this->session->data['set_device']=='tablet_desktop') {
+					$this->data['powered'] = sprintf($this->language->get('device_version_tablet')).$opencart;
+				} else {
+					$this->data['powered'] = $opencart;
+					}
+			}else{
+					if(($this->session->data['device']=='mobile') || ($this->session->data['device']=='tablet')) {
+					$this->data['powered'] = $opencart.$omtex;
+					}
+					else {
+					$this->data['powered'] = $opencart;
+					}
+			}
+			]]></add>
+		</operation>
+	</file>-->
+	<file name="catalog/controller/information/sitemap.php">
+    	<operation>
+			<search position="after" offset="1"><![CDATA[$this->data['text_contact']]]></search>
+			<add><![CDATA[
+     		$this->language->load('common/header');
+			$this->data['text_nav_categories'] = $this->language->get('text_nav_categories');
+			]]></add>
+		</operation>
+	</file>	
+	<file name="catalog/controller/checkout/register.php">
+    	<operation>
+			<search position="after" offset="1"><![CDATA[$this->data['entry_shipping']]]></search>
+			<add><![CDATA[
+     		$this->language->load('common/header');
+			$this->data['text_i_agree'] = $this->language->get('text_i_agree');
+			]]></add>
+		</operation>
+	</file>	
+	<file name="catalog/controller/common/column_left.php">
+    	<operation>
+			<search position="replace" offset="18"><![CDATA[$this->load->model('setting/extension');]]></search>
+			<add><![CDATA[
+     		$this->load->model('setting/extension');
+		
+		$extensions = $this->model_setting_extension->getExtensions('module');		
+		$template_tablet = $this->config->get('config_template_tablet');
+		$template_mobile = $this->config->get('config_template_mobile');
+		foreach ($extensions as $extension) {
+			$modules = $this->config->get($extension['code'] . '_module');
+			if ($modules) {
+				foreach ($modules as $module) {
+					if($this->session->data['device']=="tablet" && !empty($template_tablet))	{
+						if(isset($module['status_tablet']) && isset($module['position_tablet'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_tablet'] == 'column_left' && $module['status_tablet']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						elseif($this->session->data['device']=="mobile" && !empty($template_mobile))	{
+						if(isset($module['status_mobile']) && isset($module['position_mobile'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_mobile'] == 'column_left' && $module['status_mobile']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						else{
+						if ($module['layout_id'] == $layout_id && $module['position'] == 'column_left' && $module['status']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+					}
+				}
+			}
+		}
+		]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/column_right.php">
+    	<operation>
+			<search position="replace" offset="18"><![CDATA[$this->load->model('setting/extension');]]></search>
+			<add><![CDATA[
+     		$this->load->model('setting/extension');
+		
+		$extensions = $this->model_setting_extension->getExtensions('module');		
+		$template_tablet = $this->config->get('config_template_tablet');
+		$template_mobile = $this->config->get('config_template_mobile');
+		foreach ($extensions as $extension) {
+			$modules = $this->config->get($extension['code'] . '_module');
+			if ($modules) {
+				foreach ($modules as $module) {
+					if($this->session->data['device']=="tablet" && !empty($template_tablet))	{
+						if(isset($module['status_tablet']) && isset($module['position_tablet'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_tablet'] == 'column_right' && $module['status_tablet']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						elseif($this->session->data['device']=="mobile" && !empty($template_mobile))	{
+						if(isset($module['status_mobile']) && isset($module['position_mobile'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_mobile'] == 'column_right' && $module['status_mobile']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						else{
+						if ($module['layout_id'] == $layout_id && $module['position'] == 'column_right' && $module['status']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+					}
+				}
+			}
+		}
+		]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/content_bottom.php">
+    	<operation>
+			<search position="replace" offset="18"><![CDATA[$this->load->model('setting/extension');]]></search>
+			<add><![CDATA[
+     		$this->load->model('setting/extension');
+		
+		$extensions = $this->model_setting_extension->getExtensions('module');		
+		$template_tablet = $this->config->get('config_template_tablet');
+		$template_mobile = $this->config->get('config_template_mobile');
+		foreach ($extensions as $extension) {
+			$modules = $this->config->get($extension['code'] . '_module');
+			if ($modules) {
+				foreach ($modules as $module) {
+					if($this->session->data['device']=="tablet" && !empty($template_tablet))	{
+						if(isset($module['status_tablet']) && isset($module['position_tablet'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_tablet'] == 'content_bottom' && $module['status_tablet']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						elseif($this->session->data['device']=="mobile" && !empty($template_mobile))	{
+						if(isset($module['status_mobile']) && isset($module['position_mobile'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_mobile'] == 'content_bottom' && $module['status_mobile']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						else{
+						if ($module['layout_id'] == $layout_id && $module['position'] == 'content_bottom' && $module['status']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+					}
+				}
+			}
+		}
+		]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/content_top.php">
+    	<operation>
+			<search position="replace" offset="18"><![CDATA[$this->load->model('setting/extension');]]></search>
+			<add><![CDATA[
+     		$this->load->model('setting/extension');
+		
+		$extensions = $this->model_setting_extension->getExtensions('module');		
+		$template_tablet = $this->config->get('config_template_tablet');
+		$template_mobile = $this->config->get('config_template_mobile');
+		foreach ($extensions as $extension) {
+			$modules = $this->config->get($extension['code'] . '_module');
+			if ($modules) {
+				foreach ($modules as $module) {
+					if($this->session->data['device']=="tablet" && !empty($template_tablet))	{
+						if(isset($module['status_tablet']) && isset($module['position_tablet'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_tablet'] == 'content_top' && $module['status_tablet']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						elseif($this->session->data['device']=="mobile" && !empty($template_mobile))	{
+						if(isset($module['status_mobile']) && isset($module['position_mobile'])) {
+						if ($module['layout_id'] == $layout_id && $module['position_mobile'] == 'content_top' && $module['status_mobile']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+						}
+						}
+						else{
+						if ($module['layout_id'] == $layout_id && $module['position'] == 'content_top' && $module['status']) {
+						$module_data[] = array(
+							'code'       => $extension['code'],
+							'setting'    => $module,
+							'sort_order' => $module['sort_order']
+						);				
+						}
+					}
+				}
+			}
+		}
+		]]></add>
+		</operation>
+	</file>
+    <file name="catalog/controller/account/account.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['text_newsletter'] = $this->language->get('text_newsletter');]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->language->load('account/logout');
+		$this->data['text_logout'] = $this->language->get('text_logout');
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/affiliate/account.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['text_transaction'] = $this->language->get('text_transaction');]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->language->load('account/logout');
+		$this->data['text_logout'] = $this->language->get('text_logout');
+		]]>
+      </add>
+    </operation>
+  </file>  
+  <file name="catalog/controller/account/address.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['countries'] = $this->model_localisation_country->getCountries();]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->load->model('localisation/zone');
+   		$this->data['zones'] = $this->model_localisation_zone->getZonesByCountryId($this->data['country_id']);
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/affiliate/edit.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['countries'] = $this->model_localisation_country->getCountries();]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->load->model('localisation/zone');
+   		$this->data['zones'] = $this->model_localisation_zone->getZonesByCountryId($this->data['country_id']);
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/checkout/guest.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['countries'] = $this->model_localisation_country->getCountries();]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->load->model('localisation/zone');
+   		$this->data['zones'] = $this->model_localisation_zone->getZonesByCountryId($this->data['country_id']);
+		]]>
+      </add>
+    </operation>
+  </file>
+  
+</modification>

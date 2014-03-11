@@ -1,0 +1,19 @@
+<modification>
+	<id><![CDATA[remove google checkout]]></id>
+	<version><![CDATA[1.5.5.1]]></version>
+	<vqmver><![CDATA[2.2.1]]></vqmver>
+	<author><![CDATA[Mika]]></author>	
+	
+	<file name="catalog/view/theme/default/template/checkout/cart.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<?php echo $google_checkout; ?>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>				
+	</file>	
+	<file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="replace"><![CDATA['payment/google_checkout',]]></search>
+			<add><![CDATA[]]></add>
+		</operation>				
+	</file>				
+</modification>

@@ -1,0 +1,770 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+  <id>Opmex - Mobile Theme</id>
+  <version>1.0.1</version>
+  <vqmver>2.0</vqmver>
+  <author>Opcrat</author>
+  <file name="admin/controller/setting/setting.php">
+    <operation>
+      <search position="after">
+        <![CDATA[data['entry_template']]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['entry_mobile_theme_style'] = $this->language->get('entry_mobile_theme_style');
+		  $this->data['entry_mobile_theme_product_view'] = $this->language->get('entry_mobile_theme_product_view');
+		  $this->data['entry_mobile_theme_product_view_grid'] = $this->language->get('entry_mobile_theme_product_view_grid');
+		  $this->data['entry_mobile_theme_product_view_list'] = $this->language->get('entry_mobile_theme_product_view_list');
+]]>
+      </add>
+    </operation>
+    <operation>
+      <search position="after" offset="4" index="1">
+        <![CDATA[if (isset($this->request->post['config_change_device_mode_mobile'])) {]]>
+      </search>
+      <add>
+        <![CDATA[
+          
+		    if (isset($this->request->post['config_mobile_theme_style'])) {
+			  $this->data['config_mobile_theme_style'] = $this->request->post['config_mobile_theme_style'];
+			  } else {
+			  $this->data['config_mobile_theme_style'] = $this->config->get('config_mobile_theme_style');
+			  }
+		  
+		  if (isset($this->request->post['config_mobile_theme_product_view'])) {
+          $this->data['config_mobile_theme_product_view'] = $this->request->post['config_mobile_theme_product_view'];
+          } else {
+          $this->data['config_mobile_theme_product_view'] = $this->config->get('config_mobile_theme_product_view');
+		  }
+		  ]]>
+      </add>
+    </operation>
+    <operation>
+      <search position="before">
+        <![CDATA[template()]]>
+      </search>
+      <add>
+        <![CDATA[
+		
+		  public function template_mobile_theme_style() {
+		  
+		      $templates_mobile_styles = basename($this->request->get['template_mobile']);
+			  $config_mobile_theme_style=$this->request->get['config_mobile_theme_style'];
+			  $templates_mobile_style = array('Customize','Default');
+			  $templates_mobile_style_names = '';
+			  
+			  $config_template_mobile = $this->config->get('config_template_mobile');
+			  
+			  $template_mobile = $this->request->get['template_mobile'];
+			  if($template_mobile != 'opmex'){
+			  	echo "<script>";
+				echo "document.getElementById('mobile-theme-roller').style.display='none';";
+				echo "document.getElementById('opmex_feature_product_view').style.display='none';";
+				echo "document.getElementById('opmex_feature_custom_style').style.display='none';";
+				echo "</script>";
+			  }else{
+			  	echo "<script>";
+				echo "document.getElementById('opmex_feature_product_view').style.display='block';";
+				echo "document.getElementById('opmex_feature_custom_style').style.display='block';";
+				echo "</script>";
+			  }
+			  
+			 
+			foreach ($templates_mobile_style as $templates_mobile_style_name) {
+				 if (file_exists(DIR_IMAGE . 'templates_mobile/'.$templates_mobile_styles.'/' . $templates_mobile_style_name.'_mobile_theme.png')) {
+					$image = HTTP_CATALOG . 'image/' . 'templates_mobile/'.$templates_mobile_styles.'/' . $templates_mobile_style_name .'_mobile_theme.png';
+				  } else {
+					$image = HTTP_CATALOG . 'image/' . 'no_image.jpg';
+				  }
+				  if($config_mobile_theme_style == $templates_mobile_style_name) {
+					$checked='checked="checked"';
+				  }else{
+					$checked='';
+				  }
+				  $templates_mobile_style_names.= '<img src="'.$image.'" height="20" width="20" title="'.$templates_mobile_style_name.'">&nbsp;<input type="radio" name="config_mobile_theme_style" id="config_mobile_theme_style" value="'. $templates_mobile_style_name.'" '.$checked.' onClick="check_mobile_custom_theme(this.value)"/>'.$templates_mobile_style_name.'&nbsp;';
+			}
+				$templates_mobile_style_names.='<input type="hidden" name="mobile_theme_change_flag" id="mobile_theme_change_flag" value="1"/>';
+				$this->response->setOutput($templates_mobile_style_names);
+				
+				if($config_template_mobile != 'opmex') {
+					echo '<script>';
+					echo 'document.getElementById("config_mobile_theme_style").checked=false;';
+					echo '</script>';
+				}else if($config_template_mobile == 'opmex' && $config_mobile_theme_style=='Customize' && $template_mobile == 'opmex'){
+					echo '<script>';
+					echo "document.getElementById('mobile-theme-roller').style.display='block';";
+					echo '</script>';
+				} 
+          }]]>
+      </add>
+    </operation>
+    <operation>
+	<search position="before">
+        <![CDATA[$this->template = 'setting/setting.tpl';]]>
+      </search>
+      <add>
+        <![CDATA[
+		
+		$this->data['mobile_custom_styles'] = array();
+		
+		if (isset($this->request->post['config_mobile_custom_style'])) {
+			$this->data['mobile_custom_styles'] = $this->request->post['config_mobile_custom_style'];
+		} elseif ($this->config->get('config_mobile_custom_style')) { 
+			$this->data['mobile_custom_styles'] = $this->config->get('config_mobile_custom_style');
+		}		
+          
+          ]]>
+      </add>
+	</operation>
+  </file>	
+  <file name="admin/controller/setting/store.php">
+    <operation>
+      <search position="after" offset="7" index="1">
+        <![CDATA[if (isset($this->request->post['config_change_device_mode_mobile'])) {]]>
+      </search>
+      <add>
+        <![CDATA[
+          if (isset($this->request->post['config_mobile_theme_style'])) {
+          $this->data['config_mobile_theme_style'] = $this->request->post['config_mobile_theme_style'];
+          } else {
+          $this->data['config_mobile_theme_style'] = $this->config->get('config_mobile_theme_style');
+		  }
+		  
+		  if (isset($this->request->post['config_mobile_theme_product_view'])) {
+          $this->data['config_mobile_theme_product_view'] = $this->request->post['config_mobile_theme_product_view'];
+          } else {
+          $this->data['config_mobile_theme_product_view'] = $this->config->get('config_mobile_theme_product_view');
+		  }
+		  ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="admin/language/english/setting/setting.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$_['entry_template']]]>
+      </search>
+      <add>
+        <![CDATA[
+          $_['entry_mobile_theme_style'] = 'Mobile Theme Style<br /><span class="help">Select Mobile theme style.</span>';
+		  $_['entry_mobile_theme_product_view'] = 'Product View <br /><span class="help">Manage Category Product view for Mobile</span>';
+		  $_['entry_mobile_theme_product_view_grid'] = 'Grid View';
+		  $_['entry_mobile_theme_product_view_list'] = 'List View';
+		  ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="admin/language/english/setting/store.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$_['entry_template']]]>
+      </search>
+      <add>
+        <![CDATA[ $_['entry_mobile_theme_style'] = 'Mobile Theme Style<br /><span class="help">Select Mobile theme style.</span>';
+		  $_['entry_mobile_theme_product_view'] = 'Product View <br /><span class="help">Manage Category Product view for Mobile</span>';
+		  $_['entry_mobile_theme_product_view_grid'] = 'Grid View';
+		  $_['entry_mobile_theme_product_view_list'] = 'List View';
+          ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="admin/view/template/setting/setting.tpl">
+    <operation>
+      <search position="replace"><![CDATA[<a href="#tab-mobile"><?php echo $tab_mobile; ?></a>]]></search>
+      <add>
+        <![CDATA[<a href="#tab-mobile" <?php if(isset($config_mobile_theme_style)){if($config_mobile_theme_style=='Customize' && $config_template_mobile == 'opmex'){ ?>  onClick="mobile_load_preview();" <?php } }?> ><?php echo $tab_mobile; ?></a>]]>
+      </add>
+    </operation>
+	<operation>
+      <search position="replace" offset="1"><![CDATA[<td><?php echo $entry_template_mobile; ?></td>]]></search>
+      <add>
+        <![CDATA[
+		<td><?php echo $entry_template_mobile; ?></td>
+		<td><select name="config_template_mobile" onchange="$('#template_mobile').load('index.php?route=setting/setting/template_mobile&token=<?php echo $token; ?>&template_mobile=' + encodeURIComponent(this.value)); manage_mobile_options(this.value); $('#template_mobile_theme_style_text').load('index.php?route=setting/setting/template_mobile_theme_style&token=<?php echo $token; ?>&config_mobile_theme_style=<?php if(isset($config_mobile_theme_style)){ echo $config_mobile_theme_style;} ?>&template_mobile=' + encodeURIComponent(this.value));">
+			  
+		]]>
+      </add>
+    </operation>
+    <operation>
+      <search position="after" offset="3">
+        <![CDATA[<input type="radio" name="config_change_device_mode_mobile" value="0" checked="checked" />]]>
+      </search>
+      <add>
+        <![CDATA[
+		
+			 <tr><td height="20"></td></tr>
+			  
+			  <tr><td colspan="2"><table id="opmex_feature_product_view" <?php if($config_template_mobile != "opmex") { ?> style="display:none;"  <?php } ?>><tr>
+			  <td style="width:196px;"><?php echo $entry_mobile_theme_product_view; ?></td>
+			  <td style="padding:10px;"><?php if ($config_mobile_theme_product_view) { ?>
+			  <input type="radio" name="config_mobile_theme_product_view" value="1" checked="checked" />
+			  <?php echo $entry_mobile_theme_product_view_grid; ?>
+			  <input type="radio" name="config_mobile_theme_product_view" value="0" />
+			  <?php echo $entry_mobile_theme_product_view_list; ?>
+			  <?php } else { ?>
+			  <input type="radio" name="config_mobile_theme_product_view" value="1" />
+			  <?php echo $entry_mobile_theme_product_view_grid; ?>
+			  <input type="radio" name="config_mobile_theme_product_view" value="0" checked="checked" />
+			  <?php echo $entry_mobile_theme_product_view_list; ?>
+			  <?php } ?></td>
+			  </tr></table></td></tr>
+			  
+			  <tr><td height="20"></td></tr>
+			  
+			  <tr><td colspan="2"><table id="opmex_feature_custom_style" <?php if($config_template_mobile != "opmex") { ?> style="display:none;"  <?php } ?>><tr>
+			  <td style="padding-right:10px; padding-top:20px;">
+			  <?php echo $entry_mobile_theme_style;?>
+			  </td>
+			  <td id="template_mobile_theme_style_text" style="padding-left:50px; padding-top:20px;"></td>
+			  </tr></table></td></tr>
+			  
+			  <!--<input type="hidden" name="mobile_theme_change_flag" id="mobile_theme_change_flag" value="1"/>-->
+			  
+			  </div>
+			  
+			]]>
+      </add>
+    </operation>
+	<operation>
+      <search position="before" offset="1">
+        <![CDATA[<div id="tab-tablet">]]>
+      </search>
+      <add>
+        <![CDATA[
+		 <div id="mobile-theme-roller" <?php if(isset($config_mobile_theme_style)){  if($config_mobile_theme_style=='Customize'){ ?> style="display:block" <?php } else { ?> style="display:none" <?php } } ?>>
+			<div id="interface">
+				<div id="colorpicker"></div>
+				<div id="themeroller_mobile" style="height:auto;">
+						
+					<h1>Tema Móvel Personalizado</h1>
+					
+						<div class="accordion" data-form="ui-btn-active">
+							<div>
+								<h3><a href="#">Font Family</a></h3>
+								<div class="form">
+									<label class="first">FONT</label><input data-type="font-family" data-name="global-font-family"  value="<?php if(!empty($mobile_custom_styles['font_family'])) {  echo $mobile_custom_styles['font_family']; } else { echo 'Helvetica, Arial, sans-serif'; } ?>" name="config_mobile_custom_style[font_family]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-bar-c">
+							<div>
+								<h3><a href="#">Header/Footer Bar</a></h3>
+								<div class="form">
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="c-bar-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Header_footer_background'])) {  echo $mobile_custom_styles['Header_footer_background']; } else { echo '#EDEDED'; } ?>" name="config_mobile_custom_style[Header_footer_background]" /><div class="slider" data-type="background" data-name="c-bar-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="c-bar-background" href="#">+</a>
+									<div class="start-end" data-name="c-bar-background"><label class="first">START</label><input data-type="start"  data-name="c-bar-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Header_footer_background_start'])) {  echo $mobile_custom_styles['Header_footer_background_start']; } else { echo '#F0F0F0'; } ?>" name="config_mobile_custom_style[Header_footer_background_start]" />&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="c-bar-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Header_footer_background_end'])) {  echo $mobile_custom_styles['Header_footer_background_end']; } else { echo '#E9EAEB'; } ?>" name="config_mobile_custom_style[Header_footer_background_end]" /></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="c-bar-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Header_footer_border'])) {  echo $mobile_custom_styles['Header_footer_border']; } else { echo '#B3B3B3'; } ?>" name="config_mobile_custom_style[Header_footer_border]" /><br class="clear"/>
+									
+									<div class="separator"></div>
+									
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="c-bar-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Header_footer_text_color'])) {  echo $mobile_custom_styles['Header_footer_text_color']; } else { echo '#3E3E3E'; } ?>" name="config_mobile_custom_style[Header_footer_text_color]"/><br class="clear"/>
+									<label class="first">SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="c-bar-shadow-x" value="<?php if(!empty($mobile_custom_styles['Header_footer_text_shadow_x'])) {  echo $mobile_custom_styles['Header_footer_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[Header_footer_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="c-bar-shadow-y"  value="<?php if(!empty($mobile_custom_styles['Header_footer_text_shadow_y'])) {  echo $mobile_custom_styles['Header_footer_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[Header_footer_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="c-bar-shadow-radius" value="<?php if(!empty($mobile_custom_styles['Header_footer_text_shadow_radius'])) {  echo $mobile_custom_styles['Header_footer_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[Header_footer_text_shadow_radius]"/>&nbsp;<input data-name="c-bar-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Header_footer_text_shadow_color'])) {  echo $mobile_custom_styles['Header_footer_text_shadow_color']; } else { echo '#ffffff'; } ?>" name="config_mobile_custom_style[Header_footer_text_shadow_color]" /><br class="clear"/>
+									
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-up-c">
+							<div>
+								<h3><a href="#">Header/Footer Button</a></h3>
+								<div class="form">
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="c-bup-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_normal_background'])) {  echo $mobile_custom_styles['c_button_normal_background']; } else { echo '#333333'; } ?>" name="config_mobile_custom_style[c_button_normal_background]"/><div class="slider" data-type="background" data-name="c-bup-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="c-bup-background" href="#">+</a>
+									<div class="start-end" data-name="c-bup-background"><label class="first">START</label><input data-type="start"  data-name="c-bup-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_normal_background_start'])) {  echo $mobile_custom_styles['c_button_normal_background_start']; } else { echo '#555555'; } ?>" name="config_mobile_custom_style[c_button_normal_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="c-bup-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_normal_background_end'])) {  echo $mobile_custom_styles['c_button_normal_background_end']; } else { echo '#333333'; } ?>" name="config_mobile_custom_style[c_button_normal_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="c-bup-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_normal_border'])) {  echo $mobile_custom_styles['c_button_normal_border']; } else { echo '#222222'; } ?>" name="config_mobile_custom_style[c_button_normal_border]"/><br class="clear"/>
+									
+									<div class="separator"></div>
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="c-bup-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_normal_text_color'])) {  echo $mobile_custom_styles['c_button_normal_text_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[c_button_normal_text_color]"/><br class="clear"/>
+									<label class="first">SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="c-bup-shadow-x" value="<?php if(!empty($mobile_custom_styles['c_button_normal_text_shadow_x'])) {  echo $mobile_custom_styles['c_button_normal_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[c_button_normal_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="b-bup-shadow-y" value="<?php if(!empty($mobile_custom_styles['c_button_normal_text_shadow_y'])) {  echo $mobile_custom_styles['c_button_normal_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[c_button_normal_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="c-bup-shadow-radius" value="<?php if(!empty($mobile_custom_styles['c_button_normal_text_shadow_radius'])) {  echo $mobile_custom_styles['c_button_normal_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[c_button_normal_text_shadow_radius]"/>&nbsp;<input data-name="c-bup-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_normal_text_shadow_color'])) {  echo $mobile_custom_styles['c_button_normal_text_shadow_color']; } else { echo '#000000'; } ?>" name="config_mobile_custom_style[c_button_normal_text_shadow_color]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-body-a">
+							<div>
+								<h3><a href="#">Content Body</a></h3>
+								<div class="form">
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="a-body-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_background'])) {  echo $mobile_custom_styles['Content_body_background']; } else { echo '#E5E5E5'; } ?>" name="config_mobile_custom_style[Content_body_background]"/><div class="slider" data-type="background" data-name="a-body-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="a-body-background" href="#">+</a>
+									<div class="start-end" data-name="a-body-background"><label class="first">START</label><input data-type="start"  data-name="a-body-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_background_start'])) {  echo $mobile_custom_styles['Content_body_background_start']; } else { echo '#EEEEEE'; } ?>" name="config_mobile_custom_style[Content_body_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="a-body-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_background_end'])) {  echo $mobile_custom_styles['Content_body_background_end']; } else { echo '#DDDDDD'; } ?>" name="config_mobile_custom_style[Content_body_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="a-body-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_border'])) {  echo $mobile_custom_styles['Content_body_border']; } else { echo '#B3B3B3'; } ?>" name="config_mobile_custom_style[Content_body_border]" /><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">LINK COLOR</label><input data-type="link" data-name="a-body-link-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_link_color'])) {  echo $mobile_custom_styles['Content_body_link_color']; } else { echo '#2489CE'; } ?>" name="config_mobile_custom_style[Content_body_link_color]" />&nbsp;&nbsp;<a class="more" data-name="a-body-link-color" href="#">+</a><br class="clear" />
+									<div class="start-end links" data-name="a-body-link-color">
+										<label class="first">LINK HOVER</label><input data-type="link" data-name="a-body-link-hover" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_link_hover'])) {  echo $mobile_custom_styles['Content_body_link_hover']; } else { echo '#2489CE'; } ?>" name="config_mobile_custom_style[Content_body_link_hover]" /><br class="clear" />
+										<label class="first">LINK ACTIVE</label><input data-type="link" data-name="a-body-link-active" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_link_active'])) {  echo $mobile_custom_styles['Content_body_link_active']; } else { echo '#2489CE'; } ?>" name="config_mobile_custom_style[Content_body_link_active]" /><br class="clear" />
+										<label class="first">LINK VISITED</label><input data-type="link" data-name="a-body-link-visited" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_link_visited'])) {  echo $mobile_custom_styles['Content_body_link_visited']; } else { echo '#2489CE'; } ?>" name="config_mobile_custom_style[Content_body_link_visited]" />
+									</div>
+									
+									<div class="separator"></div>
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="a-body-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_text_color'])) {  echo $mobile_custom_styles['Content_body_text_color']; } else { echo '#333333'; } ?>" name="config_mobile_custom_style[Content_body_text_color]" /><br class="clear"/>
+									<label class="first">SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="a-body-shadow-x"  value="<?php if(!empty($mobile_custom_styles['Content_body_text_shadow_x'])) {  echo $mobile_custom_styles['Content_body_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[Content_body_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="a-body-shadow-y" value="<?php if(!empty($mobile_custom_styles['Content_body_text_shadow_y'])) {  echo $mobile_custom_styles['Content_body_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[Content_body_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="a-body-shadow-radius" value="<?php if(!empty($mobile_custom_styles['Content_body_text_shadow_radius'])) {  echo $mobile_custom_styles['Content_body_text_shadow_radius']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[Content_body_text_shadow_radius]"/>&nbsp;<input data-name="a-body-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Content_body_text_shadow_color'])) {  echo $mobile_custom_styles['Content_body_text_shadow_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[Content_body_text_shadow_color]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-up-a">
+							<div>
+								<h3><a href="#">Content Body Button</a></h3>
+								<div class="form">
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="a-bup-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_normal_background'])) {  echo $mobile_custom_styles['a_button_normal_background']; } else { echo '#F6F6F6'; } ?>" name="config_mobile_custom_style[a_button_normal_background]"/><div class="slider" data-type="background" data-name="a-bup-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="a-bup-background" href="#">+</a>
+									<div class="start-end" data-name="a-bup-background"><label class="first">START</label><input data-type="start"  data-name="a-bup-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_normal_background_start'])) {  echo $mobile_custom_styles['a_button_normal_background_start']; } else { echo '#FEFEFE'; } ?>" name="config_mobile_custom_style[a_button_normal_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="a-bup-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_normal_background_end'])) {  echo $mobile_custom_styles['a_button_normal_background_end']; } else { echo '#EEEEEE'; } ?>" name="config_mobile_custom_style[a_button_normal_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="a-bup-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_normal_border'])) {  echo $mobile_custom_styles['a_button_normal_border']; } else { echo '#CCCCCC'; } ?>" name="config_mobile_custom_style[a_button_normal_border]"/><br class="clear"/>
+									
+									<div class="separator"></div>
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="a-bup-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_normal_text_color'])) {  echo $mobile_custom_styles['a_button_normal_text_color']; } else { echo '#444444'; } ?>" name="config_mobile_custom_style[a_button_normal_text_color]"/><br class="clear"/>
+									<label class="first">SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="a-bup-shadow-x" value="<?php if(!empty($mobile_custom_styles['a_button_normal_text_shadow_x'])) {  echo $mobile_custom_styles['a_button_normal_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[a_button_normal_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="a-bup-shadow-y" value="<?php if(!empty($mobile_custom_styles['a_button_normal_text_shadow_y'])) {  echo $mobile_custom_styles['a_button_normal_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[a_button_normal_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="a-bup-shadow-radius" value="<?php if(!empty($mobile_custom_styles['a_button_normal_text_shadow_radius'])) {  echo $mobile_custom_styles['a_button_normal_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[a_button_normal_text_shadow_radius]"/>&nbsp;<input data-name="a-bup-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_normal_text_shadow_color'])) {  echo $mobile_custom_styles['a_button_normal_text_shadow_color']; } else { echo '#F6F6F6'; } ?>" name="config_mobile_custom_style[a_button_normal_text_shadow_color]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						<div class="accordion" data-form="ui-btn-up-b">
+							<div>
+								<h3><a href="#">Content Body Special Button</a></h3>
+								<div class="form">
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="b-bup-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_normal_background'])) {  echo $mobile_custom_styles['b_button_normal_background']; } else { echo '#F6F6F6'; } ?>" name="config_mobile_custom_style[b_button_normal_background]"/><div class="slider" data-type="background" data-name="b-bup-background-color1"></div>&nbsp;&nbsp;<a class="more" data-name="b-bup-background" href="#">+</a>
+									<div class="start-end" data-name="b-bup-background"><label class="first">START</label><input data-type="start"  data-name="b-bup-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_normal_background_start'])) {  echo $mobile_custom_styles['b_button_normal_background_start']; } else { echo '#FEFEFE'; } ?>" name="config_mobile_custom_style[b_button_normal_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="b-bup-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_normal_background_end'])) {  echo $mobile_custom_styles['b_button_normal_background_end']; } else { echo '#EEEEEE'; } ?>" name="config_mobile_custom_style[b_button_normal_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="b-bup-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_normal_border'])) {  echo $mobile_custom_styles['b_button_normal_border']; } else { echo '#CCCCCC'; } ?>" name="config_mobile_custom_style[b_button_normal_border]"/><br class="clear"/>
+									
+									<div class="separator"></div>
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="b-bup-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_normal_text_color'])) {  echo $mobile_custom_styles['b_button_normal_text_color']; } else { echo '#444444'; } ?>" name="config_mobile_custom_style[b_button_normal_text_color]"/><br class="clear"/>
+									<label class="first">SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="b-bup-shadow-x" value="<?php if(!empty($mobile_custom_styles['b_button_normal_text_shadow_x'])) {  echo $mobile_custom_styles['b_button_normal_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[b_button_normal_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="b-bup-shadow-y" value="<?php if(!empty($mobile_custom_styles['b_button_normal_text_shadow_y'])) {  echo $mobile_custom_styles['b_button_normal_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[b_button_normal_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="b-bup-shadow-radius" value="<?php if(!empty($mobile_custom_styles['b_button_normal_text_shadow_radius'])) {  echo $mobile_custom_styles['b_button_normal_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[b_button_normal_text_shadow_radius]"/>&nbsp;<input data-name="b-bup-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_normal_text_shadow_color'])) {  echo $mobile_custom_styles['b_button_normal_text_shadow_color']; } else { echo '#F6F6F6'; } ?>" name="config_mobile_custom_style[b_button_normal_text_shadow_color]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<h2>Opções Avançadas</h2>
+						<div class="accordion" data-form="ui-btn-active">
+							<div>
+								<h3><a href="#">Active State</a></h3>
+								<div class="form">
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="global-active-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['active_state_background'])) {  echo $mobile_custom_styles['active_state_background']; } else { echo '#6CA6D4'; } ?>" name="config_mobile_custom_style[active_state_background]" /><div class="slider" data-type="background" data-name="global-active-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="global-active-background" href="">+</a>
+									<div class="start-end" data-name="global-active-background"><label class="first">START</label><input data-type="start" data-name="global-active-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['active_state_background_start'])) {  echo $mobile_custom_styles['active_state_background_start']; } else { echo '#85BAE4'; } ?>" name="config_mobile_custom_style[active_state_background_start]" /><label>END</label><input data-name="global-active-background-end" data-type="end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['active_state_background_end'])) {  echo $mobile_custom_styles['active_state_background_end']; } else { echo '#5393C5'; } ?>" name="config_mobile_custom_style[active_state_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-name="global-active-border" data-type="border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['active_state_border'])) {  echo $mobile_custom_styles['active_state_border']; } else { echo '#155678'; } ?>" name="config_mobile_custom_style[active_state_border]"/><br class="clear"/>
+									<div class="separator"></div>
+									
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="global-active-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['active_state_text_color'])) {  echo $mobile_custom_styles['active_state_text_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[active_state_text_color]" /><br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="global-active-shadow-x" value="<?php if(!empty($mobile_custom_styles['active_state_text_shadow_x'])) {  echo $mobile_custom_styles['active_state_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[active_state_text_shadow_x]" />&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="global-active-shadow-y" value="<?php if(!empty($mobile_custom_styles['active_state_text_shadow_y'])) {  echo $mobile_custom_styles['active_state_text_shadow_y']; } else { echo '-1px'; } ?>" name="config_mobile_custom_style[active_state_text_shadow_y]" />&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="global-active-shadow-radius" value="<?php if(!empty($mobile_custom_styles['active_state_text_shadow_radius'])) {  echo $mobile_custom_styles['active_state_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[active_state_text_shadow_radius]" />&nbsp;<input data-name="global-active-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['active_state_text_shadow_color'])) {  echo $mobile_custom_styles['active_state_text_shadow_color']; } else { echo '#145072'; } ?>" name="config_mobile_custom_style[active_state_text_shadow_color]" /><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						<div class="accordion" data-form="ui-corner">
+							<div>
+								<h3><a href="#">Corner Radii</a></h3>
+								<div class="form">
+									<label class="first">GROUP</label><input data-type="radius" data-name="global-radii-blocks"  value="<?php if(!empty($mobile_custom_styles['Corner_Radii_group'])) {  echo $mobile_custom_styles['Corner_Radii_group']; } else { echo '.6em'; } ?>" name="config_mobile_custom_style[Corner_Radii_group]"/><div class="slider" data-type="radius" data-name="global-radii-blocks" ></div><br class="clear"/>
+									<label class="first">BUTTONS</label><input data-type="radius" data-name="global-radii-buttons" value="<?php if(!empty($mobile_custom_styles['Corner_Radii_buttons'])) {  echo $mobile_custom_styles['Corner_Radii_buttons']; } else { echo '1em'; } ?>" name="config_mobile_custom_style[Corner_Radii_buttons]"/><div class="slider" data-type="radius" data-name="global-radii-buttons" ></div><br class="clear" />
+								</div>
+							</div>
+						</div>
+						<div class="accordion" data-form="ui-icon">
+							<div>
+								<h3><a href="#">Icon</a></h3>
+								<div class="form">
+									<label class="first">DEFAULT ICON</label><select data-type="icon_set" data-name="global-icon-set" ><option value="white">White</option><option value="black">Black</option></select>&nbsp;<select data-type="icon_disc" data-name="global-icon-disc" id="with_disc" ><option value="with_disc">With disc</option><option value="without_disc">W/O disc</option></select><br class="clear"/>
+									<label class="first">DISC COLOR</label><input data-type="icon_disc" data-name="global-icon-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Icon_disc_color'])) {  echo $mobile_custom_styles['Icon_disc_color']; } else { echo '#000000'; } ?>" name="config_mobile_custom_style[Icon_disc_color]"/><br class="clear"/>
+									<label class="first">DISC OPACITY</label><input data-type="icon_disc" data-name="global-icon-disc" id="icon_opacity" value="<?php if(!empty($mobile_custom_styles['Icon_disc_opacity'])) {  echo $mobile_custom_styles['Icon_disc_opacity']; } else { echo '25'; } ?>" name="config_mobile_custom_style[Icon_disc_opacity]"/>&nbsp;<br class="clear"/>
+								</div>
+							</div>
+						</div>
+						<div class="accordion">
+							<div>
+								<h3><a href="#">Box Shadow</a></h3>
+								<div class="form">
+									<label class="first">COLOR</label><input data-type="box_shadow" data-name="global-box-shadow-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['Box_shadow_color'])) {  echo $mobile_custom_styles['Box_shadow_color']; } else { echo '#000000'; } ?>" name="config_mobile_custom_style[Box_shadow_color]"/><br class="clear"/>
+									<label class="first">OPACITY</label><input data-type="box_shadow" data-name="global-box-shadow-color" id="box-shadow-opacity" value="<?php if(!empty($mobile_custom_styles['Box_shadow_opacity'])) {  echo $mobile_custom_styles['Box_shadow_opacity']; } else { echo '25'; } ?>" name="config_mobile_custom_style[Box_shadow_opacity]"/><br class="clear"/>
+									<label class="first">SIZE</label><input data-type="box_shadow" data-name="global-box-shadow-size" id="box-shadow-size" value="<?php if(!empty($mobile_custom_styles['Box_shadow_size'])) {  echo $mobile_custom_styles['Box_shadow_size']; } else { echo '4px'; } ?>" name="config_mobile_custom_style[Box_shadow_size]"/><br class="clear" />
+								</div>
+							</div>
+						</div>
+						
+						<h2>Opções de Botão Avançada</h2>
+						<div class="accordion" data-form="ui-btn-hover-c">
+							<div>
+								<h3><a href="#">Header/Footer Button: Hover</a></h3>
+								<div class="form">
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="c-bhover-color" class="colorwell"  value="<?php if(!empty($mobile_custom_styles['c_button_hover_text_color'])) {  echo $mobile_custom_styles['c_button_hover_text_color']; } else { echo '#ffffff'; } ?>" name="config_mobile_custom_style[c_button_hover_text_color]"/><br class="clear"/>
+									<br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="c-bhover-shadow-x" value="<?php if(!empty($mobile_custom_styles['c_button_hover_text_shadow_x'])) {  echo $mobile_custom_styles['c_button_hover_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[c_button_hover_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="c-bhover-shadow-y" value="<?php if(!empty($mobile_custom_styles['c_button_hover_text_shadow_y'])) {  echo $mobile_custom_styles['c_button_hover_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[c_button_hover_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="c-bhover-shadow-radius" value="<?php if(!empty($mobile_custom_styles['c_button_hover_text_shadow_radius'])) {  echo $mobile_custom_styles['c_button_hover_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[c_button_hover_text_shadow_radius]"/>&nbsp;<input data-name="c-bhover-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_hover_text_shadow_color'])) {  echo $mobile_custom_styles['c_button_hover_text_shadow_color']; } else { echo '#000000'; } ?>" name="config_mobile_custom_style[c_button_hover_text_shadow_color]"/><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="c-bhover-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_hover_background_color'])) {  echo $mobile_custom_styles['c_button_hover_background_color']; } else { echo '#444444'; } ?>" name="config_mobile_custom_style[c_button_hover_background_color]"/><div class="slider" data-type="background" data-name="c-bhover-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="c-bhover-background" href="#">+</a>
+									<div class="start-end" data-name="c-bhover-background"><label class="first">START</label><input data-type="start"  data-name="c-bhover-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_hover_background_start'])) {  echo $mobile_custom_styles['c_button_hover_background_start']; } else { echo '#666666'; } ?>" name="config_mobile_custom_style[c_button_hover_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="c-bhover-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_hover_background_end'])) {  echo $mobile_custom_styles['c_button_hover_background_end']; } else { echo '#444444'; } ?>" name="config_mobile_custom_style[c_button_hover_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="c-bhover-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_hover_border'])) {  echo $mobile_custom_styles['c_button_hover_border']; } else { echo '#0000000'; } ?>" name="config_mobile_custom_style[c_button_hover_border]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-down-c">
+							<div>
+								<h3><a href="#">Header/Footer Button: Pressed</a></h3>
+								<div class="form">
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="c-bdown-color" class="colorwell"  value="<?php if(!empty($mobile_custom_styles['c_button_pressed_text_color'])) {  echo $mobile_custom_styles['c_button_pressed_text_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[c_button_pressed_text_color]"/><br class="clear"/>
+									<br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="c-bdown-shadow-x" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_text_shadow_x'])) {  echo $mobile_custom_styles['c_button_pressed_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[c_button_pressed_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="c-bdown-shadow-y" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_text_shadow_y'])) {  echo $mobile_custom_styles['c_button_pressed_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[c_button_pressed_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="c-bdown-shadow-radius" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_text_shadow_radius'])) {  echo $mobile_custom_styles['c_button_pressed_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[c_button_pressed_text_shadow_radius]"/>&nbsp;<input data-name="c-bdown-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_text_shadow_color'])) {  echo $mobile_custom_styles['c_button_pressed_text_shadow_color']; } else { echo '#000000'; } ?>" name="config_mobile_custom_style[c_button_pressed_text_shadow_color]"/><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="c-bdown-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_background_color'])) {  echo $mobile_custom_styles['c_button_pressed_background_color']; } else { echo '#3d3d3d'; } ?>" name="config_mobile_custom_style[c_button_pressed_background_color]"/><div class="slider" data-type="background" data-name="c-bdown-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="c-bdown-background" href="#">+</a>
+									<div class="start-end" data-name="c-bdown-background"><label class="first">START</label><input data-type="start"  data-name="c-bdown-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_background_start'])) {  echo $mobile_custom_styles['c_button_pressed_background_start']; } else { echo '#333'; } ?>" name="config_mobile_custom_style[c_button_pressed_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="c-bdown-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_background_end'])) {  echo $mobile_custom_styles['c_button_pressed_background_end']; } else { echo '#5a5a5a'; } ?>" name="config_mobile_custom_style[c_button_pressed_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="c-bdown-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['c_button_pressed_border'])) {  echo $mobile_custom_styles['c_button_pressed_border']; } else { echo '#000000'; } ?>" name="config_mobile_custom_style[c_button_pressed_border]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-hover-a">
+							<div>
+								<h3><a href="#">Content Body Button: Hover</a></h3>
+								<div class="form">
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="a-bhover-color" class="colorwell"  value="<?php if(!empty($mobile_custom_styles['a_button_hover_text_color'])) {  echo $mobile_custom_styles['a_button_hover_text_color']; } else { echo '#101010'; } ?>" name="config_mobile_custom_style[a_button_hover_text_color]"/><br class="clear"/>
+									<br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="a-bhover-shadow-x" value="<?php if(!empty($mobile_custom_styles['a_button_hover_text_shadow_x'])) {  echo $mobile_custom_styles['a_button_hover_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[a_button_hover_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="a-bhover-shadow-y" value="<?php if(!empty($mobile_custom_styles['a_button_hover_text_shadow_y'])) {  echo $mobile_custom_styles['a_button_hover_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[a_button_hover_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="a-bhover-shadow-radius" value="<?php if(!empty($mobile_custom_styles['a_button_hover_text_shadow_radius'])) {  echo $mobile_custom_styles['a_button_hover_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[a_button_hover_text_shadow_radius]"/>&nbsp;<input data-name="a-bhover-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_hover_text_shadow_color'])) {  echo $mobile_custom_styles['a_button_hover_text_shadow_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[a_button_hover_text_shadow_color]"/><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="a-bhover-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_hover_background_color'])) {  echo $mobile_custom_styles['a_button_hover_background_color']; } else { echo '#E3E3E3'; } ?>" name="config_mobile_custom_style[a_button_hover_background_color]"/><div class="slider" data-type="background" data-name="a-bhover-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="a-bhover-background" href="#">+</a>
+									<div class="start-end" data-name="a-bhover-background"><label class="first">START</label><input data-type="start"  data-name="a-bhover-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_hover_background_start'])) {  echo $mobile_custom_styles['a_button_hover_background_start']; } else { echo '#EDEDED'; } ?>" name="config_mobile_custom_style[a_button_hover_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="a-bhover-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_hover_background_end'])) {  echo $mobile_custom_styles['a_button_hover_background_end']; } else { echo '#DADADA'; } ?>" name="config_mobile_custom_style[a_button_hover_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="a-bhover-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_hover_border'])) {  echo $mobile_custom_styles['a_button_hover_border']; } else { echo '#BBBBBB'; } ?>" name="config_mobile_custom_style[a_button_hover_border]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-down-a">
+							<div>
+								<h3><a href="#">Content Body Button:: Pressed</a></h3>
+								<div class="form">
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="a-bdown-color" class="colorwell"  value="<?php if(!empty($mobile_custom_styles['a_button_pressed_text_color'])) {  echo $mobile_custom_styles['a_button_pressed_text_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[a_button_pressed_text_color]"/><br class="clear"/>
+									<br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="a-bdown-shadow-x" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_text_shadow_x'])) {  echo $mobile_custom_styles['a_button_pressed_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[a_button_pressed_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="a-bdown-shadow-y" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_text_shadow_y'])) {  echo $mobile_custom_styles['a_button_pressed_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[a_button_pressed_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="a-bdown-shadow-radius" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_text_shadow_radius'])) {  echo $mobile_custom_styles['a_button_pressed_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[a_button_pressed_text_shadow_radius]"/>&nbsp;<input data-name="a-bdown-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_text_shadow_color'])) {  echo $mobile_custom_styles['a_button_pressed_text_shadow_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[a_button_pressed_text_shadow_color]"/><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="a-bdown-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_background_color'])) {  echo $mobile_custom_styles['a_button_pressed_background_color']; } else { echo '#F5F5F5'; } ?>" name="config_mobile_custom_style[a_button_pressed_background_color]"/><div class="slider" data-type="background" data-name="a-bdown-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="a-bdown-background" href="#">+</a>
+									<div class="start-end" data-name="a-bdown-background"><label class="first">START</label><input data-type="start"  data-name="a-bdown-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_background_start'])) {  echo $mobile_custom_styles['a_button_pressed_background_start']; } else { echo '#EEEEEE'; } ?>" name="config_mobile_custom_style[a_button_pressed_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="a-bdown-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_background_end'])) {  echo $mobile_custom_styles['a_button_pressed_background_end']; } else { echo '#FDFDFD'; } ?>" name="config_mobile_custom_style[a_button_pressed_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="a-bdown-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['a_button_pressed_border'])) {  echo $mobile_custom_styles['a_button_pressed_border']; } else { echo '#808080'; } ?>" name="config_mobile_custom_style[a_button_pressed_border]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-hover-b">
+							<div>
+								<h3><a href="#">Content Body Special Button: Hover</a></h3>
+								<div class="form">
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="b-bhover-color" class="colorwell"  value="<?php if(!empty($mobile_custom_styles['b_button_hover_text_color'])) {  echo $mobile_custom_styles['b_button_hover_text_color']; } else { echo '#101010'; } ?>" name="config_mobile_custom_style[b_button_hover_text_color]"/><br class="clear"/>
+									<br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="b-bhover-shadow-x" value="<?php if(!empty($mobile_custom_styles['b_button_hover_text_shadow_x'])) {  echo $mobile_custom_styles['b_button_hover_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[b_button_hover_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="b-bhover-shadow-y" value="<?php if(!empty($mobile_custom_styles['b_button_hover_text_shadow_y'])) {  echo $mobile_custom_styles['b_button_hover_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[b_button_hover_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="b-bhover-shadow-radius" value="<?php if(!empty($mobile_custom_styles['b_button_hover_text_shadow_radius'])) {  echo $mobile_custom_styles['b_button_hover_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[b_button_hover_text_shadow_radius]"/>&nbsp;<input data-name="b-bhover-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_hover_text_shadow_color'])) {  echo $mobile_custom_styles['b_button_hover_text_shadow_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[b_button_hover_text_shadow_color]"/><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="b-bhover-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_hover_background_color'])) {  echo $mobile_custom_styles['b_button_hover_background_color']; } else { echo '#E3E3E3'; } ?>" name="config_mobile_custom_style[b_button_hover_background_color]"/><div class="slider" data-type="background" data-name="b-bhover-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="b-bhover-background" href="#">+</a>
+									<div class="start-end" data-name="b-bhover-background"><label class="first">START</label><input data-type="start"  data-name="b-bhover-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_hover_background_start'])) {  echo $mobile_custom_styles['b_button_hover_background_start']; } else { echo '#EDEDED'; } ?>" name="config_mobile_custom_style[b_button_hover_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="b-bhover-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_hover_background_end'])) {  echo $mobile_custom_styles['b_button_hover_background_end']; } else { echo '#DADADA'; } ?>" name="config_mobile_custom_style[b_button_hover_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="b-bhover-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_hover_border'])) {  echo $mobile_custom_styles['b_button_hover_border']; } else { echo '#BBBBBB'; } ?>" name="config_mobile_custom_style[b_button_hover_border]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						
+						<div class="accordion" data-form="ui-btn-down-b">
+							<div>
+								<h3><a href="#">Content Body Special Button: Pressed</a></h3>
+								<div class="form">
+									<label class="first">TEXT COLOR</label><input data-type="color" data-name="b-bdown-color" class="colorwell"  value="<?php if(!empty($mobile_custom_styles['b_button_pressed_text_color'])) {  echo $mobile_custom_styles['b_button_pressed_text_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[b_button_pressed_text_color]"/><br class="clear"/>
+									<br class="clear"/>
+									<label class="first">TEXT SHADOW</label><input title="Controls the horizontal offset of text shadow" data-type="text-shadow" data-name="b-bdown-shadow-x" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_text_shadow_x'])) {  echo $mobile_custom_styles['b_button_pressed_text_shadow_x']; } else { echo '0px'; } ?>" name="config_mobile_custom_style[b_button_pressed_text_shadow_x]"/>&nbsp;<input title="Controls the vertical offset of text shadow" data-type="text-shadow" data-name="b-bdown-shadow-y" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_text_shadow_y'])) {  echo $mobile_custom_styles['b_button_pressed_text_shadow_y']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[b_button_pressed_text_shadow_y]"/>&nbsp;<input title="Controls the blur of text shadow" data-type="text-shadow" data-name="b-bdown-shadow-radius" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_text_shadow_radius'])) {  echo $mobile_custom_styles['b_button_pressed_text_shadow_radius']; } else { echo '1px'; } ?>" name="config_mobile_custom_style[b_button_pressed_text_shadow_radius]"/>&nbsp;<input data-name="b-bdown-shadow-color" data-type="text-shadow" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_text_shadow_color'])) {  echo $mobile_custom_styles['b_button_pressed_text_shadow_color']; } else { echo '#FFFFFF'; } ?>" name="config_mobile_custom_style[b_button_pressed_text_shadow_color]"/><br class="clear"/>
+									<div class="separator"></div>
+									<label class="first">BACKGROUND</label><input data-type="background" data-name="b-bdown-background-color" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_background_color'])) {  echo $mobile_custom_styles['b_button_pressed_background_color']; } else { echo '#F5F5F5'; } ?>" name="config_mobile_custom_style[b_button_pressed_background_color]"/><div class="slider" data-type="background" data-name="b-bdown-background-color"></div>&nbsp;&nbsp;<a class="more" data-name="b-bdown-background" href="#">+</a>
+									<div class="start-end" data-name="b-bdown-background"><label class="first">START</label><input data-type="start"  data-name="b-bdown-background-start" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_background_start'])) {  echo $mobile_custom_styles['b_button_pressed_background_start']; } else { echo '#EEEEEE'; } ?>" name="config_mobile_custom_style[b_button_pressed_background_start]"/>&nbsp;<span class="end-label">END</span>&nbsp;<input data-type="end" data-name="b-bdown-background-end" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_background_end'])) {  echo $mobile_custom_styles['b_button_pressed_background_end']; } else { echo '#FDFDFD'; } ?>" name="config_mobile_custom_style[b_button_pressed_background_end]"/></div>
+									<div class="separator"></div>
+									<label class="first">BORDER</label><input data-type="border" data-name="b-bdown-border" class="colorwell" value="<?php if(!empty($mobile_custom_styles['b_button_pressed_border'])) {  echo $mobile_custom_styles['b_button_pressed_border']; } else { echo '#808080'; } ?>" name="config_mobile_custom_style[b_button_pressed_border]"/><br class="clear"/>
+								</div>
+							</div>
+						</div>
+						<div style="font-size:14px;">
+				  		<a onClick="default_style();" style="cursor:pointer;">Reset</a>
+				  </div>
+				
+				</div>
+			</div>
+			<div id="wrapper">
+				  
+			  	  <div id="quickswatch">
+								<h2>Arrastar uma cor para um elemento inferior ou no painel</h2>
+								<div class="colors">
+									<div class="color-drag" style="background-color: #FFFFFF"></div>
+									<div class="color-drag" style="background-color: #F2F2F2"></div>
+									<div class="color-drag" style="background-color: #E6E6E6"></div>
+									<div class="color-drag" style="background-color: #CCCCCC"></div>
+									<div class="color-drag" style="background-color: #808080"></div>
+									<div class="color-drag" style="background-color: #4D4D4D"></div>
+									<div class="color-drag" style="background-color: #000000"></div>
+									<div class="color-drag" style="background-color: #C1272D"></div>
+									<div class="color-drag" style="background-color: #ED1C24"></div>
+									<div class="color-drag" style="background-color: #F7931E"></div>
+									<div class="color-drag" style="background-color: #FFCC33"></div>
+									<div class="color-drag" style="background-color: #FCEE21"></div>
+									<div class="color-drag" style="background-color: #D9E021"></div>
+									<div class="color-drag" style="background-color: #8CC63F"></div>
+									<div class="color-drag" style="background-color: #009245"></div>
+									<div class="color-drag" style="background-color: #006837"></div>
+									<div class="color-drag" style="background-color: #00A99D"></div>
+									<div class="color-drag" style="background-color: #33CCCC"></div>
+									<div class="color-drag" style="background-color: #33CCFF"></div>
+									<div class="color-drag" style="background-color: #29ABE2"></div>
+									<div class="color-drag" style="background-color: #0071BC"></div>
+									<div class="color-drag" style="background-color: #2E3192"></div>
+									<div class="color-drag" style="background-color: #662D91"></div>
+									<div class="color-drag" style="background-color: #93278F"></div>
+									<div class="color-drag" style="background-color: #D4145A"></div>
+									<div class="color-drag" style="background-color: #ED1E79"></div>
+									<div class="color-drag" style="background-color: #C7B299"></div>
+									<div class="color-drag" style="background-color: #736357"></div>
+									<div class="color-drag" style="background-color: #C69C6D"></div>
+									<div class="color-drag" style="background-color: #8C6239"></div>
+									<div class="color-drag" style="background-color: #603813"></div>
+									<div class="color-drag disabled separator" style="background-color: #ddd"></div>
+									<div class="color-drag disabled" style="background-color: #ddd"></div>
+									<div class="color-drag disabled" style="background-color: #ddd"></div>
+									<div class="color-drag disabled" style="background-color: #ddd"></div>
+									<div class="color-drag disabled" style="background-color: #ddd"></div>
+								</div>
+								<div id="sliders">
+									<img src="view/javascript/mobile-theme-roller/images/target.png" alt=" "/>
+									<span>LIGHTNESS</span><div id="lightness_slider"></div>
+									<span>SATURATION</span><div id="saturation_slider"></div>
+								</div>
+							</div>
+					  
+				  <div id="content" style="background:none; padding-bottom:50px; padding-top:0px; margin-left:50px; height:800px; min-width:350px;" >
+						 <!-- <iframe id="frame" src="view/javascript/mobile-theme-roller/mobile_preview.html" onload="$.tr.iframeLoadCallback();">-->
+						<iframe id="frame" onload="$.tr.iframeLoadCallback();"></iframe>
+				  </div>
+				
+				<div id="main_style">	  
+				  <div id="mobile_style"><?php	if(!empty($mobile_custom_styles) && $config_mobile_theme_style == 'Customize') { 
+					  include_once('view/javascript/mobile-theme-roller/css/style_custom.php'); 
+				   }else { 
+					  echo file_get_contents( 'view/javascript/mobile-theme-roller/css/' . ( isset($style_id) ? 'user_themes/' . $style_id : 'default' ) . '.css');
+				  }?></div>
+				</div>  
+			  </div>
+    	  </div>
+]]>
+      </add>
+    </operation>
+    <operation>
+      <search position="after" offset="2" index="2">
+        <![CDATA[$('#template_mobile')]]>
+      </search>
+      <add>
+        <![CDATA[
+          $('#template_mobile_theme_style_text').load('index.php?route=setting/setting/template_mobile_theme_style&token=<?php echo $token; ?>&config_mobile_theme_style=<?php if(isset($config_mobile_theme_style)){echo $config_mobile_theme_style;} ?>&template_mobile=' +  encodeURIComponent($('select[name=\'config_template_mobile\']').attr('value')));
+]]>
+      </add>
+    </operation>
+    <operation>
+      <search position="before" index="1">
+        <![CDATA[<?php echo $footer; ?>]]>
+      </search>
+      <add>
+        <![CDATA[<script type="text/javascript">
+          var mobile_load_preview_flag = 0;
+		  function check_mobile_custom_theme(theme_style,customize_flag){
+			  if(theme_style=='Customize' && mobile_load_preview_flag == 0){
+				  document.getElementById('mobile-theme-roller').style.display="block";
+				  <?php if($config_mobile_theme_style != 'Customize' || $config_template_mobile != 'opmex') {?>
+			  			if(mobile_load_preview_flag == 0){
+						document.getElementById("frame").src = "view/javascript/mobile-theme-roller/mobile_preview.php";
+						}
+			  	  <?php } ?>
+				   mobile_load_preview_flag = 1;
+			  }else if(theme_style=='Customize' && mobile_load_preview_flag == 1){
+				  document.getElementById('mobile-theme-roller').style.display="block";
+			  }else{
+			  	 document.getElementById('mobile-theme-roller').style.display="none";
+			  }
+			  
+          }
+		   
+		  function mobile_load_preview(){ 
+			  if(mobile_load_preview_flag == 0){
+			  	 document.getElementById("frame").src = "view/javascript/mobile-theme-roller/mobile_preview.php";
+				 mobile_load_preview_flag = 1;
+				} 
+		  }
+          </script>]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/common/header.php">
+ 	<operation>
+      <search position="before">
+        <![CDATA[$this->data['text_home'] = $this->language->get('text_home');]]>
+      </search>
+      <add>
+        <![CDATA[$this->data['mobile_custom_styles'] = array();
+				$this->data['mobile_custom_styles'] = $this->config->get('config_mobile_custom_style');
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/language/english/common/footer.php">
+    <operation>
+			<search position="after"><![CDATA[$_['text_account']]]></search>
+			<add><![CDATA[
+     		$_['text_opmex_powered']      = '<a title="Opencart Developers" href="http://opmex.opcrat.com/" class="ui-link" rel="external">Opmex</a> Extension & Theme by <a title="Opencart Developers" href="http://opcrat.com" class="ui-link" rel="external">Opcrat</a>';
+			]]></add>
+		</operation>
+  </file>
+  <file name="catalog/controller/common/footer.php">
+    <operation>
+      <search position="after" offset="3">
+        <![CDATA[$this->data['powered'] = sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));]]>
+      </search>
+      <add>
+        <![CDATA[
+		
+		if($this->config->get('config_template_mobile') == 'opmex' && $this->session->data['device']=='mobile'){
+		 $opencart = '<br>'.sprintf($this->language->get('text_powered'), $this->config->get('config_name'), date('Y', time()));
+		 $opmex = '<br>'.sprintf($this->language->get('text_opmex_powered'));  
+			 
+					
+            if($this->session->data['device']=='mobile' && $this->data['change_device_mode_mobile']==1){
+                $this->data['powered'] = sprintf($this->language->get('device_version_mobile_desktop')).$opencart.$opmex;
+			}elseif(isset($this->session->data['set_device'])){
+                if($this->session->data['set_device']=='mobile_desktop'){
+                    $this->data['powered'] = sprintf($this->language->get('device_version_mobile')).$opencart;
+                }else{
+                    $this->data['powered'] = $opencart.$opmex;
+				}	
+            }else{
+				if(($this->session->data['device']=='mobile')) {
+					$this->data['powered'] = $opencart.$opmex;
+				}
+				else {
+					$this->data['powered'] =  $opencart;
+				}
+            }
+		  }
+		  
+		  ]]>
+      </add>
+    </operation>
+  </file>
+ <file name="admin/view/template/common/header.tpl">
+    <operation>
+      <search position="before">
+        <![CDATA[<?php foreach ($styles as $style) { ?>]]>
+      </search>
+      <add>
+        <![CDATA[
+		<?php 
+		if (isset($this->request->get['route'])) {
+		
+			if(($this->request->get['route']=="setting/setting") || ($this->request->get['route']=="setting/store/insert")) { ?>
+
+			  <script src="view/javascript/mobile-theme-roller/js/jquery.js"></script>
+			  <script src="view/javascript/mobile-theme-roller/js/jquery-ui.js"></script>
+			  
+		<?php } 
+		}
+		?>
+		  ]]>
+      </add>
+    </operation>
+    <operation>
+      <search position="before">
+        <![CDATA[<?php foreach ($scripts as $script) { ?>]]>
+      </search>
+      <add>
+        <![CDATA[<?php 
+		
+		if (isset($this->request->get['route'])) {
+		
+		if(($this->request->get['route']=="setting/setting") || ($this->request->get['route']=="setting/store/insert")) { ?>
+          
+          <link rel="stylesheet" type="text/css" href="view/javascript/mobile-theme-roller/css/layout.css" media="all" />  
+          <link rel="stylesheet" type="text/css" href="view/javascript/mobile-theme-roller/css/jquery-ui.css" />
+          <link rel="stylesheet" type="text/css" href="view/javascript/mobile-theme-roller/css/farbtastic.css" />
+          <link rel="stylesheet" type="text/css" href="view/javascript/mobile-theme-roller/css/tr.css" />
+		  <script src="view/javascript/mobile-theme-roller/js/jquery.color.js"></script>
+          <script src="view/javascript/mobile-theme-roller/js/farbtastic.js"></script>
+          <script src="view/javascript/mobile-theme-roller/js/mobile_app.js"></script>
+          <script src="view/javascript/mobile-theme-roller/js/mobile_tr.js"></script>
+		  <script src="view/javascript/mobile-theme-roller/js/ajax_functions.js"></script>
+
+          <?php } }?>
+		  ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/category.php">
+    <operation>
+      <search position="before" offset="1">
+        <![CDATA[$this->data['breadcrumbs'] = array();]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['config_mobile_theme_product_view'] =  $this->config->get('config_mobile_theme_product_view');
+          ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/search.php">
+    <operation>
+      <search position="before" offset="1">
+        <![CDATA[$this->data['breadcrumbs'] = array();]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['config_mobile_theme_product_view'] =  $this->config->get('config_mobile_theme_product_view');
+          ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/product/special.php">
+    <operation>
+      <search position="before" offset="1">
+        <![CDATA[$this->data['breadcrumbs'] = array();]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['config_mobile_theme_product_view'] =  $this->config->get('config_mobile_theme_product_view');
+          ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/module/featured.php">
+    <operation>
+      <search position="before" offset="1">
+        <![CDATA[$this->data['products'] = array();]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['config_mobile_theme_product_view'] =  $this->config->get('config_mobile_theme_product_view');
+          ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/module/special.php">
+    <operation>
+      <search position="before" offset="1">
+        <![CDATA[$this->data['products'] = array();]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['config_mobile_theme_product_view'] =  $this->config->get('config_mobile_theme_product_view');
+          ]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/module/bestseller.php">
+    <operation>
+      <search position="before" offset="1">
+        <![CDATA[$this->data['products'] = array();]]>
+      </search>
+      <add>
+        <![CDATA[
+		  $this->data['config_mobile_theme_product_view'] =  $this->config->get('config_mobile_theme_product_view');
+          ]]>
+      </add>
+    </operation>
+  </file>
+</modification>

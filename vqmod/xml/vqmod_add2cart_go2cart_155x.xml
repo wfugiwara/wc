@@ -1,0 +1,38 @@
+<modification>
+    <id>Add 2 Cart Go 2 Cart</id>
+      <version>1.0</version>
+		   <vqmver>2.2.2</vqmver>
+       <author>www.best-byte.com</author>		
+	   <file name="catalog/view/theme/*/template/common/header.tpl">
+    <operation>
+			<search position="replace"><![CDATA[<script type="text/javascript" src="catalog/view/javascript/f_i_common.js"></script>]]></search>
+			<add><![CDATA[
+      <script type="text/javascript" src="catalog/view/javascript/add2cart-go2cart/common.js"></script>
+   ]]></add>
+	</operation>
+</file>	
+<file name="catalog/view/theme/*/template/product/product.tpl">
+	<operation>
+		<search position="after"><![CDATA[$('html, body').animate({ scrollTop: 0 }, 'slow');]]></search>
+		<add><![CDATA[window.location.href = 'http://www.wecareauto.com.br/index.php?route=checkout/cart';  // Added by Best-Byte //]]></add>
+	</operation>
+</file>
+<file name="catalog/view/theme_mobile/opmex/template/product/product.tpl">
+	<operation>
+		<search position="after"><![CDATA[$('html, body').animate({ scrollTop: 0 }, 'slow');]]></search>
+		<add><![CDATA[window.location.href = 'http://www.wecareauto.com.br/index.php?route=checkout/cart';  // Added by Best-Byte //]]></add>
+	</operation>
+</file>
+<file name="catalog/view/theme_mobile/omtex-mobile/template/product/product.tpl">
+	<operation>
+		<search position="after"><![CDATA[$('html, body').animate({ scrollTop: 0 }, 'slow');]]></search>
+		<add><![CDATA[window.location.href = 'http://www.wecareauto.com.br/index.php?route=checkout/cart';  // Added by Best-Byte //]]></add>
+	</operation>
+</file>
+<file name="catalog/view/theme_tablet/omtex-tablet/template/product/product.tpl">
+	<operation>
+		<search position="after"><![CDATA[$('html, body').animate({ scrollTop: 0 }, 'slow');]]></search>
+		<add><![CDATA[window.location.href = 'http://www.wecareauto.com.br/index.php?route=checkout/cart';  // Added by Best-Byte //]]></add>
+	</operation>
+</file>							
+</modification>

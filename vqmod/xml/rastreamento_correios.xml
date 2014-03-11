@@ -1,0 +1,661 @@
+<modification>
+	<id>Rastreamento Correios</id>
+	<version>1.0</version>
+	<vqmver>2.3.0</vqmver>
+	<author>Guilherme Araujo (atualizando código de Gerrit Bouweriks)</author>
+	<opencart>1.5.5.1</opencart>
+
+	<file name="admin/controller/sale/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				public function index() {
+				]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+  				$this->checkdb();
+  				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['text_order'] = $this->language->get('text_order');
+			]]></search>
+			<add><![CDATA[
+			  	// Começa Rastreamento Correios
+				$this->data['text_notracking'] = $this->language->get('text_notracking');
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['entry_notify'] = $this->language->get('entry_notify');
+			]]></search>
+			<add><![CDATA[
+			  	// Começa Rastreamento Correios
+				$this->data['entry_track_trace'] = $this->language->get('entry_track_trace');
+				$this->data['entry_carrier'] = $this->language->get('entry_carrier');
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[
+				public function createInvoiceNo() {
+			]]></search>
+			<add><![CDATA[
+			  	// Começa Rastreamento Correios
+				private function checkdb() {
+
+					$tbl = '`' . DB_PREFIX . 'order_history`';
+
+					$col = '`carrier`';
+					$sql = "DESC $tbl $col";
+
+					$query = $this->db->query($sql);
+
+					if (!$query->num_rows) {
+
+						$sql = "alter table $tbl add column `carrier` varchar(15) charset utf8 collate utf8_unicode_ci default '' not null after `notify`";
+
+						$this->db->query($sql);
+					}
+
+					$tbl = '`' . DB_PREFIX . 'order_history`';
+
+					$col = '`trackcode`';
+					$sql = "DESC $tbl $col";
+
+					$query = $this->db->query($sql);
+
+					if (!$query->num_rows) {
+
+						$sql = "alter table $tbl add column `trackcode` varchar(15) charset utf8 collate utf8_unicode_ci default '' not null after `notify`";
+
+						$this->db->query($sql);
+					}
+				}
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[
+				$this->data['column_comment'] = $this->language->get('column_comment');
+			]]></search>
+			<add><![CDATA[
+			  	// Começa Rastreamento Correios
+				$this->data['column_trackcode'] = $this->language->get('column_trackcode');
+				$this->data['column_comment'] = $this->language->get('column_comment');
+
+				$this->data['value_nocarrier'] = $this->language->get('value_nocarrier');
+				$this->data['value_postnl'] = $this->language->get('value_postnl');
+				$this->data['value_dhl'] = $this->language->get('value_dhl');
+
+				$this->data['text_nocarrier'] = $this->language->get('text_nocarrier');
+				$this->data['text_postnl'] = $this->language->get('text_postnl');
+				$this->data['text_dhl'] = $this->language->get('text_dhl');
+
+				$this->data['text_notracking'] = $this->language->get('text_notracking');
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+					$results = $this->model_sale_order->getOrderHistories($this->request->get['order_id'], ($page - 1) * 10, 10);
+			]]></search>
+			<add><![CDATA[
+			  	// Track en Trace
+			  	$order_info = $this->model_sale_order->getOrder($this->request->get['order_id']);
+
+				$tnt_zipcode = TRIM(substr($order_info['shipping_postcode'], 0, 4) . strtoupper(substr($order_info['shipping_postcode'], -2)));
+				if ($order_info['shipping_country'] == "Netherlands") {
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[
+				$this->data['histories'][] = array(
+			]]></search>
+			<add><![CDATA[
+				// Track and Trace
+			  	$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+
+				if ($result['carrier'] == 'PostNL') {
+					$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];				}
+				if ($result['carrier'] == 'DHL') {
+					$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+				}
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+				'status'     => $result['status'],
+			]]></search>
+			<add><![CDATA[
+				// Track and Trace
+			  	'carrier'	 => $result['carrier'],
+				'tnt_track'  => $result['trackcode'],
+				'trackcode'	 => $result['trackcode'] = $trackcode,
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after" offset="3"><![CDATA[
+				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+			]]></search>
+			<add><![CDATA[
+				// Track and Trace
+			  	}
+				if ($order_info['shipping_country'] != "Netherlands") {
+					foreach ($results as $result) {
+						$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+
+						$this->data['histories'][] = array(
+							'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+							'status'     => $result['status'],
+							'carrier'	 => $result['carrier'],
+							'tnt_track'  => $result['trackcode'],
+							'trackcode'	 => $result['trackcode'] = $trackcode,
+							'comment'    => nl2br($result['comment']),
+							'notify'     => $result['notify'] ? $this->language->get('text_yes') : $this->language->get('text_no')
+						);
+					}
+				}
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+	</file>
+
+	<!--<file name="admin/language/english/sale/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['error_action']
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['column_trackcode']      = 'Tracking Code';
+				$_['entry_track_trace']     = 'Tracking Code';
+				$_['entry_carrier']         = 'Shipper';
+				$_['text_post_nl']          = 'Post NL';
+				$_['text_dhl_for_you']      = 'DHL for You';
+				$_['text_notracking']      = '-no tracking code-';
+				// Termina Rastreamento Correios
+
+			]]>
+			</add>
+		</operation>
+	</file>-->
+
+		<file name="admin/language/portuguese-br/sale/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['error_action']                            
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['column_trackcode']      = 'Código de Rastreamento';
+				$_['entry_track_trace']     = 'Código de Rastreamento';
+				$_['entry_carrier']         = 'Transportadora';
+				$_['text_post_nl']          = 'Correios';
+				$_['text_dhl_for_you']      = 'DHL for You';
+				$_['text_notracking']      = '-sem código para rastreio-';
+				// Termina Rastreamento Correios
+
+			]]>
+			</add>
+		</operation>
+	</file>
+
+
+	<file name="admin/language/portuguese-br/sale/customer.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['error_action']
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['entry_track_trace']     = 'Código de Rastreamento';
+				$_['entry_carrier']         = 'Transportadora';
+				// track and trace Selectie
+				$_['text_postnl']        	= 'Correios';
+				$_['text_dhl']            	= 'DHL for You';
+				$_['text_nocarrier']      	= '-nenhuma-';
+				// track and trace Waarde
+				$_['value_postnl']         	= 'PostNL';
+				$_['value_dhl']            	= 'DHL';
+				$_['value_nocarrier']      	= '';
+				// Track and Trace Colom
+				$_['column_trackcode']      = 'Código de Rastreamento';
+				// track and trace
+				$_['text_notracking']       = '-sem código para rastreio-';
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="admin/language/english/mail/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['text_footer']
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['text_track_trace']  = 'To track your order click on the link below:';
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+
+	<file name="admin/language/portuguese-br/mail/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['text_footer']
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['text_track_trace']  = 'Para rastrear sua encomenda, clique no link abaixo:';
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+		<file name="admin/model/sale/order.php">
+		<operation>
+			<search position="replace" ><![CDATA[
+				$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$data['order_status_id'] . "', notify = '" . (isset($data['notify']) ? (int)$data['notify'] : 0) . "', comment = '" . $this->db->escape(strip_tags($data['comment'])) . "', date_added = NOW()");
+			]]>
+			</search>
+			<add><![CDATA[
+				//Começa Rastreamento Correios
+				// Replace this line
+				//$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$data['order_status_id'] . "', notify = '" . (isset($data['notify']) ? (int)$data['notify'] : 0) . "', comment = '" . $this->db->escape(strip_tags($data['comment'])) . "', date_added = NOW()");
+
+				$this->db->query("INSERT INTO " . DB_PREFIX . "order_history SET order_id = '" . (int)$order_id . "', order_status_id = '" . (int)$data['order_status_id'] . "', notify = '" . (isset($data['notify']) ? (int)$data['notify'] : 0) . "', carrier = '" . $this->db->escape(strip_tags($data['carrier'])) . "', trackcode = '" . $this->db->escape(strip_tags($data['trackcode'])) . "', comment = '" . $this->db->escape(strip_tags($data['comment'])) . "', date_added = NOW()");
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="before" ><![CDATA[
+				if ($data['comment']) {
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+	      		if ($data['trackcode']) {
+	      			$tnt_zipcode = TRIM(substr($order_info['shipping_postcode'], 0, 4) . strtoupper(substr($order_info['shipping_postcode'], -2)));
+	      			$message .= $language->get('text_track_trace') . "\n";
+	      			// als klant in NL verzendadres heeft
+	      			if ($order_info['shipping_country'] == "Netherlands") {
+	      				if ($data['carrier'] == 'PostNL') {
+	      					$message .= html_entity_decode('http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $data['trackcode'], ENT_QUOTES, 'UTF-8') . "\n\n";
+	      				}
+	      				if ($data['carrier'] == 'DHL') {
+	      					$message .= html_entity_decode('http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $data['trackcode'], ENT_QUOTES, 'UTF-8') . "\n\n";
+	      				}
+
+					}
+	      			// als klant niet in NL zijn verzendadres heeft dan
+	      			if ($order_info['shipping_country'] != "Netherlands") {
+	      				$message .= html_entity_decode('http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $data['trackcode'], ENT_QUOTES, 'UTF-8') . "\n\n";
+	      			}
+	      		}
+	      		// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="replace" ><![CDATA[
+				$query = $this->db->query("SELECT oh.date_added, os.name AS status, oh.comment, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added ASC LIMIT " . (int)$start . "," . (int)$limit);
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				// Replace this line
+				//$query = $this->db->query("SELECT oh.date_added, os.name AS status, oh.comment, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added ASC LIMIT " . (int)$start . "," . (int)$limit);
+
+				$query = $this->db->query("SELECT oh.date_added, os.name AS status, oh.trackcode, oh.carrier, oh.comment, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added");
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+
+	<file name="admin/view/template/sale/order_history.tpl">
+		<operation>
+			<search position="after"><![CDATA[
+				<td class="left"><b><?php echo $column_status; ?></b></td>
+			]]></search>
+			<add><![CDATA[
+				<!-- Begin Track Trace -->
+				<td class="left"><b><?php echo $column_trackcode; ?></td>
+				<!-- Termina Rastreamento Correios -->
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+				<td class="left"><?php echo $history['status']; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<!-- Começa Rastreamento Correios -->
+				<?php if ($history['carrier'] == 'DHL') { ?>
+				<td class="left"><img src="view/image/dhl_logo_small.gif" hspace="3" align="absmiddle" /><a href='<?php echo $history['trackcode']; ?>' target="_blank"><b onmouseover="this.style.color='red'" onmouseout="this.style.color=''"><?php echo $history['tnt_track']; ?></b></a></td>
+				<?php } else if ($history['carrier'] == 'PostNL'){ ?>
+				<td class="left"><img src="view/image/Correios_logo_small.gif" hspace="3" align="absmiddle" /><a href='<?php echo $history['trackcode']; ?>' target="_blank"><b onmouseover="this.style.color='red'" onmouseout="this.style.color=''"><?php echo $history['tnt_track']; ?></b></a></td>
+				<?php } else { ?><td class="left"><span class="help"><?php echo $text_notracking; ?></span></td>
+				<?php } ?>
+				<!-- Termina Rastreamento Correios -->
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/sale/order_info.tpl">
+		<operation>
+			<search position="after" offset="4"><![CDATA[
+				<option value="<?php echo $order_statuses['order_status_id']; ?>"><?php echo $order_statuses['name']; ?></option>
+			]]></search>
+			<add><![CDATA[
+				<!-- Carrier PostNL of DHL -->
+		          <?php if ($shipping_country === 'Netherlands') { ?>
+		          <tr>
+		            <td><?php echo $entry_carrier; ?></td>
+		            <td>
+		            <select name="carrier" >
+		              <option value="" selected="selected"><span class="help">-geen-</span></option>
+		              <option value="PostNL">Post NL</option>
+		              <option value="DHL">DHL for You</option>
+		            </select></td>
+		          </tr>
+		          <?php } ?>
+		          <?php if ($shipping_country != 'Netherlands') { ?>
+		          <tr>
+		            <td><?php echo $entry_carrier; ?></td>
+		            <td>
+		            <select name="carrier" >
+		              <option value="" selected="selected"><span class="help">-nenhuma-</span></option>
+		              <option value="PostNL"><span class="help">Correios</span></option>		              
+		            </select></td>
+		          </tr>
+		          <?php } ?>
+				  <!-- entry field for Track and Trace -->
+		          <tr>
+		            <td><?php echo $entry_track_trace; ?></td>
+		            <td><input name="trackcode" type="text" maxlength="15" /></td>
+		          </tr>
+				<!-- end entry Track and Trace -->
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[
+				data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+			]]></search>
+			<add><![CDATA[
+				data: 'order_status_id=' + encodeURIComponent($('select[name=\'order_status_id\']').val()) + '&notify=' + encodeURIComponent($('input[name=\'notify\']').attr('checked') ? 1 : 0) + '&append=' + encodeURIComponent($('input[name=\'append\']').attr('checked') ? 1 : 0) + '&carrier=' + encodeURIComponent($('select[name=\'carrier\']').val()) + '&trackcode=' + encodeURIComponent($('input[name=\'trackcode\']').val()) + '&comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+				$('#order-status').html($('select[name=\'order_status_id\'] option:selected').text());
+			]]></search>
+			<add><![CDATA[
+		        $('#carrier').html($('select[name=\'carrier\'] option:selected').text());
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	// customer side
+
+	<file name="catalog/controller/account/order.php">
+		<operation>
+			<search position="before"><![CDATA[
+				if ($order_info['invoice_no']) {
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$this->data['column_track_trace'] = $this->language->get('column_track_trace');
+				$this->data['text_no_tracking'] = $this->language->get('text_no_tracking');
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+				$results = $this->model_account_order->getOrderHistories($this->request->get['order_id']);
+			]]></search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$tnt_zipcode = TRIM(substr($order_info['shipping_postcode'], 0, 4) . strtoupper(substr($order_info['shipping_postcode'], -2)));
+
+				if ($order_info['shipping_country'] == "Netherlands") {
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[
+				$this->data['histories'][] = array(
+			]]></search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+
+				if ($result['carrier'] == 'PostNL') {
+					$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+				}
+				if ($result['carrier'] == 'DHL') {
+					$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+				}
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after" offset="37"><![CDATA[
+				foreach ($vouchers as $voucher) {
+			]]></search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				'carrier'	 => $result['carrier'],
+				'tnt_track'  => $result['trackcode'],
+				'trackcode'	 => $result['trackcode'] = $trackcode,
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="after" offset="49"><![CDATA[
+				$vouchers = $this->model_account_order->getOrderVouchers($this->request->get['order_id']);
+			]]></search>
+			<add><![CDATA[
+				}
+				// Começa Rastreamento Correios
+				if ($order_info['shipping_country'] != "Netherlands") {
+					foreach ($results as $result) {
+						$trackcode = 'http://websro.correios.com.br/sro_bin/txect01$.Inexistente?P_LINGUA=001&P_TIPO=002&P_COD_LIS=+' . $result['trackcode'];
+
+						$this->data['histories'][] = array(
+							'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+							'status'     => $result['status'],
+							'carrier'	 => $result['carrier'],
+							'tnt_track'  => $result['trackcode'],
+							'trackcode'	 => $result['trackcode'] = $trackcode,
+							'comment'    => nl2br($result['comment'])
+						);
+					}
+				}
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/language/english/account/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['column_comment']
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['entry_carrier']         = 'Shipper';
+				$_['text_post_nl']          = 'Post NL';
+				$_['text_dhl_for_you']      = 'DHL for You';
+				$_['text_no_tracking']      = '-no tracking code-';
+				$_['column_track_trace']    = 'Tracking Code';
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/language/portuguese-br/account/order.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['column_comment']
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$_['entry_carrier']         = 'Transportadora';
+				$_['text_post_nl']          = 'Correios';
+				$_['text_dhl_for_you']      = 'DHL for You';
+				$_['text_no_tracking']      = '-sem código para rastreio-';
+				$_['column_track_trace']    = 'Código de Rastreamento';
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/account/order.php">
+		<operation>
+			<search position="replace"><![CDATA[
+				$query = $this->db->query("SELECT date_added, os.name AS status, oh.comment, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND oh.notify = '1' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added");
+			]]>
+			</search>
+			<add><![CDATA[
+				// Começa Rastreamento Correios
+				$query = $this->db->query("SELECT date_added, os.name AS status, oh.comment, oh.trackcode, oh.carrier, oh.notify FROM " . DB_PREFIX . "order_history oh LEFT JOIN " . DB_PREFIX . "order_status os ON oh.order_status_id = os.order_status_id WHERE oh.order_id = '" . (int)$order_id . "' AND oh.notify = '1' AND os.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY oh.date_added DESC");
+				// Termina Rastreamento Correios
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/default/template/account/order_info.tpl">
+		<operation>
+			<search position="after"><![CDATA[
+        		<td class="left"><?php echo $column_status; ?></td>
+			]]>
+			</search>
+			<add><![CDATA[
+				<!-- Begin track and trace -->
+				<td align="left"><?php echo $column_track_trace; ?></td>
+			]]>
+			</add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[
+        		<td class="left"><?php echo $history['comment']; ?></td>
+			]]>
+			</search>
+			<add><![CDATA[
+				<!-- Começa Rastreamento Correios -->
+		        <?php if ($history['carrier'] == 'PostNL') { ?>
+		        <td class="left"><img src="catalog/view/theme/default/image/Correios_logo_small.gif" hspace="3" align="absmiddle" /><a href='<?php echo $history['trackcode']; ?>' target="_blank"><b onmouseover="this.style.color='red'" onmouseout="this.style.color=''"><?php echo $history['tnt_track']; ?></b></a></td><?php } ?>
+		        <!-- track and trace DHL4You-->
+		        <?php if ($history['carrier'] == 'DHL') { ?>
+		        <td class="left"><img src="catalog/view/theme/default/image/dhl_logo_small.gif" hspace="3" align="absmiddle" /><a href='<?php echo $history['trackcode']; ?>' target="_blank"><b onmouseover="this.style.color='red'" onmouseout="this.style.color=''"><?php echo $history['tnt_track']; ?></b></a></td><?php } ?>
+		        <!-- als er geen carrier is maar wel een trackcode nemen we aan dat het TNT of PostNL is geweest-->
+		        <?php if (!$history['carrier'] && $history['tnt_track'] <> '') { ?>
+		        <td class="left"><img src="catalog/view/theme/default/image/Correios_logo_small.gif" hspace="3" align="absmiddle" /><a href='<?php echo $history['trackcode']; ?>' target="_blank"><b onmouseover="this.style.color='red'" onmouseout="this.style.color=''"><?php echo $history['tnt_track']; ?></b></a></td><?php } ?>
+		        <?php if (!$history['tnt_track']) { ?>
+		        <td class="left"><!--<img src="image/data/Correios_logo_small.gif" hspace="3" align="absmiddle" /><a href='<?php echo $history['trackcode']; ?>' target="_blank"><b onmouseover="this.style.color='red'" onmouseout="this.style.color=''"><?php echo $history['tnt_track']; ?> --><span class="help"><?php echo $text_no_tracking; ?></span></b></a></td>
+				<?php } ?>
+				<!-- Termina Rastreamento Correios -->
+			]]>
+			</add>
+		</operation>
+	</file>
+
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="before" index="2"><![CDATA[
+				$mail = new Mail();
+			]]></search>
+           <add><![CDATA[
+				// HTML Mail
+				$template->data['text_greeting'] = $language->get('text_new_received') . "\n\n";
+				if ($comment) {
+					$template->data['comment'] = $comment;
+				} else {
+					$template->data['comment'] = '';
+				}
+				$template->data['text_download'] = '';
+
+				$template->data['text_footer'] = '';
+				$template->data['text_powered'] = '';
+
+				$template->data['text_link'] = '';
+				$template->data['link'] = '';
+				$template->data['download'] = '';
+
+				$template->data['ip'] = $order_info['ip'] . '<br/><b>' . $language->get('text_new_order_status') . '</b> ' . $order_status;
+
+				if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/mail/order.tpl')) {
+					$html = $template->fetch($this->config->get('config_template') . '/template/mail/order.tpl');
+				} else {
+					$html = $template->fetch('default/template/mail/order.tpl');
+				}
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="before" index="2"><![CDATA[
+				$mail->setText(html_entity_decode($text, ENT_QUOTES, 'UTF-8'));
+			]]></search>
+         	<add><![CDATA[
+				$mail->setHtml($html);
+			]]></add>
+		</operation>
+       </file>
+
+</modification>

@@ -1,0 +1,562 @@
+﻿<modification>
+	<id>Quick Edit Plus</id>
+	<version>2.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Jose Mariani Jose Mariani.com</author>
+		
+		<!--EDIT THIS LINE WITH YOUR LENGUAGE-->
+		<file name="admin/language/portuguese-br/portuguese-br.php">
+        <operation error="skip">
+            <search position="after"><![CDATA[
+$_['button_copy']             = 'Copiar';
+            ]]></search>
+            <add trim="true"><![CDATA[
+$_['button_simple_pu']             = 'Atualizar os Selecionados';
+$_['text_special']           = '<strong>Promoção:</strong>';
+		    ]]></add>
+        </operation>
+	</file>
+	<file name="admin/view/template/common/footer.tpl">
+	<operation>
+		<search position="before"><![CDATA[<div id="footer"><?php echo $text_footer; ?></div>]]></search>
+		<!--EDIT the line below with the # efefef changing the color of your choice.
+Chart colors: http://html-color-codes.info/codigos-de-colores-hexadecimales/  --><add><![CDATA[<script type="text/javascript"><!--
+			your_color = '#00FFFF'; 
+			$(function(){$('.list tr').mouseover(function(){$(this).css("background-color", your_color);$(this).contents('td').css("background-color", your_color)}).mouseout(function(){$(this).css("background-color", "");$(this).contents('td').css("background-color", "")})});
+		//--></script>]]></add>
+	</operation>
+</file>
+	
+		<!--THIS NOT TOUCH ANYTHING BELOW THIS LINE-->
+		<!--Quickp1-->
+		<file name="admin/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['text_zone'] = $this->language->get('text_zone');]]></search>
+			<add><![CDATA[$this->data['text_price_update'] = $this->language->get('text_price_update');]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[$this->data['zone'] = $this->url->link('localisation/zone', 'token=' . $this->session->data['token'], 'SSL');]]></search>
+			<add><![CDATA[$this->data['quick_edit'] = $this->url->link('catalog/quick_edit', 'token=' . $this->session->data['token'], 'SSL');]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/portuguese-br/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[$_['text_zone']             = 'Estados';]]></search>
+			<add><![CDATA[$_['text_price_update']                = 'Edição Rápida';]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $option; ?>"><?php echo $text_option; ?></a></li>]]></search>
+			<add><![CDATA[<li><a href="<?php echo $quick_edit; ?>"><?php echo $text_price_update; ?></a></li>]]></add>
+		</operation>
+	</file>
+	
+<file name="admin/controller/catalog/product.php">
+    		<operation>
+			<search position="after"><![CDATA[$this->data['delete'] = $this->url->link('catalog/product/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');]]></search>
+			<add><![CDATA[$this->data['store'] = HTTP_CATALOG;
+$this->data['stores'] = array();
+
+$this->load->model('setting/store');
+
+$results = $this->model_setting_store->getStores();
+
+foreach ($results as $result) {
+$this->data['stores'][] = array(
+'name' => $result['name'],
+'id' => $result['store_id'],
+'href' => $result['url']
+);}]]></add>
+		</operation>
+	<!--Quickp2-->
+	<operation>						
+                        <search position="after" offset="1">
+						<![CDATA[
+						'&filter_name='
+						]]></search>                       
+                        <add><![CDATA[
+						/* josemariani.com extention Quick Edit Plus */
+								if (isset($this->request->get['filter_category_id'])) {
+									$filter_category_id = $this->request->get['filter_category_id'];
+								} else {
+									$filter_category_id = '';
+								}
+						/* josemariani.com extention QuickEdit END */
+						]]>
+						</add>                       
+			 </operation>
+	<operation>
+                        <search position="after" offset="1">
+						<![CDATA[
+						$url .= '&filter_status=' . $this->request->get['filter_status'];
+						]]></search>                       
+                        <add><![CDATA[
+						/* josemariani.com extention Quick Edit Plus */
+									if (isset($this->request->get['filter_category_id'])) {
+										$url .= '&filter_category_id=' . $this->request->get['filter_category_id'];
+									}
+						/* josemariani.com extention Quick Edit Plus END */
+							]]>
+						</add>      
+            </operation>	
+	<operation>
+                        <search position="after" offset="1">
+						<![CDATA[
+						$filter_status = null;
+						]]></search>                       
+                        <add><![CDATA[
+						/* josemariani.com extention Quick Edit Plus */
+								if (isset($this->request->get['filter_category_id'])) {
+									$filter_category_id = $this->request->get['filter_category_id'];
+								} else {
+									$filter_category_id = null;
+								}
+						/* josemariani.com extention Quick Edit Plus END */
+							]]>
+						</add>      
+             </operation>  
+	<operation>
+                        <search position="after"><![CDATA['filter_quantity' => $filter_quantity,]]></search>                       
+                        <add><![CDATA['filter_category_id' => $filter_category_id, //josemariani.com extention Quick Edit Plus]]></add>      
+             </operation>	
+	<operation>
+                        <search position="after"><![CDATA[$this->data['filter_quantity'] = $filter_quantity;]]></search>                       
+                        <add><![CDATA[$this->data['filter_category_id'] = $filter_category_id; //josemariani.com extention Quick Edit Plus]]></add>      
+             </operation>			 
+			 
+			 
+	<operation>
+                        <search position="after"><![CDATA[$this->language->get('button_filter');]]></search>                       
+                        <add><![CDATA[
+						/* josemariani.com extention Quick Edit Plus */
+								$this->load->model('catalog/category');
+								$this->data['categories'] = $categories = $this->model_catalog_category->getCategories(0);
+						/* josemariani.com extention Quick Edit Plus END */
+						]]></add>      
+             </operation>			 
+	   <!--Quickp3--> 
+    <operation error="skip">
+            <search position="before"><![CDATA[
+  	protected function getList() {
+            ]]></search>
+            <add trim="true"><![CDATA[
+	public function simple_pu() {
+    	$this->load->language('catalog/product');
+
+    	$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('catalog/product');
+
+		if (isset($this->request->post['selected']) && $this->validateSimplePu()) {
+			$url = '';
+
+			$this->session->data['success'] = $this->language->get('text_success');
+
+			if (isset($this->request->get['filter_name'])) {
+				$url .= '&filter_name=' . $this->request->get['filter_name'];
+			}
+
+			if (isset($this->request->get['filter_model'])) {
+				$url .= '&filter_model=' . $this->request->get['filter_model'];
+			}
+
+			if (isset($this->request->get['filter_price'])) {
+				$url .= '&filter_price=' . $this->request->get['filter_price'];
+			}
+
+			if (isset($this->request->get['filter_special'])) {
+				$url .= '&filter_special=' . $this->request->get['filter_special'];
+			}
+
+			if (isset($this->request->get['filter_quantity'])) {
+				$url .= '&filter_quantity=' . $this->request->get['filter_quantity'];
+			}
+
+			if (isset($this->request->get['page'])) {
+				$url .= '&page=' . $this->request->get['page'];
+			}
+
+			if (isset($this->request->get['sort'])) {
+				$url .= '&sort=' . $this->request->get['sort'];
+			}
+
+			if (isset($this->request->get['order'])) {
+				$url .= '&order=' . $this->request->get['order'];
+			}
+			foreach ($this->request->post['selected'] as $product_id) {
+			
+			$price_str = $product_id.'_price';
+			$special_str = $product_id.'_special';
+			$quantity_str = $product_id.'_quantity';
+			$model_str = $product_id.'_model';
+			$name_str = $product_id.'_name';
+			
+			$price = $this->request->post[$price_str];
+			$special = $this->request->post[$special_str];
+			$quantity = $this->request->post[$quantity_str];
+			$model = $this->request->post[$model_str];
+			$name = $this->request->post[$name_str];
+			
+			$su_data = array('price' => $price, 'special' => $special, 'quantity' => $quantity, 'model' => $model, 'name' => $name);
+			$this->model_catalog_product->editPrices($product_id, $su_data);
+	  		}
+
+			$this->redirect($this->url->link('catalog/product', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+		}
+    	$this->getList();
+  	}
+            ]]></add>
+        </operation>
+		<!--QuickBUTTON-data-->
+	<operation error="skip">
+            <search position="after"><![CDATA[
+		$this->data['delete'] = $this->url->link('catalog/product/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+            ]]></search>
+            <add trim="true"><![CDATA[
+		$this->data['simple_pu'] = $this->url->link('catalog/product/simple_pu', 'token=' . $this->session->data['token'] . $url, 'SSL');
+            ]]></add>
+        </operation>
+    <operation error="skip">
+            <search position="after"><![CDATA[
+		$this->data['button_delete'] = $this->language->get('button_delete');
+            ]]></search>
+            <add trim="true"><![CDATA[
+		$this->data['button_simple_pu'] = $this->language->get('button_simple_pu');
+		$this->data['text_special'] = $this->language->get('text_special');
+		    ]]></add>
+        </operation>
+	<!--QuickpcopyS-->
+	<operation error="skip">
+            <search position="before"><![CDATA[
+  	protected function validateCopy() {
+            ]]></search>
+            <add trim="true"><![CDATA[
+private function validateSimplePu() {
+    	if (!$this->user->hasPermission('modify', 'catalog/product')) {
+      		$this->error['warning'] = $this->language->get('error_permission');
+    	}
+
+		if (!$this->error) {
+	  		return TRUE;
+		} else {
+	  		return FALSE;
+		}
+  	}
+	public function option() {
+				$output = ''; 
+		
+				$this->load->model('catalog/option');
+		
+				$results = $this->model_catalog_option->getOptionValues($this->request->get['option_id']);
+		
+				foreach ($results as $result) {
+					$output .= '<option value="' . $result['option_value_id'] . '"';
+
+					if (isset($this->request->get['option_value_id']) && ($this->request->get['option_value_id'] == $result['option_value_id'])) {
+						$output .= ' selected="selected"';
+					}
+
+					$output .= '>' . $result['name'] . '</option>';
+				}
+
+				$this->response->setOutput($output);
+			}
+	
+			public function ajaxupdate() {
+				$json = array();
+		
+				if (isset($this->request->get['status'])) {
+					$this->load->model('catalog/product');
+			
+					//$this->request->get['availability_update']
+					$product_id = $this->request->get['product_id'];
+					$status = $this->request->get['status'];
+			
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET status = '" . (int)$status . "' WHERE product_id = '" . (int)$product_id . "'");
+			
+				
+						$json[] = array(
+							'ok' => 1,
+						);	
+			
+				}
+		
+		
+				$this->load->library('json');
+
+				$this->response->setOutput(Json::encode($json));
+			}
+		    ]]></add>
+        </operation>
+	
+	</file>
+	
+	<!--Quickpc upd-->
+	<file name="admin/model/catalog/product.php">
+        <operation>						
+                        <search position="replace"><![CDATA[$sql .= " AND p.price LIKE '"]]></search>                       
+                        <add><![CDATA[/* josemariani.com extention Quick Edit Plus */ $sql .= " AND p.price LIKE '%"]]></add>                       
+			</operation>
+			<operation>						
+                        <search position="replace"><![CDATA[$sql .= " AND p.model LIKE '"]]></search>                 
+						<add><![CDATA[/* josemariani.com extention Quick Edit Plus */ $sql .= " AND LCASE(p.model) LIKE '%"]]></add>                       
+			</operation>
+			<operation>						
+                        <search position="replace"><![CDATA[$sql .= " AND pd.name LIKE '"]]></search>                       
+                        <add><![CDATA[/* josemariani.com extention Quick Edit Plus */ $sql .= " AND LCASE(pd.name) LIKE '%"]]></add>                       
+			</operation>
+		
+	<operation error="skip">
+            <search position="before"><![CDATA[
+	public function editProduct($product_id, $data) {
+            ]]></search>
+            <add trim="true"><![CDATA[
+    public function editPrices($product_id, $su_data) {
+		if (isset($su_data['price']) && isset($su_data['quantity']) && isset($su_data['model'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "product SET price = '" . (float)$su_data['price'] . "', quantity = '" . (int)$su_data['quantity'] . "', model = '" . $this->db->escape($su_data['model']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+		if (isset($su_data['name'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "product_description SET name = '" . $this->db->escape($su_data['name']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+        if (isset($su_data['special'])) {
+			$this->db->query("UPDATE " . DB_PREFIX . "product_special SET price = '" . $this->db->escape($su_data['special']) . "' WHERE product_id = '" . (int)$product_id . "'");
+		}
+	  }   
+		    ]]></add>
+        </operation>
+	</file>
+	
+	<file name="admin/view/template/catalog/product_list.tpl" error="log">
+		<operation>
+			<search position="replace"><![CDATA[
+			<td class="left"><?php echo $product['status']; ?></td>
+			]]></search>
+			
+			<add><![CDATA[
+				<td class="left"><p class="field switch">
+				<label class="cb-enable<?php if ($product['status'] == 'Habilitado'){echo ' selected';} ?>" id="on<?php echo $product['product_id']; ?>" OnClick="turnon('<?php echo $product['product_id']; ?>');"><span>Habilitado</span></label>
+				<label class="cb-disable<?php if ($product['status'] == 'Desabilitado'){echo ' selected';} ?>" id="off<?php echo $product['product_id']; ?>" OnClick="turnoff('<?php echo $product['product_id']; ?>');"><span>Desabilitado</span></label>
+				</p></td>
+				<style>
+					.cb-enable, .cb-disable, .cb-enable span, .cb-disable span { background: url('../admin/view/image/switch.gif') repeat-x; display: block; float: left; }
+					.cb-enable span, .cb-disable span { line-height: 30px; display: block; background-repeat: no-repeat; font-weight: bold; }
+					.cb-enable span { background-position: left -90px; padding: 0 10px; }
+					.cb-disable span { background-position: right -180px;padding: 0 10px; }
+					.cb-disable.selected { background-position: 0 -30px; }
+					.cb-disable.selected span { background-position: right -210px; color: #fff; }
+					.cb-enable.selected { background-position: 0 -60px; }
+					.cb-enable.selected span { background-position: left -150px; color: #fff; }
+					.switch label { cursor: pointer;}
+				</style>
+			]]></add>
+		</operation>
+		<operation>
+      <search position="after"><![CDATA[<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a>]]></search>
+      <add><![CDATA[<?php } ?>
+      <?php
+$this->load->model('catalog/product');
+$product_store = $this->model_catalog_product->getProductStores($product['product_id']);
+?>
+<?php if (in_array(0, $product_store)) { ?>
+[<a onClick="window.open('<?php echo $store . 'index.php?route=product/product&product_id=' . $product['product_id']; ?>');">Ver na loja</a>]<br />
+<?php } ?>
+<?php foreach ($stores as $storel) { ?>
+<?php if (in_array($storel['id'], $product_store)) { ?>
+[<a onClick="window.open('<?php echo $storel['href'] . 'index.php?route=product/product&product_id=' . $product['product_id']; ?>');">Ver em <?php echo $storel['name']; ?></a>]<br />
+<?php } ?>
+]]></add>
+    </operation>
+		<!--Quickp2-->
+			<operation>						
+                        <search position="after" offset="1">
+						<![CDATA[encodeURIComponent(filter_price);]]></search>                       
+                        <add><![CDATA[						
+							// josemariani.com
+							var filter_category_id = $('select[name=\'filter_category_id\']').attr('value');
+							 
+							if (filter_category_id) {
+								url += '&filter_category_id=' + encodeURIComponent(filter_category_id);
+							}
+							//josemariani.com END
+						]]>
+						</add>                       
+			 </operation>
+			 	<operation>						
+                        <search position="replace"><![CDATA[$filter_name; ?>" /></td>]]></search>                       
+                        <add><![CDATA[$filter_name; ?>" /> <!-- josemariani.com extention Quick Edit Plus -->]]></add>                       
+			</operation>
+			<!--QuickpS-->
+			<operation>						
+                        <search position="after"><![CDATA[echo $filter_name]]></search>                       
+                        <add><![CDATA[						
+				<!-- josemariani.com extention Quick Edit Plus -->
+				<!--<select name="filter_category_id"  id="filter_category_id">				 
+                  <option value=""/>
+				  <?php 
+				  foreach($categories as $tmp){				  
+				  if ($filter_category_id == $tmp['category_id']) { ?>
+                  <option value="<?php echo $filter_category_id;?>" selected="selected"><?php echo $tmp['name'];?></option>
+                  <?php } else { ?>
+                  <option value="<?php echo $tmp['category_id'];?>"><?php echo $tmp['name']; ?></option>
+                  <?php }  
+				  }
+				  ?>				
+				</select></td>-->
+				<!-- josemariani.com extention Quick Edit Plus END -->
+						]]>
+						</add>                       
+			 </operation>
+	<!--QuickButton-->
+	<operation error="skip">
+            <search position="replace"><![CDATA[
+    <div class="buttons"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button"><?php echo $button_copy; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+            ]]></search>
+            <add trim="true"><![CDATA[
+    <div class="buttons"><a href="<?php echo $insert; ?>" class="button"><?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $simple_pu; ?>'); $('#form').submit();" class="button"><?php echo $button_simple_pu; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button"><?php echo $button_copy; ?></a><a onclick="$('form').submit();" class="button"><?php echo $button_delete; ?></a></div>
+		    ]]></add>
+        </operation>
+	<!--Quickp3-id-->
+	<operation error="skip">
+            <search position="replace"><![CDATA[
+              <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" checked="checked" />
+			  ]]></search>
+            <add trim="true"><![CDATA[
+              <input type="checkbox" name="selected[]" id="<?php echo $product['product_id']; ?>_select" value="<?php echo $product['product_id']; ?>" checked="checked" />
+		    ]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[
+              <input type="checkbox" name="selected[]" value="<?php echo $product['product_id']; ?>" />
+			  ]]></search>
+            <add trim="true"><![CDATA[
+              <input type="checkbox" name="selected[]" id="<?php echo $product['product_id']; ?>_select" value="<?php echo $product['product_id']; ?>" />
+		    ]]></add>
+        </operation>
+		
+		<!--Quickp3-view-->
+		<operation error="skip">
+            <search position="replace"><![CDATA[
+			  <?php echo $product['price']; ?>
+			]]></search>
+            <add trim="true"><![CDATA[
+			  <input type="text" class="<?php echo strtolower($column_price); ?> editable" name="<?php echo $product['product_id']; ?>_price" id="<?php echo $product['product_id']; ?>_price" value="<?php echo $product['price']; ?>" size="8" onclick='document.getElementById("<?php echo $product['product_id']; ?>_select").setAttribute("checked","checked");' />
+		    ]]></add>
+        </operation>
+
+        <operation error="skip">
+            <search position="replace"><![CDATA[
+              <?php echo $product['special']; ?>
+		    ]]></search>
+            <add trim="true"><![CDATA[
+		      <?php echo $text_special; ?><input type="text" class="<?php echo strtolower($column_price); ?> editable" name="<?php echo $product['product_id']; ?>_special" id="<?php echo $product['product_id']; ?>_special" value="<?php echo $product['special']; ?>" size="8" onclick='document.getElementById("<?php echo $product['product_id']; ?>_select").setAttribute("checked","checked");' />
+		    ]]></add>
+        </operation>		
+		
+		<operation error="skip">
+            <search position="replace"><![CDATA[
+			  <?php echo $product['quantity']; ?>
+			]]></search>
+            <add trim="true"><![CDATA[
+			  <input type="text" class="<?php echo strtolower($column_quantity); ?> editable" name="<?php echo $product['product_id']; ?>_quantity" id="<?php echo $product['product_id']; ?>_quantity" value="<?php echo $product['quantity']; ?>" size="8" onclick='document.getElementById("<?php echo $product['product_id']; ?>_select").setAttribute("checked","checked");' />
+		    ]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[
+			  <?php echo $product['model']; ?>
+			]]></search>
+            <add trim="true"><![CDATA[
+			  <input type="text" class="<?php echo strtolower($column_model); ?> editable" name="<?php echo $product['product_id']; ?>_model" id="<?php echo $product['product_id']; ?>_model" value="<?php echo $product['model']; ?>" size="16" onclick='document.getElementById("<?php echo $product['product_id']; ?>_select").setAttribute("checked","checked");' />
+		    ]]></add>
+        </operation>
+		<operation error="skip">
+            <search position="replace"><![CDATA[
+            <td class="left"><?php echo $product['name']; ?></td>
+			]]></search>
+            <add trim="true"><![CDATA[
+			  <td class="left name"><input type="text" class="editable" name="<?php echo $product['product_id']; ?>_name" id="<?php echo $product['product_id']; ?>_name" value="<?php echo $product['name']; ?>" size="50" onclick='document.getElementById("<?php echo $product['product_id']; ?>_select").setAttribute("checked","checked");' /></td>
+		    ]]></add>
+        </operation>
+	        <operation error="skip">
+            <search position="after"><![CDATA[
+  <div class="heading">
+            ]]></search>
+            <add trim="true"><![CDATA[
+<script type="text/javascript"> 			
+$(document).ready(function() {
+	$('.QuickEditPlus').focus(function() {
+		$(this).addClass("focusField");
+        if (this.value == this.defaultValue){
+        	this.select();
+    	}
+        if(this.value != this.defaultValue){
+	    	this.select();
+        }
+    });
+    $('.QuickEditPlus').blur(function() {
+    	$(this).removeClass("focusField");
+        
+    });
+});
+
+</script>
+		    ]]></add>
+        </operation>
+        <operation error="skip">
+            <search position="after"><![CDATA[
+  <div class="heading">
+            ]]></search>
+            <add trim="true"><![CDATA[
+<style type="text/css">		
+.focusField{
+	border:solid 2px #73A6FF!important;
+	background:#EFF5FF!important;
+	color:#000;
+}
+
+.QuickEditPlus{
+	background:none;
+	color: #000;
+	border: none;
+	cursor:pointer;
+	}
+</style>
+
+		    ]]></add>
+        </operation>
+	<!--Quickp4-view-->
+	<operation>
+			<search position="before"><![CDATA[
+				$('#form input').keydown(function(e) {
+			]]></search>
+			
+			<add><![CDATA[
+			function turnon(product_id){
+			//	alert(product_id);
+				$('#off'+product_id).removeClass('selected');
+				$('#on'+product_id).addClass('selected');
+				
+				$.ajax({
+					url: 'index.php?route=catalog/product/ajaxupdate&token=<?php echo $token; ?>&product_id='+product_id+'&status=1',
+					type: 'get',
+					dataType: 'json',
+					});
+
+			}
+
+			function turnoff(product_id){
+				$('#on'+product_id).removeClass('selected');
+				$('#off'+product_id).addClass('selected');
+				
+				$.ajax({
+					url: 'index.php?route=catalog/product/ajaxupdate&token=<?php echo $token; ?>&product_id='+product_id+'&status=0',
+					type: 'get',
+					dataType: 'json',
+					});
+
+			}
+			]]></add>
+		</operation>
+
+	</file>
+</modification>

@@ -1,0 +1,132 @@
+<modification>
+        <id>Price Update</id>
+        <version>1.0.0</version>
+        <vqmver>2.1</vqmver>
+        <author>Werner van Run - beoptimized.nl</author>
+        <file name="system/library/cart.php">
+                <operation>
+                        <search position="before"><![CDATA[$price = $product_query->row['price'];]]></search>
+                        <add><![CDATA[$is_special = $product_query->row['price'];]]></add>
+                </operation>
+                <operation>
+                        <search position="before"><![CDATA[// Reward Points]]></search>
+                        <add><![CDATA[
+                        if ($is_special == $price) {
+                            $is_special = false;
+                        } else {
+                            $is_special = ($is_special + $option_price) * $quantity;
+                        }
+                        ]]></add>
+                </operation>
+                <operation>
+                        <search position="after"><![CDATA['total'           => ($price + $option_price) * $quantity,]]></search>
+                        <add><![CDATA['special'           => $is_special,]]></add>
+                </operation>
+        </file>
+        <file name="catalog/controller/checkout/cart.php">
+                <operation>
+                        <search position="before"><![CDATA[public function index() {]]></search>
+                        <add><![CDATA[
+                        public function update_price() {
+                                $json = array();
+                                $ses_cart = $this->session->data['cart'];
+                                $this->session->data['cart'] = array();
+                                
+                                if (isset($this->request->post['product_id'])) {
+                                        $this->load->model('catalog/product');
+
+                                        if (isset($this->request->post['quantity'])) {
+                                            $quantity = $this->request->post['quantity'];
+                                        } else {
+                                            $quantity = 1;
+                                        }
+
+                                        if (isset($this->request->post['option'])) {
+                                            $option = array_filter($this->request->post['option']);
+                                        } else {
+                                            $option = array();	
+                                        }
+
+                                        if (!$option) {
+                                                $key = (int)$this->request->post['product_id'];
+                                        } else {
+                                                $key = (int)$this->request->post['product_id'] . ':' . base64_encode(serialize($option));
+                                        }
+
+                                        $this->cart->add($this->request->post['product_id'], $quantity, $option);
+
+                                        foreach ($this->cart->getProducts() as $result) {
+                                            if ($result['key'] == $key) {
+                                                if ($result['special']) {
+                                                    $json['special'] = $this->currency->format($this->tax->calculate($result['special']/$quantity, $result['tax_class_id'], $this->config->get('config_tax'))*$quantity);
+                                                } else {
+                                                    $json['special'] = '';
+                                                }
+                                                $json['price'] = $this->currency->format($this->tax->calculate($result['total']/$quantity, $result['tax_class_id'], $this->config->get('config_tax'))*$quantity);
+                                                $json['points'] = $result['points'];
+                                                $json['tax'] = $this->currency->format($result['total']);
+                                            }
+                                        }
+
+                                        $this->session->data['cart'] = $ses_cart;
+
+                                }
+
+                                $this->response->setOutput(json_encode($json));
+                        }]]></add>
+                </operation>
+        </file>
+        <file name="catalog/view/theme/*/template/product/product.tpl">
+                <operation>
+                        <search position="before"><![CDATA[$('#button-cart').bind('click', function() {]]></search>
+                        <add><![CDATA[<?php // price update start ?>
+                        $('input[name=\'quantity\']').keyup(function () {
+                            if ($(this).val() * 1 > 0) {
+                                updateprice();
+                            }
+                        });
+
+                        $('.option, .option table img').click(function () {
+                            updateprice();
+                        });
+
+                        function updateprice() {
+                                $.ajax({
+                                        url: 'index.php?route=checkout/cart/update_price',
+                                        type: 'post',
+                                        data: $('.product-info input[type=\'text\'], .product-info input[type=\'hidden\'], .product-info input[type=\'radio\']:checked, .product-info input[type=\'checkbox\']:checked, .product-info select, .product-info textarea'),
+                                        dataType: 'json',
+                                        success: function(json) {
+                                                $('.success, .warning, .attention, information, .error').remove();
+                                                var html = '';
+                                                
+                                                if (json.special.length > 0) {
+                                                    html += '<?php echo $text_price; ?> <span class="price-old">' + json.special + '</span> <span class="price-new">' + json.price + '</span><br />';
+                                                } else {
+                                                    html += '<?php echo $text_price; ?> ' + json.price + '<br />';
+                                                }
+                                                
+                                                <?php if ($tax) { ?>
+                                                    if (json.tax) {
+                                                        html += '<span class="price-tax"><?php echo $text_tax; ?> ' + json.tax + '</span><br />';
+                                                    }
+                                                <?php } ?>
+        
+                                                if (json.points) {
+                                                    html += '<span class="reward"><small><?php echo $text_points; ?> ' + json.points + '</small></span> <br />';
+                                                }
+                                                
+                                                var discount = $('.discount').html();
+                                                
+                                                if (discount) {
+                                                    html += '<br /><div class="discount">' + discount + '</div>';
+                                                }
+                                                
+                                                $('.product-info .price:first').html(html);
+                                        }
+                                });
+                        }
+                        <?php // price update end ?>]]></add>
+                </operation>
+        </file>
+</modification>

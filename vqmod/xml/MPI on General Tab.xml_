@@ -1,0 +1,36 @@
+<modification>
+	<id><![CDATA[Model, Price, Image on General Tab]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[Fabius - http://opencartit.altervista.org]]></author>
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="replace" offset="6"><![CDATA[<td><span class="required">*</span> <?php echo $entry_model; ?></td>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="3"><![CDATA[<td><?php echo $entry_price; ?></td>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="replace" offset="5"><![CDATA[<td><?php echo $entry_image; ?></td>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<div id="tab-general">]]></search>
+			<add><![CDATA[<table>
+            <tr>
+                <td><?php echo $entry_image; ?><br /><div class="image"><img src="<?php echo $thumb; ?>" alt="" id="thumb" /><br />
+                    <input type="hidden" name="image" value="<?php echo $image; ?>" id="image" />
+                    <a onclick="image_upload('image', 'thumb');"><?php echo $text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#thumb').attr('src', '<?php echo $no_image; ?>'); $('#image').attr('value', '');"><?php echo $text_clear; ?></a></div></td>
+				<td style="vertical-align:middle;text-align:right;padding-left:10px;"><span class="required">*</span> <?php echo $entry_model; ?>&nbsp;<input type="text" name="model" value="<?php echo $model; ?>" />
+                <?php if ($error_model) { ?>
+                <span class="error"><?php echo $error_model; ?></span>
+                <?php } ?><br /><br />
+				<?php echo $entry_price; ?>&nbsp;<input type="text" name="price" value="<?php echo $price; ?>" /></td>
+            </tr>
+            </table>]]></add>
+		</operation>
+
+	</file>
+</modification>

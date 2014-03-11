@@ -1,0 +1,92 @@
+/* onecheckout */
+.onecheckout-heading {
+	border-bottom: 1px solid #000000;
+	padding: 8px;
+	padding-left:0;
+	font-weight: bold;
+	font-size: 16px;
+	color: #000000;
+	margin-bottom:15px;
+	text-align:left;
+}
+.onecheckout-content {
+	padding: 0px 0px 15px 0px;
+	overflow: auto;
+	color: #555555;
+	text-align:left;
+}
+#checkout #login{
+	padding-left:6px;
+	margin: 15px 0 20px;
+	display:none;
+	width:98%;
+	padding:10px;
+	border:1px solid #ccc;
+	margin-bottom:15px;
+}
+#checkout #login .close_la{
+	position:relative;
+	margin-bottom:-16px;
+	top:-16px;
+	right:-16px;
+	cursor:pointer;
+	float:right;
+	width:16px;
+	height:16px;
+	background:url("../image/cancel.png") no-repeat scroll 0 0 transparent;
+}
+.onecheckout-content .left {
+	float: left;
+	width: 48%;
+}
+.onecheckout-content .right {
+	float: right;
+	width: 48%;
+}
+.onecheckout-content .small-field{
+	width:90%;
+}
+.onecheckout-content .large-field{
+	width:95%;
+}
+.onecheckout-content .divclear {
+	clear: both;
+}
+.onecheckout-product table {
+	width: 99%;
+	border-collapse: collapse;
+	border-top: 1px solid #DDDDDD;
+	border-left: 1px solid #DDDDDD;
+	border-right: 1px solid #DDDDDD;
+	margin-bottom: 20px;
+}
+.onecheckout-product td {
+	padding: 7px;
+}
+.onecheckout-product thead td {
+	color: #4D4D4D;
+	font-weight: bold;
+	background-color: #F7F7F7;
+	border-bottom: 1px solid #DDDDDD;
+}
+.onecheckout-product thead .name, .onecheckout-product thead .model {
+	text-align: left;
+}
+.onecheckout-product thead .quantity, .onecheckout-product thead .price, .onecheckout-product thead .total {
+	text-align: right;
+}
+.onecheckout-product tbody td {
+	vertical-align: top;
+	border-bottom: 1px solid #DDDDDD;
+}
+.onecheckout-product tbody .name, .onecheckout-product tbody .model {
+	text-align: left;
+}
+.onecheckout-product tbody .quantity, .onecheckout-product tbody .price, .onecheckout-product tbody .total {
+	text-align: right;
+}
+.onecheckout-product tfoot td {
+	text-align: right;
+	border-bottom: 1px solid #DDDDDD;
+}
+/*onecheckout end*/

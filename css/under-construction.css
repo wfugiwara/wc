@@ -1,0 +1,58 @@
+﻿body {
+    background-color: #273e6e;
+}
+.container-fluid {
+    padding-top: 60px;
+}
+.announcement {
+    font-family: "Open Sans", Helvetica, Verdana;
+    color: #ffffff;
+    font-size: 15px;
+    margin-bottom: 24px;
+}
+.announcement.title {
+    font-family: "Open Sans", Helvetica, Verdana;
+    font-weight: bold;
+    color: #ddd482;
+    text-transform: uppercase;
+    font-size: 17px;
+}
+form#message {
+    width: 100%;
+}
+form#message>div {
+    width: 100%;
+}
+form#message input, form#message textarea {
+    width: 92.8%;
+}
+form#message textarea {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 100px;
+}
+.add-on span {
+    color: #273e6e;
+    -webkit-text-shadow: none;
+    text-shadow: none;
+}
+.add-on.bigger {
+    height: 88px;
+}
+.input-prepend :first-child.add-on {
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+}
+.input-prepend {
+    border-radius: 8px;
+    border: solid 1px transparent;
+}
+textarea {
+    margin-bottom: 0;
+}
+
+
+.facebook {
+    display: inline-block;
+    margin-bottom: 20px;
+}

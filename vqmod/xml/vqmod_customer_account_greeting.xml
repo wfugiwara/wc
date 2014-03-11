@@ -1,0 +1,32 @@
+<modification>
+    <id>Best-Byte Customer Account Greeting</id>
+      <version>1.0</version>
+		   <vqmver>2.1.5</vqmver>
+       <author>www.best-byte.com</author>		
+	   <file name="catalog/controller/account/account.php">
+    <operation>
+			<search position="after"><![CDATA[$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');]]></search>
+			<add><![CDATA[
+		  $this->load->model('account/customer');
+		  $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+		  $this->data['text_greeting'] = sprintf($this->language->get('text_greeting'), $customer_info['firstname']);
+      ]]></add>
+	</operation>
+</file>		
+<file name="catalog/language/*/account/account.php">
+    <operation>
+			<search position="after"><![CDATA[$_['text_newsletter'] ]]></search>
+			<add><![CDATA[
+      $_['text_greeting']  = 'Olá <strong>%s</strong>, Seja bem vindo(a).';
+      ]]></add>
+	</operation>
+</file>	
+<file name="catalog/view/theme/*/template/account/account.tpl">
+    <operation>
+			<search position="before"><![CDATA[<h2><?php echo $text_my_account; ?></h2>]]></search>
+			<add><![CDATA[
+      <br /><p id="greeting" style="text-align: left; font-size: 14px; font-family: Verdana, Tahoma, Arial;"><?php echo $text_greeting; ?></p><br />	
+      ]]></add>
+	</operation>
+</file>	
+</modification>

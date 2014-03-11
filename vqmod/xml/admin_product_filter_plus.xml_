@@ -1,0 +1,17 @@
+<modification>
+	<id>Product Name Filter Plus</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.7</vqmver>
+	<author>M@ro</author>
+	
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA[				
+			$sql .= " AND pd.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+			]]></search>
+			<add><![CDATA[
+			$sql .= " AND pd.name LIKE '%" . $this->db->escape($data['filter_name']) . "%'";
+			]]></add>
+		</operation>		
+	</file>
+</modification>

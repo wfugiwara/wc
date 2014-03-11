@@ -1,0 +1,12 @@
+<modification>
+	<id><![CDATA[CSV Import PRO]]></id>
+	<version><![CDATA[1.4+]]></version>
+	<vqmver><![CDATA[1.0.0]]></vqmver>
+	<author><![CDATA[http://opencart.hostjars.com]]></author>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<li><a href="<?php echo $backup; ?>"><?php echo $text_backup; ?></a></li>]]></search>
+			<add><![CDATA[<li><a href="<?php echo str_replace('tool/backup', 'tool/customers', $backup); ?>">Clientes Exportar / importar</a></li>]]></add>
+		</operation>
+	</file>
+</modification>

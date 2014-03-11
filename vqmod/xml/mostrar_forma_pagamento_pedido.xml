@@ -1,0 +1,112 @@
+<modification>
+	
+	<id>Mostrar forma de pagamento na listagem do pedido</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Jeann e-mail: jeann@surgimento.com.br twiter: @surgimento site: http://www.surgimento.com.br/</author>
+
+	<file name="admin/controller/sale/order.php">	 
+		<operation>
+			<search position="after" ><![CDATA[
+			'status'        => $result['status'],
+			]]></search>
+			<add><![CDATA[
+			'payment_method'        => $result['payment_method'],
+			]]></add>  
+		</operation>
+	</file>
+	<file name="admin/model/sale/order.php">
+		<operation error="skip">
+			<search position="replace" ><![CDATA[
+				$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer,(SELECT os.cor FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS cor, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";  
+			]]></search>
+			<add><![CDATA[
+				$sql = "SELECT o.order_id,o.payment_method,  CONCAT(o.firstname, ' ', o.lastname) AS customer,(SELECT os.cor FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS cor, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";        
+			]]></add>  
+		</operation>
+		<operation error="skip">
+			<search position="replace" ><![CDATA[
+				$sql = "SELECT o.order_id, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";
+			]]></search>
+			<add><![CDATA[
+				$sql = "SELECT o.order_id,o.payment_method, CONCAT(o.firstname, ' ', o.lastname) AS customer, (SELECT os.name FROM " . DB_PREFIX . "order_status os WHERE os.order_status_id = o.order_status_id AND os.language_id = '" . (int)$this->config->get('config_language_id') . "') AS status, o.total, o.currency_code, o.currency_value, o.date_added, o.date_modified FROM `" . DB_PREFIX . "order` o";	
+			]]></add>  
+		</operation>
+		
+		
+	</file>
+	<file name="admin/view/template/sale/order_list.tpl">	 
+		<operation error="skip">
+			<search position="after" ><![CDATA[
+                <td class="right" style="<?php echo $corped; ?>"><?php echo $order['total']; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<td class="right" style="<?php echo $corped; ?>"><?php echo $order['payment_method']; ?></td>               
+			]]></add>  
+		</operation>
+		<operation error="skip">
+			<search position="after" ><![CDATA[
+                <td class="right"><?php echo $order['total']; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<td class="right"><?php echo $order['payment_method']; ?></td>              
+			]]></add>  
+		</operation>
+		
+		
+		<operation error="skip">
+			<search position="before" ><![CDATA[
+                <td class="left"><?php if ($sort == 'o.date_added') { ?>
+			]]></search>
+			<add><![CDATA[
+				<td class="right">Forma de pagamento</td>           
+			]]></add>  
+		</operation>
+		<operation error="skip">
+			<search position="before" ><![CDATA[
+                <td><input type="text" name="filter_date_added" value="<?php echo $filter_date_added; ?>" size="12" class="date" /></td>
+			]]></search>
+			<add><![CDATA[
+				<td></td>         
+			]]></add>  
+		</operation>	
+	</file>
+	<file name="admin/controller/common/home.php">	 
+		<operation>
+			<search position="after" ><![CDATA[
+			'status'     => $result['status'],
+			]]></search>
+			<add><![CDATA[
+                'payment_method'        => $result['payment_method'],
+			]]></add>  
+		</operation>
+	</file>
+	 <file name="admin/view/template/common/home.tpl">	 
+		<operation error="skip">
+			<search position="after" ><![CDATA[
+			<td class="right" style="<?php echo $corped; ?>"><?php echo $order['total']; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<td class="right" style="<?php echo $corped; ?>"><?php echo $order['payment_method']; ?></td>        
+            ]]></add>  
+		</operation>
+		
+		<operation error="skip">
+			<search position="after" ><![CDATA[
+			<td class="right"><?php echo $order['total']; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<td class="right"><?php echo $order['payment_method']; ?></td>        
+            ]]></add>  
+		</operation>
+		
+		<operation error="skip">
+			<search position="after" ><![CDATA[
+                <td class="right"><?php echo $column_total; ?></td>
+			]]></search>
+			<add><![CDATA[
+				<td class="right">Forma de pagamento</td>           
+			]]></add>  
+		</operation>		
+	</file>
+</modification>

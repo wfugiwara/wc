@@ -1,0 +1,119 @@
+<modification>
+	<id><![CDATA[Remove wishlist & compare option from product box]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.1.6]]></vqmver>
+	<author><![CDATA[www.arhigosinc.com]]></author>
+	
+	<file name="catalog/view/theme/*/template/product/category.tpl">
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// <html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		
+		<!--<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>-->
+	</file>		
+	
+	<file name="catalog/view/theme/*/template/product/manufacturer_info.tpl">
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// <html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		
+		<!--<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>-->
+	</file>		
+	
+	<file name="catalog/view/theme/*/template/product/search.tpl">
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// <html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		
+		<!--<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>-->
+	</file>	
+
+	<file name="catalog/view/theme/*/template/product/special.tpl">
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// <html += '<div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="wishlist">' + $(element).find('.wishlist').html() + '</div>';]]></add>
+		</operation>
+		
+		<!--<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '<div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace">
+				<![CDATA[html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></search>
+			<add>
+				<![CDATA[// html += '  <div class="compare">' + $(element).find('.compare').html() + '</div>';]]></add>
+		</operation>-->
+	</file>		
+			
+</modification>

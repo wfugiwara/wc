@@ -1,0 +1,16 @@
+<modification>
+	<id>Common_home</id>
+	<version>For OpenCart 1.5.x</version>
+	<vqmver>1.2.3</vqmver>
+	<author>Andrew Dacenko</author>
+	<file name="system/library/response.php">
+		<operation>
+			<search position="after"><![CDATA[
+				public function output() {
+			]]></search>
+			<add><![CDATA[
+				if (!defined('HTTP_CATALOG')) $this->output = str_replace('index.php?route=common/home', '', $this->output);
+			]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,36 @@
+/*
+|--------------------------------------------------------------------------
+| UItoTop jQuery Plugin 1.1
+| http://www.mattvarone.com/web-design/uitotop-jquery-plugin/
+|--------------------------------------------------------------------------
+*/
+
+#yukari {
+	display:none;
+	text-decoration:none;
+	position:fixed;
+	bottom:10px;
+	right:22px;
+	overflow:hidden;
+	width:55px;
+	height:55px;
+	border:none;
+	text-indent:-999px;
+	background:url(../yukari/yukari.png) no-repeat left top;
+}
+
+#yukariHover {
+	background:url(../yukari/yukari.png) no-repeat left -55px;
+	width:55px;
+	height:55px;
+	display:block;
+	overflow:hidden;
+	float:left;
+	opacity: 0;
+	-moz-opacity: 0;
+	filter:alpha(opacity=0);
+}
+
+#yukari:active, #yukari:focus {
+	outline:none;
+}

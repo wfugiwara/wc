@@ -1,0 +1,72 @@
+<modification>
+    <id>RCN jqzoom product</id>
+    <version>1.0</version>
+    <vqmver>2.1.6</vqmver>
+    <author>rocanowi</author>
+    <file name="catalog/controller/product/product.php">
+        <operation>
+            <search position="after"><![CDATA[$this->data['breadcrumbs'] = array();]]></search>
+            <add><![CDATA[
+		$this->document->addScript('catalog/view/javascript/jquery/jquery.jqzoom-core-pack.js');
+		if (file_exists('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/jquery.jqzoom.css')) {
+			$this->document->addStyle('catalog/view/theme/' . $this->config->get('config_template') . '/stylesheet/jquery.jqzoom.css');
+		} else {
+			$this->document->addStyle('catalog/view/theme/default/stylesheet/jquery.jqzoom.css');
+		}
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[$this->data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'));]]></search>
+            <add><![CDATA[
+				$this->data['thumb2'] = $this->model_tool_image->resize($product_info['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'));
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA['thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))]]></search>
+            <add><![CDATA[
+					'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height')),
+					'thumb2' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'))
+            ]]></add>
+        </operation>
+    </file>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+        <operation>
+            <search position="before"><![CDATA[<?php echo $footer; ?>]]></search>
+            <add><![CDATA[
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.jqzoom').jqzoom({
+    zoomType: 'standard',
+    lens:true,
+    preloadImages: false,
+    alwaysOn:false,
+    xOffset: 20, 
+    yOffset: -10,
+    zoomWidth: 330,  
+    zoomHeight: 350
+  });
+});
+</script>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="colorbox"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>]]></search>
+            <add><![CDATA[
+      <div class="image"><a href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>" class="jqzoom" rel='gal1'><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" id="image" /></a></div>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[<div class="image-additional">]]></search>
+            <add><![CDATA[
+        <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $thumb; ?>',largeimage: '<?php echo $popup; ?>'}"><img src="<?php echo $thumb2; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+            ]]></add>
+        </operation>
+		<operation>
+            <search position="replace"><![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></search>
+            <add><![CDATA[
+        <a href="#" title="<?php echo $heading_title; ?>" rel="{gallery: 'gal1', smallimage: '<?php echo $image['thumb2']; ?>',largeimage: '<?php echo $image['popup']; ?>'}"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+            ]]></add>
+        </operation>
+    </file>
+</modification>

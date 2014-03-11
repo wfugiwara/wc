@@ -1,0 +1,12 @@
+<modification>
+	<id><![CDATA[Total Import PRO]]></id>
+	<version><![CDATA[1.4+]]></version>
+	<vqmver><![CDATA[1.0.0]]></vqmver>
+	<author><![CDATA[http://opencart.hostjars.com]]></author>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="replace"><![CDATA[http://www.opencart.com/index.php?route=documentation/introduction]]></search>
+			<add><![CDATA[http://doc.hostjars.com/display/opencart/OpenCart+1.5+Home]]></add>
+		</operation>
+	</file>
+</modification>

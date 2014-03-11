@@ -1,0 +1,249 @@
+<!-- Created using vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk //-->
+<modification>
+	<id><![CDATA[Admin Clear All  Filters]]></id>
+	<version><![CDATA[]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[]]></author>
+	<file name="admin/language/english/english.php">
+		<operation>
+			<search position="after"><![CDATA[// Button]]></search>
+			<add><![CDATA[$_['button_clear_filters'] = 'Clear All Filters';]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_filter'] = $this->language->get('button_filter');]]></search>
+			<add><![CDATA[$this->data['button_clear_filters'] = $this->language->get('button_clear_filters');]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/product_list.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ <div class="buttons">]]></search>
+			<add><![CDATA[<div class="buttons"><a onclick="clearFilters();" class="button" ><?php echo $button_clear_filters;?></a>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[function filter() ]]></search>
+			<add><![CDATA[function clearFilters() {
+	url = 'index.php?route=catalog/product&token=<?php echo $token; ?>';
+	
+	var filter_name = '';
+	
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+	
+	var filter_model = '';
+	
+	if (filter_model) {
+		url += '&filter_model=' + encodeURIComponent(filter_model);
+	}
+	
+	var filter_price = '';
+	
+	if (filter_price) {
+		url += '&filter_price=' + encodeURIComponent(filter_price);
+	}
+	
+	var filter_quantity = '';
+	
+	if (filter_quantity) {
+		url += '&filter_quantity=' + encodeURIComponent(filter_quantity);
+	}
+	
+	var filter_status = '*';
+	
+	if (filter_status != '*') {
+		url += '&filter_status=' + encodeURIComponent(filter_status);
+	}	
+
+	location = url;
+}]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/sale/order.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_filter'] = $this->language->get('button_filter');]]></search>
+			<add><![CDATA[$this->data['button_clear_filters'] = $this->language->get('button_clear_filters');]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/sale/order_list.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ <div class="buttons">]]></search>
+			<add><![CDATA[<div class="buttons"><a onclick="clearFilters();" class="button" ><?php echo $button_clear_filters;?></a>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[function filter() ]]></search>
+			<add><![CDATA[function clearFilters() {
+url = 'index.php?route=sale/order&token=<?php echo $token; ?>';
+	
+	var filter_order_id = '';
+	
+	if (filter_order_id) {
+		url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
+	}
+	
+	var filter_customer = '';
+	
+	if (filter_customer) {
+		url += '&filter_customer=' + encodeURIComponent(filter_customer);
+	}
+	
+	var filter_order_status_id = '';
+	
+	if (filter_order_status_id != '*') {
+		url += '&filter_order_status_id=' + encodeURIComponent(filter_order_status_id);
+	}	
+
+	var filter_total = '';
+
+	if (filter_total) {
+		url += '&filter_total=' + encodeURIComponent(filter_total);
+	}	
+	
+	var filter_date_added = '';
+	
+	if (filter_date_added) {
+		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+	}
+	
+	var filter_date_modified = '';
+	
+	if (filter_date_modified) {
+		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
+	}
+				
+	location = url;
+}]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/sale/return.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_filter'] = $this->language->get('button_filter');]]></search>
+			<add><![CDATA[$this->data['button_clear_filters'] = $this->language->get('button_clear_filters');]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/sale/return_list.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ <div class="buttons">]]></search>
+			<add><![CDATA[<div class="buttons"><a onclick="clearFilters();" class="button" ><?php echo $button_clear_filters;?></a>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[function filter() ]]></search>
+			<add><![CDATA[function clearFilters() {
+url = 'index.php?route=sale/return&token=<?php echo $token; ?>';
+	
+	var filter_return_id = '';
+	
+	if (filter_return_id) {
+		url += '&filter_return_id=' + encodeURIComponent(filter_return_id);
+	}
+	
+	var filter_order_id = '';
+	
+	if (filter_order_id) {
+		url += '&filter_order_id=' + encodeURIComponent(filter_order_id);
+	}	
+		
+	var filter_customer = '';
+	
+	if (filter_customer) {
+		url += '&filter_customer=' + encodeURIComponent(filter_customer);
+	}
+	
+	var filter_product = '';
+	
+	if (filter_product) {
+		url += '&filter_product=' + encodeURIComponent(filter_product);
+	}
+
+	var filter_model = '';
+	
+	if (filter_model) {
+		url += '&filter_model=' + encodeURIComponent(filter_model);
+	}
+		
+	var filter_return_status_id = '';
+	
+	if (filter_return_status_id != '*') {
+		url += '&filter_return_status_id=' + encodeURIComponent(filter_return_status_id);
+	}	
+	
+	var filter_date_added = '';
+	
+	if (filter_date_added) {
+		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+	}
+
+	var filter_date_modified = '';
+	
+	if (filter_date_modified) {
+		url += '&filter_date_modified=' + encodeURIComponent(filter_date_modified);
+	}
+			
+	location = url;
+}]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/sale/customer.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_filter'] = $this->language->get('button_filter');]]></search>
+			<add><![CDATA[$this->data['button_clear_filters'] = $this->language->get('button_clear_filters');]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/sale/customer_list.tpl">
+		<operation>
+			<search position="replace"><![CDATA[ <div class="buttons">]]></search>
+			<add><![CDATA[<div class="buttons"><a onclick="clearFilters();" class="button" ><?php echo $button_clear_filters;?></a>]]></add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[function filter() ]]></search>
+			<add><![CDATA[function clearFilters() {
+url = 'index.php?route=sale/customer&token=<?php echo $token; ?>';
+	
+	var filter_name = '';
+	
+	if (filter_name) {
+		url += '&filter_name=' + encodeURIComponent(filter_name);
+	}
+	
+	var filter_email = '';
+	
+	if (filter_email) {
+		url += '&filter_email=' + encodeURIComponent(filter_email);
+	}
+	
+	var filter_customer_group_id = '';
+	
+	if (filter_customer_group_id != '*') {
+		url += '&filter_customer_group_id=' + encodeURIComponent(filter_customer_group_id);
+	}	
+	
+	var filter_status = '*';
+	
+	if (filter_status != '*') {
+		url += '&filter_status=' + encodeURIComponent(filter_status); 
+	}	
+	
+	var filter_approved = '*';
+	
+	if (filter_approved != '*') {
+		url += '&filter_approved=' + encodeURIComponent(filter_approved);
+	}	
+	
+	var filter_ip = '';
+	
+	if (filter_ip) {
+		url += '&filter_ip=' + encodeURIComponent(filter_ip);
+	}
+		
+	var filter_date_added = '';
+	
+	if (filter_date_added) {
+		url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+	}
+	
+	location = url;
+}]]></add>
+		</operation>
+	</file>
+</modification>

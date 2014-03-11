@@ -1,0 +1,297 @@
+<modification>
+	<id>Replace Add to Cart with More Info</id>
+	<version>20130514</version>
+	<vqmver>2.x</vqmver>
+	<author>OpenCart Express</author>
+	
+	<file name="catalog/controller/module/bestseller.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['heading_title'] = $this->language->get('heading_title');
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/module/featured.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['heading_title'] = $this->language->get('heading_title');
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/module/latest.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['heading_title'] = $this->language->get('heading_title');
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/module/special.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['heading_title'] = $this->language->get('heading_title');
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/category.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['heading_title'] = $category_info['name'];
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/manufacturer.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$this->data['heading_title'] = $manufacturer_info['name'];
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="before"><![CDATA[
+				$this->data['button_cart'] = $this->language->get('button_cart');
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/search.php">
+		<operation>
+			<search position="before"><![CDATA[
+				if (isset($this->request->get['filter_name'])) {
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/product/special.php">
+		<operation>
+			<search position="before"><![CDATA[
+				$this->data['heading_title'] = $this->language->get('heading_title');
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_more'] = $this->language->get('button_more');
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/language/portuguese-br/portuguese-br.php">
+		<operation>
+			<search position="after"><![CDATA[
+				$_['button_cart']           = 'Comprar';
+			]]></search>
+			<add><![CDATA[
+				$_['button_more']			= '';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/module/bestseller.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/module/featured.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/module/latest.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/module/special.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/category.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/*/template/product/manufacturer_info.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" />
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<a onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button"><?php echo $button_cart; ?></a>
+			]]></search>
+			<add><![CDATA[
+				<a href="<?php echo $product['href']; ?>" class="button"><span><?php echo $button_more; ?></span></a>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="catalog/view/theme/*/template/product/search.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/special.tpl">
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<div class="cart"><input type="button" value="<?php echo $button_cart; ?>" onclick="addToCart('<?php echo $product['product_id']; ?>');" class="button" /></div>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search position="replace"><![CDATA[
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></search>
+			<add><![CDATA[
+				<div class="cart"><a href="<?php echo $product['href']; ?>" class="button btnSaibaMais"><span><?php echo $button_more; ?></span></a></div>
+				<?php if (isset($button_cart) && !isset($button_more)) { ?>
+			]]></add>
+		</operation>
+	</file>
+	
+</modification>

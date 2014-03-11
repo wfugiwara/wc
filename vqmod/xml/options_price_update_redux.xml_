@@ -1,0 +1,150 @@
+<modification>
+
+	<id>Options Price Update Redux</id>
+	<version>1.0.1</version>
+	<vqmver>2.1.5</vqmver>
+	<author>qphoria</author>
+
+	
+	<file name="catalog/view/theme/megastore/template/product/product.tpl" error="skip">
+		<operation error="skip"><!-- Fix for megastore theme stupid coding format -->
+            <search position="replace"><![CDATA[
+            <?php echo '<span class="price-new">'.$price.'</span>'; ?>
+            ]]></search>
+            <add trim="true"><![CDATA[
+            <span class="price-new"><?php echo $price; ?></span>
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+
+		<operation error="skip"><!-- 1.4.x & 1.5.0.5+ only -->
+            <search position="replace"><![CDATA[
+            <?php echo $price; ?>
+            ]]></search>
+            <add trim="true"><![CDATA[
+            <span id="opu_price"><?php echo $price; ?></span>
+            ]]></add>
+        </operation>
+		
+        <operation error="skip"><!-- 1.5.0 only -->
+            <search position="replace" index="1"><![CDATA[
+            <span style="text-decoration: line-through;"><?php echo $price; ?></span>
+            ]]></search>
+            <add trim="true"><![CDATA[
+            <span id="opu_price" style="text-decoration: line-through;"><?php echo $price; ?></span>
+            ]]></add>
+        </operation>
+
+
+        <operation error="skip"><!-- 1.5.0 only -->
+            <search position="replace" index="1"><![CDATA[
+            <s><?php echo $price; ?></s>
+            ]]></search>
+            <add trim="true"><![CDATA[
+            <s id="opu_price"><?php echo $price; ?></s>
+            ]]></add>
+        </operation>
+
+        <operation error="skip">
+            <search position="replace" index="1"><![CDATA[
+            <?php echo $special; ?>
+            ]]></search>
+            <add><![CDATA[
+            <span id="opu_special"><?php echo $special; ?></span>
+            ]]></add>
+        </operation>
+
+        <operation error="skip">
+            <search position="replace" index="1"><![CDATA[
+            <?php echo $tax; ?>
+            ]]></search>
+            <add trim="true"><![CDATA[
+            <span id="opu_tax"><?php echo $tax; ?></span>
+            ]]></add>
+        </operation>
+
+
+        <operation>
+            <search position="before"><![CDATA[
+            <?php echo $footer; ?>
+            ]]></search>
+            <add><![CDATA[
+
+<script type="text/javascript">
+if (!window.console) {var console = {};}
+if (!console.log) {console.log = function() {};}
+
+function updatePx() {
+	console.log('OPU: updatePx() called');
+	<?php if (defined('_JEXEC')) { ?>
+	var ajaxurl = 'index.php?option=com_aceshop&format=raw&tmpl=component&route=product/option_price_update/updatePrice';
+	<?php } else { ?>
+	var ajaxurl = 'index.php?route=product/option_price_update/updatePrice';
+	<?php } ?>
+
+	jQuery.ajax({
+		type: 'post',
+		url: ajaxurl,
+		dataType: 'json',
+		data: jQuery(':input[name^="option"][type=\'checkbox\']:checked, :input[type=\'hidden\'], :input[name^="option"][type=\'radio\']:checked, select[name^="option"], :input[name=\'quantity\']'),
+
+		success: function (mydata) {
+			console.log('OPU: mydate.price'+mydata.price);
+			console.log('OPU: mydate.special'+mydata.special);
+			console.log('OPU: mydate.tax'+mydata.tax);
+			
+			// Update the main price with the new price.
+			<?php if (!$this->config->get('config_customer_price') || ($this->config->get('config_customer_price') && $this->customer->isLogged())) { ?>
+			jQuery('#opu_price').fadeOut('100').queue(function(n){jQuery(this).html(mydata.price); n();}).fadeIn('100');
+			jQuery('#opu_special').fadeOut('100').delay(100).queue(function(n){jQuery(this).html(mydata.special); n();}).fadeIn('100');
+			jQuery('#opu_tax').fadeOut('100').delay(200).queue(function(n){jQuery(this).html(mydata.tax); n();}).fadeIn('100');
+			<?php } ?>
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+jQuery(document).ready(function () {
+	console.log('OPU: initialized');
+	var $updateOnLoad = true; // Change to true if using 1.4.x or want to force an update on page load
+	
+	// Update on initial page load for 1.4.x only
+	if ($updateOnLoad) {
+		updatePx();
+	}
+
+	// Update whenever the triggerable page inputs are changed
+	jQuery(':input[name^="option"],:input[name^="quantity"]').change(function(){
+		updatePx();
+	});
+
+});
+</script>
+
+            ]]></add>
+        </operation>
+
+
+		<!-- IF YOU WANT TO HIDE THE OPTION PRICE NEXT TO THE OPTION, UNCOMMENT THIS BLOCK -->
+		<!-- TO UNCOMMENT, REMOVE THE ARROWS AND DASHES THAT SURROUND THE CODE BELOW -->
+		
+		
+		
+		<operation>
+            <search position="replace"><![CDATA[
+            <?php if ($option_value['price']) { ?>
+            ]]></search>
+            <add><![CDATA[
+            <?php if (1==2) { ?>
+            ]]></add>
+        </operation>
+		
+
+
+	</file>
+
+</modification>

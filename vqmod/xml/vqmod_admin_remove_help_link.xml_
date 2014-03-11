@@ -1,0 +1,46 @@
+<modification>
+	<id>Remove help link in admin</id>
+	<version>1.0</version>
+	<vqmver>1.0.8</vqmver>
+	<author>Gigo</author>
+	
+	<file name="admin/view/template/common/header.tpl">
+
+		<operation>
+			<search position="replace"><![CDATA[
+			<li id="help"><a class="top"><?php echo $text_help; ?></a>
+			]]></search>
+			<add><![CDATA[
+			<li>
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[
+          <li><a href="http://www.opencart.com" target="_blank"><?php echo $text_opencart; ?></a></li>
+			]]></search>
+			<add><![CDATA[
+			
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[
+          <li><a href="http://www.opencart.com/index.php?route=documentation/introduction" target="_blank"><?php echo $text_documentation; ?></a></li>
+			]]></search>
+			<add><![CDATA[
+			
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="replace"><![CDATA[
+          <li><a href="http://forum.opencart.com" target="_blank"><?php echo $text_support; ?></a></li>
+			]]></search>
+			<add><![CDATA[
+			
+			]]></add>
+		</operation>
+
+	</file>
+</modification>

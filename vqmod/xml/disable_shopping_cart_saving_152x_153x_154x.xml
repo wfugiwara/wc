@@ -1,0 +1,32 @@
+<modification>
+    <id>Disable Shopping Cart Saving 1.5.2.x, 1.5.3.x, 1.5.4.x</id>
+    <version>1.1</version>
+    <vqmver>2.1.7</vqmver>
+    <author>www.best-byte.com</author>
+    <file name="system/library/customer.php">
+        <operation>
+            <search position="replace"><![CDATA[
+            $this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . $this->db->escape(isset($this->session->data['cart']) ? serialize($this->session->data['cart']) : '') . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
+            ]]></search>
+            <add><![CDATA[
+$this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");            
+            ]]></add>
+        </operation>       
+        <operation>
+            <search position="replace"><![CDATA[
+            $this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . $this->db->escape(isset($this->session->data['cart']) ? serialize($this->session->data['cart']) : '') . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
+            ]]></search>
+            <add><![CDATA[
+$this->db->query("UPDATE " . DB_PREFIX . "customer SET cart = '" . "', wishlist = '" . $this->db->escape(isset($this->session->data['wishlist']) ? serialize($this->session->data['wishlist']) : '') . "' WHERE customer_id = '" . (int)$this->customer_id . "'");            
+            ]]></add>
+        </operation>
+    </file>
+    <file name="catalog/language/english/account/logout.php">
+        <operation>
+            <search position="replace"><![CDATA[
+            $_['text_message']  = '<p>You have been logged off your account. It is now safe to leave the computer.</p><p>Your shopping cart has been saved, the items inside it will be restored whenever you log back into your account.</p>';
+            ]]></search>
+            <add><![CDATA[$_['text_message']  = '<p>You have been successfully logged off your account and your shopping cart has been emptied.</p><p>Thank you for shopping with us and come again soon!</p>';]]></add>
+        </operation>
+    </file>
+</modification>	

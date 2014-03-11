@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Omtex - Opencart Mobile And Tablet Version</id>
+	<version>1.2</version>
+	<vqmver>2.0</vqmver>
+	<author>Opcrat</author>
+	<file name="system/library/pagination.php">
+		<operation>
+			<search position="before"><![CDATA[public function render() {]]></search>
+			<add><![CDATA[
+				public function render_mobile() {
+					$total = $this->total;
+					$this->num_links = 5;
+					
+					if ($this->page < 1) {
+						$page = 1;
+					} else {
+						$page = $this->page;
+					}
+					
+					if (!(int)$this->limit) {
+						$limit = 6;
+					} else {
+						$limit = $this->limit;
+					}
+					
+					$num_links = $this->num_links;
+					$num_pages = ceil($total / $limit);
+					
+					$output = '';
+					
+					if ($page > 1) {
+						$output .= ' <a href="' . str_replace('{page}', $page - 1, $this->url) . '"  data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">' . $this->text_prev . '</a> ';
+					}
+			
+					if ($num_pages > 1) {
+						if ($num_pages <= $num_links) {
+							$start = 1;
+							$end = $num_pages;
+						} else {
+							$start = $page - floor($num_links / 2);
+							$end = $page + floor($num_links / 2);
+						
+							if ($start < 1) {
+								$end += abs($start) + 1;
+								$start = 1;
+							}
+									
+							if ($end > $num_pages) {
+								$start -= ($end - $num_pages);
+								$end = $num_pages;
+							}
+						}
+			
+						if ($start > 1) {
+							$output .= ' <a data-role="button" data-theme="c" data-inline="true">&hellip;</a> ';
+						}
+			
+						for ($i = $start; $i <= $end; $i++) {
+							if ($page == $i) {
+								$output .= ' <a data-role="button" data-theme="b" data-inline="true">' . $i . '</a> ';
+							} else {
+								$output .= ' <a href="' . str_replace('{page}', $i, $this->url) . '"  data-role="button" data-theme="c" data-inline="true">' . $i . '</a> ';
+							}	
+						}
+										
+						if ($end < $num_pages) {
+							$output .= '<a data-role="button" data-theme="c" data-inline="true">&hellip;</a> ';
+						}
+					}
+					
+					if ($page < $num_pages) {
+						$output .= ' <a href="' . str_replace('{page}', $page + 1, $this->url) . '" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">' . $this->text_next . '</a>';
+					}
+					
+					$find = array(
+						'{start}',
+						'{end}',
+						'{total}',
+						'{pages}'
+					);
+					
+					$replace = array(
+						($total) ? (($page - 1) * $limit) + 1 : 0,
+						((($page - 1) * $limit) > ($total - $limit)) ? $total : ((($page - 1) * $limit) + $limit),
+						$total, 
+						$num_pages
+					);
+					
+					return ($output ? '<div data-role="controlgroup" data-type="horizontal">' . $output . '</div>' : '') . '<div class="' . $this->style_results . '">' . str_replace($find, $replace, $this->text) . '</div>';
+	}
+		
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/account/download.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/account/order.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/account/return.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/account/return.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/account/reward.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/account/transaction.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/affiliate/transaction.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/category.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/manufacturer.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/product.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/search.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/special.php">
+		<operation>
+			<search position="replace"><![CDATA[$this->data['pagination'] = $pagination->render();]]></search>
+			<add><![CDATA[
+				$theme_template = $this->config->get('config_template');
+				if($theme_template =='omtex-mobile' || $theme_template =='omtex-tablet'){
+					$this->data['pagination'] = $pagination->render_mobile();
+				}else{
+					$this->data['pagination'] = $pagination->render();
+				}
+			]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,44 @@
+<!-- Created using vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk //-->
+<modification>
+	<id><![CDATA[yukari ]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[flayk]]></author>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[<body>]]></search>
+			<add><![CDATA[	<head>
+	<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+	<!-- the necessary css for yukari -->	
+	<link rel="stylesheet" type="text/css" media="screen,projection" href="catalog/yukari/yukari.css" />
+	
+	<style type="text/css" media="screen">
+		*{margin:0 auto;}
+		#wrapper {width:90%;margin:15px auto;}
+		p { margin:20px 0;}
+	</style>
+	<!-- yukari plugin -->
+	<script src="catalog/yukari/yukari.js" type="text/javascript"></script>
+
+		
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			var defaults = {
+	  			containerID: 'yukari', // fading element id
+				containerHoverClass: 'yukarihover', // fading element hover class
+				scrollSpeed: 1000,
+				easingType: 'linear' 
+	 		};
+			*/
+			
+			$().yukari({ easingType: 'easeOutQuart' });
+			
+		});
+	</script>
+</head>
+</head>
+]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+
+	<id>Ajax Edit Quantity Admin</id>
+	<version>1.0.0</version>
+	<vqmver>2.1.5</vqmver>
+	<author>giuseppe.davi@gmail.com</author>
+
+	<file name="admin/view/template/catalog/product_list.tpl" error="log">
+
+		<operation>
+			<search position="replace" index="1"><![CDATA[<td class="right"><?php if ($product['quantity'] <= 0) { ?>]]></search>
+			<add><![CDATA[           
+<?php /* <td class="right"><?php if ($product['quantity'] <= 0) { ?> */?>
+<td class="right">
+<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+    <span class="ajax-edit" id="quantity-<?php echo $product['product_id']; ?>" value="<?php echo $product['product_id']; ?>">
+    <input type="text" value="<?php echo $product['quantity']; ?>"><br>
+    <a onclick="save_quantity(<?php echo $product['product_id']; ?>)"><?php echo $text_save ?></a>&nbsp
+    <a onclick="close_quantity(<?php echo $product['product_id']; ?>)"; return false;><?php echo $text_close ?></a>
+</span>
+<?php } ?>
+<?php if ($product['quantity'] <= 0) { ?>
+]]></add>
+		</operation>
+
+		<operation>
+			<search position="before" index="1" ><![CDATA[<script type="text/javascript"><!--]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+<style>
+.ajax-edit {
+   display:none;
+   float:right;
+   margin-right: 5px;
+   clear:right;
+}
+.ajax-edit input {
+   width:100%;
+   text-align: right;
+   cursor: text;
+}
+.ajax-edit +span {
+   cursor: pointer;
+}
+
+</style>
+<?php } ?>
+                        ]]></add>
+		</operation>
+		<operation>
+			<search position="after" index="1" ><![CDATA[<script type="text/javascript"><!--]]></search>
+			<add><![CDATA[
+<?php if ($this->user->hasPermission('modify', 'catalog/product')) {?>
+    	
+                                $(document).ready(function() {
+                                   $('.ajax-edit').each(function(index, wrapper) {
+                                        $(this).siblings().click(function() {
+                                            $(wrapper).show();
+                                            $(wrapper).siblings().hide();
+                                        })
+                                   });
+                                })
+
+                                function save_quantity(id) {
+                                    var input_quantity = $('#quantity-'+id+' input');
+                                    var quantity = $(input_quantity).val();
+                                    $(quantity).css('cursor','progress');
+                                    $.ajax({
+                                      url: 'index.php?route=catalog/product/saveQuantity&product_id='+id+'&quantity='+quantity+'&token=<?php echo $token; ?>',
+                                      dataType: 'html',
+                                      data: {},
+                                      success: function(quantity) { 
+                                         $('#quantity-'+id).next().html(quantity);
+                                         close_quantity(id);
+                                      }
+                                    });
+                                    $(input_quantity).css('cursor','default');
+                                }
+
+                                function close_quantity(id) {
+                                     $('.ajax-edit input').blur();
+                                     $('#quantity-'+id).siblings().show();
+                                     $('#quantity-'+id).hide(500);
+                                }
+<?php } ?>
+                        ]]></add>
+		</operation>
+
+	</file>
+
+    <file name="admin/controller/catalog/product.php" error="log">
+        <operation>
+			<search position="before" index="1" ><![CDATA[public function autocomplete() {]]></search>
+			<add><![CDATA[
+    public function saveQuantity() {
+        $id  = $this->request->get['product_id'];
+        $quantity = $this->request->get['quantity'];
+
+        $this->load->model('catalog/product');
+
+        $this->response->setOutput($this->model_catalog_product->saveQuantity($id,$quantity));
+    }
+
+              ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/controller/catalog/product.php" error="log">
+        <operation>
+			<search position="after" index="1" ><![CDATA[$this->data['heading_title'] = $this->language->get('heading_title');]]></search>
+			<add><![CDATA[
+                $this->data['text_save'] = $this->language->get('text_save');
+                if($this->data['text_save'] == 'text_save') $this->data['text_save'] = 'Save';
+
+                $this->data['text_close'] = $this->language->get('text_close');
+                if($this->data['text_close'] == 'text_close') $this->data['text_close'] = 'Close';
+              ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/model/catalog/product.php" error="log">
+        <operation>
+			<search position="before" index="1" ><![CDATA[public function editProduct($product_id, $data) {]]></search>
+			<add><![CDATA[
+    public function saveQuantity($product_id,$quantity) {
+        $this->db->query("UPDATE " . DB_PREFIX . "product SET quantity = '" . (int)$quantity. "', date_modified = NOW() WHERE product_id = '". $product_id . "'");
+
+        $query = $this->db->query("SELECT quantity FROM " . DB_PREFIX . "product WHERE product_id = '". $product_id . "'");
+        $row = $query->row;
+
+        return $row['quantity'];
+    }
+
+              ]]></add>
+        </operation>
+    </file>
+
+</modification>
+

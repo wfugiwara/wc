@@ -1,0 +1,9 @@
+<?php
+$_['text_out_of_stock']     = 'Produto não disponível na combinação selecionada';
+$_['text_in_stock']         = '%s unidade(s) em estoque';
+$_['text_in_stock_avail']   = 'Produto disponivel';
+$_['combination_not_avail'] = 'Esta combinação de opções não está disponível';
+$_['text_id_missing']       = 'Solicitação inválida';
+$_['text_checking_options'] = 'Verificando disponibilidade...';
+$_['text_discount']         = ' ou mais ';
+$_['text_nodiscount']       = 'Sem desconto para compras em quantidade';

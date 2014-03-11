@@ -1,0 +1,18 @@
+<modification>
+	<id>VQMOD CORE FOR OPENCART - DO NOT REMOVE</id>
+	<version>1.4.x and 1.5.x</version>
+	<vqmver>2.X</vqmver>
+	<author>pm-netti.com</author>
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="replace"><![CDATA[</head>]]></search>
+			<add><![CDATA[
+<style type="text/css">
+.list tbody tr:hover td {
+	background-color: #00FFFF;
+}
+</style>
+</head>]]></add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,25 @@
+<modification>
+	<id>Menu Home Icon</id>
+	<version>0.3</version>
+	<vqmver>2.2.1</vqmver>
+	<author>booger__</author>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+			<operation error="log">
+				<search position="before"><![CDATA[</head>]]></search>
+				<add><![CDATA[<style type="text/css" >
+div.home { width: 24px; height: 24px; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAABICAYAAADs+TUPAAABx0lEQVR42u2WTW6DMBBGcwxWkdtVjsExeoTcAm6Rk3RRdeHQ8HMEll1VlHbLBiWIeipMh2LAMeOmKLH0SYZE72Ezxl6t/lMry3JTFIVjDV5VVSaSkkuOx6MrwLxuGvThHumT17+aHEkj9yFnS4fgWCKyQ9e+8bToNPF/zxpcW2AK1xLMgU9W11z4qIQKrpRQw3uS0+m0lQuFEP7NE+yHzlRRCQar6KICmFM59Kl3ZipoFxH0b4KFClCV9IK/L3gXU2V1vY09vW3Y46tjDx58ZCzIU3IJe85cts/53ctnDYE+3CN9cglvJc1IGM/ce577EOiTwLFkvc938hokxtOik3WQe9bg2gJTuJZgDnyyuubCRyVUcKWEGt6TMJ5v5UKhgv8svPfuuYhKMFhFFxXAnLZDn3hnRgK8iKB/EyxUIKtEFbxb4V1MlSs+F3HONyKONXgURVkcxym55HA4uALOkySpIdCHe6RPLuEyciSN3IecLR2CY4n4fYdG5htPi07E/z1rcG2BKVxLMAc+WV1z4aMSKrhSQg3vScIw3MqFQgj3m3TPRVSCwSq6qADmFA2d2xC0iwj6N8FCBahKesHfF7yLqfKnJ5Evc6DmqSF5OHMAAAAASUVORK5CYII=) no-repeat scroll 0% 0% transparent; background-position: 0px -48px; cursor: pointer; float: left; margin: 7px 3px 0px 3px; }
+div.home:hover { background-position: 0px -24px; }
+div.home:active { background-position: 0px 0px; }
+</style>]]></add>
+			</operation>
+		<operation>
+			<search position="before"><![CDATA[<?php foreach ($categories as $category) { ?>]]></search>
+			<add><![CDATA[<a alt="<?php echo $text_home; ?>" href="<?php echo $home; ?>"><div class="home"></div></a>]]></add>
+		</operation>
+		<operation>
+			<search position="replace"><![CDATA[<div class="links">]]></search>
+			<add><![CDATA[<div class="links">]]></add>
+		</operation>
+
+	</file>
+</modification>

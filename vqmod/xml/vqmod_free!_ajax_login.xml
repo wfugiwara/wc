@@ -1,0 +1,41 @@
+<modification>
+	<id>FREE! Ajax Login</id>
+	<version>0.9</version>
+	<vqmver>2.2.1</vqmver>
+	<author>booger</author>
+		<file name="catalog/view/theme/*/template/common/header.tpl">
+			<operation error="log">
+				<search position="before"><![CDATA[</head>]]></search>
+				<add><![CDATA[<script type="text/javascript" src="catalog/view/javascript/jquery/ui/external/jquery.cookie.js"></script><style type="text/css" >
+#loginbox{display:none;background:white;position:relative;top:-1px;right:50px;padding:10px;border:1px solid #EEE;border-radius:5px;text-align:left;z-index:-1;box-shadow:0 2px 2px #DDD}#welcome.active .loginbox{display:inline-block}#welcome .login{display:inline-block}#welcome.active .login{border-top:1px solid #EEE;border-left:1px solid #EEE;border-right:1px solid #EEE;border-radius:5px 5px 0 0;padding:2px 6px 6px 6px;margin:-3px -7px 0 -7px;background:white}
+</style>]]></add>
+			</operation>
+		</file>
+		<file name="catalog/view/theme/*/template/common/footer.tpl">
+			<operation error="log">
+				<search position="before"><![CDATA[<div id="footer">]]></search>
+				<add><![CDATA[<script type="text/javascript"><!--
+$(document).ready(function(){-1==$(location).attr("href").indexOf("account/login")&&$.cookie("url",$(location).attr("href"));$("#welcome a").first().removeAttr("href");$("#welcome a").first().css("position","relative");$("#welcome").append('<div id="loginbox" class="loginbox"></div>');var a=$("#welcome a").first().html();$("#welcome a").first().html('<span class="login"></span>');$("#welcome a .login").html(a);-1!=$("#welcome a[href]").first().attr("href").indexOf("register")?($("#loginbox").load("index.php?route=account/login .right form"), $("#loginbox").css("right","50px")):($("#loginbox").load("index.php?route=account/account #content"),$("#loginbox").css("right","40px"));$("#welcome > a .login").live("hover",function(){$("#welcome").addClass("active");$("#loginbox .breadcrumb").remove();$("#loginbox h1").remove();$("#welcome").live("mouseleave",function(){$(this).removeClass("active")})})});
+//--></script>]]></add>
+			</operation>
+		</file>
+		<file name="catalog/controller/account/login.php">
+			<operation error="log">
+				<search position="replace" index="2,3"><![CDATA[$this->redirect($this->url->link('account/account', '', 'SSL'));]]></search>
+				<add><![CDATA[
+				
+				//$this->redirect($_COOKIE["url"]);
+				$this->redirect($this->url->link('account/account', '', 'SSL'));
+				]]></add>
+			</operation>
+		</file>
+		<file name="catalog/controller/account/logout.php">
+			<operation error="log">
+				<search position="replace"><![CDATA[$this->redirect($this->url->link('account/logout', '', 'SSL'));]]></search>
+				<add><![CDATA[
+				$this->redirect($this->url->link('account/logout', '', 'SSL'));
+				//$this->redirect($_COOKIE["url"]);
+				]]></add>
+			</operation>
+		</file>
+</modification>

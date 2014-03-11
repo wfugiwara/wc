@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+        <id>Add $shipping_address code</id>
+        <version>1.4.x and 1.5.x</version>
+        <vqmver>2.X</vqmver>
+        <author>integrio</author>
+        <file name="admin/controller/sale/order.php">
+			<operation info="After shipping address code">
+					<search position="after"><![CDATA[
+					$this->data['shipping_country'] = $order_info['shipping_country'];
+					]]></search>
+					<add><![CDATA[
+					$this->load->model('setting/setting');
+							
+					if ($order_info['shipping_address_format']) {
+						$format = $order_info['shipping_address_format'];
+					} else {
+						$format = '{firstname} {lastname}' . '\r\n' . '{company}' . '\r\n' . '{address_1}' . '\r\n' . '{address_2}' . '\r\n' . '{city} {postcode}' . '\r\n' . '{zone}' . '\r\n' . '{country}';
+					}
+					
+					$find = array(
+						'{firstname}',
+						'{lastname}',
+						'{company}',
+						'{address_1}',
+						'{address_2}',
+						'{city}',
+						'{postcode}',
+						'{zone}',
+						'{zone_code}',
+						'{country}'
+					);
+
+					$replace = array(
+						'firstname' => $order_info['shipping_firstname'],
+						'lastname'  => $order_info['shipping_lastname'],
+						'company'   => $order_info['shipping_company'],
+						'address_1' => $order_info['shipping_address_1'],
+						'address_2' => $order_info['shipping_address_2'],
+						'city'      => $order_info['shipping_city'],
+						'postcode'  => $order_info['shipping_postcode'],
+						'zone'      => $order_info['shipping_zone'],
+						'zone_code' => $order_info['shipping_zone_code'],
+						'country'   => $order_info['shipping_country']
+					);
+					
+					$shipping_address = str_replace(array("\r\n", "\n", "\r"), array('\r\n', '\n', '\r'), trim(str_replace($find, $replace, $format)));
+
+					$shipping_address = str_replace('\r\n\r\n', '\r\n', $shipping_address);
+			
+					$this->data['shipping_address'] = $shipping_address;
+					]]></add>
+			</operation>
+        </file>
+        <file name="admin/view/template/sale/order_info.tpl">
+			<operation info="Add script">
+					<search position="before"><![CDATA[
+					<div id="content">
+					]]></search>
+					<add><![CDATA[
+					<script type="text/javascript" src="view/javascript/copytoc.js"></script>
+					]]></add>
+			</operation>
+        </file>
+        <file name="admin/view/template/sale/order_info.tpl">
+			<operation info="Add button">
+					<search position="replace"><![CDATA[
+					<div class="buttons">
+					]]></search>
+					<add><![CDATA[
+					<div class="buttons"><script type="text/javascript">showButton("<?php echo $shipping_address; ?>");</script>
+					]]></add>
+			</operation>
+        </file>
+</modification>

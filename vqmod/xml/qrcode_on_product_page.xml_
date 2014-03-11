@@ -1,0 +1,19 @@
+<modification>
+	<id>QR Code on product page</id>
+	<version><![CDATA[1.1f]]></version>
+	<vqmver><![CDATA[2+]]></vqmver>
+	<author><![CDATA[<a onClick="window.open('http://www.opencart.com/index.php?route=extension/extension&filter_username=MrTech');" title="View all OpenCart Mods by MrTech">MrTech</a>]]></author>
+
+<file name="catalog/view/theme/*/template/product/product.tpl">
+	<operation error="skip">  // Display QR Code on details section
+		<search position="before"><![CDATA[<?php if ($manufacturer) { ?>]]></search>
+		<add><![CDATA[<div padding="0px;">
+		<img src="http://chart.apis.google.com/chart?chs=250x250&cht=qr&chld=L&chl=<?php $url="http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; 
+		echo $url; ?>" alt="Product QR Code" width="88" height="88" style="float: right; padding: 0px;"></div>]]></add>
+	</operation>
+	<operation  error="skip">  // Add some linebreaks
+		<search position="replace"><![CDATA[<span><?php echo $text_stock; ?></span> <?php echo $stock; ?></div>]]></search>
+		<add><![CDATA[<span><?php echo $text_stock; ?></span> <?php echo $stock; ?><br /><br /></div>]]></add>
+	</operation>
+</file>
+</modification>

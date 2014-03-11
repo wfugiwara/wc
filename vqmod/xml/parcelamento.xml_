@@ -1,0 +1,121 @@
+<modification>
+
+	<id>Mostrar parcelas no produto</id>
+	<version>1.0.0</version>
+	<vqmver>2.3.2</vqmver>
+	<author>Antonio Fragueiro</author>
+
+	<file name="/catalog/view/theme/default/template/product/product.tpl">
+        <operation>
+             <search position="before"><![CDATA[<?php if ($tax) { ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento2.php'; ?>]]></add>
+        </operation>
+    </file>	
+	
+	<!--<file name="/catalog/view/theme/default/template/product/compare.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/product/category.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/product/manufacturer_list.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>	
+	<file name="/catalog/view/theme/default/template/product/search.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/product/special.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/module/latest.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/module/featured.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/module/bestseller.tpl">
+        <operation>
+             <search position="after"><![CDATA[<?php echo $product['price']; ?>]]></search>
+             <add><![CDATA[<? include $_SERVER['DOCUMENT_ROOT'] . '/catalog/view/theme/default/parcelamento.php'; ?>]]></add>
+        </operation>
+    </file>-->
+
+	<file name="/catalog/view/theme/default/template/product/product.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $price; ?></span> <span class="price-new"><?php echo $special; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $price; ?></span> <BR> Por: <span class="price-new"><?php echo $special; ?></span>]]></add>
+        </operation>
+    </file>
+	<!--<file name="/catalog/view/theme/default/template/product/compare.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/product/category.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/product/manufacturer_list.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>	
+	<file name="/catalog/view/theme/default/template/product/search.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/product/special.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/module/latest.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/module/featured.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>
+	<file name="/catalog/view/theme/default/template/module/bestseller.tpl">
+        <operation>
+             <search position="replace"><![CDATA[<span class="price-old"><?php echo $product['price']; ?></span> <span class="price-new"><?php echo $product['special']; ?></span>]]></search>
+             <add><![CDATA[<span class="price-old">De: <?php echo $product['price']; ?></span> <BR> Por: <span class="price-new"><?php echo $product['special']; ?></span>]]></add>
+        </operation>
+    </file>-->
+
+
+
+</modification>

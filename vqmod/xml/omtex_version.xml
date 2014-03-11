@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Omtex - Version Control 1551</id>
+	<version>1.2</version>
+	<vqmver>2.0</vqmver>
+	<author>Opcrat Team</author>
+<file name="system/engine/controller.php">
+		<operation>
+			<search position="replace" offset="1"><![CDATA[trigger_error('Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');]]></search>
+			<add><![CDATA[
+			$file_default = $vqmod->modCheck(DIR_DEFAULT_TEMPLATE . $this->template);
+			if (file_exists($file_default)) {
+			extract($this->data);
+			ob_start();
+       		require($file_default);
+       		$this->output = ob_get_contents();
+      		ob_end_clean();
+			return $this->output;
+    		} else {
+			trigger_error('Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
+			exit();		
+			}
+			]]></add>
+		</operation>
+</file>
+<file name="catalog/controller/common/footer.php">
+    	<operation>
+			<search position="after" offset="1"><![CDATA[$this->data['newsletter']]]></search>
+			<add><![CDATA[
+     		$this->data['change_device_mode_mobile'] =  $this->config->get('config_change_device_mode_mobile');
+			$this->data['change_device_mode_tablet'] =  $this->config->get('config_change_device_mode_tablet');
+			$this->language->load('common/header');
+			$this->children = array('module/language','module/currency');
+			$this->data['text_nav_info'] = $this->language->get('text_nav_info');
+			$this->data['text_nav_support'] = $this->language->get('text_nav_support');
+			$this->language->load('account/logout');
+			$this->data['text_account'] = $this->language->get('text_account');
+			$this->data['text_logout'] = $this->language->get('text_logout');
+			$this->data['logged'] = $this->customer->isLogged();
+			if(isset($this->request->get['currency_code'])){
+				$this->data['currency_code'] = $this->request->get['currency_code'];
+			}else {
+				$this->data['currency_code'] = '';
+			}
+			if(isset($this->request->get['language_code'])){
+				$this->data['language_code'] = $this->request->get['language_code'];
+			}else {
+				$this->data['language_code'] = '';
+			}
+			]]></add>
+		</operation>
+</file>	
+<file name="catalog/controller/checkout/payment_method.php">
+    	<operation>
+			<search position="after" offset="1"><![CDATA[$this->data['button_continue']]]></search>
+			<add><![CDATA[
+     		$this->language->load('common/header');
+			$this->data['text_i_agree'] = $this->language->get('text_i_agree');
+			]]></add>
+		</operation>
+</file>
+<file name="catalog/controller/checkout/cart.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['countries'] = $this->model_localisation_country->getCountries();]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->load->model('localisation/zone');
+   		$this->data['zones'] = $this->model_localisation_zone->getZonesByCountryId($this->data['country_id']);
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/checkout/shipping_address.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['countries'] = $this->model_localisation_country->getCountries();]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->load->model('localisation/zone');
+   		$this->data['zones'] = $this->model_localisation_zone->getZonesByCountryId($this->data['country_id']);
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="catalog/controller/checkout/payment_address.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->data['countries'] = $this->model_localisation_country->getCountries();]]>
+      </search>
+      <add>
+        <![CDATA[
+		$this->load->model('localisation/zone');
+   		$this->data['zones'] = $this->model_localisation_zone->getZonesByCountryId($this->data['country_id']);
+		]]>
+      </add>
+    </operation>
+  </file>
+  <file name="admin/controller/setting/setting.php">
+  <operation>
+			<search position="before"><![CDATA[template()]]></search>
+			<add><![CDATA[
+		public function template_mobile() {
+		$template_mobile = basename($this->request->get['template_mobile']);
+			if (file_exists(DIR_IMAGE . 'templates_mobile/' . $template_mobile . '.png')) {
+				$image = HTTP_CATALOG . 'image/templates_mobile/' . $template_mobile . '.png';
+			} else {
+				$image = HTTP_CATALOG . 'no_image.jpg';
+			}
+			$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
+		}	
+		public function template_tablet() {
+		$template_tablet = basename($this->request->get['template_tablet']);
+			if (file_exists(DIR_IMAGE . 'templates_tablet/' . $template_tablet . '.png')) {
+				$image = HTTP_CATALOG . 'image/templates_tablet/' . $template_tablet . '.png';
+			} else {
+				$image = HTTP_CATALOG . 'no_image.jpg';
+			}
+			$this->response->setOutput('<img src="' . $image . '" alt="" title="" style="border: 1px solid #EEEEEE;" />');
+		}		
+			]]></add>
+		</operation>
+   </file>
+   <file name="catalog/controller/common/header.php">
+    	<operation>
+			<search position="replace" offset="4"><![CDATA[if ($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {]]></search>
+			<add><![CDATA[
+			    		
+			if($this->session->data['device']=='mobile'){
+				if ($this->config->get('config_logo_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_logo_mobile'))) {
+				$this->data['logo'] = $server . 'image/' . $this->config->get('config_logo_mobile');
+				} elseif($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+					$this->data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+				}
+				
+				if ($this->config->get('config_icon_mobile') && file_exists(DIR_IMAGE . $this->config->get('config_icon_mobile'))) {
+					$this->data['icon_mobile'] = $server . 'image/' . $this->config->get('config_icon_mobile');
+				} else {
+					$this->data['icon_mobile'] = '';
+				}
+				
+			}elseif($this->session->data['device']=='tablet'){
+				if ($this->config->get('config_logo_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_logo_tablet'))) {
+					$this->data['logo'] = $server . 'image/' . $this->config->get('config_logo_tablet');
+				} elseif($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))) {
+					$this->data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+				}
+				
+				if ($this->config->get('config_icon_tablet') && file_exists(DIR_IMAGE . $this->config->get('config_icon_tablet'))) {
+					$this->data['icon_tablet'] = $server . 'image/' . $this->config->get('config_icon_tablet');
+				} else {
+					$this->data['icon_tablet'] = '';
+				}
+				
+			}elseif($this->config->get('config_logo') && file_exists(DIR_IMAGE . $this->config->get('config_logo'))){
+				$this->data['logo'] = $server . 'image/' . $this->config->get('config_logo');
+			}
+			]]></add>
+		</operation>
+	</file>
+</modification>	
+	

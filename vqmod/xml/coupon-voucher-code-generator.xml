@@ -1,0 +1,122 @@
+<!-- *********************************************************************************** -->
+<!-- *** SmartFocus 2012 http://www.smartfocus.pl (c) AV                             *** -->
+<!-- *********************************************************************************** -->
+<!-- *** Version 1.0 (Free) for OC 1.5.4.1                                           *** -->
+<!-- *********************************************************************************** -->
+
+<modification>
+	<id><![CDATA[Coupon Code Generator]]></id>
+	<version><![CDATA[1.0]]></version>
+	<vqmver><![CDATA[]]></vqmver>
+	<author><![CDATA[SmartFocus]]></author>
+	
+	<file name="admin/view/template/sale/coupon_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td><input type="text" name="code" value="<?php echo $code; ?>" />]]></search>
+			<add>
+				<![CDATA[<td><input type="text" name="code" value="<?php echo $code; ?>" id="code" />
+					&nbsp;
+					<select id="code_type">
+						<option value="0">ABC</option>
+						<option value="1">abc</option>
+						<option value="2">123</option>
+						<option value="3">123ABC</option>
+						<option value="4">123abc</option>
+						<option value="5">123ABCabc</option>
+						<option value="6">123ABC!@#</option>
+					</select>
+					&nbsp;<input name="code_len" id="code_len" value="10" size="4" />
+					<input type="button" onclick="genCode()" value="?" />]]>
+			</add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[<script type="text/javascript"><!--]]></search>
+			<add><![CDATA[function genCode(){
+	var t = new Array();
+	t[0] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	t[1] = "abcedfghijklmnopqrstuvwxyz";
+	t[2] = "0123456789";
+	t[3] = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	t[4] = "01234567890abcedfghijklmnopqrstuvwxyz";
+	t[5] = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcedfghijklmnopqrstuvwxyz";
+	t[6] = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&?";
+	var rndStr = "";
+	var type = document.getElementById("code_type").options[document.getElementById("code_type").selectedIndex].value;
+	var len = document.getElementById("code_len").value;
+		
+	if( len < 3 ){
+		len = 3;
+		document.getElementById("code_len").value = 3;
+	}
+	
+	if( len > 10 ){
+		len = 10;
+		document.getElementById("code_len").value = 10;
+	}
+	
+	for( var i = 0; i < len; i++ ){
+		rndStr += t[type][Math.floor(Math.random() * t[type].length)];
+	}
+	
+	document.getElementById("code").value = rndStr;
+}
+]]>
+			</add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/sale/voucher_form.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<td><input type="text" name="code" value="<?php echo $code; ?>" />]]></search>
+			<add>
+				<![CDATA[<td><input type="text" name="code" value="<?php echo $code; ?>" id="code" />
+					&nbsp;
+					<select id="code_type">
+						<option value="0">ABC</option>
+						<option value="1">abc</option>
+						<option value="2">123</option>
+						<option value="3">123ABC</option>
+						<option value="4">123abc</option>
+						<option value="5">123ABCabc</option>
+						<option value="6">123ABC!@#</option>
+					</select>
+					&nbsp;<input name="code_len" id="code_len" value="10" size="4" />
+					<input type="button" onclick="genCode()" value="?" />]]>
+			</add>
+		</operation>
+		<operation>
+			<search position="before"><![CDATA[$('#tabs a').tabs();]]></search>
+			<add><![CDATA[function genCode(){
+	var t = new Array();
+	t[0] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	t[1] = "abcedfghijklmnopqrstuvwxyz";
+	t[2] = "0123456789";
+	t[3] = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	t[4] = "01234567890abcedfghijklmnopqrstuvwxyz";
+	t[5] = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcedfghijklmnopqrstuvwxyz";
+	t[6] = "01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&?";
+	var rndStr = "";
+	var type = document.getElementById("code_type").options[document.getElementById("code_type").selectedIndex].value;
+	var len = document.getElementById("code_len").value;
+		
+	if( len < 3 ){
+		len = 3;
+		document.getElementById("code_len").value = 3;
+	}
+	
+	if( len > 10 ){
+		len = 10;
+		document.getElementById("code_len").value = 10;
+	}
+	
+	for( var i = 0; i < len; i++ ){
+		rndStr += t[type][Math.floor(Math.random() * t[type].length)];
+	}
+	
+	document.getElementById("code").value = rndStr;
+}
+]]>
+			</add>
+		</operation>
+	</file>
+</modification>

@@ -1,0 +1,95 @@
+<modification>
+  <id>E-Piksel Admin Shortcuts Menu Lite</id>
+  <version>1.0.1</version>
+  <vqmver>2.1.0</vqmver>
+  <author>www.e-piksel.com</author>
+  <file name="admin/controller/common/home.php">
+    <operation>
+      <search position="after">
+        <![CDATA[$this->document->setTitle($this->language->get('heading_title'));]]>
+      </search>
+      <add>
+        <![CDATA[/* E-Piksel Admin Shortcuts Menu Begin */
+		if (VERSION >= '1.5.5') {
+			$this->language->load('common/epiksel_admin_shortcuts');
+		} else {
+		$this->load->language('common/epiksel_admin_shortcuts');
+		}
+		$url = '';
+		$this->data['text_emenu_voucher'] = $this->language->get('text_emenu_voucher');
+		$this->data['emenu_voucher'] = $this->url->link('sale/voucher', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_user_permission'] = $this->language->get('text_emenu_user_permission');
+		$this->data['emenu_user_permission'] = $this->url->link('user/user', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_error_log'] = $this->language->get('text_emenu_error_log');
+		$this->data['emenu_error_log'] = $this->url->link('tool/error_log', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_vqmod_manager'] = $this->language->get('text_emenu_vqmod_manager');
+		$this->data['emenu_vqmod_manager'] = $this->url->link('module/vqmod_manager', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_total'] = $this->language->get('text_emenu_total');
+		$this->data['emenu_total'] = $this->url->link('extension/total', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_payments'] = $this->language->get('text_emenu_payments');
+		$this->data['emenu_payments'] = $this->url->link('extension/payment', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_shipping'] = $this->language->get('text_emenu_shipping');
+		$this->data['emenu_shipping'] = $this->url->link('extension/shipping', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_modules'] = $this->language->get('text_emenu_modules');
+		$this->data['emenu_modules'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_add_product'] = $this->language->get('text_emenu_add_product');
+		$this->data['emenu_add_product'] = $this->url->link('catalog/product/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['text_emenu_products'] = $this->language->get('text_emenu_products');
+		$this->data['emenu_products'] = $this->url->link('catalog/product', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_add_category'] = $this->language->get('text_emenu_add_category');
+		$this->data['emenu_add_category'] = $this->url->link('catalog/category/insert', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_categories'] = $this->language->get('text_emenu_categories');
+		$this->data['emenu_categories'] = $this->url->link('catalog/category', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_options'] = $this->language->get('text_emenu_options');
+		$this->data['emenu_options'] = $this->url->link('catalog/option', 'token=' . $this->session->data['token'], 'SSL');
+        $this->data['text_emenu_LanguageEditor'] = $this->language->get('text_emenu_LanguageEditor');
+		$this->data['emenu_LanguageEditor'] = $this->url->link('LanguageEditor/LanguageEditor', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_information'] = $this->language->get('text_emenu_information');
+		$this->data['emenu_information'] = $this->url->link('catalog/information', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_reviews'] = $this->language->get('text_emenu_reviews');
+		$this->data['emenu_reviews'] = $this->url->link('catalog/review', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_orders'] = $this->language->get('text_emenu_orders');
+		$this->data['emenu_orders'] = $this->url->link('sale/order', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_returns'] = $this->language->get('text_emenu_returns');
+		$this->data['emenu_returns'] = $this->url->link('sale/return', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_customers'] = $this->language->get('text_emenu_customers');
+		$this->data['emenu_customers'] = $this->url->link('sale/customer', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_coupons'] = $this->language->get('text_emenu_coupons');
+		$this->data['emenu_coupons'] = $this->url->link('sale/coupon', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_mail'] = $this->language->get('text_emenu_mail');
+		$this->data['emenu_mail'] = $this->url->link('sale/contact', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_settings'] = $this->language->get('text_emenu_settings');
+		$this->data['emenu_settings'] = $this->url->link('setting/setting', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_purchased'] = $this->language->get('text_emenu_purchased');
+		$this->data['emenu_purchased'] = $this->url->link('report/product_purchased', 'token=' . $this->session->data['token'], 'SSL');
+		$this->data['text_emenu_backup_restore'] = $this->language->get('text_emenu_backup_restore');
+		$this->data['emenu_backup_restore'] = $this->url->link('tool/backup', 'token=' . $this->session->data['token'], 'SSL');
+		/* E-Piksel Admin Shortcuts Menu End */]]>
+      </add>
+    </operation>
+  </file>
+  <file name="admin/view/template/common/home.tpl">
+    <operation>
+      <search position="after">
+        <![CDATA[<div class="content">]]>
+      </search>
+      <add>
+        <![CDATA[<!-- Shortcuts Free Begin -->
+          <?php include '../epiksel/epiksel_admin_shortcuts/data_file/epiksel_menu.php'; ?>
+          <!-- Shortcuts Free End -->]]>
+      </add>
+    </operation>
+  </file>
+  <file name="admin/view/template/common/header.tpl">
+    <operation>
+      <search position="before">
+        <![CDATA[</head>]]>
+      </search>
+      <add>
+        <![CDATA[<!-- Shortcuts Free Begin -->
+		<link rel="stylesheet" type="text/css" href="../epiksel/epiksel_admin_shortcuts/css/epiksel_menu.css" />
+          <!-- Shortcuts Free End -->]]>
+      </add>
+    </operation>
+  </file>
+</modification>

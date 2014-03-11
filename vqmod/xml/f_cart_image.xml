@@ -1,0 +1,35 @@
+<modification>
+
+	<id>Cart image</id>
+	<version>1.0.2</version>
+	<vqmver>2.1.5</vqmver>
+	<author>Fabrikator</author>
+	
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+	    <operation><search position="replace"><![CDATA[<script type="text/javascript" src="catalog/view/javascript/common.js"></script>]]></search>
+			<add><![CDATA[<script type="text/javascript" src="catalog/view/javascript/f_i_common.js"></script>]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/module/cart.tpl">
+	    <operation><search position="after"><![CDATA[<div class="heading">]]></search>
+			<add><![CDATA[<style type="text/css">
+
+</style>
+  <?php if ($this->cart->hasProducts()) { ?>
+  <img style="margin:0 -65px -42px" src="image/data/cart_full.png">
+  <?php } else { ?>
+  <img style="margin:0 -65px -42px" src="image/data/cart_empty.png">
+  <?php } ?>]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/view/theme/*/template/product/product.tpl">
+	    <operation><search position="after" index="1"><![CDATA[if (json['success']) {]]></search>
+			<add><![CDATA[<!-- Fabrikator -->
+				$('#cart').load('index.php?route=module/cart #cart > *');
+				<!-- Fabrikator -->]]></add>
+		</operation>
+	</file>
+	
+</modification>

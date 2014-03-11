@@ -1,0 +1,108 @@
+<!-- Created using vQmod XML Generator by UKSB - http://www.opencart-extensions.co.uk //-->
+<modification>
+	<id><![CDATA[Option Copy mod]]></id>
+	<version><![CDATA[1.0.0]]></version>
+	<vqmver><![CDATA[2.1.6]]></vqmver>
+	<author><![CDATA[Minh Le mike.ltn@gmail.com]]></author>
+	<file name="admin/controller/catalog/option.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['button_delete']]]></search>
+			<add><![CDATA[//BOF Option Copy
+			$this->load->language('catalog/optc');
+			$this->data['button_copy'] = $this->language->get('button_copy');
+			
+			$this->data['copy'] = $this->url->link('catalog/option/copy', 'token=' . $this->session->data['token'] . $url, 'SSL');	
+			//EOF Option Copy]]></add>
+		</operation>
+		<operation>
+			<search position="before" offset="1"><![CDATA[?>]]></search>
+			<add><![CDATA[//BOF Option Copy
+			public function copy() {
+				$this->load->language('catalog/optc');
+
+				$this->document->setTitle($this->language->get('heading_title'));
+				
+				$this->load->model('catalog/option');
+				
+				if (isset($this->request->post['selected']) && $this->validateCopy()) {
+					foreach ($this->request->post['selected'] as $option_id) {
+						$this->model_catalog_option->copyOption($option_id);
+					}
+
+					$this->session->data['success'] = $this->language->get('text_success');
+					
+					$url = '';
+							
+					if (isset($this->request->get['sort'])) {
+						$url .= '&sort=' . $this->request->get['sort'];
+					}
+
+					if (isset($this->request->get['order'])) {
+						$url .= '&order=' . $this->request->get['order'];
+					}
+
+					if (isset($this->request->get['page'])) {
+						$url .= '&page=' . $this->request->get['page'];
+					}
+					
+					$this->redirect($this->url->link('catalog/option', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+				}
+
+				$this->getList();
+			}
+			
+			private function validateCopy() {
+				if (!$this->user->hasPermission('modify', 'catalog/option')) {
+					$this->error['warning'] = $this->language->get('error_permission');  
+				}
+				
+				if (!$this->error) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+			//EOF Option Copy]]></add>
+		</operation>
+	</file>
+	<file name="admin/model/catalog/option.php">
+		<operation>
+			<search position="before" offset="1"><![CDATA[?>]]></search>
+			<add><![CDATA[//BOF Option Copy
+			public function copyOption($option_id) {
+				$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
+				
+				$sql .= " AND o.option_id = '" . (int)$option_id . "'";
+				$query = $this->db->query($sql);
+				
+				if ($query->num_rows) {
+					$data = array();
+					
+					$data = $query->row;
+					
+					//copy option_description
+					$data = array_merge($data, array('option_description' => $this->getOptionDescriptions($option_id)));
+					
+					//edit name - append Copy of text + unique id
+					$unique_text = uniqid();
+					
+					foreach ($data['option_description'] as &$opt_desc) { //& is for reference
+						$opt_desc['name'] = "[" . $unique_text . "] Copy of " . $this->db->escape($opt_desc['name']);
+					}
+					
+					//copy option values
+					$data = array_merge($data, array('option_value' => $this->getOptionValueDescriptions($option_id)));
+					
+					$this->addOption($data);
+				}
+			}
+			//EOF Option Copy]]></add>
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/option_list.tpl">
+		<operation>
+			<search position="replace"><![CDATA[<?php echo $button_insert; ?></a>]]></search>
+			<add><![CDATA[<?php echo $button_insert; ?></a><a onclick="$('#form').attr('action', '<?php echo $copy; ?>'); $('#form').submit();" class="button"><?php echo $button_copy; ?></a>]]></add>
+		</operation>
+	</file>
+</modification>

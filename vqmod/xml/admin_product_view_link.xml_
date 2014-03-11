@@ -1,0 +1,42 @@
+﻿<modification>
+	<id>Admin Product View Link</id>
+	<version>1</version>
+	<vqmver>2.1.5</vqmver>
+	<author>godologic</author>
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="after"><![CDATA[$this->data['delete'] = $this->url->link('catalog/product/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');]]></search>
+			<add><![CDATA[$this->data['store'] = HTTP_CATALOG;
+$this->data['stores'] = array();
+
+$this->load->model('setting/store');
+
+$results = $this->model_setting_store->getStores();
+
+foreach ($results as $result) {
+$this->data['stores'][] = array(
+'name' => $result['name'],
+'id' => $result['store_id'],
+'href' => $result['url']
+);}]]></add>
+		</operation>
+	</file>
+    <file name="admin/view/template/catalog/product_list.tpl">
+    <operation>
+      <search position="after"><![CDATA[<?php echo $action['href']; ?>"><?php echo $action['text']; ?></a> ]]]></search>
+      <add><![CDATA[<?php } ?>
+      <?php
+$this->load->model('catalog/product');
+$product_store = $this->model_catalog_product->getProductStores($product['product_id']);
+?>
+<?php if (in_array(0, $product_store)) { ?>
+[<a onClick="window.open('<?php echo $store . 'index.php?route=product/product&product_id=' . $product['product_id']; ?>');">Ver na loja</a>]<br />
+<?php } ?>
+<?php foreach ($stores as $storel) { ?>
+<?php if (in_array($storel['id'], $product_store)) { ?>
+[<a onClick="window.open('<?php echo $storel['href'] . 'index.php?route=product/product&product_id=' . $product['product_id']; ?>');">Ver na <?php echo $storel['name']; ?></a>]<br />
+<?php } ?>
+]]></add>
+    </operation>
+  </file>
+</modification>

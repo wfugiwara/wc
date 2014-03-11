@@ -1,0 +1,13 @@
+<modification>
+	<id>Pinterest</id>
+	<version>1.5.1.x</version>
+	<vqmver>1.1.0</vqmver>
+	<author>x3seriesx</author>
+
+	<file name="catalog/view/theme/default/template/product/product.tpl">
+		<operation>
+			<search position="after"><![CDATA[<a class="addthis_button_twitter"></a>]]></search>
+			<add><![CDATA[ <a href="http://pinterest.com/pin/create/button/?url=<?php echo $breadcrumb['href']; ?>&media=<?php echo $thumb; ?>" class="pin-it-button" count-layout="none">Pin It</a>  <script type="text/javascript" src="http://assets.pinterest.com/js/pinit.js"></script> ]]></add>
+		</operation>
+	</file>
+</modification>

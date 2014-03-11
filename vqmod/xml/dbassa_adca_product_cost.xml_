@@ -1,0 +1,377 @@
+<modification>
+	<id>Cost</id>
+	<version>1.3</version>
+	<vqmver>2.1.6</vqmver>
+	<author>dbassa - danbasper@gmail.com</author>
+	
+	<!--admin-->
+	
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="replace"><![CDATA[
+		 		 price = '" . (float)$data['price'] . "',
+			]]></search>
+			<add><![CDATA[
+		 		 price = '" . (float)$data['price'] . "', cost = '" . (float)$data['cost'] . "',
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+		    <search position="after"><![CDATA[
+		    	public function index() {
+		    ]]></search>
+		    <add><![CDATA[
+			//Q: Insert DB columns
+			$query = $this->db->query("DESC ".DB_PREFIX."product cost");
+			if (!$query->num_rows) {
+				$this->db->query("ALTER TABLE `" . DB_PREFIX . "product` ADD `cost` decimal(15,4) NOT NULL DEFAULT '0.0000' AFTER price;");
+			}
+			$query = $this->db->query("DESC ".DB_PREFIX."order_product cost");
+			if (!$query->num_rows) {
+				$this->db->query("ALTER TABLE `" . DB_PREFIX . "order_product` ADD `cost` decimal(15,4) NOT NULL DEFAULT '0.0000' AFTER price;");
+			}			
+		    ]]></add>
+		</operation>
+				
+		<operation>
+			<search position="after"><![CDATA[
+		 		 $this->data['products'][] = array(
+			]]></search>
+			<add><![CDATA[
+		 		 'cost' => $result['cost'],
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="before"><![CDATA[
+		 		if (isset($this->request->post['status'])) {
+			]]></search>
+			<add><![CDATA[
+			    	if (isset($this->request->post['cost'])) {
+			 		$this->data['cost'] = $this->request->post['cost'];
+			    	} else if (isset($product_info)) {
+					$this->data['cost'] = $product_info['cost'];
+				} else {
+			 		$this->data['cost'] = '';
+			    	}
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation>
+			<search position="replace" index="1" offset="1"><![CDATA[
+		 		<td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+			]]></search>
+			<add><![CDATA[
+				<td><input type="text" name="price" value="<?php echo $price; ?>" /></td>
+				</tr>
+				<tr>
+				<td><?php echo "Cost"; ?></td>
+				<td><input type="text" name="cost" value="<?php echo $cost; ?>" /></td>
+				</tr>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/model/report/product.php">
+		<operation>
+			<search position="after"><![CDATA[
+		 		class ModelReportProduct extends Model {
+			]]></search>
+			<add><![CDATA[
+				public function getProfited($data = array()) {
+					$sql = "SELECT YEAR(o.date_added) AS year,MONTHNAME(o.date_added) AS month, SUM(op.price*op.quantity) AS tprice, SUM(op.cost*op.quantity) AS tcost, SUM(op.price*op.quantity - op.cost*op.quantity) AS profit, o.date_added FROM `" . DB_PREFIX . "order_product` AS op LEFT JOIN `" . DB_PREFIX . "order` AS o ON (op.order_id = o.order_id)";
+		
+					if (!empty($data['filter_order_status_id'])) {
+						$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+					} else {
+						$sql .= " WHERE o.order_status_id > '0'";
+					}
+		
+					if (!empty($data['filter_date_start'])) {
+						$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+					}
+
+					if (!empty($data['filter_date_end'])) {
+						$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+					}
+		
+					$sql .= " GROUP BY YEAR(o.date_added), MONTH(o.date_added) ORDER BY YEAR(o.date_added), MONTH(o.date_added) ASC";
+					
+					if (isset($data['start']) || isset($data['limit'])) {
+						if ($data['start'] < 0) {
+							$data['start'] = 0;
+						}			
+
+						if ($data['limit'] < 1) {
+							$data['limit'] = 20;
+						}	
+			
+						$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+					}
+		
+					$query = $this->db->query($sql);
+	
+					return $query->rows;
+				}
+
+				public function getTotalProfited($data) {		
+
+					$sql = "SELECT COUNT(*), YEAR(o.date_added), MONTHNAME(o.date_added) 
+							FROM `" . DB_PREFIX . "order_product` op LEFT JOIN `" . DB_PREFIX . "order` o ON (op.order_id = o.order_id)";
+		
+					if (!empty($data['filter_order_status_id'])) {
+						$sql .= " WHERE o.order_status_id = '" . (int)$data['filter_order_status_id'] . "'";
+					} else {
+						$sql .= " WHERE o.order_status_id > '0'";
+					}
+		
+					if (!empty($data['filter_date_start'])) {
+						$sql .= " AND DATE(o.date_added) >= '" . $this->db->escape($data['filter_date_start']) . "'";
+					}
+
+					if (!empty($data['filter_date_end'])) {
+						$sql .= " AND DATE(o.date_added) <= '" . $this->db->escape($data['filter_date_end']) . "'";
+					}
+		
+					$sql .= " GROUP BY YEAR(o.date_added), MONTH(o.date_added)";
+		
+					$query = $this->db->query($sql);
+		
+					if ($query->num_rows) {
+			
+						return $query->num_rows;
+					} else {
+						return 0;		
+					}
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/common/header.tpl">
+		<operation>
+			<search position="after"><![CDATA[
+		 		<li><a href="<?php echo $report_product_purchased; ?>">
+			]]></search>
+			<add><![CDATA[
+				<li><a href="<?php echo $report_product_profited; ?>"><?php echo $text_report_product_profited; ?></a></li>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[
+		 		$this->data['text_report_product_purchased']
+			]]></search>
+			<add><![CDATA[
+				$this->data['text_report_product_profited'] = $this->language->get('text_report_product_profited');
+			]]></add>
+		</operation>
+
+		<operation>
+			<search position="after"><![CDATA[
+		 		$this->data['report_product_purchased']
+			]]></search>
+			<add><![CDATA[
+				$this->data['report_product_profited'] = $this->url->link('report/product_profited', 'token=' . $this->session->data['token'], 'SSL');
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/language/spanish/common/header.php" error="skip">
+		<operation error="skip">
+			<search position="after"><![CDATA[
+		 		$_['text_report_product_purchased']
+			]]></search>
+			<add><![CDATA[
+				$_['text_report_product_profited'] = 'Beneficios';
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="admin/language/english/common/header.php">
+		<operation>
+			<search position="after"><![CDATA[
+		 		$_['text_report_product_purchased']
+			]]></search>
+			<add><![CDATA[
+				$_['text_report_product_profited'] = 'Benefits';
+			]]></add>
+		</operation>
+	</file>	
+
+	<file name="admin/language/english/setting/setting.php">
+		<operation>
+			<search position="before"><![CDATA[
+		 		?>
+			]]></search>
+			<add><![CDATA[
+				$_['button_set_orders_cost'] = 'Set Actual Products Cost to ALL Orders';
+				$_['entry_set_orders_cost'] =  'Set ALL orders products cost:<br /><span class="help">BE CAREFULL. Make a backup before you use this option. Only use this button to setup the Product Cost and Profit extension at his firts use. If you press this button all products cost in your orders are going to be modified to include your actual products cost. You need to enter all your products cost in the product form page for this operation works fine.</span>';
+				$_['text_cost_sure_message'] = 'Are your sure what you are doing?';
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/language/spanish/setting/setting.php" error="skip">
+		<operation>
+			<search position="before"><![CDATA[
+		 		?>
+			]]></search>
+			<add><![CDATA[
+				$_['button_set_orders_cost'] = 'Set Actual Products Cost to ALL Orders';
+				$_['entry_set_orders_cost'] =  'Set ALL orders products cost:<br /><span class="help">BE CAREFULL. Make a backup before you use this option. Only use this button to setup the Product Cost and Profit extension at his firts use. If you press this button all products cost in your orders are going to be modified to include your actual products cost. You need to enter all your products cost in the product form page for this operation works fine.</span>';
+				$_['text_cost_sure_message'] = 'Are your sure what you are doing?';
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/setting/setting.php">
+		<operation>
+			<search position="after"><![CDATA[
+		 		$this->data['heading_title']
+			]]></search>
+			<add><![CDATA[
+				$this->data['entry_set_orders_cost'] = $this->language->get('entry_set_orders_cost');
+				$this->data['text_cost_sure_message'] = $this->language->get('text_cost_sure_message');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+		 		$this->data['button_cancel']
+			]]></search>
+			<add><![CDATA[
+				$this->data['button_set_costs_to_all_orders'] = $this->language->get('button_set_orders_cost');
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+		 		$this->data['token']
+			]]></search>
+			<add><![CDATA[
+				$this->data['url_set_costs_to_all_orders'] = $this->url->link('catalog/product/SetCostsToAllOrders', 'token=' . $this->session->data['token']);
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/view/template/setting/setting.tpl">
+		<operation>
+			<search position="before"><![CDATA[
+		 		<?php echo $footer; ?>
+			]]></search>
+			<add><![CDATA[
+				<script type="text/javascript"><!--
+				function show_confirm()
+				{
+				var r=confirm("<?php echo $text_cost_sure_message ;?>");
+				if (r==true)
+				  {
+				  window.location = "<?php echo htmlspecialchars_decode($url_set_costs_to_all_orders) ;?>";
+				  }
+				else
+				  {
+				  //alert("You pressed Cancel!");
+				  }
+				}
+				//--></script>
+			]]></add>
+		</operation>
+		<operation>
+			<search position="after"><![CDATA[
+		 		<div id="tab-option">
+			]]></search>
+			<add><![CDATA[
+				<h2>Add Product Cost & Sales Report</h2>
+				<table class="form">
+		        <tr>
+		        	<td><?php echo $entry_set_orders_cost; ?></td>
+		        	<td><input onclick="show_confirm()" type="button" class="button" value="<?php echo $button_set_costs_to_all_orders; ?>" /></td>
+		        </tr>
+		    	</table>
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/controller/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[
+		 		public function insert() {
+			]]></search>
+			<add><![CDATA[
+				public function SetCostsToAllOrders () {
+					$this->load->model('catalog/product');
+					$this->model_catalog_product->SetCostsToAllOrders();
+					$this->redirect($this->url->link('setting/setting', 'token=' . $this->session->data['token'] . $url, 'SSL'));
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	<file name="admin/model/catalog/product.php">
+		<operation>
+			<search position="before"><![CDATA[
+		 		public function addProduct($data) {
+			]]></search>
+			<add><![CDATA[
+				public function SetCostsToAllOrders() {
+					$query = $this->db->query("SELECT product_id, cost FROM " . DB_PREFIX . "product WHERE status=1");
+					foreach ($query->rows as $result) {
+						$this->db->query("UPDATE " . DB_PREFIX . "order_product SET cost = '" . (float)$result['cost'] . "' WHERE product_id = '" . (int)$result['product_id'] . "'");
+					}
+				}
+			]]></add>
+		</operation>
+	</file>
+
+	
+	<!--catalog-->
+	
+	<file name="system/library/cart.php">
+		<operation>
+			<search position="after"><![CDATA[
+		 		data[$key] = array(
+			]]></search>
+			<add><![CDATA[
+				'cost' => $product_query->row['cost'],
+			]]></add>
+		</operation>
+	</file>	
+	
+	<file name="catalog/controller/checkout/cart.php">
+		<operation>
+			<search position="after" index="1"><![CDATA[
+		 		$this->data['products'][] = array(
+			]]></search>
+			<add><![CDATA[
+				'cost' => $product['cost'],
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/controller/checkout/confirm.php">
+		<operation>
+			<search position="after"><![CDATA[
+		 		$product_data[] = array(
+			]]></search>
+			<add><![CDATA[
+				'cost' => $product['cost'],
+			]]></add>
+		</operation>
+	</file>
+	
+	<file name="catalog/model/checkout/order.php">
+		<operation>
+			<search position="replace"><![CDATA[
+		 		, price = '" . (float)$product['price'] . "'
+			]]></search>
+			<add><![CDATA[
+				, price = '" . (float)$product['price'] . "', cost = '" . (float)$product['cost'] . "'
+			]]></add>
+		</operation>
+	</file>	
+</modification>

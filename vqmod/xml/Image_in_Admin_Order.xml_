@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id>Image_in_Admin_Orders</id>
+	<version>1.0.0</version>
+	<vqmver>2.3.2</vqmver>
+	<author>@Brunte27</author>
+	<file name="admin/view/template/sale/order_info.tpl">
+		<operation error="log">
+			<search position="after"><![CDATA[<td class="left"><?php echo $column_product; ?></td>]]></search>
+			<add><![CDATA[<td class="left"><?php echo "Image"; ?></td>]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace"><![CDATA[<tbody>]]></search>
+			<add><![CDATA[]]></add>
+		</operation>
+		<operation error="log">
+			<search position="replace"><![CDATA[<?php foreach ($products as $product) { ?>]]></search>
+			<add><![CDATA[          <?php foreach ($products as $product) { ?>
+		  <?php $productinfo = $this->db->query("SELECT * FROM " . DB_PREFIX . "product WHERE product_id = '" . ($product['product_id'] . "'"));?>
+          <tbody id="product-row<?php echo $product['order_product_id']; ?>">]]></add>
+		</operation>
+		<operation error="log">
+			<search position="before"><![CDATA[<td class="left"><?php echo $product['model']; ?></td>]]></search>
+			<add><![CDATA[			  <td>
+			 <img src="<?php echo HTTPS_CATALOG."image/".$productinfo->row['image']; ?>" width="60" height="60" />
+			 </td>]]></add>
+		</operation>
+	</file>
+</modification>

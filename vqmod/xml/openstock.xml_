@@ -1,0 +1,995 @@
+<modification>
+    <id>Open Stock</id>
+    <version>149</version>
+    <vqmver>1.0.8</vqmver>
+    <author>James Allsup</author>
+    <file name="system/library/cart.php">
+        <operation>
+            <search position="after" trim="true"><![CDATA[ $options = unserialize(base64_decode($product[1])); ]]></search>
+            <add><![CDATA[
+                $optionsTmp = array();
+                foreach($options as $v) {
+                    if(!is_array($v)){
+                        $q = $this->db->query("
+                            SELECT `o`.`type`
+                            FROM
+                                `" . DB_PREFIX . "product_option_value` as `pv`,
+                                `" . DB_PREFIX . "option` as `o`
+                            WHERE `pv`.`option_id` = `o`.`option_id`
+                            AND `pv`.`product_option_value_id` = '".(int)$v."'");
+
+                        if($q->num_rows){
+                            $type = $q->row['type'];
+                        }else{
+                            $type = '';
+                        }
+
+                        if($type == 'select' || $type == 'image' || $type =='radio'){
+                            $optionsTmp[] = $v;
+                        }
+                    }
+                }
+                $var = implode(':', $optionsTmp);
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before" trim="true"><![CDATA[$this->data[$key] = array(]]></search>
+            <add><![CDATA[
+            if(!isset($pImage) || $pImage == ''){
+                $pImage = $product_query->row['image'];
+            }
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" trim="true"><![CDATA['image'           => $product_query->row['image'],]]></search>
+            <add><![CDATA['image'           => $pImage,]]></add>
+        </operation>
+        <operation>
+            <search position="after" offset="1"><![CDATA[foreach ($this->session->data['cart'] as $key => $quantity) {]]></search>
+            <add><![CDATA[$pImage = '';]]></add>
+        </operation>
+        <operation>
+            <search position="replace" trim="true"><![CDATA[ if ($product_2[0] == $product_id) { ]]></search>
+            <add><![CDATA[
+                    $options2 = array();
+                    if (isset($product_2[1])) {
+                        $options2 = unserialize(base64_decode($product_2[1]));
+                        $optionsTmp2 = array();
+                        foreach($options2 as $v) {
+                            if(!is_array($v)){
+
+                                $q = $this->db->query("
+                                    SELECT `o`.`type`
+                                    FROM
+                                        `" . DB_PREFIX . "product_option_value` as `pv`,
+                                        `" . DB_PREFIX . "option` as `o`
+                                    WHERE `pv`.`option_id` = `o`.`option_id`
+                                    AND `pv`.`product_option_value_id` = '".(int)$v."'");
+
+                                if($q->num_rows){
+                                    $type = $q->row['type'];
+                                }else{
+                                    $type = '';
+                                }
+
+                                if($type == 'select' || $type == 'image' || $type =='radio'){
+                                    $optionsTmp2[] = $v;
+                                }
+                            }
+                        }
+
+                        $var2 = implode(':', $optionsTmp2);
+                    }
+
+                    $excludeDiscount = false;
+                    if(isset($product_query->row['has_option']) && ($product_query->row['has_option'] == 1)){
+                        $stock_qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "product_option_relation` WHERE `var` = '".(string)$var2."' AND `product_id` = '".(int)$product_2[0]."' LIMIT 1");
+
+                        if($stock_qry->num_rows){
+                            if($stock_qry->row['price'] != 0){
+                                $excludeDiscount = '3';
+                            }
+                        }
+                    }
+
+                    if (($product_2[0] == $product_id) && ($excludeDiscount == false)) {
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" trim="true" offset="2"><![CDATA[ if (!$product_query->row['quantity'] || ($product_query->row['quantity'] < $quantity)) { ]]></search>
+            <add><![CDATA[
+                    if(isset($product_query->row['has_option']) && ($product_query->row['has_option'] == 1)){
+                        $stock_qry = $this->db->query("SELECT * FROM `" . DB_PREFIX . "product_option_relation` WHERE `var` = '".(string)$var."' AND `product_id` = '".(int)$product_id."' LIMIT 1");
+
+                        if(!empty($stock_qry->row['image'])){
+                            $pImage = $stock_qry->row['image'];
+                        }
+
+                        if($stock_qry->num_rows){
+                            $priceNew = $stock_qry->row['price'];
+
+                            if($stock_qry->row['stock'] < 1 || $stock_qry->row['stock'] < $quantity)
+                            {
+                                $stock = false;
+                            }
+
+                            //product special pricing
+                            $sql2 = "
+                                SELECT `price`
+                                FROM `" . DB_PREFIX . "product_option_relation_group_price`
+                                    WHERE `product_option_relation_id` = '".(int)$stock_qry->row['id']."'
+                                    AND `product_id` = '".(int)$product_id."'
+                                    AND `customer_group_id` = '".(int)$customer_group_id."'
+                                ORDER BY `price` ASC
+                                LIMIT 1";
+
+                            $option_qry2 = $this->db->query($sql2);
+
+                            if($option_qry2->num_rows)
+                            {
+                                if($option_qry2->row['price'] != 0)
+                                {
+                                    $priceNew = $option_qry2->row['price'];
+                                }
+                            }
+
+                            //product option discounts.
+                            $sql = "
+                                SELECT
+                                    `" . DB_PREFIX . "product_option_relation_discount_price`.`price` AS `dp`
+                                FROM
+                                    `" . DB_PREFIX . "product_option_relation_discount_price`,
+                                    `" . DB_PREFIX . "product_option_relation`
+                                WHERE
+                                    `" . DB_PREFIX . "product_option_relation`.`var` = '".(string)$var."'
+                                AND
+                                    `" . DB_PREFIX . "product_option_relation`.`product_id` = '".(int)$product_id."'
+                                AND
+                                    `" . DB_PREFIX . "product_option_relation`.`id` = `" . DB_PREFIX . "product_option_relation_discount_price`.`product_option_relation_id`
+                                AND
+                                    `" . DB_PREFIX . "product_option_relation_discount_price`.`qty` <= '" . (int)$quantity . "'
+                                ORDER BY
+                                    `" . DB_PREFIX . "product_option_relation_discount_price`.`qty` DESC, `" . DB_PREFIX . "product_option_relation_discount_price`.`price` ASC
+                                LIMIT 1
+                            ";
+                            $discount_qry = $this->db->query($sql);
+
+                            if($discount_qry->num_rows){
+                                if($discount_qry->row['dp'] != 0){
+                                    $priceNew = $discount_qry->row['dp'];
+                                }
+                            }
+
+                            if($priceNew != 0){
+                                $price = $priceNew;
+                            }
+                        }else{
+                            $stock = false;
+                        }
+                    }else{
+                        if (!$product_query->row['quantity'] || ($product_query->row['quantity'] < $quantity)) {
+                            $stock = false;
+                        }
+                    }
+
+            ]]></add>
+        </operation>
+
+        <!-- USED FOR DEBUG, LEAVE FOR NOW.
+                <operation>
+                    <search position="after" offset="1"><![CDATA['length_class_id' => $product_query->row['length_class_id']	]]></search>
+                    <add><![CDATA[echo'<pre>'; print_r($this->data); echo '</pre>';]]></add>
+                </operation>
+        -->
+
+    </file>
+
+    <file name="catalog/model/checkout/order.php">
+        <operation>
+            <search position="replace" offset="8" index="1"><![CDATA[ foreach ($order_product_query->rows as $order_product) { ]]></search>
+            <add trim="true"><![CDATA[
+            // openstock modified version of product stock update loop.
+            $passArray = array();
+
+            foreach ($order_product_query->rows as $order_product){
+                    $product_query = $this->db->query("
+                    SELECT *
+                    FROM " . DB_PREFIX . "product
+                    WHERE `product_id` = '".(int)$order_product['product_id']."'
+                    LIMIT 1");
+
+                    if(isset($product_query->row['has_option']) && ($product_query->row['has_option'] == 1)){
+                            $pOption_query = $this->db->query("
+                            SELECT `" . DB_PREFIX . "order_option`.`product_option_value_id`
+                            FROM `" . DB_PREFIX . "order_option`, `" . DB_PREFIX . "product_option`, `" . DB_PREFIX . "option`
+                            WHERE `" . DB_PREFIX . "order_option`.`order_product_id` = '".(int)$order_product['order_product_id']."'
+                            AND `" . DB_PREFIX . "order_option`.`order_id` = '".(int)$order_id."'
+                            AND `" . DB_PREFIX . "order_option`.`product_option_id` = `" . DB_PREFIX . "product_option`.`product_option_id`
+                            AND `" . DB_PREFIX . "product_option`.`option_id` = `" . DB_PREFIX . "option`.`option_id`
+                            AND ((`" . DB_PREFIX . "option`.`type` = 'radio') OR (`" . DB_PREFIX . "option`.`type` = 'select') OR (`" . DB_PREFIX . "option`.`type` = 'image'))
+                            ORDER BY `" . DB_PREFIX . "order_option`.`order_option_id`
+                            ASC");
+
+                            if($pOption_query->num_rows != 0){
+
+                                    $pOptions = array();
+                                    foreach ($pOption_query->rows as $pOptionRow){
+                                            $pOptions[] = $pOptionRow['product_option_value_id'];
+                                    }
+
+                                    $var = implode(':', $pOptions);
+
+                                    $passArray[] = array('pid' => $order_product['product_id'], 'qty' => $order_product['quantity'], 'var' => $var);
+
+                                    $this->db->query("UPDATE " . DB_PREFIX . "product_option_relation SET stock = (stock - " . (int)$order_product['quantity'] . ") WHERE `var` = '" . (string)$var . "' AND subtract = '1' AND `product_id` = '".(int)$order_product['product_id']."'");
+                            }
+                    }else{
+                            $passArray[] = array('pid' => $order_product['product_id'], 'qty' => $order_product['quantity'], 'var' => null);
+                            $this->db->query("UPDATE " . DB_PREFIX . "product SET quantity = (quantity - " . (int)$order_product['quantity'] . ") WHERE product_id = '" . (int)$order_product['product_id'] . "' AND subtract = '1'");
+                    }
+            }]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/controller/product/product.php">
+        <operation>
+            <search position="after"><![CDATA[ $this->data['text_tags'] = $this->language->get('text_tags'); ]]></search>
+            <add><![CDATA[
+                $this->language->load('module/openstock');
+                $this->data['text_checking_options'] = $this->language->get('text_checking_options');
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[ $this->data['points'] = $product_info['points']; ]]></search>
+            <add><![CDATA[
+                $this->data['has_option'] = $product_info['has_option'];
+                $this->data['subtract'] = $product_info['subtract'];
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/model/catalog/product.php">
+        <operation error="skip">
+            <search position="after"><![CDATA[ 'isbn'             => $query->row['isbn'], ]]></search>
+            <add><![CDATA[
+                'has_option'             => $query->row['has_option'],
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="catalog/controller/product/compare.php">
+        <operation error="skip">
+            <search position="after"><![CDATA[ 'remove'       => $this->url->link('product/product', 'product_id=' . $product_id) ]]></search>
+            <add><![CDATA[
+                ,
+                'has_option'   => $product_info['has_option']
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/view/template/catalog/product_list.tpl">
+        <operation>
+            <search position="replace" offset="6"><![CDATA[ <td class="right"><?php if ($product['quantity'] <= 0) { ?> ]]></search>
+            <add><![CDATA[
+                <td class="right">
+                    <?php if($product['has_option'] == 0){ ?>
+                    <?php if ($product['quantity'] <= 0) { ?>
+                        <span style="color: #FF0000;"><?php echo $product['quantity']; ?></span>
+                    <?php } elseif ($product['quantity'] <= 5) { ?>
+                        <span style="color: #FFA500;"><?php echo $product['quantity']; ?></span>
+                    <?php } else { ?>
+                        <span style="color: #008000;"><?php echo $product['quantity']; ?></span>
+                    <?php } }else{ ?>
+                        <span style="color: #000000;"><?php echo $product['vCount']; ?> variations</span><br />
+                        <span style="color: #000000;"><?php echo $product['vsCount']; ?> stock</span>
+                    <?php } ?>
+                </td>
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/model/catalog/product.php">
+        <operation>
+                <search position="before"><![CDATA[ if (isset($data['product_option'])) { ]]></search>
+                <add><![CDATA[ /* ]]></add>
+        </operation>
+        <operation>
+                <search position="before"><![CDATA[ if (isset($data['product_discount'])) { ]]></search>
+                <add><![CDATA[ */ ]]></add>
+        </operation>
+        <operation>
+                <search position="after"><![CDATA[ public function addProduct($data) { ]]></search>
+                <add><![CDATA[
+                    $isAdd = true;
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="replace"><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "' ]]></search>
+                <add><![CDATA[
+                    if(!isset($data['has_option'])) { $data['has_option'] = 0; }
+
+                    $this->db->query("INSERT INTO " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', has_option = '".(int)$data['has_option']."'
+                ]]></add>
+        </operation>
+        <operation error="skip">
+                <search position="replace"><![CDATA[
+                    $product_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option po LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+                ]]></search>
+                <add><![CDATA[
+        $product_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option po LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.sort_order ASC");
+                ]]></add>
+        </operation>
+        <operation error="skip">
+                <search position="replace"><![CDATA[ $product_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option po LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.sort_order"); ]]></search>
+                <add><![CDATA[
+        $product_option_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option po LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY o.sort_order ASC");
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="after"><![CDATA[ $data = array_merge($data, array('product_store' => $this->getProductStores($product_id))); ]]></search>
+                <add><![CDATA[
+                    $data['product_option_stock'] = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_relation WHERE product_id = " . (int)$product_id);
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="replace"><![CDATA[ $this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "']]></search>
+                <add><![CDATA[
+        if(!isset($data['has_option'])) { $data['has_option'] = 0; }
+
+        $this->db->query("UPDATE " . DB_PREFIX . "product SET model = '" . $this->db->escape($data['model']) . "', sku = '" . $this->db->escape($data['sku']) . "', has_option = '" . (int)$data['has_option']."']]></add>
+        </operation>
+        <operation error="skip">
+                <search position="replace"><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . $this->db->escape($product_option_value['option_value_id']) . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'");]]></search>
+                <add><![CDATA[
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'");
+                ]]></add>
+        </operation>
+        <operation error="skip">
+                <search position="replace"><![CDATA[ $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'"); ]]></search>
+                <add><![CDATA[
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value_id = '" . (int)$product_option_value['option_value_id'] . "', price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'");
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="before" offset="4"><![CDATA[ public function editProduct($product_id, $data) { ]]></search>
+                <add><![CDATA[
+        /*
+         * Stock control for options - calculate, insert
+         */
+        if(!isset($data['has_option'])) { $data['has_option'] = 0; }
+
+        if($data['has_option'] == 1){
+            $this->load->model('openstock/openstock');
+            $optionsStockCalcs = (array)$this->model_openstock_openstock->calcOptions((int)$product_id);
+
+            rsort($optionsStockCalcs);
+
+            if(isset($data['product_option_stock']) && !empty($data['product_option_stock'])){
+                $data['product_option_stock'] = $data['product_option_stock']->rows;
+                foreach($optionsStockCalcs as $i => $newOption){
+                    $this->db->query("
+                        INSERT INTO " . DB_PREFIX . "product_option_relation
+                        SET
+                            `product_id`    = '" . (int)$product_id . "',
+                            `var`           = '".$newOption."',
+                            `sku`           = '" . ((isset($data['product_option_stock'][$i]['sku'])) ? $data['product_option_stock'][$i]['sku'] : '') . "',
+                            `stock`         = '" . ((isset($data['product_option_stock'][$i]['stock'])) ? $data['product_option_stock'][$i]['stock'] : '') . "',
+                            `active`        = '" . ((isset($data['product_option_stock'][$i]['active'])) ? $data['product_option_stock'][$i]['active'] : '') . "',
+                            `subtract`      = '" . ((isset($data['product_option_stock'][$i]['subtract'])) ? $data['product_option_stock'][$i]['subtract'] : '') . "',
+                            `price`         = '" . ((isset($data['product_option_stock'][$i]['price'])) ? $data['product_option_stock'][$i]['price'] : '') . "',
+                            `image`         = '" . ((isset($data['product_option_stock'][$i]['image'])) ? $data['product_option_stock'][$i]['image'] : '') . "'
+                    ");
+                }
+            }else{
+                foreach($optionsStockCalcs as $i => $newOption)
+                {
+                    $this->db->query("
+                        INSERT INTO " . DB_PREFIX . "product_option_relation
+                        SET
+                            `product_id`    = '" . (int)$product_id . "',
+                            `var`           = '".$newOption."',
+                            `sku`           = '',
+                            `stock`         = '',
+                            `active`        = '',
+                            `subtract`      = '',
+                            `price`         = '',
+                            `image`         = ''
+                    ");
+                }
+            }
+        }
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="before"><![CDATA[ if (isset($data['product_discount'])) { ]]></search>
+                <add><![CDATA[
+if (!empty($data['product_option']) && $data['has_option'] == 1) {
+    foreach ($data['product_option'] as $product_option){
+        if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image'){
+                $this->db->query("
+                INSERT INTO
+                    " . DB_PREFIX . "product_option
+                SET
+                    product_id = '" . (int)$product_id . "',
+                    option_id = '" . (int)$product_option['option_id'] . "',
+                    required = '" . (int)$product_option['required'] . "'");
+
+                $product_option_id = $this->db->getLastId();
+
+                if (!empty($product_option['product_option_value'])){
+                        foreach ($product_option['product_option_value'] as $product_option_value){
+                            if(!isset($isAdd) || $isAdd == false){
+                                $this->db->query("
+                                INSERT INTO " . DB_PREFIX . "product_option_value
+                                SET
+                                product_option_value_id = '" . (int)$product_option_value['product_option_value_id'] . "',
+                                product_option_id = '" . (int)$product_option_id . "',
+                                product_id = '" . (int)$product_id . "',
+                                option_id = '" . (int)$product_option['option_id'] . "',
+                                option_value_id = '" . $this->db->escape($product_option_value['option_value_id']) . "',
+                                price = '" . (float)$product_option_value['price'] . "',
+                                price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "',
+                                points = '" . (int)$product_option_value['points'] . "',
+                                points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "',
+                                weight = '" . (float)$product_option_value['weight'] . "',
+                                weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'
+                                ");
+                            } else {
+                                $this->db->query("
+                                INSERT INTO " . DB_PREFIX . "product_option_value
+                                SET
+                                product_option_id = '" . (int)$product_option_id . "',
+                                product_id = '" . (int)$product_id . "',
+                                option_id = '" . (int)$product_option['option_id'] . "',
+                                option_value_id = '" . $this->db->escape($product_option_value['option_value_id']) . "',
+                                price = '" . (float)$product_option_value['price'] . "',
+                                price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "',
+                                points = '" . (int)$product_option_value['points'] . "',
+                                points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "',
+                                weight = '" . (float)$product_option_value['weight'] . "',
+                                weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'
+                                ");
+                                $product_option_value['product_option_value_id'] = $this->db->getLastId();
+                            }
+                        }
+                }
+        }else{
+                $this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', option_value = '" . $this->db->escape($product_option['option_value']) . "', required = '" . (int)$product_option['required'] . "'");
+        }
+    }
+}
+                if (!isset($isAdd) || !$isAdd) {
+                    $this->db->query("DELETE FROM " . DB_PREFIX . "product_discount WHERE product_id = '" . (int)$product_id . "'");
+                }
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="before" offset="4"><![CDATA[
+                        public function copyProduct($product_id) {
+                ]]></search>
+                <add><![CDATA[
+        /*
+         * Stock control for options.
+         * Only clears the tables too if the has_options is set to 0.
+         * remove, recalculate, insert
+         */
+
+        //remove
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "product_option_relation` WHERE `product_id`= '" . (int)$product_id. "'");
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "product_option_relation_group_price` WHERE `product_id`= '" . (int)$product_id. "'");
+        $this->db->query("DELETE FROM `" . DB_PREFIX . "product_option_relation_discount_price` WHERE `product_id`= '" . (int)$product_id. "'");
+
+        if($data['has_option'] == 1){
+            //recalculate
+            $this->load->model('openstock/openstock');
+            $optionsStockCalcs = $this->model_openstock_openstock->calcOptions((int)$product_id);
+
+            //insert
+            if (isset($data['product_option_stock'])){
+                foreach ($data['product_option_stock'] as $key => $option_stock){
+                    if(in_array($option_stock['var'], $optionsStockCalcs)){
+                        unset($optionsStockCalcs[array_search($option_stock['var'], $optionsStockCalcs)]);
+
+                        $this->db->query("
+                            INSERT INTO " . DB_PREFIX . "product_option_relation
+                            SET
+                                `product_id`    = '" . (int)$product_id . "',
+                                `var`           = '".$option_stock['var']."',
+                                `sku`           = '".$option_stock['sku']."',
+                                `stock`         = '".$option_stock['stock']."',
+                                `active`        = '".$option_stock['active']."',
+                                `subtract`      = '".$option_stock['subtract']."',
+                                `price`         = '".$option_stock['price']."',
+                                `image`         = '".$option_stock['image']."'
+                                ");
+
+                        $osId = $this->db->getLastId();
+
+                        if(!empty($option_stock['grp'])){
+                            foreach($option_stock['grp'] as $gKey => $gVal){
+                                $this->db->query("
+                                    INSERT INTO " . DB_PREFIX . "product_option_relation_group_price
+                                    SET
+                                        `product_id`                    = '" . (int)$product_id . "',
+                                        `product_option_relation_id`    = '" . (int) $osId . "',
+                                        `customer_group_id`             = '" . (int) $gVal['grp_id'] . "',
+                                        `price`                         = '" . $gVal['price'] . "'
+                                ");
+                            }
+                        }
+
+                        if(!empty($option_stock['discount'])){
+                            foreach($option_stock['discount'] as $dKey => $dVal){
+                                $this->db->query("
+                                    INSERT INTO " . DB_PREFIX . "product_option_relation_discount_price
+                                    SET
+                                        `product_id`                    = '" . (int)$product_id . "',
+                                        `product_option_relation_id`    = '" . (int) $osId . "',
+                                        `customer_group_id`             = '" . (int) $dVal['grp'] . "',
+                                        `qty`                           = '" . (int) $dVal['qty'] . "',
+                                        `price`                         = '" . (float)$dVal['price'] . "'
+                                ");
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach($optionsStockCalcs as $newOption){
+                $this->db->query("
+                    INSERT INTO " . DB_PREFIX . "product_option_relation
+                    SET
+                        `product_id`    = '" . (int)$product_id . "',
+                        `var`           = '".$newOption."',
+                        `sku`           = '',
+                        `stock`         = '0',
+                        `active`        = '0',
+                        `subtract`      = '1',
+                        `price`         = '0.00'
+                        ");
+            }
+        }else{
+            $this->db->query("DELETE FROM " . DB_PREFIX . "product_option WHERE product_id = '" . (int)$product_id . "'");
+            $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_value WHERE product_id = '" . (int)$product_id . "'");
+        }
+                ]]></add>
+        </operation>
+        <operation>
+                <search position="after"><![CDATA[
+                        $this->db->query("DELETE FROM " . DB_PREFIX . "review WHERE product_id = '" . (int)$product_id . "'");
+                ]]></search>
+                <add><![CDATA[
+                        $this->db->query("DELETE FROM " . DB_PREFIX . "product_option_relation WHERE product_id = '" . (int)$product_id . "'");
+                ]]></add>
+        </operation>
+</file>
+
+    <file name="admin/controller/catalog/product.php">
+        <operation>
+            <search position="after"><![CDATA[ 'action'     => $action ]]></search>
+            <add><![CDATA[
+                    ,
+                    'has_option'      => $result['has_option'],
+                    'vCount'          => $this->model_openstock_openstock->countVariation($result['product_id']),
+                    'vsCount'         => $this->model_openstock_openstock->countVariationStock($result['product_id'])
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[ $this->data['products'][] = array(]]></search>
+            <add><![CDATA[
+                    if(!isset($result['has_option'])){ $result['has_option'] = 0; }
+                    $this->load->model('openstock/openstock');
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[ $this->data['column_action'] = $this->language->get('column_action'); ]]></search>
+            <add><![CDATA[
+                    $this->language->load('module/openstock');
+                    $this->data['column_label_hasoption'] = $this->language->get('column_label_hasoption');
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[ $this->data['tab_design'] = $this->language->get('tab_design'); ]]></search>
+            <add><![CDATA[
+                    $this->language->load('module/openstock');
+                    $this->data['column_label_hasoption']       = $this->language->get('column_label_hasoption');
+                    $this->data['tab_option_stock']             = $this->language->get('tab_option_stock');
+                    $this->data['tab_stock']                    = $this->language->get('tab_stock');
+                    $this->data['entry_stockoption_sku']        = $this->language->get('entry_stockoption_sku');
+                    $this->data['entry_stockoption_mix']        = $this->language->get('entry_stockoption_mix');
+                    $this->data['entry_stockoption_active']     = $this->language->get('entry_stockoption_active');
+                    $this->data['entry_stockoption_subtract']   = $this->language->get('entry_stockoption_subtract');
+                    $this->data['entry_stockoption_stock']      = $this->language->get('entry_stockoption_stock');
+                    $this->data['entry_stockoption_price']      = $this->language->get('entry_stockoption_price');
+                    $this->data['entry_layout']                 = $this->language->get('entry_layout');
+                    $this->data['entry_has_option']             = $this->language->get('entry_has_option');
+                    $this->data['entry_stockoption_groups']     = $this->language->get('entry_stockoption_groups');
+                    $this->data['entry_stockoption_discount']   = $this->language->get('entry_stockoption_discount');
+                    $this->data['option_text_browse']           = $this->language->get('option_text_browse');
+                    $this->data['option_text_clear']            = $this->language->get('option_text_clear');
+                    $this->data['lang_atn_adding']              = $this->language->get('lang_atn_adding');
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after" offset="6"><![CDATA[ if (isset($this->request->post['product_option'])) ]]></search>
+            <add><![CDATA[
+                    if (isset($this->request->post['has_option'])) {
+                            $this->data['has_option'] = $this->request->post['has_option'];
+                    } elseif (isset($product_info)) {
+                            $this->data['has_option'] = $product_info['has_option'];
+                    } else {
+                            $this->data['has_option'] = '';
+                    }
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after" offset="2"><![CDATA[ $this->data['product_discounts'] = array(); ]]></search>
+            <add><![CDATA[
+                    if (isset($this->request->post['product_option_stock'])) {
+                            $this->data['product_option_stocks'] = $this->request->post['product_option_stock'];
+                    } elseif (isset($product_info)) {
+                            $this->load->model('openstock/openstock');
+                            $this->data['product_option_stocks'] = $this->model_openstock_openstock->getProductOptionStocks($this->request->get['product_id']);
+                    } else {
+                            $this->data['product_option_stocks'] = array();
+                    }
+
+            ]]></add>
+        </operation>
+    </file>
+
+    <file name="admin/view/template/catalog/product_form.tpl">
+        <operation>
+            <search position="replace" offset="28"><![CDATA[ function addOptionValue(option_row) { ]]></search>
+            <add><![CDATA[
+                function addOptionValue(option_row) {
+                        html  = '<tbody id="option-value-row' + option_value_row + '">';
+                        html += '  <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" />';
+                        html += '  <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price_prefix]" value="" />';
+                        html += '  <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]"  value="" />';
+                        html += '  <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" size="5" />';
+                        html += '  <tr>';
+                        html += '    <td class="left"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][option_value_id]">';
+                        html += $('#option-values' + option_row).html();
+                        html += '    </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="" /></td>';
+                        html += '    <td class="right"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points_prefix]">';
+                        html += '      <option value="+">+</option>';
+                        html += '      <option value="-">-</option>';
+                        html += '    </select>';
+                        html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points]" value="" size="5" /></td>';
+                        html += '    <td class="right"><select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight_prefix]">';
+                        html += '      <option value="+">+</option>';
+                        html += '      <option value="-">-</option>';
+                        html += '    </select>';
+                        html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" size="5" /></td>';
+                        html += '    <td class="left"><a onclick="$(\'#option-value-row' + option_value_row + '\').remove();" class="button"><?php echo $button_remove; ?></a></td>';
+                        html += '  </tr>';
+                        html += '</tbody>';
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[ html += '        <td class="left"><?php echo $entry_subtract; ?></td>'; ]]></search>
+            <add><![CDATA[ ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="1"><![CDATA[<td><?php echo $entry_sku; ?></td>]]></search>
+            <add><![CDATA[ <td></td><td></td> ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="1"><![CDATA[<td><?php echo $entry_quantity; ?></td>]]></search>
+            <add><![CDATA[ <td></td><td></td> ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="9"><![CDATA[<td><?php echo $entry_subtract; ?></td>]]></search>
+            <add><![CDATA[ <td></td><td></td> ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[ html += '        <td class="right"><?php echo $entry_quantity; ?></td>'; ]]></search>
+            <add><![CDATA[ ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[ html += '        <td class="right"><?php echo $entry_price; ?></td>'; ]]></search>
+            <add><![CDATA[ ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[ <div id="tabs" class="htabs"><a href="#tab-general"><?php echo $tab_general; ?></a><a href="#tab-data"><?php echo $tab_data; ?></a><a href="#tab-links"><?php echo $tab_links; ?></a><a href="#tab-attribute"><?php echo $tab_attribute; ?></a><a href="#tab-option"><?php echo $tab_option; ?></a><a href="#tab-discount"><?php echo $tab_discount; ?></a><a href="#tab-special"><?php echo $tab_special; ?></a><a href="#tab-image"><?php echo $tab_image; ?></a><a href="#tab-reward"><?php echo $tab_reward; ?></a><a href="#tab-design"><?php echo $tab_design; ?></a></div> ]]></search>
+            <add><![CDATA[
+                <div id="tabs" class="htabs">
+                      <a href="#tab-general"><?php echo $tab_general; ?></a>
+                      <a href="#tab-data"><?php echo $tab_data; ?></a>
+                      <a href="#tab-links"><?php echo $tab_links; ?></a>
+                      <a href="#tab-attribute"><?php echo $tab_attribute; ?></a>
+                      <a href="#tab-stock"><?php echo $tab_stock; ?></a>
+                      <a href="#tab-option" class="isStockCont"><?php echo $tab_option; ?></a>
+                      <a href="#tab-option-stock" class="isStockCont"><?php echo $tab_option_stock; ?></a>
+                      <!-- IF THE TABS SHOULD BE HIDDEN FOR OPTIONS  class="notStockCont" -->
+                      <a href="#tab-discount" class="notStockCont"><?php echo $tab_discount; ?></a>
+                      <a href="#tab-special" class="notStockCont"><?php echo $tab_special; ?></a>
+                      <a href="#tab-image"><?php echo $tab_image; ?></a>
+                      <a href="#tab-reward"><?php echo $tab_reward; ?></a>
+                      <a href="#tab-design"><?php echo $tab_design; ?></a>
+                  </div>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[ <div id="tab-option"> ]]></search>
+            <add><![CDATA[
+                <div id="tab-stock">
+                  <table class="form">
+                    <tr>
+                      <td><?php echo $entry_has_option; ?></td>
+                      <td><select name="has_option" onchange="updateStockCont();" id="has_option">
+                          <?php if ($has_option) { ?>
+                          <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                          <option value="0"><?php echo $text_no; ?></option>
+                          <?php } else { ?>
+                          <option value="1"><?php echo $text_yes; ?></option>
+                          <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                          <?php } ?>
+                        </select></td>
+                    </tr>
+                    <tr class="notStockCont">
+                      <td><?php echo $entry_sku; ?></td>
+                      <td><input type="text" name="sku" value="<?php echo $sku; ?>" /></td>
+                    </tr>
+                    <tr class="notStockCont">
+                      <td><?php echo $entry_quantity; ?></td>
+                      <td><input type="text" name="quantity" value="<?php echo $quantity; ?>" size="2" /></td>
+                    </tr>
+                    <tr class="notStockCont">
+                      <td><?php echo $entry_subtract; ?></td>
+                      <td><select name="subtract">
+                          <?php if ($subtract) { ?>
+                          <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                          <option value="0"><?php echo $text_no; ?></option>
+                          <?php } else { ?>
+                          <option value="1"><?php echo $text_yes; ?></option>
+                          <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                          <?php } ?>
+                        </select></td>
+                    </tr>
+                  </table>
+                </div>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="22"><![CDATA[ <td class="right"><input type="text" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][quantity]" value="<?php echo $product_option_value['quantity']; ?>" size="3" /></td> ]]></search>
+            <add><![CDATA[
+                <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][quantity]" value="<?php echo $product_option_value['quantity']; ?>" />
+                <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][subtract]" value="<?php echo $product_option_value['subtract']; ?>" />
+                <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][price_prefix]" value="<?php echo $product_option_value['price_prefix']; ?>" />
+                <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][price]" value="<?php echo $product_option_value['price']; ?>" />
+                <input type="hidden" name="product_option[<?php echo $option_row; ?>][product_option_value][<?php echo $option_value_row; ?>][quantity]" value="<?php echo $product_option_value['quantity']; ?>" />
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="after"><![CDATA[ <div id="tab-option"> ]]></search>
+            <add><![CDATA[
+            <?php if(!empty($product_options)){ ?>
+                <div class="attention"><?php echo $lang_atn_adding; ?></div>
+            <?php } ?>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="11"><![CDATA[ <table id="option-value<?php echo $option_row; ?>" class="list"> ]]></search>
+            <add><![CDATA[
+                <table id="option-value<?php echo $option_row; ?>" class="list">
+                  <thead>
+                    <tr>
+                      <td class="left"><?php echo $entry_option_value; ?></td>
+                      <td class="right"><?php echo $entry_option_points; ?></td>
+                      <td class="right"><?php echo $entry_weight; ?></td>
+                      <td></td>
+                    </tr>
+                  </thead>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[ <div id="tab-special"> ]]></search>
+            <add><![CDATA[
+                <div id="tab-option-stock">
+                  <table id="option-stock" class="list">
+                    <thead>
+                      <tr>
+                        <td class="left" width="120">Image</td>
+                        <td class="left" width="40"><?php echo $entry_stockoption_sku; ?></td>
+                        <td class="left"><?php echo $entry_stockoption_mix; ?></td>
+                        <td class="left"><?php echo $entry_stockoption_groups; ?></td>
+                        <td class="left"><?php echo $entry_stockoption_discount; ?></td>
+                        <td class="left" width="30"><?php echo $entry_stockoption_stock; ?></td>
+                        <td class="left" width="30"><?php echo $entry_stockoption_price; ?></td>
+                        <td class="left" width="30"><?php echo $entry_stockoption_subtract; ?></td>
+                        <td class="center" width="10">Active<br /><input type="checkbox" id="product_option_stock_active_change" onclick="optionActiveChange();" /></td>
+                      </tr>
+                    </thead>
+                    <?php
+                    $grp_price          = 0;
+                    $discount_price     = 0;
+                    foreach ($product_option_stocks as $key => $product_option_stock) {
+                    ?>
+                    <tbody id="discount-row<?php echo $key; ?>">
+                      <tr>
+
+                        <input type="hidden" name="product_option_stock[<?php echo $key; ?>][id]" value="<?php echo $product_option_stock['id']; ?>" />
+                        <input type="hidden" name="product_option_stock[<?php echo $key; ?>][var]" value="<?php echo $product_option_stock['var']; ?>" />
+
+                        <!-- Variation Image -->
+
+                        <td class="left">
+                            <div class="image">
+                                <img src="<?php if($product_option_stock['thumb']) { echo $product_option_stock['thumb']; } ?>" alt="" id="pos_<?php echo $key; ?>_thumb" /><br />
+                                <input type="hidden" name="product_option_stock[<?php echo $key; ?>][image]" value="<?php echo $product_option_stock['image']; ?>" id="pos_<?php echo $key; ?>_image" />
+                                <a onclick="image_upload('pos_<?php echo $key; ?>_image', 'pos_<?php echo $key; ?>_thumb');"><?php echo $option_text_browse; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('#pos_<?php echo $key; ?>_thumb').attr('src', '<?php echo $no_image; ?>'); $('#pos_<?php echo $key; ?>_image').attr('value', '');"><?php echo $option_text_clear; ?></a>
+                            </div>
+                        </td>
+
+                        <td class="left"><input type="text" name="product_option_stock[<?php echo $key; ?>][sku]" value="<?php echo $product_option_stock['sku']; ?>" size="10" /></td>
+                        <td class="left"><?php if(isset($product_option_stock['combi'])){ echo $product_option_stock['combi']; } ?></td>
+                        <td class="left" style="vertical-align:top;">
+                            <div id="groupPrice<?php echo $key; ?>">
+                                <?php if(is_array($product_option_stock['grp'])){ foreach ($product_option_stock['grp'] as $psogKey => $psogVal) { ?>
+                                    <div style="margin:5px 0px; padding:5px; background-color:#EFEFEF;" id="grp_price_<?php echo $key; ?>_<?php echo $grp_price; ?>">
+                                        <p><span style="margin-left:5px; margin-right:5px;">Group</span><select name="product_option_stock[<?php echo $key; ?>][grp][<?php echo $grp_price; ?>][grp_id]">
+                                            <?php foreach ($customer_groups as $customer_group) { ?>
+                                                <option value="<?php echo $customer_group['customer_group_id']; ?>" <?php if($customer_group['customer_group_id'] == $psogKey){ echo 'selected';}?>><?php echo $customer_group['name']; ?></option>
+                                            <?php } ?>
+                                            </select></p><p><span style="margin-left:5px; margin-right:5px;">Price</span>
+                                            <input type="text" name="product_option_stock[<?php echo $key; ?>][grp][<?php echo $grp_price; ?>][price]" style="width:50px; margin-right:5px;" value="<?php echo $psogVal; ?>" />
+                                            <a class="button" onclick="removeGroupPrice('grp_price_<?php echo $key; ?>_<?php echo $grp_price; ?>');" style="float:right; margin-top:-2px;">X</a>
+                                    </p></div><div style="clear:both;"></div>
+                                <?php $grp_price++; } }?>
+                            </div>
+                            <a class="button" onclick="addGroupPrice('<?php echo $key; ?>');" style="float:right;">Add</a>
+                        </td>
+                        <td class="left" style="vertical-align:top;">
+                            <div id="discountPrice<?php echo $key; ?>">
+                                <?php if(is_array($product_option_stock['discount'])){ foreach ($product_option_stock['discount'] as $discKey => $discVal) { ?>
+                                    <div style="margin:5px 0px; padding:5px; background-color:#EFEFEF;" id="discount_price_<?php echo $key; ?>_<?php echo $discount_price; ?>">
+                                        <p>
+                                            <span style="margin-left:5px; margin-right:5px;">Group</span>
+                                            <select name="product_option_stock[<?php echo $key; ?>][discount][<?php echo $discount_price; ?>][grp]">
+                                                <?php foreach ($customer_groups as $customer_group) { ?>
+                                                    <option value="<?php echo $customer_group['customer_group_id']; ?>" <?php if($customer_group['customer_group_id'] == $discVal['grp']){ echo 'selected';}?>><?php echo $customer_group['name']; ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </p>
+                                        <p>
+                                            <span style="margin-left:5px; margin-right:5px;">Qty</span>
+                                            <input type="text" name="product_option_stock[<?php echo $key; ?>][discount][<?php echo $discount_price; ?>][qty]" style="width:50px; margin-right:5px;" value="<?php echo $discVal['qty']; ?>" />
+                                            <span style="margin-left:5px; margin-right:5px;">Price</span>
+                                            <input type="text" name="product_option_stock[<?php echo $key; ?>][discount][<?php echo $discount_price; ?>][price]" style="width:50px; margin-right:5px;" value="<?php echo $discVal['price']; ?>" />
+                                            <a class="button" onclick="removeDiscountPrice('discount_price_<?php echo $key; ?>_<?php echo $discount_price; ?>');" style="float:right; margin-top:-2px;">X</a>
+                                        </p>
+                                    </div><div style="clear:both;"></div>
+                                <?php $discount_price++; } }?>
+                            </div>
+                            <a class="button" onclick="addDiscountPrice('<?php echo $key; ?>');" style="float:right;">Add</a>
+                        </td>
+                        <td class="left"><input type="text" name="product_option_stock[<?php echo $key; ?>][stock]" value="<?php echo $product_option_stock['stock']; ?>" size="4" style="text-align:center;" /></td>
+                        <td class="left"><input type="text" name="product_option_stock[<?php echo $key; ?>][price]" value="<?php echo $product_option_stock['price']; ?>" size="6" style="text-align:center;" /></td>
+                        <td class="left">
+                            <select name="product_option_stock[<?php echo $key; ?>][subtract]">
+                                <?php if ($product_option_stock['subtract']) { ?>
+                                <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                                <option value="0"><?php echo $text_no; ?></option>
+                                <?php } else { ?>
+                                <option value="1"><?php echo $text_yes; ?></option>
+                                <option value="0" selected="selected"><?php echo $text_no; ?></option>
+                                <?php } ?>
+                            </select>
+                        </td>
+                        <td class="center">
+                            <input type="hidden" name="product_option_stock[<?php echo $key; ?>][active]" value="0" />
+                            <input type="checkbox" class="product_option_stock_active" name="product_option_stock[<?php echo $key; ?>][active]" value="1"
+                            <?php if($product_option_stock['active'] == 1) { echo ' checked="checked"';} ?>
+                            />
+                        </td>
+                      </tr>
+                    </tbody>
+                    <?php
+                    } ?>
+                  </table>
+                </div>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="before"><![CDATA[ <?php echo $footer; ?> ]]></search>
+            <add><![CDATA[
+                <script type="text/javascript"><!--
+                function updateStockCont()
+                {
+                    var getStockContStatus = $('#has_option').val();
+                    if(getStockContStatus == 0)
+                    {
+                        $('.isStockCont').hide();
+                        $('.notStockCont').show();
+                    }else{
+                        $('.isStockCont').show();
+                        $('.notStockCont').hide();
+                    }
+                }
+
+                function optionActiveChange()
+                {
+                    var valChecked = $('#product_option_stock_active_change').prop('checked');
+
+                    if(valChecked == true)
+                    {
+                        $('.product_option_stock_active').prop('checked', true);
+                    }else{
+                        $('.product_option_stock_active').prop('checked', false);
+                    }
+                }
+
+                var grp_price = <?php echo $grp_price; ?>;
+
+                function addGroupPrice(id)
+                {
+                    var appendHtml = '';
+                    appendHtml += '<div style="margin:5px 0px; padding:5px; background-color:#EFEFEF;" id="grp_price_'+id+'_'+grp_price+'">';
+                        appendHtml += '<p><span style="margin-left:5px; margin-right:5px;">Group</span><select name="product_option_stock['+id+'][grp]['+grp_price+'][grp_id]">';
+
+                        <?php foreach ($customer_groups as $customer_group) { ?>
+                        appendHtml += '      <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>';
+                        <?php } ?>
+
+                        appendHtml += '</select></p><p><span style="margin-left:5px; margin-right:5px;">Price</span>';
+                        appendHtml += '<input type="text" name="product_option_stock['+id+'][grp]['+grp_price+'][price]" style="width:50px; margin-right:5px;" />';
+
+                        var divId = "'grp_price_"+id+"_"+grp_price+"'";
+
+                        appendHtml += '<a class="button" onclick="removeGroupPrice('+divId+');" style="float:right; margin-top:-2px;">X</a>';
+                    appendHtml += '</p></div><div style="clear:both;"></div>';
+
+                    $('#groupPrice'+id).append(appendHtml);
+                    grp_price++;
+                }
+
+                var discount_price = <?php echo $discount_price; ?>;
+
+                function addDiscountPrice(id)
+                {
+                    var appendHtml = '';
+                    appendHtml += '<div style="margin:5px 0px; padding:5px; background-color:#EFEFEF;" id="discount_price_'+id+'_'+discount_price+'">';
+                    appendHtml += '<p><span style="margin-left:5px; margin-right:5px;">Group</span><select name="product_option_stock['+id+'][discount]['+discount_price+'][grp]">';
+
+                    <?php foreach ($customer_groups as $customer_group) { ?>
+                    appendHtml += '      <option value="<?php echo $customer_group['customer_group_id']; ?>"><?php echo $customer_group['name']; ?></option>';
+                    <?php } ?>
+
+                    appendHtml += '</select><p><p><span style="margin-left:5px; margin-right:5px;">Qty</span>';
+                    appendHtml += '<input type="text" name="product_option_stock['+id+'][discount]['+discount_price+'][qty]" style="width:50px; margin-right:5px;" />';
+
+                    appendHtml += '</select><span style="margin-left:5px; margin-right:5px;">Price</span>';
+                    appendHtml += '<input type="text" name="product_option_stock['+id+'][discount]['+discount_price+'][price]" style="width:50px; margin-right:5px;" />';
+
+                    var divId = "'discount_price_"+id+"_"+discount_price+"'";
+
+                    appendHtml += '<a class="button" onclick="removeDiscountPrice('+divId+');" style="float:right; margin-top:-2px;">X</a>';
+                    appendHtml += '</p></div><div style="clear:both;"></div>';
+
+                    $('#discountPrice'+id).append(appendHtml);
+
+                    discount_price++;
+                }
+
+                function removeGroupPrice(id) { $('#'+id).remove(); }
+                function removeDiscountPrice(id) { $('#'+id).remove(); }
+
+                $(document).ready(function() { updateStockCont(); });
+                //--></script>
+            ]]></add>
+        </operation>
+        <operation>
+            <search position="replace"><![CDATA[<td colspan="6"></td>';]]></search>
+            <add><![CDATA[<td colspan="3"></td>';]]></add>
+        </operation>
+        <operation>
+            <search position="replace" offset="1" index="1"><![CDATA[ <td colspan="6"></td> ]]></search>
+            <add><![CDATA[
+                <td colspan="3"></td>
+                <td class="left"><a onclick="addOptionValue('<?php echo $option_row; ?>');" class="button"><?php echo $button_add_option_value; ?></a></td>
+            ]]></add>
+        </operation>
+    </file>
+</modification>
